@@ -1,0 +1,15 @@
+:root,
+body.light {
+  --primary: #00A4D9;
+  --on-primary: #FFFFFF;
+  --secondary-container: #00A4D9;
+  --on-secondary-container: #FFFFFF;
+  --surface: #F5F5F5;
+}
+
+body.dark {
+  --primary: #8ae2ff;
+  --on-primary: #000000;
+  --secondary-container: #8ae2ff;
+  --on-secondary-container: #000000;
+}
