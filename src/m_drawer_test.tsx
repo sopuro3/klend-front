@@ -17,6 +17,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { SvgIconProps } from '@mui/material';
 import { Home, Info } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -67,21 +68,23 @@ export default function ResponsiveDrawer(props: Props) {
             <Divider />
             <List>
                 {lists.map((list, index) => (
+                    <Link key={list.text} to={list.href}>
+                        <ListItem disablePadding >
 
-                    <ListItem key={list.text} disablePadding onClick={() => location.href = list.href}>
-
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={list.text} />
-
-
-                        </ListItemButton>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <list.iconName />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    {list.text}
+                                </ListItemText>
 
 
-                    </ListItem>
 
+                            </ListItemButton>
+
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
             <Divider />
@@ -104,7 +107,6 @@ export default function ResponsiveDrawer(props: Props) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
             <AppBar
                 position="fixed"
                 sx={{

@@ -1,21 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import './index.css';
 import ResponsiveDrawer from './m_drawer_test.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './pages/home.tsx';
 import About from './pages/about.tsx';
+import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <ResponsiveDrawer></ResponsiveDrawer>
-        <App id="1" />
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} /> {/*追加*/}
-            </Routes>
-        </BrowserRouter>
+
+        <div>
+            <BrowserRouter>
+
+                <ResponsiveDrawer></ResponsiveDrawer>
+                <div className='main'>
+
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} /> {/*追加*/}
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </div>
+
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            <main>This app is using the dark mode</main>
+        </ThemeProvider>
     </React.StrictMode>,
 );
