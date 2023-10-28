@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import ResponsiveDrawer from './m_drawer_test.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/home.tsx';
-import About from './pages/about.tsx';
+import Home from './pages/Home.tsx';
+import About from './pages/About.tsx';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import ReturnEmpty from './pages/ReturnEmptyPage.tsx';
 
 const darkTheme = createTheme({
     palette: {
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} /> {/*追加*/}
+                        <Route path="/users" element={<ReturnEmpty text="Users" />} /> {/*追加*/}
                     </Routes>
                 </div>
             </BrowserRouter>
@@ -34,7 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <main>This app is using the dark mode</main>
+
         </ThemeProvider>
     </React.StrictMode>,
 );

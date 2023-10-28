@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -15,9 +14,13 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { SvgIconProps } from '@mui/material';
-import { Home, Info } from '@mui/icons-material';
+
 import { Link } from 'react-router-dom';
+import { lists } from './pages';
+
+import './drawer.css'
+import { Height } from '@mui/icons-material';
+
 
 const drawerWidth = 240;
 
@@ -39,35 +42,15 @@ export default function ResponsiveDrawer(props: Props) {
     };
 
 
-    interface ListProps {
-        href: string;
-        text: string;
-        iconName: React.ElementType<SvgIconProps>;
-    }
-
-    class Lists {
-        href: string;
-        text: string;
-        iconName: React.ElementType<SvgIconProps>;
-        constructor(arg1: string, arg2: string, arg3: React.ElementType<SvgIconProps>) {
-            this.href = arg1
-            this.text = arg2
-            this.iconName = arg3
-        }
-    }
-
-    const lists: ListProps[] = [
-        new Lists("/", "Home", Home),
-        new Lists("/about", "About", Info)
-    ]
 
 
     const drawer = (
-        <div>
+        //height:100%
+        <div className='Drawer'>
             <Toolbar />
             <Divider />
             <List>
-                {lists.map((list, index) => (
+                {lists.map((list) => (
                     <Link key={list.text} to={list.href}>
                         <ListItem disablePadding >
 
@@ -106,7 +89,7 @@ export default function ResponsiveDrawer(props: Props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }} >
             <AppBar
                 position="fixed"
                 sx={{
@@ -114,7 +97,7 @@ export default function ResponsiveDrawer(props: Props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar >
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
