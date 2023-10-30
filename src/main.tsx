@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import ResponsiveDrawer from './m_drawer_test.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/Home.tsx';
+import Home from './pages/home.tsx';
 import About from './pages/About.tsx';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
