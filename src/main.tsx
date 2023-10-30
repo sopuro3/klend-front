@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import ResponsiveDrawer from './drawer/m_drawer_test.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/home.tsx';
-import About from './pages/About.tsx';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import ReturnEmpty from './pages/ReturnEmptyPage.tsx';
+import { lists } from './pages.tsx';
 
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     },
 });
+
+
+
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -26,9 +28,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <div className='main'>
 
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} /> {/*追加*/}
-                        <Route path="/users" element={<ReturnEmpty text="Users" />} /> {/*追加*/}
+                        {lists.map((list) => (
+                            <Route key={list.text} path={list.href} element={list.element} />
+                        
+                        ))}
                     </Routes>
                 </div>
             </BrowserRouter>

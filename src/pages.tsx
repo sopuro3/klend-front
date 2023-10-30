@@ -1,15 +1,14 @@
-import { Home, Info } from "@mui/icons-material";
+import {Info ,Home as HomeIcon} from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
-import About from "./pages/About";
+import About from "./pages/about.tsx";
 import ReturnEmpty from "./pages/ReturnEmptyPage";
+import Home from "./pages/home.tsx";
 
 interface Page {
     href: string;
     text: string;
     iconName: React.ElementType<SvgIconProps>;
-
     element: JSX.Element;
-
     /*ドロワーにボタンを表示するか */
     isDrawerButton: boolean;
 }
@@ -17,11 +16,14 @@ interface Page {
 // PagesはPageのArray
 type Pages = Page[];
 
+/**
+ * これをいじって、ページ一覧を設定できる
+ */
 export const lists: Pages = [
     {
         href: "/",
         text: "Home",
-        iconName: Home,
+        iconName: HomeIcon,
         element: <Home />,
         isDrawerButton: true,
     },
