@@ -20,7 +20,7 @@ function getPages(Item:Page):JSX.Element[]{
 
     if (Item.subPages){
         for(let i = 0;i < Item.subPages.length;i++){
-            ReturnItem.concat(getPages(Item.subPages[i]))
+            ReturnItem =  ReturnItem.concat(getPages(Item.subPages[i]))
         }
         return ReturnItem
     }else{
