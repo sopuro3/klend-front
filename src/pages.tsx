@@ -4,17 +4,18 @@ import About from "./pages/about.tsx";
 import ReturnEmpty from "./pages/ReturnEmptyPage";
 import Home from "./pages/home.tsx";
 
-interface Page {
+export interface Page {
     href: string;
     text: string;
     iconName: React.ElementType<SvgIconProps>;
     element: JSX.Element;
     /*ドロワーにボタンを表示するか */
     isDrawerButton: boolean;
+    subPages?: Page[];
 }
 
 // PagesはPageのArray
-type Pages = Page[];
+export type Pages = Page[];
 
 /**
  * これをいじって、ページ一覧を設定できる
