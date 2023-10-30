@@ -97,7 +97,7 @@ export default function ResponsiveDrawer(props: Props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar >
+                {/* <Toolbar >
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -110,7 +110,7 @@ export default function ResponsiveDrawer(props: Props) {
                     <Typography variant="h6" noWrap component="div">
                         Responsive drawer
                     </Typography>
-                </Toolbar>
+                </Toolbar> */}
             </AppBar>
             <Box
                 component="nav"
@@ -118,7 +118,7 @@ export default function ResponsiveDrawer(props: Props) {
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Drawer
+                {/* <Drawer
                     container={container}
                     variant="temporary"
                     open={mobileOpen}
@@ -132,7 +132,13 @@ export default function ResponsiveDrawer(props: Props) {
                     }}
                 >
                     {drawer}
-                </Drawer>
+                </Drawer> */}
+
+                <div className='Logo'>
+                    
+                </div>
+
+
                 <Drawer
                     variant="permanent"
                     sx={{
@@ -154,3 +160,6 @@ export default function ResponsiveDrawer(props: Props) {
         </Box>
     );
 }
+
+
+
