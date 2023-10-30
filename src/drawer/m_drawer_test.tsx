@@ -16,10 +16,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import { Link } from 'react-router-dom';
-import { lists } from './pages';
+import { lists } from '../pages';
 
 import './drawer.css'
-import { Height } from '@mui/icons-material';
+// import { Height } from '@mui/icons-material';
 
 
 const drawerWidth = 240;
