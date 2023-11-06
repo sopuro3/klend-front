@@ -6,7 +6,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Page, Pages, lists } from './pages.tsx';
+import { Page, lists } from './pages.tsx';
 
 const darkTheme = createTheme({
     palette: {
@@ -15,20 +15,13 @@ const darkTheme = createTheme({
 });
 
 
-function getPages(Item:Page):JSX.Element[]{
-    let ReturnItem:JSX.Element[] = []
-
-    if (Item.subPages){
-        for(let i = 0;i < Item.subPages.length;i++){
-            ReturnItem =  ReturnItem.concat(getPages(Item.subPages[i]))
-        }
-        return ReturnItem
-    }else{
-        return [getRoute(Item)]
-    }
+function getPages(Item: Page): JSX.Element[] {
 
 
-    function getRoute(Item:Page):JSX.Element{
+    const ReturnItem = Item.subPages?.flatMap((page) => getPages(page)) ?? [getRoute(Item)]
+    return ReturnItem
+
+    function getRoute(Item: Page): JSX.Element {
         return (
             <Route key={Item.text} path={Item.href} element={Item.element} />
         )
@@ -48,7 +41,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <div className='main'>
 
                     <Routes>
-                        {lists.map((Item:Page) => {
+                        {lists.map((Item: Page) => {
                             return getPages(Item)
                         })}
                     </Routes>

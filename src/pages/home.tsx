@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import App from "../App";
 
-export default function Mtest() {
+export default function home() {
 
     return (
         <>
