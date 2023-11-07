@@ -16,7 +16,7 @@ const menuList: Props[] = [
     {
         title: "貸出",
         content: "ボランティア様の資器材貸出用フォームです。",
-        image: "src\\reception\\asset\\borrow_image.png",
+        image: "src\\reception\\asset\\borrow_image.jpg",
         href: "/borrow",
     },
     {

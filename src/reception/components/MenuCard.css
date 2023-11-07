@@ -3,3 +3,11 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+.CardGrid>div {
+    margin: 10px;
+}
+
+.CardGrid .MuiButtonBase-root {
+    height: 100%;
+}
