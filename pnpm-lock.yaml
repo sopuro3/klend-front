@@ -20,6 +20,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  fontsource-noto-sans-jp:
+    specifier: ^4.0.0
+    version: 4.0.0
   materialize-css:
     specifier: 1.0.0-rc.2
     version: 1.0.0-rc.2
@@ -1662,6 +1665,11 @@ packages:
   /flatted@3.2.9:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
     dev: true
+
+  /fontsource-noto-sans-jp@4.0.0:
+    resolution: {integrity: sha512-/XLWHhy7nBTb8V+J05nb6O/SeeChlWhpx2Srs8Ipl2p0KztUTMz9AmYTARuWOLErtZc/Ar2XwuUjsWA+MBMBGw==}
+    deprecated: Package relocated. Please install and migrate to @fontsource/noto-sans-jp.
+    dev: false
 
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}

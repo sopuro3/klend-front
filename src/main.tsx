@@ -16,19 +16,13 @@ const darkTheme = createTheme({
 
 
 function getPages(Item: Page): JSX.Element[] {
-
-
-    const ReturnItem = Item.subPages?.flatMap((page) => getPages(page)) ?? [getRoute(Item)]
-    return ReturnItem
+    const ReturnItem = [getRoute(Item), ...(Item.subPages?.flatMap((page) => getPages(page)) ?? [])];
+    return ReturnItem;
 
     function getRoute(Item: Page): JSX.Element {
-        return (
-            <Route key={Item.text} path={Item.href} element={Item.element} />
-        )
+        return <Route key={Item.text} path={Item.href} element={Item.element} />;
     }
 }
-
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

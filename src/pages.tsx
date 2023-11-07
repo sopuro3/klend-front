@@ -1,8 +1,8 @@
-import {Info ,Home as HomeIcon} from "@mui/icons-material";
+import { Info, Home as HomeIcon } from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
-import About from "./pages/about.tsx";
+import About from "./pages/About.tsx";
 import ReturnEmpty from "./pages/ReturnEmptyPage";
-import Home from "./pages/home.tsx";
+import Home from "./pages/Home.tsx";
 
 export interface Page {
     href: string;
