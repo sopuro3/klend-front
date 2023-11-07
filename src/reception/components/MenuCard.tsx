@@ -15,7 +15,13 @@ type Props = {
 const menuList: Props[] = [
     {
         title: "貸出",
-        content: "ボランティア様の資器材貸出用フォームです。",
+        content: "ボランティアへの資器材貸出用フォームです。",
+        image: "src\\reception\\asset\\borrow_image.jpg",
+        href: "/borrow",
+    },
+    {
+        title: "個人用貸出",
+        content: "個人への資器材貸出用フォームです。",
         image: "src\\reception\\asset\\borrow_image.jpg",
         href: "/borrow",
     },
@@ -25,7 +31,26 @@ const menuList: Props[] = [
         image: "src\\reception\\asset\\return_image.jpg",
 
         href: "/return",
-    }
+    },
+    {
+        title: "貸出",
+        content: "ボランティアへの資器材貸出用フォームです。",
+        image: "src\\reception\\asset\\borrow_image.jpg",
+        href: "/borrow",
+    },
+    {
+        title: "個人用貸出",
+        content: "個人への資器材貸出用フォームです。",
+        image: "src\\reception\\asset\\borrow_image.jpg",
+        href: "/borrow",
+    },
+    {
+        title: "返却",
+        content: "ボランティアおよび個人向け資器材返却用フォームです。",
+        image: "src\\reception\\asset\\return_image.jpg",
+
+        href: "/return",
+    },
 ];
 
 export default function MenuCard() {
@@ -54,7 +79,7 @@ function ActionAreaCard(props: Props) {
     const { title, content, image, href } = props;
     return (
         <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea href={href}>
+            <CardActionArea sx={{ padding: 1, background: "#f8f8f8" }} href={href}>
                 <CardMedia
                     component="img"
                     height="300"
