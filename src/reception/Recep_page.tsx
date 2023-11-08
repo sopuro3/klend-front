@@ -1,8 +1,8 @@
 import { Info, Home as HomeIcon } from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
-import About from "../pages/About.tsx";
 import ReturnEmpty from "../pages/ReturnEmptyPage.tsx";
 import Recep_home from "./pages/Recep_home.tsx";
+import BreadCrumb from "./BreadCrumb.tsx";
 
 export interface Page {
     href: string;
@@ -25,25 +25,59 @@ export const lists: Pages = [
         href: "/",
         text: "入力",
         iconName: HomeIcon,
-        element: <Recep_home />,
+        element: <>
+        <BreadCrumb></BreadCrumb>
+        <Recep_home />
+        </>,
         isDrawerButton: true,
         subPages: [
             {
-                href: "reception/main",
-                text: "受付",
+                href: "reception/borrow",
+                text: "貸出受付",
                 iconName: Info,
-                element: <About />,
+                element: <>
+                <BreadCrumb></BreadCrumb>
+                <ReturnEmpty text="貸出" />
+                </>,
                 isDrawerButton: true,
                 subPages: [
 
                     {
-                        href: "/users",
-                        text: "Users",
+                        href: "reception/borrow/check",
+                        text: "貸出数量確認",
                         iconName: Info,
-                        element: <ReturnEmpty text="Users" />,
+                        element: <>
+                        <BreadCrumb></BreadCrumb>
+                        <ReturnEmpty text="貸出数量" />
+                        </>,
                         isDrawerButton: true,
                     }
                 ]
+                
+            },
+            {
+                href: "reception/return",
+                text: "返却受付",
+                iconName: Info,
+                element: <>
+                <BreadCrumb></BreadCrumb>
+                <ReturnEmpty text="返却" />
+                </>,
+                isDrawerButton: true,
+                subPages: [
+
+                    {
+                        href: "reception/return/check",
+                        text: "返却数量確認",
+                        iconName: Info,
+                        element: <>
+                        <BreadCrumb></BreadCrumb>
+                        <ReturnEmpty text="返却数量" />
+                        </>,
+                        isDrawerButton: true,
+                    }
+                ]
+                
             },
         ]
     },

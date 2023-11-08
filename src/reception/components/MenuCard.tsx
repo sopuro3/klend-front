@@ -4,7 +4,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import './MenuCard.css';
-type Props = {
+import { Link } from 'react-router-dom';
+type CardProps = {
     title: string;
     content: string;
     image: string;
@@ -12,45 +13,27 @@ type Props = {
 }
 
 
-const menuList: Props[] = [
+const menuList: CardProps[] = [
     {
         title: "貸出",
         content: "ボランティアへの資器材貸出用フォームです。",
         image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/borrow",
+        href: "/reception/borrow",
     },
     {
         title: "個人用貸出",
         content: "個人への資器材貸出用フォームです。",
         image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/borrow",
+        href: "/reception/borrow",
     },
     {
         title: "返却",
         content: "ボランティアおよび個人向け資器材返却用フォームです。",
         image: "src\\reception\\asset\\return_image.jpg",
 
-        href: "/return",
+        href: "/reception/return",
     },
-    {
-        title: "貸出",
-        content: "ボランティアへの資器材貸出用フォームです。",
-        image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/borrow",
-    },
-    {
-        title: "個人用貸出",
-        content: "個人への資器材貸出用フォームです。",
-        image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/borrow",
-    },
-    {
-        title: "返却",
-        content: "ボランティアおよび個人向け資器材返却用フォームです。",
-        image: "src\\reception\\asset\\return_image.jpg",
 
-        href: "/return",
-    },
 ];
 
 export default function MenuCard() {
@@ -60,14 +43,17 @@ export default function MenuCard() {
                 <h1>メニュー</h1>
             </div>
             <div className='CardGrid'>
-                {menuList.map((menu: Props) => (
-                    <ActionAreaCard
-                        key={menu.title}
-                        title={menu.title}
-                        content={menu.content}
-                        image={menu.image}
-                        href={menu.href}
-                    />
+                {menuList.map((menu: CardProps) => (
+                    <Link key={menu.title} to={menu.href}>
+                        {/* なぜエラーが出るのか分らない */}
+
+                        <ActionAreaCard
+                            title={menu.title}
+                            content={menu.content}
+                            image={menu.image}
+                            href={menu.href}
+                        />
+                    </Link>
                 ))}
             </div>
         </>
@@ -75,11 +61,11 @@ export default function MenuCard() {
 }
 
 
-function ActionAreaCard(props: Props) {
-    const { title, content, image, href } = props;
+function ActionAreaCard(props: CardProps) {
+    const { title, content, image} = props;
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea sx={{ padding: 1, background: "#f8f8f8" }} href={href}>
+        <Card sx={{ width: 345,maxWidth:345 }}>
+            <CardActionArea sx={{ padding: 1, background: "#f8f8f8" }}>
                 <CardMedia
                     component="img"
                     height="300"
