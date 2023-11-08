@@ -43,7 +43,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                     <Routes>
 
                         {lists.map((Item: Page) => {
-                            console.log(getPages(Item))
                             return getPages(Item)
                         })}
                     </Routes>
