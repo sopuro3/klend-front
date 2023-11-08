@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Page, lists } from './reception/Recep_page.tsx';
 import ResponsiveAppBar from './appbar/Appbar.tsx';
 import './App.css'
+import BreadCrumb from './reception/BreadCrumb.tsx';
 
 
 const darkTheme = createTheme({
@@ -21,7 +22,11 @@ function getPages(Item: Page): JSX.Element[] {
 
     function getRoute(Item: Page): JSX.Element {
         return <>
-        <Route key={Item.text} path={Item.href} element={Item.element} />
+        <Route key={Item.text} path={Item.href} element={<>
+            <BreadCrumb></BreadCrumb>
+        
+        {Item.element}
+        </>} />
         </>;
     }
 }

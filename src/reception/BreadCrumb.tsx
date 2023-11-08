@@ -14,9 +14,11 @@ export default function BreadCrumb() {
 
 
     let pathname = location.pathname.replace(/^\//,"")
+    //こいつのコメントアウトを外すと、ホームでもホームのパンくずが表示される。がむしろ混乱を招くのでいらないと思う
     // if(pathname === "") pathname = "/"
-    //listsから探索し、階層をArrayで取得する。
 
+
+    //listsから探索し、階層をArrayで取得する。
     function getBreadCrumbItems(lists: Pages, pathname: string): BreadCrumbItems {
 
         const ReturnItems: BreadCrumbItems = [];
