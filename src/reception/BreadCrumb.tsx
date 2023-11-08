@@ -13,7 +13,7 @@ interface BreadCrumbItems extends Array<BreadCrumbItem> { }
 export default function BreadCrumb() {
 
 
-    let pathname = location.pathname.replace(/^\//,"")
+    let pathname = window.location.pathname;
     //こいつのコメントアウトを外すと、ホームでもホームのパンくずが表示される。がむしろ混乱を招くのでいらないと思う
     // if(pathname === "") pathname = "/"
 

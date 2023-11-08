@@ -3,6 +3,7 @@ import { SvgIconProps } from '@mui/material';
 import ReturnEmpty from '../pages/ReturnEmptyPage.tsx';
 import Recep_home from './pages/Recep_home.tsx';
 import Borrow from './pages/Borrow.tsx';
+import Borrow_complete from './pages/Borrow_complete.tsx';
 
 export interface Page {
     href: string;
@@ -29,30 +30,37 @@ export const lists: Pages = [
         isDrawerButton: true,
         subPages: [
             {
-                href: 'reception/borrow',
+                href: '/reception/borrow',
                 text: '貸出受付',
                 iconName: Info,
                 element: <Borrow />,
                 isDrawerButton: true,
                 subPages: [
                     {
-                        href: 'reception/borrow/check',
+                        href: '/reception/borrow/check',
                         text: '貸出数量確認',
                         iconName: Info,
                         element: <ReturnEmpty text="貸出数量" />,
                         isDrawerButton: true,
                     },
+                    {
+                        href: '/reception/borrow/done',
+                        text: '貸出完了',
+                        iconName: Info,
+                        element: <Borrow_complete/>,
+                        isDrawerButton: true,
+                    }
                 ],
             },
             {
-                href: 'reception/return',
+                href: '/reception/return',
                 text: '返却受付',
                 iconName: Info,
                 element: <ReturnEmpty text="返却" />,
                 isDrawerButton: true,
                 subPages: [
                     {
-                        href: 'reception/return/check',
+                        href: '/reception/return/check',
                         text: '返却数量確認',
                         iconName: Info,
                         element: <ReturnEmpty text="返却数量" />,

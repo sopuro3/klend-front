@@ -45,7 +45,6 @@ export default function MenuCard() {
             <div className='CardGrid'>
                 {menuList.map((menu: CardProps) => (
                     <Link key={menu.title} to={menu.href}>
-                        {/* なぜエラーが出るのか分らない */}
 
                         <ActionAreaCard
                             title={menu.title}
