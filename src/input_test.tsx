@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Page, lists } from './reception/Recep_page.tsx';
 import ResponsiveAppBar from './appbar/Appbar.tsx';
 import './App.css'
-import BreadCrumb from './reception/BreadCrumb.tsx';
+import BreadCrumb from './reception/components/BreadCrumb.tsx';
 
 
 const darkTheme = createTheme({
