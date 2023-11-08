@@ -4,8 +4,12 @@
     justify-content: space-evenly;
 }
 
-.CardGrid>div {
-    margin: 10px;
+.CardGrid>a{
+    height: auto;
+}
+
+.CardGrid>a>div{
+    height: 100%;
 }
 
 .CardGrid .MuiButtonBase-root {

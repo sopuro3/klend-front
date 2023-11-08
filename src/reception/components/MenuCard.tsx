@@ -65,14 +65,14 @@ function ActionAreaCard(props: CardProps) {
     const { title, content, image} = props;
     return (
         <Card sx={{ width: 345,maxWidth:345 }}>
-            <CardActionArea sx={{ padding: 1, background: "#f8f8f8" }}>
+            <CardActionArea sx={{ padding: 1, background: "#f8f8f8",display:"flex",flexDirection:"column" }}>
                 <CardMedia
                     component="img"
                     height="300"
                     image={image}
                     alt={title}
                 />
-                <CardContent>
+                <CardContent sx={{flexGrow:1}}>
                     <Typography gutterBottom variant="h5" component="div">
                         {title}
                     </Typography>
