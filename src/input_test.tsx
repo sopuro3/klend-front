@@ -8,7 +8,6 @@ import ResponsiveAppBar from './appbar/Appbar.tsx';
 import './App.css'
 import BreadCrumb from './reception/components/BreadCrumb.tsx';
 
-
 const darkTheme = createTheme({
     palette: {
         //ライトモードで
@@ -40,7 +39,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ResponsiveAppBar></ResponsiveAppBar>
 
         <div>
-
             <BrowserRouter>
 
                 <div className='main'>
