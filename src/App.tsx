@@ -8,7 +8,6 @@ type Props = {
 };
 
 function App(props: Props) {
-    const { id } = props;
     const [count, setCount] = useState(0);
 
     return (

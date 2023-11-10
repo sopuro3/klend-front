@@ -1,0 +1,20 @@
+.Drawer {
+    background: rgb(22, 0, 51);
+    height: 100%;
+}
+
+.Drawer * {
+    color: white;
+
+}
+
+
+
+
+body.disableDrawer .Drawer {
+    display: none;
+}
+
+body.disableDrawer{
+    padding-left: 0;
+}

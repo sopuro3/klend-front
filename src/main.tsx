@@ -1,21 +1,57 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import './index.css';
-import ResponsiveDrawer from './m_drawer_test.tsx';
+import ResponsiveDrawer from './drawer/drawer.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/home.tsx';
-import About from './pages/about.tsx';
+import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Page, lists } from './pages.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
+
+
+function getPages(Item: Page): JSX.Element[] {
+
+
+    const ReturnItem = Item.subPages?.flatMap((page) => getPages(page)) ?? [getRoute(Item)]
+    return ReturnItem
+
+    function getRoute(Item: Page): JSX.Element {
+        return (
+            <Route key={Item.text} path={Item.href} element={Item.element} />
+        )
+    }
+}
+
+
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <ResponsiveDrawer></ResponsiveDrawer>
-        <App id="1" />
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} /> {/*追加*/}
-            </Routes>
-        </BrowserRouter>
+
+        <div>
+
+            <BrowserRouter>
+
+                <ResponsiveDrawer></ResponsiveDrawer>
+                <div className='main'>
+
+                    <Routes>
+                        {lists.map((Item: Page) => {
+                            return getPages(Item)
+                        })}
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </div>
+
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+
+        </ThemeProvider>
     </React.StrictMode>,
 );

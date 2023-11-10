@@ -1,4 +1,4 @@
-export default function Mtest() {
+export default function About() {
 
     return (
         <>
