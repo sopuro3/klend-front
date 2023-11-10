@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import App from "../App";
 
-export default function home() {
+export default function Home() {
 
     return (
         <>
