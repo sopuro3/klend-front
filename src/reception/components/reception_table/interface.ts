@@ -1,6 +1,6 @@
 interface columnName {
     name: string;
-    content:string;
+    content: string;
 }
 
 export class columnItem {
@@ -10,13 +10,7 @@ export class columnItem {
     stock: number;
     requested: number;
 
-
-    constructor({
-        name = "",
-        description = "",
-        type = "",
-        stock = 0,
-    }){
+    constructor({ name = '', description = '', type = '', stock = 0 }) {
         this.name = name;
         this.requested = 0;
         this.description = description;

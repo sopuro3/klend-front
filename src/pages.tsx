@@ -1,8 +1,8 @@
-import { Info, Home as HomeIcon } from "@mui/icons-material";
-import { SvgIconProps } from "@mui/material";
-import About from "./pages/About.tsx";
-import ReturnEmpty from "./pages/ReturnEmptyPage";
-import Home from "./pages/Home.tsx";
+import { Info, Home as HomeIcon } from '@mui/icons-material';
+import { SvgIconProps } from '@mui/material';
+import About from './pages/About.tsx';
+import ReturnEmpty from './pages/ReturnEmptyPage';
+import Home from './pages/Home.tsx';
 
 export interface Page {
     href: string;
@@ -22,24 +22,24 @@ export type Pages = Page[];
  */
 export const lists: Pages = [
     {
-        href: "/",
-        text: "Home",
+        href: '/',
+        text: 'Home',
         iconName: HomeIcon,
         element: <Home />,
         isDrawerButton: true,
     },
     {
-        href: "/about",
-        text: "About",
+        href: '/about',
+        text: 'About',
         iconName: Info,
         element: <About />,
         isDrawerButton: true,
     },
     {
-        href: "/users",
-        text: "Users",
+        href: '/users',
+        text: 'Users',
         iconName: Info,
         element: <ReturnEmpty text="Users" />,
         isDrawerButton: true,
-    }
-]
+    },
+];

@@ -10,42 +10,39 @@ type CardProps = {
     content: string;
     image: string;
     href: string;
-}
-
+};
 
 const menuList: CardProps[] = [
     {
-        title: "貸出",
-        content: "ボランティアへの資器材貸出用フォームです。",
-        image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/reception/borrow",
+        title: '貸出',
+        content: 'ボランティアへの資器材貸出用フォームです。',
+        image: 'src\\reception\\asset\\borrow_image.jpg',
+        href: '/reception/borrow',
     },
     {
-        title: "個人用貸出",
-        content: "個人への資器材貸出用フォームです。",
-        image: "src\\reception\\asset\\borrow_image.jpg",
-        href: "/reception/borrow",
+        title: '個人用貸出',
+        content: '個人への資器材貸出用フォームです。',
+        image: 'src\\reception\\asset\\borrow_image.jpg',
+        href: '/reception/borrow',
     },
     {
-        title: "返却",
-        content: "ボランティアおよび個人向け資器材返却用フォームです。",
-        image: "src\\reception\\asset\\return_image.jpg",
+        title: '返却',
+        content: 'ボランティアおよび個人向け資器材返却用フォームです。',
+        image: 'src\\reception\\asset\\return_image.jpg',
 
-        href: "/reception/return",
+        href: '/reception/return',
     },
-
 ];
 
 export default function MenuCard() {
     return (
         <>
-            <div className='CardTitle'>
+            <div className="CardTitle">
                 <h1>メニュー</h1>
             </div>
-            <div className='CardGrid'>
+            <div className="CardGrid">
                 {menuList.map((menu: CardProps) => (
                     <Link key={menu.title} to={menu.href}>
-
                         <ActionAreaCard
                             title={menu.title}
                             content={menu.content}
@@ -59,19 +56,25 @@ export default function MenuCard() {
     );
 }
 
-
 function ActionAreaCard(props: CardProps) {
-    const { title, content, image} = props;
+    const { title, content, image } = props;
     return (
-        <Card sx={{ width: 345,maxWidth:345 }}>
-            <CardActionArea sx={{ padding: 1, background: "#f8f8f8",display:"flex",flexDirection:"column" }}>
+        <Card sx={{ width: 345, maxWidth: 345 }}>
+            <CardActionArea
+                sx={{
+                    padding: 1,
+                    background: '#f8f8f8',
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
                 <CardMedia
                     component="img"
                     height="300"
                     image={image}
                     alt={title}
                 />
-                <CardContent sx={{flexGrow:1}}>
+                <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="div">
                         {title}
                     </Typography>

@@ -47,9 +47,9 @@ export const lists: Pages = [
                         href: '/reception/borrow/done',
                         text: '貸出完了',
                         iconName: Info,
-                        element: <Borrow_complete/>,
+                        element: <Borrow_complete />,
                         isDrawerButton: true,
-                    }
+                    },
                 ],
             },
             {

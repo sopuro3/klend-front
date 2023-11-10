@@ -14,29 +14,29 @@ const darkTheme = createTheme({
     },
 });
 
-
 function getPages(Item: Page): JSX.Element[] {
-    const ReturnItem = [getRoute(Item), ...(Item.subPages?.flatMap((page) => getPages(page)) ?? [])];
+    const ReturnItem = [
+        getRoute(Item),
+        ...(Item.subPages?.flatMap((page) => getPages(page)) ?? []),
+    ];
     return ReturnItem;
 
     function getRoute(Item: Page): JSX.Element {
-        return <Route key={Item.text} path={Item.href} element={Item.element} />;
+        return (
+            <Route key={Item.text} path={Item.href} element={Item.element} />
+        );
     }
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-
         <div>
-
             <BrowserRouter>
-
                 <ResponsiveDrawer></ResponsiveDrawer>
-                <div className='main'>
-
+                <div className="main">
                     <Routes>
                         {lists.map((Item: Page) => {
-                            return getPages(Item)
+                            return getPages(Item);
                         })}
                     </Routes>
                 </div>
@@ -45,7 +45,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-
         </ThemeProvider>
     </React.StrictMode>,
 );

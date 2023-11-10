@@ -1,5 +1,1 @@
-
-
-export function callTable(){
-
-}
+export function callTable() {}
