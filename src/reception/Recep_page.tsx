@@ -70,13 +70,12 @@ export const lists: Pages = [
                 ],
             },
             {
-                href:"/401",
-                text:"エラー:使用済みQRコード",
-                iconName:Info,
-                element:<Error401/>,
-                isDrawerButton:true,
-
-            }
+                href: '/401',
+                text: 'エラー:使用済みQRコード',
+                iconName: Info,
+                element: <Error401 />,
+                isDrawerButton: true,
+            },
         ],
     },
 ];
