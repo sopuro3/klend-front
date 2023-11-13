@@ -7,6 +7,7 @@ import { Page, lists } from './reception/Recep_page.tsx';
 import ResponsiveAppBar from './appbar/Appbar.tsx';
 import './App.css';
 import BreadCrumb from './reception/components/BreadCrumb.tsx';
+import Error404 from './pages/other/error/Error404.tsx';
 
 const darkTheme = createTheme({
     palette: {
@@ -52,6 +53,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                         {lists.map((Item: Page) => {
                             return getPages(Item);
                         })}
+
+                        <Route path="*" element={Error404()} />
                     </Routes>
                 </div>
             </BrowserRouter>
