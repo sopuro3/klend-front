@@ -4,6 +4,7 @@ import ReturnEmpty from '../pages/ReturnEmptyPage.tsx';
 import Recep_home from './pages/home/Recep_home.tsx';
 import Borrow from './pages/borrow/Borrow.tsx';
 import Borrow_complete from './pages/borrow_comp/Borrow_complete.tsx';
+import Error401 from '../pages/other/error/Error401.tsx';
 
 export interface Page {
     href: string;
@@ -68,6 +69,14 @@ export const lists: Pages = [
                     },
                 ],
             },
+            {
+                href:"/401",
+                text:"エラー:使用済みQRコード",
+                iconName:Info,
+                element:<Error401/>,
+                isDrawerButton:true,
+
+            }
         ],
     },
 ];
