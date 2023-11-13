@@ -1,7 +1,7 @@
-interface columnName {
-    name: string;
-    content: string;
-}
+// interface columnName {
+//     name: string;
+//     content: string;
+// }
 
 export class columnItem {
     name: string;

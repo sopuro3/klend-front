@@ -1,12 +1,6 @@
 import './done.css';
 import './borrow_complete.css';
-import { Card, CardContent, Typography, createTheme } from '@mui/material';
-
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+import { Card, CardContent, Typography } from '@mui/material';
 
 export default function Borrow_complete() {
     return (

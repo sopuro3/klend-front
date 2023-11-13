@@ -3,11 +3,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
-type Props = {
-    id: string;
-};
-
-function App(props: Props) {
+function App() {
     const [count, setCount] = useState(0);
 
     return (

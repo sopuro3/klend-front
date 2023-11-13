@@ -8,6 +8,5 @@ export default function ReturnEmpty(props: Props) {
             <p>空のページ</p>
             <p>{props.text}</p>
         </>
-
     );
 }

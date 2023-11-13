@@ -1,10 +1,7 @@
 import { Typography } from '@mui/material';
 import App from '../App';
 
-
 export default function Home() {
-
-
     return (
         <>
             <App id="1" />
@@ -42,6 +39,5 @@ export default function Home() {
                 sagittis orci a.
             </p>
         </>
-
     );
 }
