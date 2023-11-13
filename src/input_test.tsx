@@ -54,7 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                             return getPages(Item);
                         })}
 
-                        <Route path="*" element={Error404()} />
+                        <Route path="*" element={Error404({pathname:location.pathname})} />
                     </Routes>
                 </div>
             </BrowserRouter>
