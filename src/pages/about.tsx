@@ -7,3 +7,5 @@ export default function About() {
         </>
     );
 }
+
+console.log("aaaa")

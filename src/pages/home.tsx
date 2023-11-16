@@ -4,7 +4,7 @@ import App from '../App';
 export default function Home() {
     return (
         <>
-            <App id="1" />
+            <App />
 
             <div>テスト</div>
             <p>あああああああああああ</p>
