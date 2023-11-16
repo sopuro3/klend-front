@@ -5,7 +5,6 @@ export default function Home() {
     return (
         <>
             <App />
-
             <div>テスト</div>
             <p>あああああああああああ</p>
             <Typography variant="h1">About Page</Typography>
