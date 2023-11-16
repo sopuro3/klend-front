@@ -14,7 +14,7 @@ const customErrorMessage: customErrorMessage = {
 export default function Error404(props: props) {
     //customErrorMessageに合致するなら、それを表示する
     let dfMessage =
-        'URLが存在しません。QRコードを読み込んでこのページが出た場合、どうしようもありません。';
+        'URLが存在しません。QRコードを読み込んでこのページが出た場合、お手持ちの受付番号と併せて管理者へ報告してください。';
     if (customErrorMessage[props.pathname]) {
         dfMessage = customErrorMessage[props.pathname];
     }
