@@ -4,7 +4,6 @@ import { SvgIconProps } from '@mui/material';
 import ReturnEmpty from './pages/ReturnEmptyPage';
 import About from './pages/NormAbout';
 
-
 export interface Page {
     href: string;
     text: string;

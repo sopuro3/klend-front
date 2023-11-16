@@ -11,25 +11,26 @@ type CardProps = {
     image: string;
     href: string;
 };
+import borrowImage from '../asset/borrow_image.jpg';
+import returnImage from '../asset/return_image.jpg';
 
 const menuList: CardProps[] = [
     {
         title: '貸出',
         content: 'ボランティアへの資器材貸出用フォームです。',
-        image: 'src\\reception\\asset\\borrow_image.jpg',
+        image: borrowImage,
         href: '/reception/borrow',
     },
     {
         title: '個人用貸出',
         content: '個人への資器材貸出用フォームです。',
-        image: 'src\\reception\\asset\\borrow_image.jpg',
+        image: borrowImage,
         href: '/reception/borrow',
     },
     {
         title: '返却',
         content: 'ボランティアおよび個人向け資器材返却用フォームです。',
-        image: 'src\\reception\\asset\\return_image.jpg',
-
+        image: returnImage,
         href: '/reception/return',
     },
 ];

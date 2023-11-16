@@ -1,21 +1,20 @@
 import './error.css';
 type props = {
-    pathname:string;
-}
+    pathname: string;
+};
 
 interface customErrorMessage {
     [key: string]: string;
 }
 
 const customErrorMessage: customErrorMessage = {
-    "/418": "I'm a teapot",
+    '/418': "I'm a teapot",
+};
 
-}
-
-export default function Error404(props:props) {
-
+export default function Error404(props: props) {
     //customErrorMessageに合致するなら、それを表示する
-    let dfMessage = "URLが存在しません。QRコードを読み込んでこのページが出た場合、どうしようもありません。";
+    let dfMessage =
+        'URLが存在しません。QRコードを読み込んでこのページが出た場合、どうしようもありません。';
     if (customErrorMessage[props.pathname]) {
         dfMessage = customErrorMessage[props.pathname];
     }
@@ -31,9 +30,7 @@ export default function Error404(props:props) {
                 </div>
 
                 <h1>ページを読み込めません</h1>
-                <p>
-                    {dfMessage}
-                </p>
+                <p>{dfMessage}</p>
             </div>
         </>
     );

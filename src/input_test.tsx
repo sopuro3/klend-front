@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -43,7 +43,7 @@ function getPages(Item: Page): JSX.Element[] {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+    <StrictMode>
         <ResponsiveAppBar></ResponsiveAppBar>
 
         <div>
@@ -54,7 +54,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                             return getPages(Item);
                         })}
 
-                        <Route path="*" element={Error404({pathname:location.pathname})} />
+                        <Route
+                            path="*"
+                            element={Error404({ pathname: location.pathname })}
+                        />
                     </Routes>
                 </div>
             </BrowserRouter>
@@ -63,5 +66,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
         </ThemeProvider>
-    </React.StrictMode>,
+    </StrictMode>,
 );

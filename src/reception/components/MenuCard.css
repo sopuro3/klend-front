@@ -4,14 +4,20 @@
     justify-content: space-evenly;
 }
 
-.CardGrid>a{
+.CardGrid>a {
     height: auto;
+    padding: 10px
 }
 
-.CardGrid>a>div{
+.CardGrid>a>div {
     height: 100%;
 }
 
 .CardGrid .MuiButtonBase-root {
     height: 100%;
+}
+
+.CardGrid::after {
+    content: "";
+    width: calc(345px + (10px * 2));
 }
