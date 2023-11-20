@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import ResponsiveDrawer from './drawer/drawer.tsx';
@@ -29,7 +29,7 @@ function getPages(Item: Page): JSX.Element[] {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+    <StrictMode>
         <div>
             <BrowserRouter>
                 <ResponsiveDrawer></ResponsiveDrawer>
@@ -46,5 +46,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
         </ThemeProvider>
-    </React.StrictMode>,
+    </StrictMode>,
 );
