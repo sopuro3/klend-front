@@ -5,16 +5,12 @@
 
 .Drawer * {
     color: white;
-
 }
-
-
-
 
 body.disableDrawer .Drawer {
     display: none;
 }
 
-body.disableDrawer{
+body.disableDrawer {
     padding-left: 0;
 }
