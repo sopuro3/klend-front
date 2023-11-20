@@ -18,7 +18,6 @@ export default function Error404(props: props) {
     if (customErrorMessage[props.pathname]) {
         dfMessage = customErrorMessage[props.pathname];
     }
-    console.log(props.pathname);
     return (
         <>
             <div>
