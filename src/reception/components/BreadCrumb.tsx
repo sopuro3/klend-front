@@ -1,6 +1,6 @@
-import { Breadcrumbs, Link, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { Pages, lists } from '../Recep_page';
+import { Breadcrumbs, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { Pages, lists } from "../Recep_page";
 
 interface BreadCrumbItem {
     text: string;

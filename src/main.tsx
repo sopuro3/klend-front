@@ -1,16 +1,16 @@
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import ResponsiveDrawer from './drawer/drawer.tsx';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import './App.css';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Page, lists } from './pages.tsx';
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import ResponsiveDrawer from "./drawer/drawer.tsx";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import "./App.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Page, lists } from "./pages.tsx";
 
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: "dark",
     },
 });
 
@@ -28,7 +28,7 @@ function getPages(Item: Page): JSX.Element[] {
     }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <div>
             <BrowserRouter>

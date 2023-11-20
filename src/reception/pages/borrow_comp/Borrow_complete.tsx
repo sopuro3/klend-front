@@ -1,6 +1,6 @@
-import './done.css';
-import './borrow_complete.css';
-import { Card, CardContent, Typography } from '@mui/material';
+import "./done.css";
+import "./borrow_complete.css";
+import { Card, CardContent, Typography } from "@mui/material";
 
 export default function Borrow_complete() {
     return (
@@ -31,9 +31,9 @@ export default function Borrow_complete() {
             <Card
                 sx={{
                     maxWidth: 300,
-                    margin: 'auto',
-                    padding: '10px',
-                    background: '#f8f8f8',
+                    margin: "auto",
+                    padding: "10px",
+                    background: "#f8f8f8",
                 }}
             >
                 <CardContent>

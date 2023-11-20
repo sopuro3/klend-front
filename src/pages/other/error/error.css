@@ -46,7 +46,7 @@
 }
 .error::before,
 .error::after {
-    content: '';
+    content: "";
     display: block;
     height: 4px;
     background: #f86;

@@ -1,37 +1,37 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import './MenuCard.css';
-import { Link } from 'react-router-dom';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import "./MenuCard.css";
+import { Link } from "react-router-dom";
 type CardProps = {
     title: string;
     content: string;
     image: string;
     href: string;
 };
-import borrowImage from '../asset/borrow_image.jpg';
-import returnImage from '../asset/return_image.jpg';
+import borrowImage from "../asset/borrow_image.jpg";
+import returnImage from "../asset/return_image.jpg";
 
 const menuList: CardProps[] = [
     {
-        title: '貸出',
-        content: 'ボランティアへの資器材貸出用フォームです。',
+        title: "貸出",
+        content: "ボランティアへの資器材貸出用フォームです。",
         image: borrowImage,
-        href: '/reception/borrow',
+        href: "/reception/borrow",
     },
     {
-        title: '個人用貸出',
-        content: '個人への資器材貸出用フォームです。',
+        title: "個人用貸出",
+        content: "個人への資器材貸出用フォームです。",
         image: borrowImage,
-        href: '/reception/borrow',
+        href: "/reception/borrow",
     },
     {
-        title: '返却',
-        content: 'ボランティアおよび個人向け資器材返却用フォームです。',
+        title: "返却",
+        content: "ボランティアおよび個人向け資器材返却用フォームです。",
         image: returnImage,
-        href: '/reception/return',
+        href: "/reception/return",
     },
 ];
 
@@ -64,9 +64,9 @@ function ActionAreaCard(props: CardProps) {
             <CardActionArea
                 sx={{
                     padding: 1,
-                    background: '#f8f8f8',
-                    display: 'flex',
-                    flexDirection: 'column',
+                    background: "#f8f8f8",
+                    display: "flex",
+                    flexDirection: "column",
                 }}
             >
                 <CardMedia

@@ -18,6 +18,6 @@
 }
 
 .CardGrid::after {
-    content: '';
+    content: "";
     width: calc(345px + (10px * 2));
 }

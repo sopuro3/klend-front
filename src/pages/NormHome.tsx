@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
-import App from '../App';
+import { Typography } from "@mui/material";
+import App from "../App";
 
 export default function Home() {
     return (

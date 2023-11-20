@@ -1,18 +1,18 @@
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Page, lists } from './reception/Recep_page.tsx';
-import ResponsiveAppBar from './appbar/Appbar.tsx';
-import './App.css';
-import BreadCrumb from './reception/components/BreadCrumb.tsx';
-import Error404 from './pages/other/error/Error404.tsx';
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Page, lists } from "./reception/Recep_page.tsx";
+import ResponsiveAppBar from "./appbar/Appbar.tsx";
+import "./App.css";
+import BreadCrumb from "./reception/components/BreadCrumb.tsx";
+import Error404 from "./pages/other/error/Error404.tsx";
 
 const darkTheme = createTheme({
     palette: {
         //ライトモードで
-        mode: 'light',
+        mode: "light",
     },
 });
 
@@ -42,7 +42,7 @@ function getPages(Item: Page): JSX.Element[] {
     }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <ResponsiveAppBar></ResponsiveAppBar>
 

@@ -1,4 +1,4 @@
-import './error.css';
+import "./error.css";
 
 export default function Error401() {
     return (
