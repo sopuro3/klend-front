@@ -57,10 +57,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 function ForGeneral() {
     return (
         <>
-            <ResponsiveAppBar></ResponsiveAppBar>
 
             <div>
                 <BrowserRouter>
+                    <ResponsiveAppBar>
+
+                    </ResponsiveAppBar>
+
+
                     <div className="main">
                         <Routes>
                             {lists.map((Item: Page) => {

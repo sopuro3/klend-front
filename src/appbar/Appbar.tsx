@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { EventNote } from "@mui/icons-material";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages: string[] = [];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
