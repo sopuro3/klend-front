@@ -17,7 +17,9 @@ export default function Home() {
                 // key="/reception/borrow/done"
 
                 href="/reception/borrow/done"
-            >受付完了画面へジャンプしてみる</Link>
+            >
+                受付完了画面へジャンプしてみる
+            </Link>
             <Typography variant="h1">About Page</Typography>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

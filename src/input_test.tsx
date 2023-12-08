@@ -46,8 +46,7 @@ function getPages(Item: Page): JSX.Element[] {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
-
-        {location.pathname.includes("/dashboard") ? (ForStaff()) : (ForGeneral())}
+        {location.pathname.includes("/dashboard") ? ForStaff() : ForGeneral()}
 
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
@@ -55,10 +54,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </StrictMode>,
 );
 
-
 function ForGeneral() {
-
-
     return (
         <>
             <ResponsiveAppBar></ResponsiveAppBar>
@@ -73,16 +69,17 @@ function ForGeneral() {
 
                             <Route
                                 path="*"
-                                element={Error404({ pathname: location.pathname })}
+                                element={Error404({
+                                    pathname: location.pathname,
+                                })}
                             />
                         </Routes>
                     </div>
                 </BrowserRouter>
             </div>
         </>
-    )
+    );
 }
-
 
 function ForStaff() {
     return (
@@ -98,7 +95,9 @@ function ForStaff() {
 
                             <Route
                                 path="*"
-                                element={Error404({ pathname: location.pathname })}
+                                element={Error404({
+                                    pathname: location.pathname,
+                                })}
                             />
                         </Routes>
                     </div>
@@ -109,5 +108,5 @@ function ForStaff() {
                 <CssBaseline />
             </ThemeProvider>
         </>
-    )
+    );
 }
