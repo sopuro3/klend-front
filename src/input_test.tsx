@@ -95,6 +95,11 @@ function ForStaff() {
                             {dashboard_lists.map((Item: Page) => {
                                 return getPages(Item);
                             })}
+
+                            <Route
+                                path="*"
+                                element={Error404({ pathname: location.pathname })}
+                            />
                         </Routes>
                     </div>
                 </BrowserRouter>
