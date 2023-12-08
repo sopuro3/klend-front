@@ -1,8 +1,9 @@
-import { Info, Home as HomeIcon, Home } from "@mui/icons-material";
+import { Info, Home as HomeIcon } from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
 
 import ReturnEmpty from "./pages/ReturnEmptyPage";
 import About from "./pages/NormAbout";
+import Home from "./pages/NormHome";
 
 export interface Page {
     href: string;
@@ -22,21 +23,21 @@ export type Pages = Page[];
  */
 export const lists: Pages = [
     {
-        href: "/",
+        href: "/dashboard",
         text: "Home",
         iconName: HomeIcon,
         element: <Home />,
         isDrawerButton: true,
     },
     {
-        href: "/about",
+        href: "/dashboard/about",
         text: "About",
         iconName: Info,
         element: <About />,
         isDrawerButton: true,
     },
     {
-        href: "/users",
+        href: "/dashboard/users",
         text: "Users",
         iconName: Info,
         element: <ReturnEmpty text="Users" />,

@@ -4,10 +4,12 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Page, lists } from "./reception/Recep_page.tsx";
+import { lists as dashboard_lists } from "./pages.tsx";
 import ResponsiveAppBar from "./appbar/Appbar.tsx";
 import "./App.css";
 import BreadCrumb from "./reception/components/BreadCrumb.tsx";
 import Error404 from "./pages/other/error/Error404.tsx";
+import ResponsiveDrawer from "./drawer/drawer.tsx";
 
 const darkTheme = createTheme({
     palette: {
@@ -44,27 +46,63 @@ function getPages(Item: Page): JSX.Element[] {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <ResponsiveAppBar></ResponsiveAppBar>
 
-        <div>
-            <BrowserRouter>
-                <div className="main">
-                    <Routes>
-                        {lists.map((Item: Page) => {
-                            return getPages(Item);
-                        })}
-
-                        <Route
-                            path="*"
-                            element={Error404({ pathname: location.pathname })}
-                        />
-                    </Routes>
-                </div>
-            </BrowserRouter>
-        </div>
+        {location.pathname.includes("/dashboard") ? (ForStaff()) : (ForGeneral())}
 
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
         </ThemeProvider>
     </StrictMode>,
 );
+
+
+function ForGeneral() {
+
+
+    return (
+        <>
+            <ResponsiveAppBar></ResponsiveAppBar>
+
+            <div>
+                <BrowserRouter>
+                    <div className="main">
+                        <Routes>
+                            {lists.map((Item: Page) => {
+                                return getPages(Item);
+                            })}
+
+                            <Route
+                                path="*"
+                                element={Error404({ pathname: location.pathname })}
+                            />
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </div>
+        </>
+    )
+}
+
+
+function ForStaff() {
+    return (
+        <>
+            <div>
+                <BrowserRouter>
+                    <ResponsiveDrawer></ResponsiveDrawer>
+                    <div className="main">
+                        <Routes>
+                            {dashboard_lists.map((Item: Page) => {
+                                return getPages(Item);
+                            })}
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </div>
+
+            <ThemeProvider theme={darkTheme}>
+                <CssBaseline />
+            </ThemeProvider>
+        </>
+    )
+}
