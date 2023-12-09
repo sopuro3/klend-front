@@ -5,7 +5,6 @@ import { Card, CardContent, Typography } from "@mui/material";
 export default function Borrow_complete() {
     return (
         <>
-
             <div className="main-container">
                 <div className="check-container">
                     <div className="check-background">
