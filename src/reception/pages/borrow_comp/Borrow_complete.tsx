@@ -6,6 +6,8 @@ import Loader from "../../../components/Loader";
 export default function Borrow_complete() {
     return (
         <>
+            <Loader></Loader>
+
             <div className="main-container">
                 <div className="check-container">
                     <div className="check-background">
@@ -26,7 +28,6 @@ export default function Borrow_complete() {
                     <div className="check-shadow"></div>
                 </div>
             </div>
-            <Loader></Loader>
             <div className="text-container">手続きが完了しました！</div>
             <br></br>
             <Card

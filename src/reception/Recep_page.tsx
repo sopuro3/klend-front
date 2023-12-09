@@ -76,9 +76,7 @@ export const lists: Pages = [
                 iconName: Info,
                 element: <ChangeOrderInputMenu />,
                 isDrawerButton: true,
-                subPages: [
-
-                ],
+                subPages: [],
             },
 
             {
