@@ -11,12 +11,10 @@ import BreadCrumb from "./reception/components/BreadCrumb.tsx";
 import Error404 from "./pages/other/error/Error404.tsx";
 import ResponsiveDrawer from "./drawer/drawer.tsx";
 
-
 //forstaffには、index.cssが必須であるが、ここで読み込むとgeneralにも影響を及ぼす。
 //将来的に現在のforstaffは使用しなくなる可能性があるため保留するが、もし使用する場合は、以下のどちらかで実現できると思う
 //1. forstaffのみに適用するcssを作成する
 //2. cssを読ませるだけのコンポーネントを作成する
-
 
 const darkTheme = createTheme({
     palette: {
@@ -94,7 +92,6 @@ function ForStaff() {
             {/* index.cssをインポートする */}
 
             <div>
-
                 <BrowserRouter>
                     <ResponsiveDrawer></ResponsiveDrawer>
                     <div className="main">
