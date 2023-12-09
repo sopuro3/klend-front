@@ -5,6 +5,7 @@ import Recep_home from "./pages/home/Recep_home.tsx";
 import Borrow from "./pages/borrow/Borrow.tsx";
 import Borrow_complete from "./pages/borrow_comp/Borrow_complete.tsx";
 import Error401 from "../pages/other/error/Error401.tsx";
+import ChangeOrderInputMenu from "./pages/change_order/Change_NumInput.tsx";
 
 export interface Page {
     href: string;
@@ -69,6 +70,17 @@ export const lists: Pages = [
                     },
                 ],
             },
+            {
+                href: "/reception/change_order",
+                text: "申請の変更",
+                iconName: Info,
+                element: <ChangeOrderInputMenu />,
+                isDrawerButton: true,
+                subPages: [
+
+                ],
+            },
+
             {
                 href: "/401",
                 text: "エラー:使用済みQRコード",

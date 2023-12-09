@@ -1,6 +1,7 @@
 import "./done.css";
 import "./borrow_complete.css";
 import { Card, CardContent, Typography } from "@mui/material";
+import Loader from "../../../components/Loader";
 
 export default function Borrow_complete() {
     return (
@@ -25,7 +26,7 @@ export default function Borrow_complete() {
                     <div className="check-shadow"></div>
                 </div>
             </div>
-
+            <Loader></Loader>
             <div className="text-container">手続きが完了しました！</div>
             <br></br>
             <Card
