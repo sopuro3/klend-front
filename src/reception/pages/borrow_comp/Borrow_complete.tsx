@@ -1,12 +1,10 @@
 import "./done.css";
 import "./borrow_complete.css";
 import { Card, CardContent, Typography } from "@mui/material";
-import Loader from "../../../components/Loader";
 
 export default function Borrow_complete() {
     return (
         <>
-            <Loader></Loader>
 
             <div className="main-container">
                 <div className="check-container">

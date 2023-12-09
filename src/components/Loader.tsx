@@ -9,7 +9,9 @@ export default function Loader() {
                 <div className="shadow"></div>
                 <div className="shadow"></div>
                 <div className="shadow"></div>
-                <span style={{ fontSize: "1.5em" }}>読み込み中</span>
+                <div className="TextWrap">
+                    <span>読み込み中</span>
+                </div>
             </div>
         </div>
     );
