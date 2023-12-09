@@ -11,9 +11,8 @@ import BreadCrumb from "./reception/components/BreadCrumb.tsx";
 import Error404 from "./pages/other/error/Error404.tsx";
 import ResponsiveDrawer from "./drawer/drawer.tsx";
 
-
 //forstaffの時はbodyにクラスを適用することでCSSの切り替えに対応
-import "./index.css"
+import "./index.css";
 
 //index.cssの内容を文字として受け取る
 
@@ -88,7 +87,6 @@ function ForGeneral() {
 }
 
 function ForStaff() {
-
     //bodyにforstaffクラスを追加する
     document.body.classList.add("forstaff");
 
@@ -97,7 +95,6 @@ function ForStaff() {
             {/* index.cssをインポートする */}
             <div>
                 <BrowserRouter>
-
                     <ResponsiveDrawer></ResponsiveDrawer>
                     <div className="main">
                         <Routes>
@@ -121,6 +118,4 @@ function ForStaff() {
             </ThemeProvider>
         </>
     );
-
-
 }
