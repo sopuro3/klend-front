@@ -31,7 +31,7 @@ const menuList: CardProps[] = [
     },
 
     {
-        title: "個数修正の申請",
+        title: "貸出個数の修正",
         content: "資機材の追加申請を行うためのフォームです。",
         image: fixImage,
         href: "/reception/fix",

@@ -1,16 +1,27 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import ResponsiveDrawer from "./drawer/drawer.tsx";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Page, lists } from "./pages.tsx";
+import { Page, lists } from "./reception/Recep_page.tsx";
+import { lists as dashboard_lists } from "./pages.tsx";
+import ResponsiveAppBar from "./appbar/Appbar.tsx";
+import "./App.css";
+import BreadCrumb from "./reception/components/BreadCrumb.tsx";
+import Error404 from "./pages/other/error/Error404.tsx";
+import ResponsiveDrawer from "./drawer/drawer.tsx";
+
+
+//forstaffには、index.cssが必須であるが、ここで読み込むとgeneralにも影響を及ぼす。
+//将来的に現在のforstaffは使用しなくなる可能性があるため保留するが、もし使用する場合は、以下のどちらかで実現できると思う
+//1. forstaffのみに適用するcssを作成する
+//2. cssを読ませるだけのコンポーネントを作成する
+
 
 const darkTheme = createTheme({
     palette: {
-        mode: "dark",
+        //ライトモードで
+        mode: "light",
     },
 });
 
@@ -23,28 +34,89 @@ function getPages(Item: Page): JSX.Element[] {
 
     function getRoute(Item: Page): JSX.Element {
         return (
-            <Route key={Item.text} path={Item.href} element={Item.element} />
+            <>
+                <Route
+                    key={Item.text}
+                    path={Item.href}
+                    element={
+                        <>
+                            <BreadCrumb></BreadCrumb>
+
+                            {Item.element}
+                        </>
+                    }
+                />
+            </>
         );
     }
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <div>
-            <BrowserRouter>
-                <ResponsiveDrawer></ResponsiveDrawer>
-                <div className="main">
-                    <Routes>
-                        {lists.map((Item: Page) => {
-                            return getPages(Item);
-                        })}
-                    </Routes>
-                </div>
-            </BrowserRouter>
-        </div>
+    <StrictMode>
+        {location.pathname.includes("/dashboard") ? ForStaff() : ForGeneral()}
 
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
         </ThemeProvider>
-    </React.StrictMode>,
+    </StrictMode>,
 );
+
+function ForGeneral() {
+    return (
+        <>
+            <div>
+                <BrowserRouter>
+                    <ResponsiveAppBar></ResponsiveAppBar>
+
+                    <div className="main">
+                        <Routes>
+                            {lists.map((Item: Page) => {
+                                return getPages(Item);
+                            })}
+
+                            <Route
+                                path="*"
+                                element={Error404({
+                                    pathname: location.pathname,
+                                })}
+                            />
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </div>
+        </>
+    );
+}
+
+function ForStaff() {
+    return (
+        <>
+            {/* index.cssをインポートする */}
+
+            <div>
+
+                <BrowserRouter>
+                    <ResponsiveDrawer></ResponsiveDrawer>
+                    <div className="main">
+                        <Routes>
+                            {dashboard_lists.map((Item: Page) => {
+                                return getPages(Item);
+                            })}
+
+                            <Route
+                                path="*"
+                                element={Error404({
+                                    pathname: location.pathname,
+                                })}
+                            />
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </div>
+
+            <ThemeProvider theme={darkTheme}>
+                <CssBaseline />
+            </ThemeProvider>
+        </>
+    );
+}
