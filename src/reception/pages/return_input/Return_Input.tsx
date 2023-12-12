@@ -45,17 +45,17 @@ function App() {
     return (
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div style={{display:"flex"}} >
-                <TextField
-                    id="outlined-basic"
-                    label="4桁の数字"
-                    type="number"
-                    variant="outlined"
-                    {...register("number")}
-                />
-                <Button variant="contained" type="submit">
-                    決定
-                </Button>
+                <div style={{ display: "flex" }}>
+                    <TextField
+                        id="outlined-basic"
+                        label="4桁の数字"
+                        type="number"
+                        variant="outlined"
+                        {...register("number")}
+                    />
+                    <Button variant="contained" type="submit">
+                        決定
+                    </Button>
                 </div>
             </form>
         </div>
