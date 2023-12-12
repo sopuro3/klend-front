@@ -1,8 +1,3 @@
-
-
-  
-
-
 @media only screen and (max-width: 480px) {
     .single-row-table th,
     .single-row-table td {
@@ -18,7 +13,7 @@
         padding-top: 0;
     }
 
-    .single-row-table thead{
-            display: none;
+    .single-row-table thead {
+        display: none;
     }
-  }
+}
