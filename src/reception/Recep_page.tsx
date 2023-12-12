@@ -5,6 +5,7 @@ import Recep_home from "./pages/home/Recep_home.tsx";
 import Borrow from "./pages/borrow/Borrow.tsx";
 import Borrow_complete from "./pages/borrow_comp/Borrow_complete.tsx";
 import Error401 from "../pages/other/error/Error401.tsx";
+import 返却時のナンバー入力画面 from "./pages/return_input/Return_Input.tsx";
 
 export interface Page {
     href: string;
@@ -57,7 +58,7 @@ export const lists: Pages = [
                 href: "/reception/return",
                 text: "返却受付",
                 iconName: Info,
-                element: <ReturnEmpty text="返却" />,
+                element: <返却時のナンバー入力画面 />,
                 isDrawerButton: true,
                 subPages: [
                     {
