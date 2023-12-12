@@ -45,6 +45,7 @@ function App() {
     return (
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
+                <div style={{display:"flex"}} >
                 <TextField
                     id="outlined-basic"
                     label="4桁の数字"
@@ -52,9 +53,10 @@ function App() {
                     variant="outlined"
                     {...register("number")}
                 />
-                <Button variant="text" type="submit">
+                <Button variant="contained" type="submit">
                     決定
                 </Button>
+                </div>
             </form>
         </div>
     );
