@@ -31,16 +31,20 @@ export default function 返却時のナンバー入力画面() {
     );
 }
 
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+    number: number;
+};
 
 function App() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm<FormValues>();
 
-    const onSubmit = (data: string) => console.log(data);
+    const onSubmit = (data: FormValues) => console.log(data);
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit(onSubmit as any)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                     id="outlined-basic"
                     label="4桁の数字"
