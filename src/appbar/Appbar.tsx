@@ -7,14 +7,23 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { EventNote } from "@mui/icons-material";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages: string[] = [];
+
+const settings_2 = [
+    {
+        name: "メニューを表示",
+        href: "/dashboard",
+    },
+    {
+        name: "ログアウト",
+        href: "/dashboard/login",
+    },
+];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -159,10 +168,16 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
+                    <Box
+                        sx={{
+                            flexGrow: 0,
+                        }}
+                    >
+                        <Typography onClick={handleOpenUserMenu}>
+                            職員用メニュー
+                        </Typography>
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton
+                        {/* <IconButton
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
@@ -170,8 +185,7 @@ function ResponsiveAppBar() {
                                     alt="Remy Sharp"
                                     src="/static/images/avatar/2.jpg"
                                 />
-                            </IconButton>
-                        </Tooltip>
+                            </IconButton> */}
                         <Menu
                             sx={{ mt: "45px" }}
                             id="menu-appbar"
@@ -188,13 +202,16 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {settings_2.map((setting) => (
                                 <MenuItem
-                                    key={setting}
-                                    onClick={handleCloseUserMenu}
+                                    //このキーは重複してはならないので、例えば二つ同じhrefに行くものがあればエラーを吐くが動作は可能。その場合はkeyを変える必要がある。
+                                    key={setting.href}
+                                    onClick={() => {
+                                        window.location.href = setting.href;
+                                    }}
                                 >
                                     <Typography textAlign="center">
-                                        {setting}
+                                        {setting.name}
                                     </Typography>
                                 </MenuItem>
                             ))}

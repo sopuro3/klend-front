@@ -13,6 +13,7 @@ type CardProps = {
 };
 import borrowImage from "../asset/borrow_image.jpg";
 import returnImage from "../asset/return_image.jpg";
+import fixImage from "../asset/fix_image.jpg";
 
 const menuList: CardProps[] = [
     {
@@ -21,17 +22,19 @@ const menuList: CardProps[] = [
         image: borrowImage,
         href: "/reception/borrow",
     },
-    {
-        title: "個人用貸出",
-        content: "個人への資器材貸出用フォームです。",
-        image: borrowImage,
-        href: "/reception/borrow",
-    },
+
     {
         title: "返却",
         content: "ボランティアおよび個人向け資器材返却用フォームです。",
         image: returnImage,
         href: "/reception/return",
+    },
+
+    {
+        title: "貸出個数の修正",
+        content: "資機材の追加申請を行うためのフォームです。",
+        image: fixImage,
+        href: "/reception/change_order",
     },
 ];
 

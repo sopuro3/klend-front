@@ -25,7 +25,6 @@ export default function Borrow_complete() {
                     <div className="check-shadow"></div>
                 </div>
             </div>
-
             <div className="text-container">手続きが完了しました！</div>
             <br></br>
             <Card

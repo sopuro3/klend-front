@@ -1,5 +1,6 @@
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import App from "../App";
+// import { Link as RouterLink } from "react-router-dom";
 
 export default function Home() {
     return (
@@ -7,6 +8,18 @@ export default function Home() {
             <App />
             <div>テスト</div>
             <p>あああああああああああ</p>
+
+            <Link
+                // component={RouterLink}
+                underline="hover"
+                color="inherit"
+                // to="/reception/borrow/done"
+                // key="/reception/borrow/done"
+
+                href="/reception/borrow/done"
+            >
+                受付完了画面へジャンプしてみる
+            </Link>
             <Typography variant="h1">About Page</Typography>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
