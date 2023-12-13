@@ -28,7 +28,7 @@ function createData(
         | typeof Object,
 ) {
     return { name, type };
-} 
+}
 
 const rows = [
     createData("被災宅の名前(仮)", String),
