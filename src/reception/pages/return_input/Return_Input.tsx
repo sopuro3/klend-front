@@ -43,14 +43,26 @@ export default function 返却時のナンバー入力画面() {
 import { useForm } from "react-hook-form";
 
 type FormValues = {
-    number: number;
+    number: string;
     password: string;
 };
 
 function App() {
     const { register, handleSubmit } = useForm<FormValues>();
 
-    const onSubmit = (data: FormValues) => console.log(data);
+    const onSubmit = (data: FormValues) => {
+        console.log(data);
+        //もし、numberが4桁の数字以外であれば、エラーを表示する
+        if (!data.number.match(/^[0-9]{4}$/)) {
+            alert("受付番号は4桁の数字で入力してください。");
+            return;
+        }
+    }
+
+
+
+
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -64,9 +76,10 @@ function App() {
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
+                    <div className="ErrorMsg"></div>
                     <TextField
                         label="4桁の受付No."
-                        type="number"
+                        type="input"
                         variant="outlined"
                         {...register("number")}
                         sx={{ marginBottom: "10px", width: "100%" }}
