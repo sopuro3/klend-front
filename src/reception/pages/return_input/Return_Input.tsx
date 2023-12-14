@@ -40,12 +40,13 @@ export default function 返却時のナンバー入力画面() {
     );
 }
 
-import { useForm } from "react-hook-form";
 
 type FormValues = {
     number: string;
     password: string;
 };
+
+import { useForm } from "react-hook-form";
 
 function App() {
     const { register, handleSubmit } = useForm<FormValues>();
