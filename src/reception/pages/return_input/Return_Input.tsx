@@ -40,7 +40,6 @@ export default function 返却時のナンバー入力画面() {
     );
 }
 
-
 type FormValues = {
     number: string;
     password: string;
@@ -58,11 +57,7 @@ function App() {
             alert("受付番号は4桁の数字で入力してください。");
             return;
         }
-    }
-
-
-
-
+    };
 
     const [showPassword, setShowPassword] = useState(false);
 
