@@ -9,7 +9,6 @@ import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 import Breadcrumbs from '@/dashboard/ui-component/extended/Breadcrumbs';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Customization from '../Customization';
 import navigation from '@/dashboard/menu-items';
 import { drawerWidth } from '@/dashboard/store/constant';
 import { SET_MENU } from '@/dashboard/store/actions';
@@ -91,7 +90,6 @@ const MainLayout = () => {
         <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
         <Outlet />
       </Main>
-      <Customization />
     </Box>
   );
 };
