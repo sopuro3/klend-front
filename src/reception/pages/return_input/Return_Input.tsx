@@ -12,7 +12,8 @@ import {
     Typography,
 } from "@mui/material";
 import { useState } from "react";
-
+import { useForm } from "react-hook-form";
+import "./Return_Input.css";
 export default function 返却時のナンバー入力画面() {
     return (
         <>
@@ -45,11 +46,9 @@ type FormValues = {
     password: string;
 };
 
-import { useForm } from "react-hook-form";
 
 function App() {
-    const { register, handleSubmit } = useForm<FormValues>();
-
+    const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
     const onSubmit = (data: FormValues) => {
         console.log(data);
         //もし、numberが4桁の数字以外であれば、エラーを表示する
@@ -68,16 +67,33 @@ function App() {
     ) => {
         event.preventDefault();
     };
+
+    const rules = {
+        required: '受付ナンバーを入力してください',
+        pattern: { value: /^[0-9]+$/, message: '受付ナンバーは半角数字で入力してください' },
+        minLength: { value: 4, message: `4桁の受付ナンバーを入力してください` },
+        maxLength: { value: 4, message: `4桁の受付ナンバーを入力してください` },
+      }
+
+
     return (
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <div className="ErrorMsg"></div>
+         
+
+             
+
+
+                    {errors.number && (
+                        <p className="errormsg" role="alert">{errors.number.message}</p>
+                        
+                        )}
                     <TextField
                         label="4桁の受付No."
                         type="input"
                         variant="outlined"
-                        {...register("number")}
+                        {...register("number",rules)}
                         sx={{ marginBottom: "10px", width: "100%" }}
                     />
 
