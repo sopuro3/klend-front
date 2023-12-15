@@ -1,27 +1,16 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 
 export default function 返却フォームの資器材入力画面() {
     return (
         <>
-            <h3>受付番号の入力</h3>
+            <h3>返却した資機材の数量確認</h3>
             <p>
-                書類に記されている受付ナンバーとパスワードを入力してください。
+                破損・紛失した資機材は除き、返却した資機材の数量を確認してください。
             </p>
-
-            <Card
-                sx={{
-                    maxWidth: 400,
-                    margin: "auto",
-                    padding: "10px",
-                    background: "#f8f8f8",
-                }}
-            >
-                <CardContent>
-                    <Typography variant="h5" component="div">
-                        受付番号
-                    </Typography>
-                </CardContent>
-            </Card>
+            <p>ここにテーブルコンポーネントが入ります</p>
+            <div style={{display:"flex"}}>
+                <Button variant="contained" href="/reception/return/done" sx={{marginLeft:"auto"}}>送信</Button>
+            </div>
         </>
     );
 }
