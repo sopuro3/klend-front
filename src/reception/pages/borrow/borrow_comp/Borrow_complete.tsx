@@ -1,4 +1,4 @@
-import DoneMark from "../../components/checkmark/Checkmark";
+import DoneMark from "../../../components/checkmark/Checkmark";
 import "./borrow_complete.css";
 import { Card, CardContent, Typography } from "@mui/material";
 
@@ -28,4 +28,3 @@ export default function Borrow_complete() {
     );
 }
 
-//https://codepen.io/Hellwinkel/pen/KKaNNKb

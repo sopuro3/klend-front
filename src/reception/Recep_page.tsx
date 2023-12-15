@@ -3,10 +3,11 @@ import { SvgIconProps } from "@mui/material";
 import ReturnEmpty from "../pages/ReturnEmptyPage.tsx";
 import Recep_home from "./pages/home/Recep_home.tsx";
 import Borrow from "./pages/borrow/Borrow.tsx";
-import Borrow_complete from "./pages/borrow_comp/Borrow_complete.tsx";
+import Borrow_complete from "./pages/borrow/borrow_comp/Borrow_complete.tsx";
 import Error401 from "../pages/other/error/Error401.tsx";
 import 返却時のナンバー入力画面 from "./pages/return/Return_Input.tsx";
 import 返却フォームの資器材入力画面 from "./pages/return/return_setitem/Return_Shikizai.tsx";
+import Return_complete from "./pages/return/return_comp/Return_complete.tsx";
 import ChangeOrderInputMenu from "./pages/change_order/Change_NumInput.tsx";
 
 export interface Page {
