@@ -23,14 +23,18 @@ import { Button } from "@mui/material";
 type rowData = {
     name: string;
     FormName: "name" | "address";
-    example:string;
+    example: string;
 };
-function createData(name: string, FormName: "name" | "address",example:string): rowData {
-    return { name, FormName,example };
+function createData(
+    name: string,
+    FormName: "name" | "address",
+    example: string,
+): rowData {
+    return { name, FormName, example };
 }
 
 const rows = [
-    createData("被災宅の名前(仮)", "name","例: 久留米 太郎"),
+    createData("被災宅の名前(仮)", "name", "例: 久留米 太郎"),
     createData("住所", "address", "例: 久留米市小森野1丁目1-1"),
 ];
 
