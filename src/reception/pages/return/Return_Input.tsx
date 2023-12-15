@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import "./Return_Input.css";
+import "./Return_input.css";
 export default function 返却時のナンバー入力画面() {
     return (
         <>
