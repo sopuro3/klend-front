@@ -1,9 +1,10 @@
-import "./done.css"
+import "./done.css";
+//https://codepen.io/Hellwinkel/pen/KKaNNKb
 
-export default function DoneMark(){
+export default function DoneMark() {
     return (
         <>
-                    <div className="main-container">
+            <div className="main-container">
                 <div className="check-container">
                     <div className="check-background">
                         <svg
@@ -24,5 +25,5 @@ export default function DoneMark(){
                 </div>
             </div>
         </>
-    )
+    );
 }

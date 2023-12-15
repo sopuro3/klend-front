@@ -150,12 +150,15 @@ function App() {
                     </div>
                 </div>
             </form>
-            <Link               
+            <Link
                 component={RouterLink}
                 underline="hover"
                 color="inherit"
                 to={"/reception/return/select"}
-                key={"/reception/return/select"}>返却個数入力画面へ</Link>
+                key={"/reception/return/select"}
+            >
+                返却個数入力画面へ
+            </Link>
         </div>
     );
 }
