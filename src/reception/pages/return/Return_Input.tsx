@@ -81,6 +81,11 @@ function App() {
         maxLength: { value: 4, message: "4桁の受付ナンバーを入力してください" },
     };
 
+    const pwRules = {
+        //といっても、パスワードはあっているかどうかは、サーバー側で判定するので、ここでは、パスワードが入力されているかどうかだけを判定する
+        required: "パスワードを入力してください",
+    };
+
     return (
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -97,7 +102,11 @@ function App() {
                         {...register("number", rules)}
                         sx={{ marginBottom: "10px", width: "100%" }}
                     />
-
+                    {errors.password && (
+                        <p className="errormsg" role="alert">
+                            {errors.password.message}
+                        </p>
+                    )}
                     <FormControl
                         sx={{ width: "100%", marginBottom: "10px" }}
                         variant="outlined"
@@ -108,7 +117,7 @@ function App() {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? "text" : "password"}
-                            {...register("password")}
+                            {...register("password", pwRules)}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
