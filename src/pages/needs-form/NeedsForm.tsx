@@ -23,14 +23,15 @@ import { Button } from "@mui/material";
 type rowData = {
     name: string;
     FormName: "name" | "address";
+    example:string;
 };
-function createData(name: string, FormName: "name" | "address"): rowData {
-    return { name, FormName };
+function createData(name: string, FormName: "name" | "address",example:string): rowData {
+    return { name, FormName,example };
 }
 
 const rows = [
-    createData("被災宅の名前(仮)", "name"),
-    createData("住所", "address"),
+    createData("被災宅の名前(仮)", "name","例: 久留米 太郎"),
+    createData("住所", "address", "例: 久留米市小森野1丁目1-1"),
 ];
 
 type FormValues = {
@@ -98,7 +99,7 @@ export function BasicTable() {
                             required
                             sx={{ width: "100%" }}
                             id="outlined-basic"
-                            label="入力必須"
+                            label={row.example}
                             variant="outlined"
                             {...register(row.FormName, { required: true })}
                         />
