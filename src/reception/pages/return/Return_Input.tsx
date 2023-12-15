@@ -7,6 +7,7 @@ import {
     IconButton,
     InputAdornment,
     InputLabel,
+    Link,
     OutlinedInput,
     TextField,
     Typography,
@@ -40,6 +41,7 @@ export default function 返却時のナンバー入力画面() {
         </>
     );
 }
+import { Link as RouterLink } from "react-router-dom";
 
 type FormValues = {
     number: string;
@@ -148,6 +150,12 @@ function App() {
                     </div>
                 </div>
             </form>
+            <Link               
+                component={RouterLink}
+                underline="hover"
+                color="inherit"
+                to={"/reception/return/select"}
+                key={"/reception/return/select"}>返却個数入力画面へ</Link>
         </div>
     );
 }
