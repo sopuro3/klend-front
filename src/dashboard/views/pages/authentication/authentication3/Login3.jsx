@@ -8,7 +8,7 @@ import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
-import Logo from '@/dashboard/ui-component/Logo';
+import Logo from '@/ui-component/Logo';
 import AuthFooter from '@/dashboard/ui-component/cards/AuthFooter';
 
 // assets
@@ -28,7 +28,7 @@ const Login = () => {
               <AuthCardWrapper>
                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                   <Grid item sx={{ mb: 3 }}>
-                    <Link to="#">
+                    <Link to="#" style={{ display: 'flex'}}>
                       <Logo />
                     </Link>
                   </Grid>

@@ -6,7 +6,7 @@ import { ButtonBase } from '@mui/material';
 
 // project imports
 import config from '@/dashboard/config';
-import Logo from '@/dashboard/ui-component/Logo';
+import Logo from '@/ui-component/Logo'
 import { MENU_OPEN } from '@/dashboard/store/actions';
 
 // ==============================|| MAIN LOGO ||============================== //
