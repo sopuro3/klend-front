@@ -1,12 +1,10 @@
 import { Button } from "@mui/material";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 
 export default function 返却フォームの資器材入力画面() {
     const { id } = useParams<{ id: string }>();
 
-    
-    
     return (
         <>
             <h3>返却した資機材の数量確認</h3>
@@ -21,8 +19,6 @@ export default function 返却フォームの資器材入力画面() {
                     to={"/reception/return/done"}
                     key={"/reception/return/done"}
                     component={RouterLink}
-
-        
                     sx={{ marginLeft: "auto" }}
                 >
                     送信
