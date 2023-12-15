@@ -70,6 +70,15 @@ export const lists: Pages = [
                         iconName: Info,
                         element: <返却フォームの資器材入力画面 />,
                         isDrawerButton: true,
+                        subPages: [
+                            {
+                                href: "/reception/return/done",
+                                text: "返却完了",
+                                iconName: Info,
+                                element: <Return_complete />,
+                                isDrawerButton: true,
+                            },
+                        ],
                     },
                 ],
             },
