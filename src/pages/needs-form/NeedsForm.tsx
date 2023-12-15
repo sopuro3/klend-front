@@ -17,6 +17,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
 function createData(
     name: string,
     type:
@@ -37,40 +38,48 @@ const rows = [
 
 export function BasicTable() {
     return (
-        <TableContainer component={Paper}>
-            <Table className="single-row-table" aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>項目</TableCell>
-                        <TableCell>入力欄</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{
-                                "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                },
-                            }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell>
-                                <TextField
-                                    required
-                                    sx={{ width: "100%" }}
-                                    id="outlined-basic"
-                                    label="入力必須"
-                                    variant="outlined"
-                                />
-                            </TableCell>
+        <>
+            <TableContainer component={Paper}>
+                <Table className="single-row-table" aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>項目</TableCell>
+                            <TableCell>入力欄</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow
+                                key={row.name}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell>
+                                    <TextField
+                                        required
+                                        sx={{ width: "100%" }}
+                                        id="outlined-basic"
+                                        label="入力必須"
+                                        variant="outlined"
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <br></br>
+            <div style={{ display: "flex" }}>
+                <Button variant="contained" sx={{ marginLeft: "auto" }}>
+                    送信
+                </Button>
+            </div>
+        </>
     );
 }
