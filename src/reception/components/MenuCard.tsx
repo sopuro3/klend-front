@@ -22,12 +22,6 @@ const menuList: CardProps[] = [
         href: "/reception/borrow",
     },
     {
-        title: "個人用貸出",
-        content: "個人への資器材貸出用フォームです。",
-        image: borrowImage,
-        href: "/reception/borrow",
-    },
-    {
         title: "返却",
         content: "ボランティアおよび個人向け資器材返却用フォームです。",
         image: returnImage,
