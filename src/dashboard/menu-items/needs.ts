@@ -8,19 +8,23 @@ const icons = {
 
 const needs = {
     id: "needs",
-    title: "ニーズ班",
-    caption: "資器材調査用",
+    title: "ボランティア案件調査",
     type: "group",
     children: [
         {
             id: "createNewNeeds",
             title: "案件の新規作成",
-            type: "collapse",
+            type: "item",
             icon: icons.TourIcon,
             breadcrumbs: true,
-            url: "/dashboard/needsForm",
+            url: "/survey/firstForm",
         },
+
     ],
 };
+
+
+
+
 
 export default needs;

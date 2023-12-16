@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 
 // project imports
-import NormWidget from "./CustomItem/NormWidget";
 import PopularCard from "./PopularCard";
+import EarningCard from "./EarningCard";
 import TotalOrderLineChartCard from "./TotalOrderLineChartCard";
 import TotalIncomeDarkCard from "./TotalIncomeDarkCard";
 import TotalIncomeLightCard from "./TotalIncomeLightCard";
@@ -26,7 +26,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <NormWidget isLoading={isLoading} />
+                        <EarningCard isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
                         <TotalOrderLineChartCard isLoading={isLoading} />
