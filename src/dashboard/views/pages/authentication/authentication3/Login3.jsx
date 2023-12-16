@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
-import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+    Grid,
+    Stack,
+    Typography,
+    useMediaQuery,
+    ButtonBase,
+} from "@mui/material";
 
 // project imports
 import AuthWrapper1 from "../AuthWrapper1";
@@ -43,12 +49,13 @@ const Login = () => {
                                     justifyContent="center"
                                 >
                                     <Grid item sx={{ mb: 3 }}>
-                                        <Link
-                                            to="#"
+                                        <ButtonBase
+                                            component={Link}
                                             style={{ display: "flex" }}
+                                            to="#"
                                         >
                                             <Logo />
-                                        </Link>
+                                        </ButtonBase>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Stack
