@@ -17,7 +17,7 @@
     height: 100%;
 }
 
-.CardGrid::after {
+/* .CardGrid::after {
     content: "";
     width: calc(345px + (10px * 2));
-}
+} */

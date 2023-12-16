@@ -1,8 +1,7 @@
 import "./done.css";
-import "./borrow_complete.css";
-import { Card, CardContent, Typography } from "@mui/material";
+//https://codepen.io/Hellwinkel/pen/KKaNNKb
 
-export default function Borrow_complete() {
+export default function DoneMark() {
     return (
         <>
             <div className="main-container">
@@ -25,26 +24,6 @@ export default function Borrow_complete() {
                     <div className="check-shadow"></div>
                 </div>
             </div>
-            <div className="text-container">手続きが完了しました！</div>
-            <br></br>
-            <Card
-                sx={{
-                    maxWidth: 300,
-                    margin: "auto",
-                    padding: "10px",
-                    background: "#f8f8f8",
-                }}
-            >
-                <CardContent>
-                    <Typography variant="h5" component="div">
-                        受付番号
-                    </Typography>
-                    <Typography variant="h4">3218</Typography>
-                    <Typography>この受付番号を控えてください。</Typography>
-                </CardContent>
-            </Card>
         </>
     );
 }
-
-//https://codepen.io/Hellwinkel/pen/KKaNNKb
