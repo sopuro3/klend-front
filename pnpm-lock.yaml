@@ -35,9 +35,6 @@ dependencies:
     "@mui/x-date-pickers":
         specifier: ^6.18.4
         version: 6.18.4(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.15)(@mui/system@5.14.20)(@types/react@18.2.33)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
-    "@tabler/icons":
-        specifier: ^1.119.0
-        version: 1.119.0(react-dom@18.2.0)(react@18.2.0)
     apexcharts:
         specifier: ^3.44.2
         version: 3.44.2
@@ -94,6 +91,12 @@ dependencies:
         version: 0.32.11
 
 devDependencies:
+    "@tabler/icons":
+        specifier: ^1.119.0
+        version: 1.119.0(react-dom@18.2.0)(react@18.2.0)
+    "@types/prop-types":
+        specifier: ^15.7.11
+        version: 15.7.11
     "@types/react":
         specifier: ^18.2.15
         version: 18.2.33
@@ -1529,7 +1532,7 @@ packages:
         dependencies:
             react: 18.2.0
             react-dom: 18.2.0(react@18.2.0)
-        dev: false
+        dev: true
 
     /@types/chai-subset@1.3.4:
         resolution:
@@ -1599,13 +1602,6 @@ packages:
             {
                 integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==,
             }
-        dev: false
-
-    /@types/prop-types@15.7.9:
-        resolution:
-            {
-                integrity: sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==,
-            }
 
     /@types/react-dom@18.2.14:
         resolution:
@@ -1631,7 +1627,7 @@ packages:
                 integrity: sha512-v+I7S+hu3PIBoVkKGpSYYpiBT1ijqEzWpzQD62/jm4K74hPpSP7FF9BnKG6+fg2+62weJYkkBWDJlZt5JO/9hg==,
             }
         dependencies:
-            "@types/prop-types": 15.7.9
+            "@types/prop-types": 15.7.11
             "@types/scheduler": 0.16.5
             csstype: 3.1.2
 
@@ -4278,7 +4274,6 @@ packages:
             loose-envify: 1.4.0
             react: 18.2.0
             scheduler: 0.23.0
-        dev: false
 
     /react-fast-compare@2.0.4:
         resolution:
@@ -4393,7 +4388,6 @@ packages:
         engines: { node: ">=0.10.0" }
         dependencies:
             loose-envify: 1.4.0
-        dev: false
 
     /readdirp@3.6.0:
         resolution:
@@ -4559,7 +4553,6 @@ packages:
             }
         dependencies:
             loose-envify: 1.4.0
-        dev: false
 
     /semver@6.3.1:
         resolution:
