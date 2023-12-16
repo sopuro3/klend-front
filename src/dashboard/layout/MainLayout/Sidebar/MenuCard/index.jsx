@@ -94,6 +94,18 @@ const MenuCard = () => {
     const theme = useTheme();
 
     return (
+        <></>
+    );
+};
+
+export default MenuCard;
+/**
+ このコンポーネントは、メニュー下部に追加のコンテンツを表示するために使用されます。
+
+
+ 
+ */
+/*
         <CardStyle>
             <CardContent sx={{ p: 2 }}>
                 <List sx={{ p: 0, m: 0 }}>
@@ -140,7 +152,4 @@ const MenuCard = () => {
                 <LinearProgressWithLabel value={80} />
             </CardContent>
         </CardStyle>
-    );
-};
-
-export default MenuCard;
+*/
