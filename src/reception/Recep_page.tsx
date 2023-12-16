@@ -34,21 +34,21 @@ export const lists: Pages = [
         isDrawerButton: true,
         subPages: [
             {
-                href: "/reception/borrow",
+                href: "reception/borrow",
                 text: "貸出受付",
                 iconName: Info,
                 element: <Borrow />,
                 isDrawerButton: true,
                 subPages: [
                     {
-                        href: "/reception/borrow/check",
+                        href: "check",
                         text: "貸出数量確認",
                         iconName: Info,
                         element: <ReturnEmpty text="貸出数量" />,
                         isDrawerButton: true,
                     },
                     {
-                        href: "/reception/borrow/done",
+                        href: "done",
                         text: "貸出完了",
                         iconName: Info,
                         element: <Borrow_complete />,
@@ -57,32 +57,33 @@ export const lists: Pages = [
                 ],
             },
             {
-                href: "/reception/return",
+                href: "reception/return",
                 text: "返却受付",
                 iconName: Info,
                 element: <返却時のナンバー入力画面 />,
                 isDrawerButton: true,
                 subPages: [
                     {
-                        href: "/reception/return/select/:id",
+                        href: "select/:id",
                         text: "返却数編集",
                         iconName: Info,
                         element: <返却フォームの資器材入力画面 />,
                         isDrawerButton: true,
                         subPages: [
                             {
-                                href: "/reception/return/done",
+                                href: "done",
                                 text: "返却完了",
                                 iconName: Info,
                                 element: <Return_complete />,
                                 isDrawerButton: true,
                             },
-                        ],
+                        ]
                     },
+
                 ],
             },
             {
-                href: "/401",
+                href: "401",
                 text: "エラー:使用済みQRコード",
                 iconName: Info,
                 element: <Error401 />,

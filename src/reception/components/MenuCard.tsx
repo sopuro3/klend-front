@@ -21,6 +21,7 @@ const menuList: CardProps[] = [
         image: borrowImage,
         href: "/reception/borrow",
     },
+
     {
         title: "返却",
         content: "ボランティアおよび個人向け資器材返却用フォームです。",

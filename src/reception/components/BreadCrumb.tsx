@@ -10,7 +10,9 @@ interface BreadCrumbItem {
 interface BreadCrumbItems extends Array<BreadCrumbItem> {}
 
 export default function BreadCrumb() {
+
     const pathname = window.location.pathname;
+    const pathArray = pathname.split("/");
     //こいつのコメントアウトを外すと、ホームでもホームのパンくずが表示される。がむしろ混乱を招くのでいらないと思う
     // if(pathname === "") pathname = "/"
 
