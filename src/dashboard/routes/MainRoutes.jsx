@@ -31,12 +31,7 @@ const SamplePage = Loadable(
     lazy(() => import("@/dashboard/views/sample-page")),
 );
 
-
-const Survey = Loadable(
-    lazy(() => import("@/dashboard/views/firstForm")),
-);
-
-
+const Survey = Loadable(lazy(() => import("@/dashboard/views/firstForm")));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -107,17 +102,15 @@ const MainRoutes = {
             element: <SamplePage />,
         },
 
-
         {
-            path:"survey",
-            children:[
+            path: "survey",
+            children: [
                 {
-                    path:"firstForm",
-                    element:<Survey/>
-                }
-            ]
-        }
-        
+                    path: "firstForm",
+                    element: <Survey />,
+                },
+            ],
+        },
     ],
 };
 
