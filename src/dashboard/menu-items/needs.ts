@@ -1,8 +1,7 @@
-
-import TourIcon from '@mui/icons-material/Tour';
+import TourIcon from "@mui/icons-material/Tour";
 // constant
 const icons = {
-    TourIcon
+    TourIcon,
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -20,8 +19,6 @@ const needs = {
             icon: icons.TourIcon,
             breadcrumbs: true,
             url: "/dashboard/needsForm",
-
-
         },
     ],
 };
