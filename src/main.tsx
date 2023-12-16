@@ -28,23 +28,19 @@ const darkTheme = createTheme({
 //     }
 // }
 
-
 function getPagesv2(Item: Page): JSX.Element {
-
     return (
         <Route key={Item.text} path={Item.href} element={Item.element}>
             {Item.subPages?.map((page) => getPagesChild(page))}
         </Route>
-    )
+    );
 
     function getPagesChild(Item: Page): JSX.Element {
         return (
-           
-                <Route path={Item.href}>
-                    <Route index element={Item.element} />
-                    {Item.subPages?.map((page) => getPagesChild(page))}
-                </Route>
-           
+            <Route path={Item.href}>
+                <Route index element={Item.element} />
+                {Item.subPages?.map((page) => getPagesChild(page))}
+            </Route>
         );
     }
 }
@@ -55,10 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <BrowserRouter>
                 <ResponsiveDrawer></ResponsiveDrawer>
                 <div className="main">
-                    <Routes>
-                        {getPagesv2(lists[0])}
-                        
-                    </Routes>
+                    <Routes>{getPagesv2(lists[0])}</Routes>
                 </div>
             </BrowserRouter>
         </div>

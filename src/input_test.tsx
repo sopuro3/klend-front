@@ -42,7 +42,6 @@ const darkTheme = createTheme({
 //     }
 // }
 
-
 // function getPagesv2(Item: Page): JSX.Element {
 
 //     return (
@@ -51,22 +50,22 @@ const darkTheme = createTheme({
 //         </Route>
 //     )
 
-
 // }
 
 function getPagesChild(Item: Page): JSX.Element {
     return (
-       
-            <Route path={Item.href} key={Item.href}>
-                <Route index element={
+        <Route path={Item.href} key={Item.href}>
+            <Route
+                index
+                element={
                     <>
-                    {/* <BreadCrumb/> */}
-                    {Item.element}
+                        {/* <BreadCrumb/> */}
+                        {Item.element}
                     </>
-                    } />
-                {Item.subPages?.map((page) => getPagesChild(page))}
-            </Route>
-       
+                }
+            />
+            {Item.subPages?.map((page) => getPagesChild(page))}
+        </Route>
     );
 }
 

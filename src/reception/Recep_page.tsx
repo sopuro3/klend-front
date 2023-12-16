@@ -77,9 +77,8 @@ export const lists: Pages = [
                                 element: <Return_complete />,
                                 isDrawerButton: true,
                             },
-                        ]
+                        ],
                     },
-
                 ],
             },
             {
