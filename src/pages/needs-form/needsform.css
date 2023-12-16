@@ -1,0 +1,19 @@
+@media only screen and (max-width: 480px) {
+    .single-row-table th,
+    .single-row-table td {
+        width: 100%;
+        display: block;
+    }
+
+    .single-row-table th {
+        width: 100%;
+    }
+
+    .single-row-table td {
+        padding-top: 0;
+    }
+
+    .single-row-table thead {
+        display: none;
+    }
+}
