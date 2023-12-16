@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { EventNote } from "@mui/icons-material";
 
+import Logo from "@/ui-component/Logo";
+
 const pages: string[] = [];
 
 const settings_2 = [
@@ -48,42 +50,7 @@ function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <EventNote
-                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-                    />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            display: { xs: "none", md: "flex" },
-                            fontFamily: "Noto Sans JP",
-                            fontWeight: 700,
-                            letterSpacing: ".3rem",
-                            color: "inherit",
-                            textDecoration: "none",
-                        }}
-                    >
-                        K-Lend
-                    </Typography>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: "none", md: "flex" },
-                            fontWeight: 700,
-                            fontFamily: "Noto Sans JP",
-                            letterSpacing: ".rem",
-                            color: "inherit",
-                            textDecoration: "none",
-                        }}
-                    >
-                        (仮)
-                    </Typography>
+                    <Logo />
 
                     <Box
                         sx={{
