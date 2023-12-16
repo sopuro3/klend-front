@@ -1,5 +1,4 @@
 module.exports = {
-    ignorePatterns: ["dist/**"],
     env: {
         browser: true,
         es2021: true,
@@ -31,8 +30,9 @@ module.exports = {
     rules: {
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
+        indent: ['error', 4],
         'linebreak-style': ['error', 'unix'],
-        quotes: ['error', 'double', { avoidEscape: true }],
+        quotes: ['error', 'double'],
         semi: ['error', 'always'],
     },
     settings: {
