@@ -21,7 +21,6 @@ const Dashboard = () => {
     }, []);
 
     return (
-        // <></>
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
