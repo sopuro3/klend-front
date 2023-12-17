@@ -30,7 +30,7 @@ const lends = {
             target: true,
 
             // urlは、rootにする
-            url: location.protocol +"//" + location.host + "/reception/return",
+            url: location.protocol + "//" + location.host + "/reception/return",
         },
     ],
 };
