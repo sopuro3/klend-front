@@ -51,6 +51,11 @@ const Caselist = Loadable(
     lazy(() => import("@/dashboard/views/firstForm/caselist")),
 );
 
+const Determine_lend = Loadable(
+    lazy(() => import("@/dashboard/views/determine_lend")),
+);
+
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -160,6 +165,10 @@ const MainRoutes = {
             path: "case/:id",
             element: <CasePage></CasePage>,
         },
+        {
+            path: "determine_lend",
+            element: <Determine_lend></Determine_lend>,
+        }
     ],
 };
 

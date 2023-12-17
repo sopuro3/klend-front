@@ -19,7 +19,7 @@ const manage_stock = {
             type: "item",
             icon: icons.SubjectIcon,
             breadcrumbs: false,
-            url: "/survey/firstForm",
+            url: "/stocklist",
         },
         {
             id: "addOrDelete_stock",

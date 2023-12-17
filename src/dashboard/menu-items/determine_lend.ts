@@ -21,7 +21,7 @@ const lends = {
             type: "item",
             icon: icons.AssignmentIcon,
             breadcrumbs: false,
-            url: "/survey/firstForm",
+            url: "/determine_lend",
         },
         {
             id: "jump_to_return",

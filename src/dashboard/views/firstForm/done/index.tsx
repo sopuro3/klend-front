@@ -1,3 +1,4 @@
+import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import DoneMark from "../../../../reception/components/checkmark/Checkmark";
 import "./borrow_complete.css";
 import { Card, CardContent, Typography } from "@mui/material";
@@ -5,6 +6,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 export default function Borrow_complete() {
     return (
         <>
+            <MainCard_ts>
             <DoneMark></DoneMark>
             <div className="text-container">手続きが完了しました！</div>
             <br></br>
@@ -24,6 +26,7 @@ export default function Borrow_complete() {
                     <Typography>この受付番号を控えてください。</Typography>
                 </CardContent>
             </Card>
+            </MainCard_ts>
         </>
     );
 }

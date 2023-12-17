@@ -1,4 +1,4 @@
-import { CallTable } from "@/components/Shikizai-Table/Shikizai_Table";
+import { CallTable } from "@/components/shikizai-table/Shikizai_Table";
 import { Button } from "@mui/material";
 
 export default function 返却フォームの資器材入力画面() {
