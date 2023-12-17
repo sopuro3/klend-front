@@ -1,6 +1,5 @@
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import NeedsForm from "../../../dashboard/views/firstForm";
 
 export default function Borrow() {
     return (
@@ -9,15 +8,13 @@ export default function Borrow() {
                 component={RouterLink}
                 underline="hover"
                 color="inherit"
-                to={"/reception/borrow/done"}
-                key={"/reception/borrow/done"}
+                to={"/survey/firstform/done"}
+                key={"/survey/firstform/done"}
             >
                 貸出完了
             </Link>
             <BasicDatePicker />
             {/* 日付型を入力できるインプット欄を用意する */}
-
-            <NeedsForm />
         </>
     );
 }

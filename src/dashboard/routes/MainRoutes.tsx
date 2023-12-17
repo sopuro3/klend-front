@@ -1,39 +1,54 @@
 import { lazy } from "react";
 
 // project imports
+//@ts-ignore
 import MainLayout from "@/dashboard/layout/MainLayout";
+//@ts-ignore
 import Loadable from "@/dashboard/ui-component/Loadable";
 
 // dashboard routing
 const DashboardDefault = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/dashboard/Default")),
 );
 
 // utilities routing
 const UtilsTypography = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/utilities/Typography")),
 );
 const UtilsColor = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/utilities/Color")),
 );
 const UtilsShadow = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/utilities/Shadow")),
 );
 const UtilsMaterialIcons = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/utilities/MaterialIcons")),
 );
 const UtilsTablerIcons = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/utilities/TablerIcons")),
 );
 
 // sample page routing
 const SamplePage = Loadable(
+    //@ts-expect-error
     lazy(() => import("@/dashboard/views/sample-page")),
 );
 
 const Survey = Loadable(lazy(() => import("@/dashboard/views/firstForm")));
 
-const Survey_Done = Loadable(lazy(() => import("@/dashboard/views/firstForm/done")))
+const Survey_Done = Loadable(
+    lazy(() => import("@/dashboard/views/firstForm/done")),
+);
+
+const Caselist = Loadable(
+    lazy(() => import("@/dashboard/views/firstForm/caselist")),
+);
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -111,7 +126,6 @@ const MainRoutes = {
                 {
                     path: "firstForm",
                     element: <Survey />,
-
                 },
             ],
         },
@@ -121,10 +135,18 @@ const MainRoutes = {
                 {
                     path: "firstForm/done",
                     element: <Survey_Done />,
-
                 },
             ],
-        }
+        },
+        {
+            path: "survey",
+            children: [
+                {
+                    path: "caselist",
+                    element: <Caselist></Caselist>
+                },
+            ],
+        },
     ],
 };
 

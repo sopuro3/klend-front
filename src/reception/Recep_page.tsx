@@ -1,13 +1,10 @@
 import { Info, Home as HomeIcon } from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
-import ReturnEmpty from "../pages/ReturnEmptyPage.tsx";
 import Recep_home from "./pages/home/Recep_home.tsx";
-import Borrow from "./pages/borrow/Borrow.tsx";
 import Error401 from "../pages/other/error/Error401.tsx";
 import 返却時のナンバー入力画面 from "./pages/return/Return_Input.tsx";
 import 返却フォームの資器材入力画面 from "./pages/return/return_setitem/Return_Shikizai.tsx";
 import Return_complete from "./pages/return/return_comp/Return_complete.tsx";
-import ChangeOrderInputMenu from "./pages/change_order/Change_NumInput.tsx";
 
 export interface Page {
     href: string;
@@ -33,23 +30,7 @@ export const lists: Pages = [
         element: <Recep_home />,
         isDrawerButton: true,
         subPages: [
-            {
-                href: "/reception/borrow",
-                text: "貸出受付",
-                iconName: Info,
-                element: <Borrow />,
-                isDrawerButton: true,
-                subPages: [
-                    {
-                        href: "/reception/borrow/check",
-                        text: "貸出数量確認",
-                        iconName: Info,
-                        element: <ReturnEmpty text="貸出数量" />,
-                        isDrawerButton: true,
-                    },
-      
-                ],
-            },
+  
             {
                 href: "/reception/return",
                 text: "返却受付",
@@ -75,14 +56,7 @@ export const lists: Pages = [
                     },
                 ],
             },
-            {
-                href: "/reception/change_order",
-                text: "申請の変更",
-                iconName: Info,
-                element: <ChangeOrderInputMenu />,
-                isDrawerButton: true,
-                subPages: [],
-            },
+ 
 
             {
                 href: "/401",

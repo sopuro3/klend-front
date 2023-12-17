@@ -1,10 +1,10 @@
 import TourIcon from "@mui/icons-material/Tour";
-import ListIcon from '@mui/icons-material/List';
+import ListIcon from "@mui/icons-material/List";
 
 // constant
 const icons = {
     TourIcon,
-    ListIcon
+    ListIcon,
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -28,7 +28,7 @@ const needs = {
             type: "item",
             icon: icons.ListIcon,
             breadcrumbs: false,
-            url: "/survey/firstForm",
+            url: "/survey/caselist",
         },
     ],
 };
