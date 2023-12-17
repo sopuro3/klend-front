@@ -8,8 +8,6 @@ const icons = {
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
 
-
-
 const lends = {
     id: "lends_returns",
     title: "資器材の貸し出し",
@@ -32,7 +30,7 @@ const lends = {
             target: true,
 
             // urlは、rootにする
-            url: location.protocol + location.host + "/reception/return",
+            url: location.protocol +"//" + location.host + "/reception/return",
         },
     ],
 };
