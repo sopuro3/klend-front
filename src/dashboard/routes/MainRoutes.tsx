@@ -157,9 +157,9 @@ const MainRoutes = {
             ],
         },
         {
-            path:"case/:id",
-            element:<CasePage></CasePage>
-        }
+            path: "case/:id",
+            element: <CasePage></CasePage>,
+        },
     ],
 };
 

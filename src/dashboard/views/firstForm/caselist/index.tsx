@@ -5,5 +5,5 @@ export default function Caselist() {
         <>
             <CaseTable></CaseTable>
         </>
-    )
-    }
+    );
+}
