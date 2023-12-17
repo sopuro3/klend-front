@@ -52,7 +52,6 @@ type FormValues = {
     address: string;
 };
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,

@@ -1,5 +1,5 @@
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 // constant
 const icons = {
