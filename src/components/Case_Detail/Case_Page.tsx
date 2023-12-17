@@ -6,8 +6,6 @@ export default function CasePage() {
     const { id } = useParams();
     const [isLoading, setLoading] = useState(true);
 
-
-
     setTimeout(() => {
         setLoading(false);
     }, 1300);
@@ -16,18 +14,16 @@ export default function CasePage() {
 
     return (
         <>
-        {isLoading ? (
-            <>
-                <Loader></Loader>
-            </>
-        ):(
-            <>
-            <h1>Case Page</h1>
-            <h3>Case #{id}</h3>
-            </>
-
-        )}
-
+            {isLoading ? (
+                <>
+                    <Loader></Loader>
+                </>
+            ) : (
+                <>
+                    <h1>Case Page</h1>
+                    <h3>Case #{id}</h3>
+                </>
+            )}
         </>
     );
 }

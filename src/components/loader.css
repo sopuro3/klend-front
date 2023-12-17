@@ -9,10 +9,9 @@
     left: calc(50% - 50px);
 }
 
-.static_parent{
-    width:100%;
-    margin:0 auto;
-
+.static_parent {
+    width: 100%;
+    margin: 0 auto;
 }
 
 .wrapper {

@@ -3,7 +3,6 @@ export default function Loader() {
     return (
         // <div className="loader_parent">
         <div className="static_parent">
-
             <div className="wrapper">
                 <div className="circle"></div>
                 <div className="circle"></div>
@@ -15,6 +14,6 @@ export default function Loader() {
                     <span>読み込み中</span>
                 </div>
             </div>
-         </div>
+        </div>
     );
 }
