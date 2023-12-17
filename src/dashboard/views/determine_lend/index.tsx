@@ -4,20 +4,20 @@ import { Link as RouterLink } from "react-router-dom";
 export default function Borrow() {
     return (
         <>
-        <PageTitle title={"貸出数の確定"} />
+            <PageTitle title={"貸出数の確定"} />
 
-        <MainCard_ts>
-            <Link
-                component={RouterLink}
-                underline="hover"
-                color="inherit"
-                to={"/survey/firstform/done"}
-                key={"/survey/firstform/done"}
-            >
-                貸出完了
-            </Link>
-            <BasicDatePicker />
-            {/* 日付型を入力できるインプット欄を用意する */}
+            <MainCard_ts>
+                <Link
+                    component={RouterLink}
+                    underline="hover"
+                    color="inherit"
+                    to={"/survey/firstform/done"}
+                    key={"/survey/firstform/done"}
+                >
+                    貸出完了
+                </Link>
+                <BasicDatePicker />
+                {/* 日付型を入力できるインプット欄を用意する */}
             </MainCard_ts>
         </>
     );

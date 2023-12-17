@@ -55,7 +55,6 @@ const Determine_lend = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend")),
 );
 
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -168,7 +167,7 @@ const MainRoutes = {
         {
             path: "determine_lend",
             element: <Determine_lend></Determine_lend>,
-        }
+        },
     ],
 };
 
