@@ -5,6 +5,7 @@ import { lazy } from "react";
 import MainLayout from "@/dashboard/layout/MainLayout";
 //@ts-expect-error jsxなので
 import Loadable from "@/dashboard/ui-component/Loadable";
+import CasePage from "@/components/Case_Detail/Case_Page";
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -146,6 +147,19 @@ const MainRoutes = {
                 },
             ],
         },
+        {
+            path: "survey",
+            children: [
+                {
+                    path: "caselist",
+                    element: <Caselist></Caselist>,
+                },
+            ],
+        },
+        {
+            path:"case/:id",
+            element:<CasePage></CasePage>
+        }
     ],
 };
 

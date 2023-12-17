@@ -1,3 +1,9 @@
+import CaseTable from "@/components/Case_Table/CaseTable";
+
 export default function Caselist() {
-    return <h1>ここにケースリストを表示する</h1>;
-}
+    return (
+        <>
+            <CaseTable></CaseTable>
+        </>
+    )
+    }
