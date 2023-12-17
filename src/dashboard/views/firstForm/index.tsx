@@ -8,8 +8,8 @@ export default function Borrow() {
                 component={RouterLink}
                 underline="hover"
                 color="inherit"
-                to={"/reception/borrow/done"}
-                key={"/reception/borrow/done"}
+                to={"/survey/firstform/done"}
+                key={"/survey/firstform/done"}
             >
                 貸出完了
             </Link>
