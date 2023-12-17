@@ -46,7 +46,7 @@ export default function CaseTable() {
         <>
             {isLoading ? (
                 <>
-                  <Loader></Loader>
+                    <Loader></Loader>
                 </>
             ) : (
                 <>
