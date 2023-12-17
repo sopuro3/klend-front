@@ -17,7 +17,7 @@ export type FormResponse = {
 // GET /form   end
 
 // GET /equipment
-export type EquipmentItem =        {
+export type EquipmentItem = {
     id: string; // uuid
     name: string; // 備品名
     /**
@@ -29,7 +29,7 @@ export type EquipmentItem =        {
      */
     currentQuantity: number;
     note?: string; // 備考
-}
+};
 
 export type Equipment = {
     equipments: EquipmentItem[];
@@ -38,8 +38,8 @@ export type Equipment = {
 
 // GET /equipment/:id
 export type EquipmentInvividual = {
-    name: string,
-    currentQuantiy: number,
-    maxQuantity: number,
-    note?: string,
-}
+    name: string;
+    currentQuantiy: number;
+    maxQuantity: number;
+    note?: string;
+};

@@ -59,7 +59,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
     },
-
 }));
 
 export function BasicTable() {
@@ -107,7 +106,7 @@ export function BasicTable() {
     );
 
     function RowItem(props: RowItemProps) {
-        const { row,multiline } = props;
+        const { row, multiline } = props;
         return (
             <>
                 <TableRow
