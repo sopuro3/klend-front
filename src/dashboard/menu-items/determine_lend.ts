@@ -1,9 +1,11 @@
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 // constant
 const icons = {
     KeyboardReturnIcon,
     AssignmentIcon,
+    OpenInNewIcon,
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -23,7 +25,7 @@ const lends = {
         },
         {
             id: "jump_to_return",
-            title: "資器材の返却",
+            title: "資器材の返却" + OpenInNewIcon,
             type: "item",
             icon: icons.KeyboardReturnIcon,
             breadcrumbs: false,
