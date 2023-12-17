@@ -5,11 +5,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Equipment, EquipmentItem } from "@/API/API_interface";
+import {
+    Equipment,
+    EquipmentItem,
+} from "@/API/API_interface";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader";
+import "./StockTable.css"
 
 const responseItem: Equipment = {
     equipments: [
@@ -45,7 +49,7 @@ const responseItem: Equipment = {
 };
 const rows = responseItem.equipments;
 
-export default function StockTable() {
+export function StockTable() {
     const [isLoading, setLoading] = useState(true);
 
     setTimeout(() => {
@@ -70,7 +74,7 @@ export default function StockTable() {
                                 <TableRow>
                                     <TableCell
                                         align="left"
-                                        sx={{ width: "250px" }}
+                                        sx={{ width: "150px" }}
                                     >
                                         資器材名
                                     </TableCell>
@@ -145,6 +149,93 @@ export default function StockTable() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                </>
+            )}
+        </>
+    );
+}
+
+export function SelectableStockTable(){
+    const [isLoading, setLoading] = useState(true);
+
+    setTimeout(() => {
+        setLoading(false);
+    }, 10);
+
+    return (
+        <>
+            {isLoading ? (
+                <>
+                    <Loader></Loader>
+                </>
+            ) : (
+                <>
+                    <div>
+                    <TableContainer component={Paper} elevation={3}>
+                        <Table
+                            sx={{ minWidth: "600px" }} 
+                            className="bigTable"
+                            size="small"
+                            aria-label="a dense table"
+                        >
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ width: "150px" }}
+                                    >
+                                        資器材名
+                                    </TableCell>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ width: "120px" }}
+                                    >
+                                        現在の在庫数
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="left"
+                                        sx={{ width: "200px" }}
+                                    >
+                                        貸出を希望する個数
+                                    </TableCell>
+         
+
+                                    <TableCell align="left">備考</TableCell>
+                                    
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((equip: EquipmentItem) => (
+                                    <TableRow
+                                        key={equip.name}
+                                        sx={{
+                                            "&:last-child td, &:last-child th":
+                                                {
+                                                    border: 0,
+                                                },
+                                        }}
+                                    >
+                                        <TableCell scope="row">
+                                            {equip.name}
+                                        </TableCell>
+                      
+                                        <TableCell align="right">
+                                            {equip.currentQuantity}
+                                        </TableCell>
+                                        <TableCell align="left">
+                         
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {equip.note}
+                                        </TableCell>
+            
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </div>
                 </>
             )}
         </>

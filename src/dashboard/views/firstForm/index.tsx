@@ -23,11 +23,13 @@ export default function NeedsForm() {
             <PageTitle title="ボランティア案件の新規作成"></PageTitle>
             <MainCard_ts>
                 <BasicTable />
+
             </MainCard_ts>
         </>
     );
 }
 import { styled } from "@mui/material/styles";
+import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 
 type rowData = {
     name: string;
@@ -69,8 +71,13 @@ export function BasicTable() {
 
     return (
         <>
+       
             <form onSubmit={handleSubmit(onSubmit)}>
-                <TableContainer component={Paper} elevation={1}>
+            <div className="survey">
+                <div>
+                <h3>案件の基本情報</h3>
+
+                <TableContainer sx={{ minWidth: 400 }} component={Paper} elevation={1}>
                     <Table
                         className="single-row-table"
                         aria-label="simple table"
@@ -82,8 +89,8 @@ export function BasicTable() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <RowItem row={rows[0]} />
-                            <RowItem row={rows[1]} />
+                            <RowItem required row={rows[0]} />
+                            <RowItem required row={rows[1]} />
                             <RowItem multiline={true} row={rows[2]} />
                         </TableBody>
                     </Table>
@@ -91,7 +98,13 @@ export function BasicTable() {
                 <br></br>
                 <Divider></Divider>
                 <br></br>
-
+                </div>
+                <div>
+                <h3>必要な資機材の見積り</h3>
+                <SelectableStockTable/>
+                <br></br>
+                <Divider/>
+                <br></br>
                 <div style={{ display: "flex" }}>
                     <Button
                         variant="contained"
@@ -101,12 +114,15 @@ export function BasicTable() {
                         送信
                     </Button>
                 </div>
+                </div>
+                </div>
             </form>
+        
         </>
     );
 
     function RowItem(props: RowItemProps) {
-        const { row, multiline } = props;
+        const { row, multiline,required: require } = props;
         return (
             <>
                 <TableRow
@@ -123,12 +139,12 @@ export function BasicTable() {
                     <TableCell>
                         <TextField
                             {...(multiline && { multiline: true, rows: 6 })}
-                            required
+                            {...(require && { required: true })}
                             sx={{ width: "100%" }}
                             id="outlined-basic"
                             label={row.example}
                             variant="outlined"
-                            {...register(row.FormName, { required: true })}
+                            {...register(row.FormName, { required: (require?true:false) })}
                         />
                     </TableCell>
                 </TableRow>
@@ -139,5 +155,6 @@ export function BasicTable() {
 
 type RowItemProps = {
     row: rowData;
+    required?: boolean;
     multiline?: boolean;
 };

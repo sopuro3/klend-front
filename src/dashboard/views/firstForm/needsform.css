@@ -17,3 +17,16 @@
         display: none;
     }
 }
+
+
+.survey{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.survey>div{
+    flex: 1;
+    margin: 0 10px;
+
+}
+
