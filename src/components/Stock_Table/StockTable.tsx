@@ -5,35 +5,45 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Case, FormResponse } from "@/API/API_interface";
+import { Case, Equipment, EquipmentItem, FormResponse } from "@/API/API_interface";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader";
 
-const responseItem: FormResponse = {
-    issue: [
-        {
-            adress: "123 Main St",
-            name: "John Doe",
-            id: "123e4567-e89b-12d3-a456-426614174001",
-            displayId: "0001",
-            status: "Pending",
-            note: "This is a sample case.",
-        },
-        {
-            adress: "456 Oak Ave",
-            name: "Jane Smith",
-            id: "234e5678-e89b-12d3-a456-426614174002",
-            displayId: "0002",
-            status: "In Progress",
-            note: "Another sample case.",
-        },
-        // Add more cases as needed
+const responseItem: Equipment = {
+    equipments: [
+      {
+        name: "スコップ",
+        id: 'a1b2c3d4-1111-2222-3333-123456789abc',
+        maxQuantity: 10,
+        currentQuantity: 5,
+        note: 'これは装備アイテム1です。'
+      },
+      {
+        name: "ハンマー",
+        id: 'b2c3d4e5-2222-3333-4444-23456789abcd',
+        maxQuantity: 20,
+        currentQuantity: 15,
+        note: 'これは装備アイテム2です。'
+      },
+      {
+        name: "ドライバー",
+        id: 'c3d4e5f6-3333-4444-5555-3456789abcde',
+        maxQuantity: 8,
+        currentQuantity: 3,
+        note: 'これは装備アイテム3です。'
+      },
+      {
+        name: "ペンチ",
+        id: 'd4e5f6g7-4444-5555-6666-456789abcdef',
+        maxQuantity: 25,
+        currentQuantity: 20,
+        note: 'これは装備アイテム4です。'
+      },
     ],
-};
-
-const rows = responseItem.issue;
+  };
+const rows = responseItem.equipments
 
 export default function StockTable() {
     const [isLoading, setLoading] = useState(true);
@@ -60,32 +70,36 @@ export default function StockTable() {
                                 <TableRow>
                                     <TableCell
                                         align="left"
-                                        sx={{ width: "80px" }}
+                                        sx={{ width: "250px" }}
                                     >
-                                        受付ID
+                                        資器材名
                                     </TableCell>
                                     <TableCell
                                         align="left"
-                                        sx={{ width: "180px" }}
+                                        sx={{ width: "100px" }}
                                     >
-                                        被災者の代表者名
+                                        保有数
                                     </TableCell>
-                                    <TableCell align="left">住所</TableCell>
+          
+                                    <TableCell align="left" sx={{width:"120px"}}>
+                                        現在の在庫数
+                                    </TableCell>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ width: "100px" }}
+                                    >
+                                        使用率
+                                    </TableCell>
 
-                                    <TableCell
-                                        align="left"
-                                        sx={{ width: "180px" }}
-                                    >
-                                        現在の状態
-                                    </TableCell>
-                                    <TableCell align="left">概要</TableCell>
+                                    <TableCell align="left">備考</TableCell>
                                     <TableCell align="left"></TableCell>
+
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((issue: Case) => (
+                                {rows.map((equip: EquipmentItem) => (
                                     <TableRow
-                                        key={issue.name}
+                                        key={equip.name}
                                         sx={{
                                             "&:last-child td, &:last-child th":
                                                 {
@@ -93,27 +107,28 @@ export default function StockTable() {
                                                 },
                                         }}
                                     >
-                                        <TableCell component="th" align="right">
-                                            {issue.displayId}
-                                        </TableCell>
+           
                                         <TableCell scope="row">
-                                            {issue.name}
+                                            {equip.name}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            {equip.maxQuantity}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            {equip.currentQuantity}
+                                        </TableCell>
+                                        <TableCell align="left"  >
+                                            {Math.round((equip.maxQuantity - equip.currentQuantity) / equip.maxQuantity * 10000)/100}%
                                         </TableCell>
                                         <TableCell align="left">
-                                            {issue.adress}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {issue.status}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {issue.note}
+                                            {equip.note}
                                         </TableCell>
                                         <TableCell align="left">
                                             <Link
                                                 component={RouterLink}
                                                 underline="hover"
-                                                to={"/case/" + issue.id}
-                                                key={"/case/" + issue.id}
+                                                to={"/equipment/" + equip.id}
+                                                key={"/equipment/" + equip.id}
                                             >
                                                 詳細情報
                                             </Link>

@@ -1,4 +1,4 @@
-// GET /form  
+// GET /form
 
 export type Case = {
     adress: string; // 被災者宅の住所
@@ -14,24 +14,32 @@ export type FormResponse = {
     issue: Case[];
 };
 
-
 // GET /form   end
 
 // GET /equipment
-export type Equipment = {
-    equipments:[{
-		id: string // uuid
-        /**
-         * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
-         */
-		maxQuantity: number
-        /**
-         * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
-         */
-		currentQuantity: number 
-        notes: string // 備考
-	}]
+export type EquipmentItem =        {
+    id: string; // uuid
+    name: string; // 備品名
+    /**
+     * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
+     */
+    maxQuantity: number;
+    /**
+     * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
+     */
+    currentQuantity: number;
+    note?: string; // 備考
 }
+
+export type Equipment = {
+    equipments: EquipmentItem[];
+};
 // GET /equipment end
 
 // GET /equipment/:id
+export type EquipmentInvividual = {
+    name: string,
+    currentQuantiy: number,
+    maxQuantity: number,
+    note?: string,
+}

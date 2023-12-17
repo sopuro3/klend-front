@@ -35,7 +35,7 @@ const LogoutSection = () => {
                 onClick={handleLogout}
                 color="inherit"
             >
-                <Typography variant="body2">Logout</Typography>
+                <Typography variant="body2">ログアウト</Typography>
             </Button>
         </Box>
     );

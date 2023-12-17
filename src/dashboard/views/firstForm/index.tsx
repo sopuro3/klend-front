@@ -31,12 +31,12 @@ import { styled } from "@mui/material/styles";
 
 type rowData = {
     name: string;
-    FormName: "name" | "address";
+    FormName: "name" | "address" | "note";
     example: string;
 };
 function createData(
     name: string,
-    FormName: "name" | "address",
+    FormName: "name" | "address" | "note",
     example: string,
 ): rowData {
     return { name, FormName, example };
@@ -45,11 +45,13 @@ function createData(
 const rows = [
     createData("被災宅の名前(仮)", "name", "例: 久留米 太郎"),
     createData("住所", "address", "例: 久留米市小森野1丁目1-1"),
+    createData("備考", "note", ""),
 ];
 
 type FormValues = {
     name: string;
     address: string;
+    note: string;
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -57,6 +59,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
     },
+
 }));
 
 export function BasicTable() {
@@ -82,6 +85,7 @@ export function BasicTable() {
                         <TableBody>
                             <RowItem row={rows[0]} />
                             <RowItem row={rows[1]} />
+                            <RowItem multiline={true} row={rows[2]} />
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -103,7 +107,7 @@ export function BasicTable() {
     );
 
     function RowItem(props: RowItemProps) {
-        const { row } = props;
+        const { row,multiline } = props;
         return (
             <>
                 <TableRow
@@ -119,6 +123,7 @@ export function BasicTable() {
                     </TableCell>
                     <TableCell>
                         <TextField
+                            {...(multiline && { multiline: true, rows: 6 })}
                             required
                             sx={{ width: "100%" }}
                             id="outlined-basic"
@@ -135,4 +140,5 @@ export function BasicTable() {
 
 type RowItemProps = {
     row: rowData;
+    multiline?: boolean;
 };

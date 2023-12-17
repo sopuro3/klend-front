@@ -55,11 +55,7 @@ const Determine_lend = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend")),
 );
 
-const Stocklist = Loadable(
-    lazy(() => import("@/dashboard/views/stocklist")),
-);
-
-
+const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -171,13 +167,17 @@ const MainRoutes = {
             element: <CasePage></CasePage>,
         },
         {
+            path: "equipment/:id",
+            element: <CasePage></CasePage>,
+        },
+        {
             path: "determine_lend",
             element: <Determine_lend></Determine_lend>,
         },
         {
             path: "stocklist",
             element: <Stocklist></Stocklist>,
-        }
+        },
     ],
 };
 
