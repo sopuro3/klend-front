@@ -23,7 +23,6 @@ export default function NeedsForm() {
             <PageTitle title="ボランティア案件の新規作成"></PageTitle>
             <MainCard_ts>
                 <BasicTable />
-
             </MainCard_ts>
         </>
     );
@@ -71,58 +70,62 @@ export function BasicTable() {
 
     return (
         <>
-       
             <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="survey">
-                <div>
-                <h3>案件の基本情報</h3>
+                <div className="survey">
+                    <div>
+                        <h3>案件の基本情報</h3>
 
-                <TableContainer sx={{ minWidth: 400 }} component={Paper} elevation={1}>
-                    <Table
-                        className="single-row-table"
-                        aria-label="simple table"
-                    >
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>項目</StyledTableCell>
-                                <StyledTableCell>入力欄</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <RowItem required row={rows[0]} />
-                            <RowItem required row={rows[1]} />
-                            <RowItem multiline={true} row={rows[2]} />
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <br></br>
-                <Divider></Divider>
-                <br></br>
-                </div>
-                <div>
-                <h3>必要な資機材の見積り</h3>
-                <SelectableStockTable/>
-                <br></br>
-                <Divider/>
-                <br></br>
-                <div style={{ display: "flex" }}>
-                    <Button
-                        variant="contained"
-                        sx={{ marginLeft: "auto" }}
-                        type="submit"
-                    >
-                        送信
-                    </Button>
-                </div>
-                </div>
+                        <TableContainer
+                            sx={{ minWidth: 400 }}
+                            component={Paper}
+                            elevation={1}
+                        >
+                            <Table
+                                className="single-row-table"
+                                aria-label="simple table"
+                            >
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>項目</StyledTableCell>
+                                        <StyledTableCell>
+                                            入力欄
+                                        </StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <RowItem required row={rows[0]} />
+                                    <RowItem required row={rows[1]} />
+                                    <RowItem multiline={true} row={rows[2]} />
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <br></br>
+                        <Divider></Divider>
+                        <br></br>
+                    </div>
+                    <div>
+                        <h3>必要な資機材の見積り</h3>
+                        <SelectableStockTable />
+                        <br></br>
+                        <Divider />
+                        <br></br>
+                        <div style={{ display: "flex" }}>
+                            <Button
+                                variant="contained"
+                                sx={{ marginLeft: "auto" }}
+                                type="submit"
+                            >
+                                送信
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </form>
-        
         </>
     );
 
     function RowItem(props: RowItemProps) {
-        const { row, multiline,required: require } = props;
+        const { row, multiline, required: require } = props;
         return (
             <>
                 <TableRow
@@ -144,7 +147,9 @@ export function BasicTable() {
                             id="outlined-basic"
                             label={row.example}
                             variant="outlined"
-                            {...register(row.FormName, { required: (require?true:false) })}
+                            {...register(row.FormName, {
+                                required: require ? true : false,
+                            })}
                         />
                     </TableCell>
                 </TableRow>

@@ -1,4 +1,4 @@
-.bigTable{
+.bigTable {
     /* 横方向へのスクロールを許可する */
     overflow-x: scroll;
 }
