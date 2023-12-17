@@ -50,7 +50,8 @@ export default function CaseTable() {
                 </>
             ) : (
                 <>
-                    <TableContainer component={Paper}>
+                    
+                    <TableContainer component={Paper} elevation={3}>
                         <Table
                             sx={{ minWidth: 650 }}
                             size="small"

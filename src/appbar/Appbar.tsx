@@ -57,6 +57,7 @@ function ResponsiveAppBar() {
                         to="#"
                     >
                         <Logo />
+                        
                     </ButtonBase>
 
                     <Box

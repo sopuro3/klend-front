@@ -5,12 +5,11 @@ import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 export default function Caselist() {
     return (
         <>
-        <PageTitle title="登録済みの案件一覧"/>
+            <PageTitle title="登録済みの案件一覧" />
 
-        <MainCard_ts>
-
-            <CaseTable></CaseTable>
-        </MainCard_ts>
+            <MainCard_ts>
+                <CaseTable></CaseTable>
+            </MainCard_ts>
         </>
     );
 }

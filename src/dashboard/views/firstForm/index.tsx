@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import {
     Button,
+    Divider,
     Paper,
     Table,
     TableBody,
@@ -11,6 +12,7 @@ import {
     TableHead,
     TableRow,
     TextField,
+    tableCellClasses,
 } from "@mui/material";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
@@ -18,12 +20,10 @@ import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 export default function NeedsForm() {
     return (
         <>
-        <PageTitle title="ボランティア案件の新規作成">
-            
-        </PageTitle>
-        <MainCard_ts>
-            <BasicTable />
-        </MainCard_ts>
+            <PageTitle title="ボランティア案件の新規作成"></PageTitle>
+            <MainCard_ts>
+                <BasicTable />
+            </MainCard_ts>
         </>
     );
 }
@@ -51,6 +51,15 @@ type FormValues = {
     address: string;
 };
 
+import { styled } from "@mui/material/styles";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    }
+  }));
+
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();
     const onSubmit = (data: FormValues) => {
@@ -60,15 +69,15 @@ export function BasicTable() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} elevation={1}>
                     <Table
                         className="single-row-table"
                         aria-label="simple table"
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>項目</TableCell>
-                                <TableCell>入力欄</TableCell>
+                                <StyledTableCell>項目</StyledTableCell>
+                                <StyledTableCell>入力欄</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -78,6 +87,9 @@ export function BasicTable() {
                     </Table>
                 </TableContainer>
                 <br></br>
+                <Divider></Divider>
+                <br></br>
+
                 <div style={{ display: "flex" }}>
                     <Button
                         variant="contained"

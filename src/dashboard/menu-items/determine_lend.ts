@@ -27,6 +27,8 @@ const lends = {
             type: "item",
             icon: icons.KeyboardReturnIcon,
             breadcrumbs: false,
+            target: true,
+            
             url: "/survey/firstForm",
         },
     ],
