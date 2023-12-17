@@ -55,10 +55,10 @@ import { styled } from "@mui/material/styles";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    }
-  }));
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+}));
 
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();

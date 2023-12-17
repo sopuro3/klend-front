@@ -7,7 +7,7 @@ import pages from "./pages";
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [dashboard, needs, lends, utilities, pages,other],
+    items: [dashboard, needs, lends, utilities, pages, other],
 };
 
 export default menuItems;
