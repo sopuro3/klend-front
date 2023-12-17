@@ -1,5 +1,5 @@
 //@ts-expect-error これは最初から読まれていたやつ
-import { IconDashboard,IconKey } from "@tabler/icons";
+import { IconDashboard, IconKey } from "@tabler/icons";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -19,7 +19,6 @@ const icons = {
     ListIcon: ListIcon,
     AssignmentIcon: AssignmentIcon,
 };
-
 
 // ==============================|| MENU ITEMS ||============================== //
 
@@ -86,9 +85,13 @@ const menuItems = {
                     icon: OpenInNewIcon,
                     breadcrumbs: false,
                     target: true,
-        
+
                     // urlは、rootにする
-                    url: location.protocol + "//" + location.host + "/reception/return",
+                    url:
+                        location.protocol +
+                        "//" +
+                        location.host +
+                        "/reception/return",
                 },
             ],
         },
@@ -126,7 +129,7 @@ const menuItems = {
                     title: "Authentication",
                     type: "collapse",
                     icon: icons.IconKey,
-        
+
                     children: [
                         {
                             id: "login3",
@@ -138,10 +141,8 @@ const menuItems = {
                     ],
                 },
             ],
-        }
-    ]
+        },
+    ],
 };
-
-
 
 export default menuItems;

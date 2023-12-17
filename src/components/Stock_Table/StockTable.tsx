@@ -35,7 +35,7 @@ const responseItem: FormResponse = {
 
 const rows = responseItem.issue;
 
-export default function CaseTable() {
+export default function StockTable() {
     const [isLoading, setLoading] = useState(true);
 
     setTimeout(() => {
