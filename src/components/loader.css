@@ -8,20 +8,28 @@
     top: calc(50% - 50px);
     left: calc(50% - 50px);
 }
+
+.static_parent{
+    width:100%;
+    margin:0 auto;
+
+}
+
 .wrapper {
     width: 200px;
-    height: 60px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
+    height: 80px;
+    margin: 0 auto;
+    /* position: absolute; */
+    /* left: 50%; */
+    /* top: 50%; */
+    transform: scale(0.75);
 }
 .circle {
     width: 20px;
     height: 20px;
     position: absolute;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: #000;
     left: 15%;
     transform-origin: 50%;
     animation: circle 0.5s alternate infinite ease;
@@ -95,7 +103,7 @@
     top: 75px;
     font-family: "Lato";
     letter-spacing: 12px;
-    color: #fff;
+    color: #000;
     left: 0%;
     width: 100%;
     text-align: right;

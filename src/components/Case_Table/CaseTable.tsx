@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import { Case, FormResponse } from "@/API/form_interface";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
 
 const responseItem: FormResponse = {
     issue: [
@@ -34,8 +35,23 @@ const responseItem: FormResponse = {
 const rows = responseItem.issue;
 
 export default function CaseTable() {
+
+  const [isLoading, setLoading] = useState(true);
+
+
+
+  setTimeout(() => {
+      setLoading(false);
+  }, 1300);
+
+
     return (
+
+
         <>
+
+        {isLoading ? (<>
+        </>):(<>
             <TableContainer component={Paper}>
                 <Table
                     sx={{ minWidth: 650 }}
@@ -95,6 +111,8 @@ export default function CaseTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
+        </>)}
+
         </>
     );
 }
