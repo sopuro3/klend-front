@@ -30,7 +30,6 @@ export const lists: Pages = [
         element: <Recep_home />,
         isDrawerButton: true,
         subPages: [
-  
             {
                 href: "/reception/return",
                 text: "返却受付",
@@ -56,7 +55,6 @@ export const lists: Pages = [
                     },
                 ],
             },
- 
 
             {
                 href: "/401",

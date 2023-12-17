@@ -1,6 +1,5 @@
-
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 // constant
 const icons = {
     KeyboardReturnIcon,
