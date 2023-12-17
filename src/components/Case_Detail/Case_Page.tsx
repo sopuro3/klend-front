@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
+import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 
 export default function CasePage() {
     const { id } = useParams();
@@ -21,9 +22,9 @@ export default function CasePage() {
                 </MainCard_ts>
             ) : (
                 <>
+                    <PageTitle title={"Case #" + id} />
                     <MainCard_ts>
-                        <h1>Case Page</h1>
-                        <h3>Case #{id}</h3>
+                        <h3>Case </h3>
                     </MainCard_ts>
                 </>
             )}

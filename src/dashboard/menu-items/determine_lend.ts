@@ -25,9 +25,9 @@ const lends = {
         },
         {
             id: "jump_to_return",
-            title: "資器材の返却" + OpenInNewIcon,
+            title: "資器材の返却",
             type: "item",
-            icon: icons.KeyboardReturnIcon,
+            icon: OpenInNewIcon,
             breadcrumbs: false,
             target: true,
 
