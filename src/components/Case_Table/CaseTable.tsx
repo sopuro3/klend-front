@@ -9,6 +9,7 @@ import { Case, FormResponse } from "@/API/form_interface";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
+import Loader from "../Loader";
 
 const responseItem: FormResponse = {
     issue: [
@@ -39,12 +40,14 @@ export default function CaseTable() {
 
     setTimeout(() => {
         setLoading(false);
-    }, 1300);
+    }, 10);
 
     return (
         <>
             {isLoading ? (
-                <></>
+                <>
+                  <Loader></Loader>
+                </>
             ) : (
                 <>
                     <TableContainer component={Paper}>

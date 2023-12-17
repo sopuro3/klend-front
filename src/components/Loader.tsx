@@ -1,4 +1,6 @@
 import "./loader.css";
+
+//loaderは800ms以内では表示されない。
 export default function Loader() {
     return (
         // <div className="loader_parent">

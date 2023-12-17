@@ -12,6 +12,26 @@
 .static_parent {
     width: 100%;
     margin: 0 auto;
+    padding-top:50px;
+
+    /* 100msかけて、表示されるようにする。初回のみ。 */
+    animation: fadein 1s
+
+
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .wrapper {
