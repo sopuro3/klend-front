@@ -20,8 +20,7 @@ const headerSX = {
 
 type MainCardProps = {
     children: React.ReactNode;
-  }
-
+};
 
 const MainCard_ts: React.FC<MainCardProps> = forwardRef(
     (
@@ -55,7 +54,7 @@ const MainCard_ts: React.FC<MainCardProps> = forwardRef(
 
         return (
             //@ts-expect-error jsxからの変換。何も考えたくない
-            
+
             <Card
                 ref={ref}
                 {...others}

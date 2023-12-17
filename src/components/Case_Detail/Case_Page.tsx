@@ -14,17 +14,16 @@ export default function CasePage() {
     //GET /forom/:id
 
     return (
-
         <>
             {isLoading ? (
-                <>
+                <MainCard_ts>
                     <Loader></Loader>
-                </>
+                </MainCard_ts>
             ) : (
                 <>
-                <MainCard_ts>
-                    <h1>Case Page</h1>
-                    <h3>Case #{id}</h3>
+                    <MainCard_ts>
+                        <h1>Case Page</h1>
+                        <h3>Case #{id}</h3>
                     </MainCard_ts>
                 </>
             )}

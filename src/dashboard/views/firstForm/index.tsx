@@ -12,12 +12,18 @@ import {
     TableRow,
     TextField,
 } from "@mui/material";
+import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
+import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 
 export default function NeedsForm() {
     return (
         <>
-            <h3>ニーズ班情報新規作成(いい名前思いつかん)</h3>
+        <PageTitle title="ボランティア案件の新規作成">
+            
+        </PageTitle>
+        <MainCard_ts>
             <BasicTable />
+        </MainCard_ts>
         </>
     );
 }
