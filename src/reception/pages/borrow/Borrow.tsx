@@ -14,7 +14,7 @@ export default function Borrow() {
             >
                 貸出完了
             </Link>
-            <BasicDatePicker />
+            {/* <BasicDatePicker /> */}
             {/* 日付型を入力できるインプット欄を用意する */}
 
             <NeedsForm />

@@ -19,11 +19,10 @@
 }
 
 .survey {
-    display: flex;
-    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 .survey > div {
-    flex: 1;
+
     margin: 0 10px;
 }

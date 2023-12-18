@@ -1,7 +1,7 @@
 import { CallTable } from "@/components/shikizai-table/Shikizai_Table";
 import { Button } from "@mui/material";
 
-export default function 返却フォームの資器材入力画面() {
+export default function 返却フォームの資機材入力画面() {
     return (
         <>
             <h3>返却した資機材の数量確認</h3>

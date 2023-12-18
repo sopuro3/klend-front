@@ -2,3 +2,11 @@
     /* 横方向へのスクロールを許可する */
     overflow-x: scroll;
 }
+
+
+.text-overflow-lines{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}

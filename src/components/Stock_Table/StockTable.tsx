@@ -19,14 +19,14 @@ const responseItem: Equipment = {
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
-            note: "これは装備アイテム1です。",
+            note: "",
         },
         {
             name: "ハンマー",
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
-            note: "これは装備アイテム2です。",
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
         {
             name: "ドライバー",
@@ -73,7 +73,7 @@ export function StockTable() {
                                         align="left"
                                         sx={{ width: "150px" }}
                                     >
-                                        資器材名
+                                        資機材名
                                     </TableCell>
                                     <TableCell
                                         align="left"
@@ -96,7 +96,7 @@ export function StockTable() {
                                     </TableCell>
 
                                     <TableCell align="left">備考</TableCell>
-                                    <TableCell align="left"></TableCell>
+                                    <TableCell sx={{ width: "100px" }} align="left"></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -181,7 +181,7 @@ export function SelectableStockTable() {
                                             align="left"
                                             sx={{ width: "150px" }}
                                         >
-                                            資器材名
+                                            資機材名
                                         </TableCell>
                                         <TableCell
                                             align="left"
@@ -197,7 +197,7 @@ export function SelectableStockTable() {
                                             貸出を希望する個数
                                         </TableCell>
 
-                                        <TableCell align="left">備考</TableCell>
+                                        <TableCell sx={{width:"200px"}} align="left">備考</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -219,7 +219,7 @@ export function SelectableStockTable() {
                                                 {equip.currentQuantity}
                                             </TableCell>
                                             <TableCell align="left"></TableCell>
-                                            <TableCell align="left">
+                                            <TableCell align="left"  >
                                                 {equip.note}
                                             </TableCell>
                                         </TableRow>

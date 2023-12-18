@@ -3,7 +3,7 @@ import { SvgIconProps } from "@mui/material";
 import Recep_home from "./pages/home/Recep_home.tsx";
 import Error401 from "../pages/other/error/Error401.tsx";
 import 返却時のナンバー入力画面 from "./pages/return/Return_Input.tsx";
-import 返却フォームの資器材入力画面 from "./pages/return/return_setitem/Return_Shikizai.tsx";
+import 返却フォームの資機材入力画面 from "./pages/return/return_setitem/Return_Shikizai.tsx";
 import Return_complete from "./pages/return/return_comp/Return_complete.tsx";
 
 export interface Page {
@@ -41,7 +41,7 @@ export const lists: Pages = [
                         href: "/reception/return/select",
                         text: "返却数編集",
                         iconName: Info,
-                        element: <返却フォームの資器材入力画面 />,
+                        element: <返却フォームの資機材入力画面 />,
                         isDrawerButton: true,
                         subPages: [
                             {

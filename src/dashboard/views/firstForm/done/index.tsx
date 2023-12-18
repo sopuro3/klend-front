@@ -1,7 +1,7 @@
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import DoneMark from "../../../../reception/components/checkmark/Checkmark";
 import "./borrow_complete.css";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Paper, Typography } from "@mui/material";
 
 export default function Borrow_complete() {
     return (
@@ -17,13 +17,14 @@ export default function Borrow_complete() {
                         padding: "10px",
                         background: "#f8f8f8",
                     }}
+                    component={Paper} elevation={4}
                 >
                     <CardContent>
                         <Typography variant="h5" component="div">
                             受付番号
                         </Typography>
                         <Typography variant="h4">3218</Typography>
-                        <Typography>この受付番号を控えてください。</Typography>
+                        <Typography>この番号を控えてください。</Typography>
                     </CardContent>
                 </Card>
             </MainCard_ts>

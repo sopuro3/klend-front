@@ -67,7 +67,7 @@ const menuItems = {
         },
         {
             id: "lends_returns",
-            title: "資器材の貸し出し",
+            title: "資機材の貸し出し",
             type: "group",
             children: [
                 {
@@ -80,7 +80,7 @@ const menuItems = {
                 },
                 {
                     id: "jump_to_return",
-                    title: "資器材の返却",
+                    title: "資機材の返却",
                     type: "item",
                     icon: OpenInNewIcon,
                     breadcrumbs: false,
@@ -97,7 +97,7 @@ const menuItems = {
         },
         {
             id: "manage_stock",
-            title: "資器材個数の管理",
+            title: "資機材個数の管理",
             type: "group",
             children: [
                 {
