@@ -5,12 +5,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import { Equipment, EquipmentItem } from "@/API/API_interface";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
+import { Suspense } from "react";
 import Loader from "../Loader";
 import "./StockTable.css";
+import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 const responseItem: Equipment = {
     equipments: [
@@ -47,197 +50,159 @@ const responseItem: Equipment = {
 const rows = responseItem.equipments;
 
 export function StockTable() {
-    const [isLoading, setLoading] = useState(true);
-
-    setTimeout(() => {
-        setLoading(false);
-    }, 10);
-
     return (
-        <>
-            {isLoading ? (
-                <>
-                    <Loader></Loader>
-                </>
-            ) : (
-                <>
-                    <TableContainer component={Paper} elevation={3}>
-                        <Table
-                            sx={{ minWidth: 650 }}
-                            size="small"
-                            aria-label="a dense table"
+        <Suspense fallback={<Loader />}>
+            <StockTable_ />
+        </Suspense>
+    );
+}
+
+function StockTable_() {
+    /*const _ignore = */ useSuspenseQuery({
+        queryKey: ["stockTable"],
+        queryFn: () => sleepWithValue(10, "stockTable"),
+    });
+    return (
+        <TableContainer component={Paper} elevation={3}>
+            <Table
+                sx={{ minWidth: 650 }}
+                size="small"
+                aria-label="a dense table"
+            >
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="left" sx={{ width: "150px" }}>
+                            資機材名
+                        </TableCell>
+                        <TableCell align="left" sx={{ width: "100px" }}>
+                            保有数
+                        </TableCell>
+
+                        <TableCell align="left" sx={{ width: "120px" }}>
+                            現在の在庫数
+                        </TableCell>
+                        <TableCell align="left" sx={{ width: "100px" }}>
+                            使用率
+                        </TableCell>
+
+                        <TableCell align="left">備考</TableCell>
+                        <TableCell
+                            sx={{ width: "100px" }}
+                            align="left"
+                        ></TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map((equip: EquipmentItem) => (
+                        <TableRow
+                            key={equip.name}
+                            sx={{
+                                "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                },
+                            }}
                         >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell
-                                        align="left"
-                                        sx={{ width: "150px" }}
-                                    >
-                                        資機材名
-                                    </TableCell>
-                                    <TableCell
-                                        align="left"
-                                        sx={{ width: "100px" }}
-                                    >
-                                        保有数
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        sx={{ width: "120px" }}
-                                    >
-                                        現在の在庫数
-                                    </TableCell>
-                                    <TableCell
-                                        align="left"
-                                        sx={{ width: "100px" }}
-                                    >
-                                        使用率
-                                    </TableCell>
-
-                                    <TableCell align="left">備考</TableCell>
-                                    <TableCell
-                                        sx={{ width: "100px" }}
-                                        align="left"
-                                    ></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((equip: EquipmentItem) => (
-                                    <TableRow
-                                        key={equip.name}
-                                        sx={{
-                                            "&:last-child td, &:last-child th":
-                                                {
-                                                    border: 0,
-                                                },
-                                        }}
-                                    >
-                                        <TableCell scope="row">
-                                            {equip.name}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {equip.maxQuantity}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {equip.currentQuantity}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {Math.round(
-                                                ((equip.maxQuantity -
-                                                    equip.currentQuantity) /
-                                                    equip.maxQuantity) *
-                                                    10000,
-                                            ) / 100}
-                                            %
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {equip.note}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Link
-                                                component={RouterLink}
-                                                underline="hover"
-                                                to={"/equipment/" + equip.id}
-                                                key={"/equipment/" + equip.id}
-                                            >
-                                                詳細情報
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </>
-            )}
-        </>
+                            <TableCell scope="row">{equip.name}</TableCell>
+                            <TableCell align="right">
+                                {equip.maxQuantity}
+                            </TableCell>
+                            <TableCell align="right">
+                                {equip.currentQuantity}
+                            </TableCell>
+                            <TableCell align="left">
+                                {Math.round(
+                                    ((equip.maxQuantity -
+                                        equip.currentQuantity) /
+                                        equip.maxQuantity) *
+                                        10000,
+                                ) / 100}
+                                %
+                            </TableCell>
+                            <TableCell align="left">{equip.note}</TableCell>
+                            <TableCell align="left">
+                                <Link
+                                    component={RouterLink}
+                                    underline="hover"
+                                    to={"/equipment/" + equip.id}
+                                    key={"/equipment/" + equip.id}
+                                >
+                                    詳細情報
+                                </Link>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 
 export function SelectableStockTable() {
-    const [isLoading, setLoading] = useState(true);
+    return (
+        <Suspense fallback={<Loader />}>
+            <SelectableStockTable_ />
+        </Suspense>
+    );
+}
 
-    setTimeout(() => {
-        setLoading(false);
-    }, 10);
+function SelectableStockTable_() {
+    /*const _ignore = */ useSuspenseQuery({
+        queryKey: ["selectableStockTable"],
+        queryFn: () => sleepWithValue(10, "selectableStockTable"),
+    });
 
     return (
-        <>
-            {isLoading ? (
-                <>
-                    <Loader></Loader>
-                </>
-            ) : (
-                <>
-                    <div>
-                        <TableContainer component={Paper} elevation={3}>
-                            <Table
-                                sx={{ minWidth: "600px" }}
-                                className="bigTable"
-                                size="small"
-                                aria-label="a dense table"
+        <div>
+            <TableContainer component={Paper} elevation={3}>
+                <Table sx={{ minWidth: "600px" }} className="bigTable">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="left" sx={{ width: "150px" }}>
+                                資機材名
+                            </TableCell>
+                            <TableCell align="left" sx={{ width: "120px" }}>
+                                現在の在庫数
+                            </TableCell>
+
+                            <TableCell align="left" sx={{ width: "200px" }}>
+                                貸出を希望する個数
+                            </TableCell>
+
+                            <TableCell sx={{ width: "200px" }} align="left">
+                                備考
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((equip: EquipmentItem) => (
+                            <TableRow
+                                key={equip.name}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
                             >
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell
-                                            align="left"
-                                            sx={{ width: "150px" }}
-                                        >
-                                            資機材名
-                                        </TableCell>
-                                        <TableCell
-                                            align="left"
-                                            sx={{ width: "120px" }}
-                                        >
-                                            現在の在庫数
-                                        </TableCell>
+                                <TableCell scope="row">{equip.name}</TableCell>
 
-                                        <TableCell
-                                            align="left"
-                                            sx={{ width: "200px" }}
-                                        >
-                                            貸出を希望する個数
-                                        </TableCell>
+                                <TableCell align="right">
+                                    {equip.currentQuantity}
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ display: "flex" }}
+                                >
+                                    <TextField
+                                        sx={{ width: "100%" }}
+                                    ></TextField>
+                                </TableCell>
 
-                                        <TableCell
-                                            sx={{ width: "200px" }}
-                                            align="left"
-                                        >
-                                            備考
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map((equip: EquipmentItem) => (
-                                        <TableRow
-                                            key={equip.name}
-                                            sx={{
-                                                "&:last-child td, &:last-child th":
-                                                    {
-                                                        border: 0,
-                                                    },
-                                            }}
-                                        >
-                                            <TableCell scope="row">
-                                                {equip.name}
-                                            </TableCell>
-
-                                            <TableCell align="right">
-                                                {equip.currentQuantity}
-                                            </TableCell>
-                                            <TableCell align="left"></TableCell>
-                                            <TableCell align="left">
-                                                {equip.note}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </div>
-                </>
-            )}
-        </>
+                                <TableCell align="left">{equip.note}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }

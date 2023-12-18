@@ -76,7 +76,7 @@ export function BasicTable() {
                         <h3>案件の基本情報</h3>
 
                         <TableContainer
-                            sx={{ minWidth: 400 }}
+                            sx={{ minWidth: "min(400px,100%)" }}
                             component={Paper}
                             elevation={1}
                         >
@@ -144,7 +144,6 @@ export function BasicTable() {
                             {...(multiline && { multiline: true, rows: 6 })}
                             {...(require && { required: true })}
                             sx={{ width: "100%" }}
-                            id="outlined-basic"
                             label={row.example}
                             variant="outlined"
                             {...register(row.FormName, {

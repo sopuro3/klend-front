@@ -1,4 +1,4 @@
-import DoneMark from "../../../components/checkmark/Checkmark";
+import DoneMark from "../../../../components/checkmark/Checkmark";
 import "./borrow_complete.css";
 // import { Card, CardContent, Typography } from "@mui/material";
 

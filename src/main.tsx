@@ -16,6 +16,8 @@ import { store } from "@/dashboard/store";
 import "@/dashboard/assets/scss/style.scss";
 import config from "@/dashboard/config";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 //forstaffの時はbodyにクラスを適用することでCSSの切り替えに対応
 // import "./index.css";
 
@@ -95,16 +97,20 @@ function ForGeneral() {
     );
 }
 
+const queryClient = new QueryClient();
+
 function ForStaff() {
     //bodyにforstaffクラスを追加する
     document.body.classList.add("forstaff");
 
     return (
-        <Provider store={store}>
-            {/* index.cssをインポートする */}
-            <BrowserRouter basename={config.basename}>
-                <App />
-            </BrowserRouter>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                {/* index.cssをインポートする */}
+                <BrowserRouter basename={config.basename}>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </QueryClientProvider>
     );
 }
