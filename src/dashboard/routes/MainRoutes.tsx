@@ -9,7 +9,6 @@ import CasePage from "@/components/Case_Detail/Case_Page";
 
 // dashboard routing
 const DashboardDefault = Loadable(
-    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/dashboard/Default")),
 );
 
@@ -51,8 +50,16 @@ const Caselist = Loadable(
     lazy(() => import("@/dashboard/views/firstForm/caselist")),
 );
 
-const Determine_lend = Loadable(
+const Determine_lend_numinput = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend")),
+);
+
+const DeLend_Shikizai = Loadable(
+    lazy(() => import("@/dashboard/views/determine_lend/delend_Shikizai")),
+);
+
+const DeLend_check = Loadable(
+    lazy(() => import("@/dashboard/views/determine_lend/delend_check")),
 );
 
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
@@ -172,7 +179,20 @@ const MainRoutes = {
         },
         {
             path: "determine_lend",
-            element: <Determine_lend></Determine_lend>,
+            element: <Determine_lend_numinput></Determine_lend_numinput>,
+        },
+        {
+            path: "determine_lend",
+            children: [
+                {
+                    path: "delend_Shikizai",
+                    element: <DeLend_Shikizai></DeLend_Shikizai>,
+                },
+                {
+                    path: "delend_check",
+                    element: <DeLend_check></DeLend_check>,
+                },
+            ],
         },
         {
             path: "stocklist",

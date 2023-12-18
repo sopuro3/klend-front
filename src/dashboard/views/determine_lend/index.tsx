@@ -1,42 +1,44 @@
-import { Link } from "@mui/material";
+import { Card, CardContent, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 
-export default function Borrow() {
+export default function 貸出時のナンバー入力画面() {
     return (
         <>
-            <PageTitle title={"貸出数の確定"} />
-
             <MainCard_ts>
+                <h3>受付番号の入力</h3>
+                <p>書類に記されている受付ナンバーを入力してください。</p>
+
+                <Card
+                    sx={{
+                        maxWidth: 400,
+                        margin: "auto",
+                        padding: "10px",
+                        background: "#f8f8f8",
+                    }}
+                >
+                    <CardContent>
+                        <Typography variant="h4" component="div">
+                            受付番号
+                        </Typography>
+                    </CardContent>
+                </Card>
+
                 <Link
                     component={RouterLink}
                     underline="hover"
                     color="inherit"
-                    to={"/survey/firstform/done"}
-                    key={"/survey/firstform/done"}
+                    to={"/determine_lend/delend_Shikizai"}
+                    key={"/determine_lend/delend_Shikizai"}
                 >
-                    貸出完了
+                    <Typography variant="h4" component="div">
+                        入力内容の確認
+                    </Typography>
                 </Link>
+
                 {/* <BasicDatePicker /> */}
                 {/* 日付型を入力できるインプット欄を用意する */}
             </MainCard_ts>
         </>
-    );
-}
-
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
-import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
-// https://mui.com/x/react-date-pickers/date-picker/
-//ここより取得。フォームではこういうのが役に立つ。
-export function BasicDatePicker() {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-                <DatePicker label="日付を選択" format="YYYY-MM-DD" />
-            </DemoContainer>
-        </LocalizationProvider>
     );
 }
