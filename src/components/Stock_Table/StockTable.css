@@ -3,8 +3,7 @@
     overflow-x: scroll;
 }
 
-
-.text-overflow-lines{
+.text-overflow-lines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;

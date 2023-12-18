@@ -96,7 +96,10 @@ export function StockTable() {
                                     </TableCell>
 
                                     <TableCell align="left">備考</TableCell>
-                                    <TableCell sx={{ width: "100px" }} align="left"></TableCell>
+                                    <TableCell
+                                        sx={{ width: "100px" }}
+                                        align="left"
+                                    ></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -197,7 +200,12 @@ export function SelectableStockTable() {
                                             貸出を希望する個数
                                         </TableCell>
 
-                                        <TableCell sx={{width:"200px"}} align="left">備考</TableCell>
+                                        <TableCell
+                                            sx={{ width: "200px" }}
+                                            align="left"
+                                        >
+                                            備考
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -219,7 +227,7 @@ export function SelectableStockTable() {
                                                 {equip.currentQuantity}
                                             </TableCell>
                                             <TableCell align="left"></TableCell>
-                                            <TableCell align="left"  >
+                                            <TableCell align="left">
                                                 {equip.note}
                                             </TableCell>
                                         </TableRow>

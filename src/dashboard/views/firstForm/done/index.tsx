@@ -17,7 +17,8 @@ export default function Borrow_complete() {
                         padding: "10px",
                         background: "#f8f8f8",
                     }}
-                    component={Paper} elevation={4}
+                    component={Paper}
+                    elevation={4}
                 >
                     <CardContent>
                         <Typography variant="h5" component="div">
