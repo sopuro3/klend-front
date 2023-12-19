@@ -200,10 +200,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     function setItem(id: string, quantity: number) {
         const tmp: EquipmentRequired = { equipments: [] };
         for (let i = 0; i < items.length; i++) {
+            if (items[i].id === id) {
+                items[i].quantity = quantity;
+            }
             if (items[i].quantity > 0) {
-                if (items[i].id === id) {
-                    items[i].quantity = quantity;
-                }
+ 
 
                 tmp.equipments.push({
                     id: items[i].id,
@@ -302,13 +303,13 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     >
                                         <AddIcon />
                                     </IconButton>
-                                    <IconButton
+                                    {/* <IconButton
                                         onClick={() => {
                                             console.log(equip.quantity);
                                         }}
                                     >
                                         <AddIcon />
-                                    </IconButton>
+                                    </IconButton> */}
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
