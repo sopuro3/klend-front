@@ -204,8 +204,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 items[i].quantity = quantity;
             }
             if (items[i].quantity > 0) {
- 
-
                 tmp.equipments.push({
                     id: items[i].id,
                     quantity: items[i].quantity,
