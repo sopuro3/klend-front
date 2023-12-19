@@ -6,7 +6,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { Equipment, EquipmentItem, EquipmentRequired} from "@/API/API_interface";
+import {
+    Equipment,
+    EquipmentItem,
+    EquipmentRequired,
+} from "@/API/API_interface";
 import { IconButton, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Suspense, useState } from "react";
@@ -144,7 +148,7 @@ type SelectableStockTableProps = {
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ setVal={props.setVal}/>
+            <SelectableStockTable_ setVal={props.setVal} />
         </Suspense>
     );
 }
@@ -166,8 +170,6 @@ type EquipmentTmpItem = {
     quantity: number;
 };
 
-
-
 function SelectableStockTable_(props: SelectableStockTableProps) {
     const response = useSuspenseQuery({
         queryKey: ["selectableStockTable"],
@@ -188,7 +190,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             currentQuantity: rows[i].currentQuantity,
             note: rows[i].note,
 
-            setCount: (value)=>{
+            setCount: (value) => {
                 setCount(value);
                 setItem();
             },
@@ -196,18 +198,17 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         });
     }
 
-
-    function setItem(){
-        const tmp: EquipmentRequired = {equipments:[]};
-        for(let i = 0; i < items.length; i++){
-            if(items[i].quantity > 0){
+    function setItem() {
+        const tmp: EquipmentRequired = { equipments: [] };
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].quantity > 0) {
                 tmp.equipments.push({
                     id: items[i].id,
                     quantity: items[i].quantity,
                 });
             }
         }
-        console.log(tmp)
+        console.log(tmp);
         setVal(tmp);
     }
 
@@ -253,14 +254,15 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     sx={{ display: "flex" }}
                                 >
                                     <IconButton
-                                        onClick={() =>{
-                                            equip.setCount((count) => count - 1)
+                                        onClick={() => {
+                                            equip.setCount(
+                                                (count) => count - 1,
+                                            );
                                             // setItem();
-                                            console.log(items)
+                                            console.log(items);
 
-                                            console.log(equip.quantity)
-                                            }
-                                        }
+                                            console.log(equip.quantity);
+                                        }}
                                     >
                                         <RemoveIcon />
                                     </IconButton>
@@ -275,29 +277,25 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                                 equip.setCount(parseInt(value));
                                             }
                                             // setItem();
-                                            console.log(equip.quantity)
-                                            
+                                            console.log(equip.quantity);
                                         }}
                                     ></TextField>
                                     <IconButton
-                                        onClick={() =>{
-                                            equip.setCount((count) => count + 1)
+                                        onClick={() => {
+                                            equip.setCount(
+                                                (count) => count + 1,
+                                            );
                                             // setItem();
-                                            
-                                        }
-                                        }
+                                        }}
                                     >
-                                
                                         <AddIcon />
                                     </IconButton>
                                     <IconButton
-                                        onClick={() =>{
-                                            console.log(equip.quantity)
-                                            
-                                        }
-                                        }
+                                        onClick={() => {
+                                            console.log(equip.quantity);
+                                        }}
                                     >
-                                         <AddIcon />
+                                        <AddIcon />
                                     </IconButton>
                                 </TableCell>
 

@@ -64,10 +64,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();
 
-    const [value, setValue] = useState<EquipmentRequired>({equipments:[]})
+    const [value, setValue] = useState<EquipmentRequired>({ equipments: [] });
     const onSubmit = (data: FormValues) => {
         console.log(data);
-        console.log(value)
+        console.log(value);
     };
 
     return (
