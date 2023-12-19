@@ -9,7 +9,8 @@ import TextField from "@mui/material/TextField";
 import {
     Equipment,
     EquipmentItem,
-    EquipmentRequired,
+    EquipmentItem_withQuantity,
+    EquipmentSuper,
 } from "@/API/API_interface";
 import { IconButton, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -53,21 +54,86 @@ const responseItem: Equipment = {
     ],
 };
 
-export function StockTable() {
+
+type StockTableProps = {
+    displayItems?: EquipmentItem_withQuantity[];
+}
+
+export function StockTable(props: StockTableProps) {
+    const { displayItems } = props;
     return (
         <Suspense fallback={<Loader />}>
-            <StockTable_ />
+            <StockTable_ displayItems={displayItems} />
         </Suspense>
     );
 }
 
-function StockTable_() {
+function StockTable_(props: StockTableProps) {
+
+    const { displayItems } = props;
+    let rows;
+    let isLocalRequest = false;
+    if(!displayItems){
     const response = useSuspenseQuery({
         queryKey: ["stockTable"],
         queryFn: () => sleepWithValue(10, responseItem),
     });
-    const rows = response.data.equipments;
+    rows = response.data.equipments;
+    }else{
+        rows = displayItems;
+        isLocalRequest = true;
 
+        return (
+            <TableContainer component={Paper} elevation={3}>
+                <Table
+                    sx={{ minWidth: 650 }}
+                    size="small"
+                    aria-label="a dense table"
+                >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="left" sx={{ width: "150px" }}>
+                                資機材名
+                            </TableCell>
+    
+                            <TableCell align="left" sx={{ width: "120px" }}>
+                                現在の在庫数
+                            </TableCell>
+                            <TableCell align="left" sx={{ width: "100px",color:"red" }}>
+                                選択数
+                            </TableCell>
+    
+                            <TableCell align="left">備考</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((equip: EquipmentItem_withQuantity) => (
+                            <TableRow
+                                key={equip.name}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
+                            >
+                                <TableCell scope="row">{equip.name}</TableCell>
+                                <TableCell align="right">
+                                    {equip.currentQuantity}
+
+                                </TableCell>
+                                <TableCell align="right">
+                                    {equip.quantity}
+                                </TableCell>
+
+                                <TableCell align="left">{equip.note}</TableCell>
+           
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        );
+    }
     return (
         <TableContainer component={Paper} elevation={3}>
             <Table
@@ -88,7 +154,7 @@ function StockTable_() {
                             現在の在庫数
                         </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
-                            使用率
+                            {isLocalRequest? "選択数":"使用率"}
                         </TableCell>
 
                         <TableCell align="left">備考</TableCell>
@@ -143,7 +209,7 @@ function StockTable_() {
     );
 }
 type SelectableStockTableProps = {
-    setVal: React.Dispatch<React.SetStateAction<EquipmentRequired>>;
+    setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
@@ -198,16 +264,24 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     }
 
     function setItem(id: string, quantity: number) {
-        const tmp: EquipmentRequired = { equipments: [] };
+        const tmp: EquipmentSuper= { equipmentswithQuantity: [],equipmentsRequired:[] };
         for (let i = 0; i < items.length; i++) {
             if (items[i].id === id) {
                 items[i].quantity = quantity;
             }
             if (items[i].quantity > 0) {
-                tmp.equipments.push({
+                tmp.equipmentsRequired.push({
                     id: items[i].id,
                     quantity: items[i].quantity,
                 });
+                tmp.equipmentswithQuantity.push({
+                    id: items[i].id,
+                    name: items[i].name,
+                    maxQuantity: items[i].maxQuantity,
+                    currentQuantity: items[i].currentQuantity,
+                    note: items[i].note,
+                    quantity: items[i].quantity,
+                })
             }
         }
         console.log(tmp);

@@ -12,22 +12,29 @@ import {
     tableCellClasses,
     styled,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 
-import { EquipmentRequired, LendForm } from "@/API/API_interface";
-import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
+import { EquipmentSuper, LendForm } from "@/API/API_interface";
+import { SelectableStockTable, StockTable } from "@/components/Stock_Table/StockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 
 import "./needsform.css";
 import { useState } from "react";
 
+
+// type FormStates = {
+//     EquipmentSuper: EquipmentSuper;
+//     FormValues: LendForm;
+// }
+
 export default function NeedsForm() {
+
     return (
         <>
             <PageTitle title="ボランティア案件の新規作成"></PageTitle>
             <MainCard_ts>
-                <BasicTable />
+                <InfoInputTable />
             </MainCard_ts>
         </>
     );
@@ -61,17 +68,34 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-export function BasicTable() {
+
+// type BasicTableProps = {
+//     setIsConfirm: (isConfirm: boolean) => void;
+// }
+
+export function InfoInputTable() {
+
     const { register, handleSubmit } = useForm<FormValues>();
 
-    const [value, setValue] = useState<EquipmentRequired>({ equipments: [] });
+    const [value, setValue] = useState<EquipmentSuper>({equipmentsRequired: [],equipmentswithQuantity: []  });
     const onSubmit = (data: FormValues) => {
         console.log(data);
         console.log(value);
+        setIsConfirm(true);
     };
+
+
+    const methods = useForm({
+        mode: "onChange",
+        criteriaMode: "all"
+      });
+    const [isConfirm, setIsConfirm] = useState(false);
+
 
     return (
         <>
+        <FormProvider {...methods}>
+            {!isConfirm ?(
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="survey">
                     <div>
@@ -123,6 +147,15 @@ export function BasicTable() {
                     </div>
                 </div>
             </form>
+            ) : (
+                <>
+                <h3>確認</h3>
+                <div className="survey">
+                    <StockTable displayItems={value.equipmentswithQuantity} />
+                </div>
+                </>
+            )}
+        </FormProvider>
         </>
     );
 

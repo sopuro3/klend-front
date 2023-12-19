@@ -45,6 +45,18 @@ export type EquipmentRequired = {
     equipments: EquipmentItemRequired[];
 };
 
+export type EquipmentItem_withQuantity = {
+    quantity: number; // 必要な数量
+} & EquipmentItem;
+
+
+
+export type EquipmentSuper = {
+    equipmentswithQuantity: EquipmentItem_withQuantity[];
+    equipmentsRequired: EquipmentItemRequired[];
+};
+
+
 // GET /equipment end
 
 // GET /equipment/:id
@@ -61,3 +73,5 @@ export type LendForm = {
     address: string;
     note: string;
 } & EquipmentRequired;
+
+
