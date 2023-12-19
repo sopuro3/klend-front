@@ -7,7 +7,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TourIcon from "@mui/icons-material/Tour";
 import ListIcon from "@mui/icons-material/List";
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const icons = {
     IconDashboard: IconDashboard,
@@ -150,7 +150,6 @@ const menuItems = {
                         },
                     ],
                 },
-
             ],
         },
     ],

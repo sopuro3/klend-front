@@ -59,7 +59,6 @@ const AccountManagement = Loadable(
     lazy(() => import("@/dashboard/views/account_manage")),
 );
 
-
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
