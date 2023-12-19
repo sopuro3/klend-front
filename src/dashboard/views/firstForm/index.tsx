@@ -64,6 +64,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();
+
+    
+
     const onSubmit = (data: FormValues) => {
         console.log(data);
     };
@@ -147,7 +150,7 @@ export function BasicTable() {
                             label={row.example}
                             variant="outlined"
                             {...register(row.FormName, {
-                                required: require ? true : false,
+                                required: require,
                             })}
                         />
                     </TableCell>

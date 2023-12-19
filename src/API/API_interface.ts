@@ -34,6 +34,17 @@ export type EquipmentItem = {
 export type Equipment = {
     equipments: EquipmentItem[];
 };
+
+//必要な数量を返すEquipmentItem
+export type EquipmentItemRequired = {
+    id: string; // uuid
+    quantity: number; // 必要な数量
+};
+
+export type EquipmentRequired = {
+    equipments: EquipmentItemRequired[];
+};
+
 // GET /equipment end
 
 // GET /equipment/:id

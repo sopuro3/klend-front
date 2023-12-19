@@ -7,14 +7,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { Equipment, EquipmentItem } from "@/API/API_interface";
-import { Link } from "@mui/material";
+import {  IconButton, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Loader from "../Loader";
 import "./StockTable.css";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 const responseItem: Equipment = {
     equipments: [
         {
@@ -29,7 +30,7 @@ const responseItem: Equipment = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
-            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
         {
             name: "ドライバー",
@@ -48,6 +49,9 @@ const responseItem: Equipment = {
     ],
 };
 const rows = responseItem.equipments;
+
+
+
 
 export function StockTable() {
     return (
@@ -144,12 +148,46 @@ export function SelectableStockTable() {
         </Suspense>
     );
 }
+type EquipmentTmpItem = {
+    id: string; // uuid
+    name: string; // 備品名
+    /**
+     * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
+     */
+    maxQuantity: number;
+    /**
+     * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
+     */
+    currentQuantity: number;
+    note?: string; // 備考
 
+    setCount: React.Dispatch<React.SetStateAction<number>>;
+    quantity: number;
+}
 function SelectableStockTable_() {
+
+
+    const items: EquipmentTmpItem[] = [];
+    
+    for (let i=0; i<rows.length; i++){
+        const [count , setCount] = useState(0);
+        items.push({
+            name: rows[i].name,
+            id: rows[i].id,
+            maxQuantity: rows[i].maxQuantity,
+            currentQuantity: rows[i].currentQuantity,
+            note: rows[i].note,
+            
+            setCount: setCount,
+            quantity: count,
+        })
+    }
+
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["selectableStockTable"],
         queryFn: () => sleepWithValue(10, "selectableStockTable"),
     });
+
 
     return (
         <div>
@@ -174,7 +212,7 @@ function SelectableStockTable_() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((equip: EquipmentItem) => (
+                        {items.map((equip: EquipmentTmpItem) => (
                             <TableRow
                                 key={equip.name}
                                 sx={{
@@ -191,10 +229,26 @@ function SelectableStockTable_() {
                                 <TableCell
                                     align="left"
                                     sx={{ display: "flex" }}
-                                >
+                                >   
+                                    <IconButton onClick={() => equip.setCount((count) => count -1)}>
+                                        <RemoveIcon />
+                                    </IconButton>
                                     <TextField
+                                    value={equip.quantity}
                                         sx={{ width: "100%" }}
+
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value === "") {
+                                            equip.setCount(0);
+                                        } else {
+                                            equip.setCount(parseInt(value));
+                                        }
+                                    }}
                                     ></TextField>
+                                    <IconButton onClick={() => equip.setCount((count) => count + 1)} >
+                                        <AddIcon />
+                                        </IconButton>
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
