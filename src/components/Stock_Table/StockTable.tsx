@@ -54,10 +54,9 @@ const responseItem: Equipment = {
     ],
 };
 
-
 type StockTableProps = {
     displayItems?: EquipmentItem_withQuantity[];
-}
+};
 
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
@@ -69,17 +68,16 @@ export function StockTable(props: StockTableProps) {
 }
 
 function StockTable_(props: StockTableProps) {
-
     const { displayItems } = props;
     let rows;
     let isLocalRequest = false;
-    if(!displayItems){
-    const response = useSuspenseQuery({
-        queryKey: ["stockTable"],
-        queryFn: () => sleepWithValue(10, responseItem),
-    });
-    rows = response.data.equipments;
-    }else{
+    if (!displayItems) {
+        const response = useSuspenseQuery({
+            queryKey: ["stockTable"],
+            queryFn: () => sleepWithValue(10, responseItem),
+        });
+        rows = response.data.equipments;
+    } else {
         rows = displayItems;
         isLocalRequest = true;
 
@@ -95,14 +93,17 @@ function StockTable_(props: StockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
-    
+
                             <TableCell align="left" sx={{ width: "120px" }}>
                                 現在の在庫数
                             </TableCell>
-                            <TableCell align="left" sx={{ width: "100px",color:"red" }}>
+                            <TableCell
+                                align="left"
+                                sx={{ width: "100px", color: "red" }}
+                            >
                                 選択数
                             </TableCell>
-    
+
                             <TableCell align="left">備考</TableCell>
                         </TableRow>
                     </TableHead>
@@ -119,14 +120,12 @@ function StockTable_(props: StockTableProps) {
                                 <TableCell scope="row">{equip.name}</TableCell>
                                 <TableCell align="right">
                                     {equip.currentQuantity}
-
                                 </TableCell>
                                 <TableCell align="right">
                                     {equip.quantity}
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
-           
                             </TableRow>
                         ))}
                     </TableBody>
@@ -154,7 +153,7 @@ function StockTable_(props: StockTableProps) {
                             現在の在庫数
                         </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
-                            {isLocalRequest? "選択数":"使用率"}
+                            {isLocalRequest ? "選択数" : "使用率"}
                         </TableCell>
 
                         <TableCell align="left">備考</TableCell>
@@ -264,7 +263,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     }
 
     function setItem(id: string, quantity: number) {
-        const tmp: EquipmentSuper= { equipmentswithQuantity: [],equipmentsRequired:[] };
+        const tmp: EquipmentSuper = {
+            equipmentswithQuantity: [],
+            equipmentsRequired: [],
+        };
         for (let i = 0; i < items.length; i++) {
             if (items[i].id === id) {
                 items[i].quantity = quantity;
@@ -281,7 +283,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
                     quantity: items[i].quantity,
-                })
+                });
             }
         }
         console.log(tmp);
