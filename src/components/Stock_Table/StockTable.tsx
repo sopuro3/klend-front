@@ -201,8 +201,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         const tmp: EquipmentRequired = { equipments: [] };
         for (let i = 0; i < items.length; i++) {
             if (items[i].quantity > 0) {
-
-                if(items[i].id === id){
+                if (items[i].id === id) {
                     items[i].quantity = quantity;
                 }
 
@@ -259,12 +258,15 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 >
                                     <IconButton
                                         onClick={() => {
-                                            let count = (equip.quantity > 0 ? equip.quantity - 1 : 0)
+                                            const val =
+                                                equip.quantity > 0
+                                                    ? equip.quantity - 1
+                                                    : 0;
 
                                             equip.setCount((count) =>
                                                 count > 0 ? count - 1 : 0,
                                             );
-                                            setItem(equip.id,count);
+                                            setItem(equip.id, val);
                                             console.log(items);
 
                                             console.log(equip.quantity);
@@ -282,7 +284,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                             } else {
                                                 equip.setCount(parseInt(value));
                                             }
-                                            setItem(equip.id,Number(value));
+                                            setItem(equip.id, Number(value));
 
                                             // setItem();
                                             console.log(equip.quantity);
@@ -290,12 +292,12 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     ></TextField>
                                     <IconButton
                                         onClick={() => {
-                                            let count = equip.quantity + 1
+                                            const val = equip.quantity + 1;
 
                                             equip.setCount(
                                                 (count) => count + 1,
                                             );
-                                            setItem(equip.id,count);
+                                            setItem(equip.id, val);
                                         }}
                                     >
                                         <AddIcon />
