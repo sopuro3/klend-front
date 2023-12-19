@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { Equipment, EquipmentItem } from "@/API/API_interface";
+import { Equipment, EquipmentItem, EquipmentRequired} from "@/API/API_interface";
 import { IconButton, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Suspense, useState } from "react";
@@ -138,11 +138,13 @@ function StockTable_() {
         </TableContainer>
     );
 }
-
-export function SelectableStockTable() {
+type SelectableStockTableProps = {
+    setVal: React.Dispatch<React.SetStateAction<EquipmentRequired>>;
+};
+export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ />
+            <SelectableStockTable_ setVal={props.setVal}/>
         </Suspense>
     );
 }
@@ -164,9 +166,9 @@ type EquipmentTmpItem = {
     quantity: number;
 };
 
-// type SelectableStockTableProps = {};
 
-function SelectableStockTable_() {
+
+function SelectableStockTable_(props: SelectableStockTableProps) {
     const response = useSuspenseQuery({
         queryKey: ["selectableStockTable"],
         queryFn: () => sleepWithValue(10, responseItem),
@@ -174,6 +176,8 @@ function SelectableStockTable_() {
     const rows = response.data.equipments;
 
     const items: EquipmentTmpItem[] = [];
+
+    const { setVal } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(0);
@@ -184,9 +188,27 @@ function SelectableStockTable_() {
             currentQuantity: rows[i].currentQuantity,
             note: rows[i].note,
 
-            setCount: setCount,
+            setCount: (value)=>{
+                setCount(value);
+                setItem();
+            },
             quantity: count,
         });
+    }
+
+
+    function setItem(){
+        const tmp: EquipmentRequired = {equipments:[]};
+        for(let i = 0; i < items.length; i++){
+            if(items[i].quantity > 0){
+                tmp.equipments.push({
+                    id: items[i].id,
+                    quantity: items[i].quantity,
+                });
+            }
+        }
+        console.log(tmp)
+        setVal(tmp);
     }
 
     return (
@@ -231,8 +253,13 @@ function SelectableStockTable_() {
                                     sx={{ display: "flex" }}
                                 >
                                     <IconButton
-                                        onClick={() =>
+                                        onClick={() =>{
                                             equip.setCount((count) => count - 1)
+                                            // setItem();
+                                            console.log(items)
+
+                                            console.log(equip.quantity)
+                                            }
                                         }
                                     >
                                         <RemoveIcon />
@@ -247,14 +274,30 @@ function SelectableStockTable_() {
                                             } else {
                                                 equip.setCount(parseInt(value));
                                             }
+                                            // setItem();
+                                            console.log(equip.quantity)
+                                            
                                         }}
                                     ></TextField>
                                     <IconButton
-                                        onClick={() =>
+                                        onClick={() =>{
                                             equip.setCount((count) => count + 1)
+                                            // setItem();
+                                            
+                                        }
                                         }
                                     >
+                                
                                         <AddIcon />
+                                    </IconButton>
+                                    <IconButton
+                                        onClick={() =>{
+                                            console.log(equip.quantity)
+                                            
+                                        }
+                                        }
+                                    >
+                                         <AddIcon />
                                     </IconButton>
                                 </TableCell>
 

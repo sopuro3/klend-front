@@ -14,12 +14,13 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-import { LendForm } from "@/API/API_interface";
+import { EquipmentRequired, LendForm } from "@/API/API_interface";
 import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 
 import "./needsform.css";
+import { useState } from "react";
 
 export default function NeedsForm() {
     return (
@@ -62,8 +63,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();
+
+    const [value, setValue] = useState<EquipmentRequired>({equipments:[]})
     const onSubmit = (data: FormValues) => {
         console.log(data);
+        console.log(value)
     };
 
     return (
@@ -103,7 +107,7 @@ export function BasicTable() {
                     </div>
                     <div>
                         <h3>必要な資機材の見積り</h3>
-                        <SelectableStockTable />
+                        <SelectableStockTable setVal={setValue} />
                         <br></br>
                         <Divider />
                         <br></br>
