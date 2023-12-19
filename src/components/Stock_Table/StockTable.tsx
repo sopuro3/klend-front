@@ -192,16 +192,20 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
             setCount: (value) => {
                 setCount(value);
-                setItem();
             },
             quantity: count,
         });
     }
 
-    function setItem() {
+    function setItem(id: string, quantity: number) {
         const tmp: EquipmentRequired = { equipments: [] };
         for (let i = 0; i < items.length; i++) {
             if (items[i].quantity > 0) {
+
+                if(items[i].id === id){
+                    items[i].quantity = quantity;
+                }
+
                 tmp.equipments.push({
                     id: items[i].id,
                     quantity: items[i].quantity,
@@ -255,10 +259,12 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 >
                                     <IconButton
                                         onClick={() => {
+                                            let count = (equip.quantity > 0 ? equip.quantity - 1 : 0)
+
                                             equip.setCount((count) =>
                                                 count > 0 ? count - 1 : 0,
                                             );
-                                            // setItem();
+                                            setItem(equip.id,count);
                                             console.log(items);
 
                                             console.log(equip.quantity);
@@ -276,16 +282,20 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                             } else {
                                                 equip.setCount(parseInt(value));
                                             }
+                                            setItem(equip.id,Number(value));
+
                                             // setItem();
                                             console.log(equip.quantity);
                                         }}
                                     ></TextField>
                                     <IconButton
                                         onClick={() => {
+                                            let count = equip.quantity + 1
+
                                             equip.setCount(
                                                 (count) => count + 1,
                                             );
-                                            // setItem();
+                                            setItem(equip.id,count);
                                         }}
                                     >
                                         <AddIcon />
