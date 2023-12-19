@@ -7,6 +7,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TourIcon from "@mui/icons-material/Tour";
 import ListIcon from "@mui/icons-material/List";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const icons = {
     IconDashboard: IconDashboard,
@@ -18,6 +19,7 @@ const icons = {
     TourIcon: TourIcon,
     ListIcon: ListIcon,
     AssignmentIcon: AssignmentIcon,
+    ManageAccountsIcon: ManageAccountsIcon,
 };
 
 // ==============================|| MENU ITEMS ||============================== //
@@ -126,9 +128,8 @@ const menuItems = {
             children: [
                 {
                     id: "authentication",
-                    title: "Authentication",
+                    title: "その他",
                     type: "collapse",
-                    icon: icons.IconKey,
 
                     children: [
                         {
@@ -136,10 +137,20 @@ const menuItems = {
                             title: "Login",
                             type: "item",
                             url: "/pages/login/login3",
+                            icon: icons.IconKey,
+
                             target: true,
+                        },
+                        {
+                            id: "Account",
+                            title: "アカウント管理",
+                            type: "item",
+                            url: "manage_account",
+                            icon: icons.ManageAccountsIcon,
                         },
                     ],
                 },
+
             ],
         },
     ],
