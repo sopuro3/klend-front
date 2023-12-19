@@ -1,6 +1,3 @@
-import "./needsform.css";
-import { useForm } from "react-hook-form";
-
 import {
     Button,
     Divider,
@@ -13,9 +10,16 @@ import {
     TableRow,
     TextField,
     tableCellClasses,
+    styled,
 } from "@mui/material";
+import { useForm } from "react-hook-form";
+
+import { LendForm } from "@/API/API_interface";
+import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
+
+import "./needsform.css";
 
 export default function NeedsForm() {
     return (
@@ -27,8 +31,6 @@ export default function NeedsForm() {
         </>
     );
 }
-import { styled } from "@mui/material/styles";
-import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 
 type rowData = {
     name: string;
@@ -49,11 +51,7 @@ const rows = [
     createData("備考", "note", ""),
 ];
 
-type FormValues = {
-    name: string;
-    address: string;
-    note: string;
-};
+type FormValues = LendForm;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -64,9 +62,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export function BasicTable() {
     const { register, handleSubmit } = useForm<FormValues>();
-
-    
-
     const onSubmit = (data: FormValues) => {
         console.log(data);
     };

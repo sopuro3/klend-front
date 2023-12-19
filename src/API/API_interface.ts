@@ -54,3 +54,10 @@ export type EquipmentInvividual = {
     maxQuantity: number;
     note?: string;
 };
+
+// POST /form/survey
+export type LendForm = {
+    name: string;
+    address: string;
+    note: string;
+} & EquipmentRequired;
