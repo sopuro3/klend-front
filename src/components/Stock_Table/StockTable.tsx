@@ -255,8 +255,8 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 >
                                     <IconButton
                                         onClick={() => {
-                                            equip.setCount(
-                                                (count) => (count > 0 ? count - 1 : 0),
+                                            equip.setCount((count) =>
+                                                count > 0 ? count - 1 : 0,
                                             );
                                             // setItem();
                                             console.log(items);

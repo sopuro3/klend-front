@@ -3,7 +3,7 @@ import "./done.css";
 
 export default function DoneMark() {
     return (
-        <>
+        <div className="parent-donemark">
             <div className="main-container">
                 <div className="check-container">
                     <div className="check-background">
@@ -24,6 +24,6 @@ export default function DoneMark() {
                     <div className="check-shadow"></div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
