@@ -22,13 +22,66 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import "./index.css";
 
 //index.cssの内容を文字として受け取る
-
 const darkTheme = createTheme({
     palette: {
         //ライトモードで
         mode: "light",
     },
 });
+
+(function () {
+    "use strict";
+
+    const // 入力受付時間（1.5秒）
+        wait = 1500,
+        command = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+        length = command.length;
+    let
+        // standby = false の時は入力を受け付けない
+        standby = true,
+        // コマンドのキーコード
+        index = 0,
+        timer: number = 0;
+
+    document.addEventListener("keydown", function (ev) {
+        // タイマーのリセット
+        clearTimeout(timer);
+
+        // コマンドの確認
+        if (standby && ev.keyCode === command[index]) {
+            index++;
+
+            if (index >= length) {
+                // すべてのコマンドを入力した！
+
+                standby = false; // 処理中にコマンドを受け付けないようにする
+                index = 0; // コマンドリセット
+
+                console.log("コマンド入力成功");
+                /*
+  
+            何かしらの処理
+            処理が完了したら standby = true に戻す
+  
+          */
+                document.body.classList.add("easter-egg-rotate");
+                //3秒後にクラスを削除
+                setTimeout(function () {
+                    document.body.classList.remove("easter-egg-rotate");
+                }, 3000);
+                standby = true;
+            } else {
+                // 一定時間入力がなかったらリセット
+                timer = setTimeout(function () {
+                    index = 0;
+                }, wait);
+            }
+        } else {
+            // コマンドが間違っていたらリセット
+            index = 0;
+        }
+    });
+})();
 
 function getPages(Item: Page): JSX.Element[] {
     const ReturnItem = [
