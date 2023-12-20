@@ -55,6 +55,10 @@ const Determine_lend = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend")),
 );
 
+const Determine_select = Loadable(
+    lazy(() => import("@/dashboard/views/delend_select")),
+);
+
 const AccountManagement = Loadable(
     lazy(() => import("@/dashboard/views/account_manage")),
 );
@@ -177,6 +181,15 @@ const MainRoutes = {
         {
             path: "determine_lend",
             element: <Determine_lend></Determine_lend>,
+        },
+        {
+            path: "determine_lend",
+            children: [
+                {
+                    path: "select",
+                    element: <Determine_select></Determine_select>,
+                },
+            ],
         },
         {
             path: "stocklist",

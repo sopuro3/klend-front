@@ -6,13 +6,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Case, FormResponse } from "@/API/API_interface";
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Suspense } from "react";
 import Loader from "../Loader";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-
+import { useTheme } from "@mui/material/styles";
 const responseItem: FormResponse = {
     issue: [
         {
@@ -37,19 +37,35 @@ const responseItem: FormResponse = {
 
 const rows = responseItem.issue;
 
-export default function CaseTable() {
+type CaseTableProps = {
+    selectBtn?: boolean;
+    setValue?: React.Dispatch<React.SetStateAction<Case | undefined>>;
+};
+
+export default function CaseTable(props: CaseTableProps) {
+    const { selectBtn, setValue } = props;
     return (
         <Suspense fallback={<Loader />}>
-            <Table_ />
+            <Table_ selectBtn={selectBtn} setValue={setValue} />
         </Suspense>
     );
 }
 
-function Table_() {
+function Table_(props: CaseTableProps) {
+    const { selectBtn, setValue } = props;
+    const theme = useTheme();
+
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["caseTable"],
         queryFn: () => sleepWithValue(10, "caseTable"),
     });
+
+    function handleChange(issue: Case) {
+        return function () {
+            setValue && setValue(issue);
+        };
+    }
+
     return (
         <TableContainer component={Paper} elevation={3}>
             <Table
@@ -75,6 +91,12 @@ function Table_() {
                             align="left"
                             sx={{ width: "100px" }}
                         ></TableCell>
+                        {selectBtn && (
+                            <TableCell
+                                align="left"
+                                sx={{ width: "100px" }}
+                            ></TableCell>
+                        )}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -104,6 +126,22 @@ function Table_() {
                                     詳細情報
                                 </Link>
                             </TableCell>
+                            {selectBtn && (
+                                <TableCell align="left" sx={{ width: "100px" }}>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            backgroundColor:
+                                                theme.palette.secondary.dark,
+                                            color: theme.palette.secondary
+                                                .light,
+                                        }}
+                                        onClick={handleChange(issue)}
+                                    >
+                                        選択
+                                    </Button>
+                                </TableCell>
+                            )}
                         </TableRow>
                     ))}
                 </TableBody>

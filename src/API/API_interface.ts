@@ -36,22 +36,13 @@ export type Equipment = {
 };
 
 //必要な数量を返すEquipmentItem
-export type EquipmentItemRequired = {
+export type POSTEquipmentItem = {
     id: string; // uuid
     quantity: number; // 必要な数量
 };
 
-export type EquipmentRequired = {
-    equipments: EquipmentItemRequired[];
-};
-
-export type EquipmentItem_withQuantity = {
-    quantity: number; // 必要な数量
-} & EquipmentItem;
-
-export type EquipmentSuper = {
-    equipmentswithQuantity: EquipmentItem_withQuantity[];
-    equipmentsRequired: EquipmentItemRequired[];
+export type POSTEquipment = {
+    equipments: POSTEquipmentItem[];
 };
 
 // GET /equipment end
@@ -69,4 +60,4 @@ export type LendForm = {
     name: string;
     address: string;
     note: string;
-} & EquipmentRequired;
+} & POSTEquipment;

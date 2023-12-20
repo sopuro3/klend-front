@@ -13,7 +13,8 @@ import {
     styled,
 } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
-import { EquipmentSuper, LendForm } from "@/API/API_interface";
+import { LendForm } from "@/API/API_interface";
+import { EquipmentSuper } from "@/API/Data_manage";
 import {
     SelectableStockTable,
     StockTable,
@@ -102,6 +103,12 @@ export function InfoInputTable() {
     });
 
     const onCancel = () => {
+        // setValueの値を初期化する
+        setValue({
+            equipmentsRequired: [],
+            equipmentswithQuantity: [],
+        });
+
         setIsConfirm(false);
     };
 

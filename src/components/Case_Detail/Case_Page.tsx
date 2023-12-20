@@ -31,6 +31,7 @@ export default function CasePage() {
 type CaseProps = {
     id: string;
 };
+
 function Case(props: CaseProps) {
     const { id } = props;
     /*const _ignore = */ useSuspenseQuery({
@@ -39,9 +40,9 @@ function Case(props: CaseProps) {
     });
     return (
         <>
-            <PageTitle title={`Case #${id}`} />
+            <PageTitle title={`案件 #${id}`} />
             <MainCard_ts>
-                <h3>Case </h3>
+                <h3>案件 </h3>
             </MainCard_ts>
         </>
     );

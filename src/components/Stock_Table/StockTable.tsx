@@ -6,12 +6,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import {
-    Equipment,
-    EquipmentItem,
-    EquipmentItem_withQuantity,
-    EquipmentSuper,
-} from "@/API/API_interface";
+import { Equipment, EquipmentItem } from "@/API/API_interface";
+import { EquipmentItem_withQuantity, EquipmentSuper } from "@/API/Data_manage";
 import { IconButton, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Suspense, useState } from "react";
@@ -334,7 +330,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     <IconButton
                                         tabIndex={-1}
                                         onClick={() => {
-
                                             const val =
                                                 equip.quantity > 0
                                                     ? equip.quantity - 1
@@ -344,9 +339,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                                 count > 0 ? count - 1 : 0,
                                             );
                                             setItem(equip.id, val);
-                                            console.log(items);
+                                            // console.log(items);
 
-                                            console.log(equip.quantity);
+                                            // console.log(equip.quantity);
                                         }}
                                     >
                                         <RemoveIcon />
@@ -366,7 +361,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     ></TextField>
                                     <IconButton
                                         tabIndex={-1}
-
                                         onClick={() => {
                                             const val = equip.quantity + 1;
 
