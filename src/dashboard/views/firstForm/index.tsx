@@ -13,7 +13,6 @@ import {
     styled,
 } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
-
 import { EquipmentSuper, LendForm } from "@/API/API_interface";
 import {
     SelectableStockTable,
@@ -21,9 +20,11 @@ import {
 } from "@/components/Stock_Table/StockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
-
 import "./needsform.css";
 import { useState } from "react";
+
+
+import { useTheme } from "@mui/material/styles";
 
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
@@ -73,16 +74,29 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 //     setIsConfirm: (isConfirm: boolean) => void;
 // }
 
+
+let rollup:FormValues = {
+    name:"",
+    address:"",
+    note:"",
+    equipments: [],
+}
+
 export function InfoInputTable() {
     const { register, handleSubmit } = useForm<FormValues>();
+    const theme = useTheme();
 
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+
+
+
     const onSubmit = (data: FormValues) => {
-        console.log(data);
-        console.log(value);
+        rollup = data;
+        rollup.equipments = value.equipmentsRequired;
+        
         setIsConfirm(true);
     };
 
@@ -90,8 +104,17 @@ export function InfoInputTable() {
         mode: "onChange",
         criteriaMode: "all",
     });
-    const [isConfirm, setIsConfirm] = useState(false);
 
+    const onCancel = () => {
+        setIsConfirm(false);
+    }
+
+
+    const onSubmitConfirm = () => {
+        // APIにデータを送る
+    }
+
+    const [isConfirm, setIsConfirm] = useState(false);
     return (
         <>
             <FormProvider {...methods}>
@@ -112,7 +135,8 @@ export function InfoInputTable() {
                                     >
                                         <TableHead>
                                             <TableRow>
-                                                <StyledTableCell>
+                                            <StyledTableCell sx={{width:200}}>
+
                                                     項目
                                                 </StyledTableCell>
                                                 <StyledTableCell>
@@ -143,10 +167,13 @@ export function InfoInputTable() {
                                 <div style={{ display: "flex" }}>
                                     <Button
                                         variant="contained"
-                                        sx={{ marginLeft: "auto" }}
+                                        sx={{ marginLeft: "auto",
+                                        background: theme.palette.primary.main,
+                                    }}
                                         type="submit"
+                                        
                                     >
-                                        送信
+                                        確認
                                     </Button>
                                 </div>
                             </div>
@@ -156,9 +183,69 @@ export function InfoInputTable() {
                     <>
                         <h3>確認</h3>
                         <div className="survey">
+                            <p>以下の内容で間違えがないか、今一度ご確認ください。</p>
+
+                            <h3>案件の基本情報</h3>
+
+                            <TableContainer
+                                sx={{ minWidth: "min(400px,100%)" }}
+                                component={Paper}
+                                elevation={1}
+                            >
+                                <Table
+                                    className="single-row-table"
+                                    aria-label="simple table"
+                                >
+                                    <TableHead>
+                                        <TableRow>
+                                            <StyledTableCell sx={{width:200}}>
+                                                項目
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                入力
+                                            </StyledTableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <RowItem isConfirm row={rows[0]} value={rollup.name}/>
+                                        <RowItem isConfirm row={rows[1]} value={rollup.address}/>
+                                        <RowItem
+                                            isConfirm
+                                            multiline={true}
+                                            row={rows[2]}
+                                            value={rollup.note}
+                                        />
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <br></br>
+                            <Divider></Divider>
+                            <br></br>
                             <StockTable
                                 displayItems={value.equipmentswithQuantity}
                             />
+                            <br></br>
+                            <div style={{ display: "flex" }}>
+                            <Button
+                                        variant="contained"
+                                        sx={{ marginRight: "auto",
+                                        background: theme.palette.success.dark,
+                                     }}
+                                        onClick={onCancel}
+                                    >
+                                        変更
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{ marginLeft: "auto" ,
+                                        background: theme.palette.error.main,
+                                    }}
+                                        onClick={onSubmitConfirm}
+                                    >
+                                        決定
+                                    </Button>
+                                </div>
+                            {/* 決定と前に戻るボタンを作る */}
                         </div>
                     </>
                 )}
@@ -167,7 +254,7 @@ export function InfoInputTable() {
     );
 
     function RowItem(props: RowItemProps) {
-        const { row, multiline, required: require } = props;
+        const { row, multiline, required: require, isConfirm ,value} = props;
         return (
             <>
                 <TableRow
@@ -182,16 +269,26 @@ export function InfoInputTable() {
                         {row.name}
                     </TableCell>
                     <TableCell>
-                        <TextField
-                            {...(multiline && { multiline: true, rows: 6 })}
-                            {...(require && { required: true })}
-                            sx={{ width: "100%" }}
-                            label={row.example}
-                            variant="outlined"
-                            {...register(row.FormName, {
-                                required: require,
-                            })}
-                        />
+                        {isConfirm ? (
+                            <>
+                                {row.FormName === "note" && value==="" ? (
+                                    <p>なし</p>
+                                ) : (
+                                    <p>{value}</p>
+                                )}
+                            </>
+                        ) : (
+                            <TextField
+                                {...(multiline && { multiline: true, rows: 6 })}
+                                {...(require && { required: true })}
+                                sx={{ width: "100%" }}
+                                label={row.example}
+                                variant="outlined"
+                                {...register(row.FormName, {
+                                    required: require,
+                                })}
+                            />
+                        )}
                     </TableCell>
                 </TableRow>
             </>
@@ -203,4 +300,7 @@ type RowItemProps = {
     row: rowData;
     required?: boolean;
     multiline?: boolean;
+
+    isConfirm?: boolean;
+    value?: string;
 };

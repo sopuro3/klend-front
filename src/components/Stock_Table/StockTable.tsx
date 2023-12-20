@@ -361,8 +361,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                             }
                                             setItem(equip.id, Number(value));
 
-                                            // setItem();
-                                            console.log(equip.quantity);
+        
                                         }}
                                     ></TextField>
                                     <IconButton
