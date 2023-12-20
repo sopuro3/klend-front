@@ -332,7 +332,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     sx={{ display: "flex" }}
                                 >
                                     <IconButton
+                                        tabIndex={-1}
                                         onClick={() => {
+
                                             const val =
                                                 equip.quantity > 0
                                                     ? equip.quantity - 1
@@ -360,11 +362,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                                 equip.setCount(parseInt(value));
                                             }
                                             setItem(equip.id, Number(value));
-
-        
                                         }}
                                     ></TextField>
                                     <IconButton
+                                        tabIndex={-1}
+
                                         onClick={() => {
                                             const val = equip.quantity + 1;
 
