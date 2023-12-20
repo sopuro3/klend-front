@@ -36,8 +36,7 @@ const darkTheme = createTheme({
         wait = 1500,
         command = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
         length = command.length;
-    let
-        // standby = false の時は入力を受け付けない
+    let // standby = false の時は入力を受け付けない
         standby = true,
         // コマンドのキーコード
         index = 0,
