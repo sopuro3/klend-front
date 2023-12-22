@@ -78,7 +78,7 @@ export default function PageTitle(props: TitleProps) {
                                     to={props.backButton.link}
                                     key={props.backButton.link}
                                 >
-                                    <Button variant="contained" color="primary">
+                                    <Button color="primary">
                                         {props.backButton.text + "に戻る"}
                                     </Button>
                                 </Link>

@@ -6,7 +6,7 @@ import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 
-export default function CasePage() {
+export function CasePage() {
     const { id } = useParams();
 
     //idがundefinedなら、エラー画面へ遷移する
@@ -21,6 +21,28 @@ export default function CasePage() {
         );
     }
 
+    return (
+        <Suspense fallback={<PageLoader />}>
+            <PageTitle title={`案件 #${id}`} />
+            <MainCard_ts>
+                <Case id={id} />
+            </MainCard_ts>
+        </Suspense>
+    );
+}
+
+export function WithoutWrapper_Case() {
+    const { id } = useParams();
+    if (id === undefined) {
+        return (
+            <>
+                <PageTitle title={"Error!"} />
+                <MainCard_ts>
+                    <h3>Case </h3>
+                </MainCard_ts>
+            </>
+        );
+    }
     return (
         <Suspense fallback={<PageLoader />}>
             <Case id={id} />
@@ -40,10 +62,7 @@ function Case(props: CaseProps) {
     });
     return (
         <>
-            <PageTitle title={`案件 #${id}`} />
-            <MainCard_ts>
-                <h3>案件 </h3>
-            </MainCard_ts>
+            <h3>案件 </h3>
         </>
     );
 }

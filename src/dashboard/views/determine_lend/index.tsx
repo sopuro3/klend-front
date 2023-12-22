@@ -17,7 +17,7 @@ export default function Borrow() {
         setSelected(issue);
 
         //react-router-domを用いて、URLを変更する。
-        navigate("/survey/firstform/done");
+        navigate("/determine_lend/select/" + issue.id);
     };
 
     return (
