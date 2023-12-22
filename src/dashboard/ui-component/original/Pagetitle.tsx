@@ -1,6 +1,6 @@
 import { Button, Card, Grid, Link, Typography } from "@mui/material";
 import { Box, useTheme } from "@mui/system";
-import {Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 //@ts-expect-error jsxなので
 import { gridSpacing } from "@/dashboard/store/constant";
 export type BackButton = {
@@ -8,15 +8,13 @@ export type BackButton = {
     text: string;
 };
 
-
-
 type TitleProps = {
     title: string;
 
     backButton?: {
         link: string;
         text: string;
-    }
+    };
 };
 
 export default function PageTitle(props: TitleProps) {
@@ -34,7 +32,7 @@ export default function PageTitle(props: TitleProps) {
                 }}
                 // {...others}
             >
-                <Box sx={{ p: 2, pl: 2,flexGrow:1 }}>
+                <Box sx={{ p: 2, pl: 2, flexGrow: 1 }}>
                     <Grid
                         container
                         direction="column"
@@ -77,13 +75,9 @@ export default function PageTitle(props: TitleProps) {
                                     to={props.backButton.link}
                                     key={props.backButton.link}
                                 >
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    
-                                >
-                                    {props.backButton.text + "に戻る"}
-                                </Button>
+                                    <Button variant="contained" color="primary">
+                                        {props.backButton.text + "に戻る"}
+                                    </Button>
                                 </Link>
                             </Grid>
                         )}

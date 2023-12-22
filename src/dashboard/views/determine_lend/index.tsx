@@ -10,19 +10,22 @@ export default function Borrow() {
     const navigate = useNavigate();
 
     //selected使わねえな...せや！
-    console.debug("selected"+selected);
+    console.debug("selected" + selected);
 
     const handleSetSelected = (issue: Case) => {
-        console.log("issue",issue);
+        console.log("issue", issue);
         setSelected(issue);
 
         //react-router-domを用いて、URLを変更する。
         navigate("/survey/firstform/done");
-    }
-    
+    };
+
     return (
         <>
-            <PageTitle title={"貸出数の確定"} backButton={{text:"ホーム",link:"/dashboard/default"}} />
+            <PageTitle
+                title={"貸出数の確定"}
+                backButton={{ text: "ホーム", link: "/dashboard/default" }}
+            />
 
             <MainCard_ts>
                 <Link
