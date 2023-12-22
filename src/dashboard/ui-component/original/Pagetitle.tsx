@@ -8,13 +8,16 @@ export type BackButton = {
     text: string;
 };
 
+export type FuncButton = {
+    func: () => void;
+    text: string;
+}
+
 type TitleProps = {
     title: string;
 
-    backButton?: {
-        link: string;
-        text: string;
-    };
+    backButton?: BackButton;
+    funcButton?: FuncButton;
 };
 
 export default function PageTitle(props: TitleProps) {

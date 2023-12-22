@@ -351,11 +351,20 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                         sx={{ width: "100%" }}
                                         onChange={(e) => {
                                             const value = e.target.value;
+
+                                            //valueがNaNになってしまったら0にする
+                                            if (isNaN(Number(value))) {
+                                                setItem(equip.id, 0);
+                                                return;
+                                            }
+
                                             if (value === "") {
                                                 equip.setCount(0);
                                             } else {
                                                 equip.setCount(parseInt(value));
                                             }
+                                        
+
                                             setItem(equip.id, Number(value));
                                         }}
                                     ></TextField>
