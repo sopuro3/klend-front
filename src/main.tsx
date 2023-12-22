@@ -73,7 +73,7 @@ const darkTheme = createTheme({
                 standby = true;
             } else {
                 // 一定時間入力がなかったらリセット
-                timer = setTimeout(function () {
+                timer = window.setTimeout(function () {
                     index = 0;
                 }, wait);
             }
