@@ -39,7 +39,7 @@ const rows = responseItem.issue;
 
 type CaseTableProps = {
     selectBtn?: boolean;
-    setValue?: React.Dispatch<React.SetStateAction<Case | undefined>>;
+    setValue?: (issue: Case) => void;
 };
 
 export default function CaseTable(props: CaseTableProps) {

@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import CaseTable from "@/components/Case_Table/CaseTable";
@@ -7,10 +7,22 @@ import { useState } from "react";
 import { Case } from "@/API/API_interface";
 export default function Borrow() {
     const [selected, setSelected] = useState<Case>();
-    console.log(selected);
+    const navigate = useNavigate();
+
+    //selected使わねえな...せや！
+    console.debug("selected"+selected);
+
+    const handleSetSelected = (issue: Case) => {
+        console.log("issue",issue);
+        setSelected(issue);
+
+        //react-router-domを用いて、URLを変更する。
+        navigate("/survey/firstform/done");
+    }
+    
     return (
         <>
-            <PageTitle title={"貸出数の確定"} />
+            <PageTitle title={"貸出数の確定"} backButton={{text:"ホーム",link:"/dashboard/default"}} />
 
             <MainCard_ts>
                 <Link
@@ -23,10 +35,9 @@ export default function Borrow() {
                     貸出完了
                 </Link>
                 <h3>案件の選択</h3>
-                <h4>受付ナンバーから選択する</h4>
 
                 <h4>一覧から選択する</h4>
-                <CaseTable selectBtn setValue={setSelected} />
+                <CaseTable selectBtn setValue={handleSetSelected} />
             </MainCard_ts>
         </>
     );
