@@ -39,8 +39,10 @@ const darkTheme = createTheme({
     let // standby = false の時は入力を受け付けない
         standby = true,
         // コマンドのキーコード
-        index = 0,
-        timer: number = 0;
+        index = 0;
+
+    //timerはsetTimeoutの戻り値
+    let timer = 0;
 
     document.addEventListener("keydown", function (ev) {
         // タイマーのリセット
