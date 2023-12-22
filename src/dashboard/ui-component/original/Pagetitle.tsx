@@ -11,7 +11,7 @@ export type BackButton = {
 export type FuncButton = {
     func: () => void;
     text: string;
-}
+};
 
 type TitleProps = {
     title: string;

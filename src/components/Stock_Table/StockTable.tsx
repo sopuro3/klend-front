@@ -363,7 +363,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                             } else {
                                                 equip.setCount(parseInt(value));
                                             }
-                                        
 
                                             setItem(equip.id, Number(value));
                                         }}
