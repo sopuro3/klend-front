@@ -23,7 +23,7 @@ export function CasePage() {
 
     return (
         <Suspense fallback={<PageLoader />}>
-            <PageTitle title={`案件 #${id}`} />
+            <PageTitle title={`案件 #${id}`} backButton={{}} />
             <MainCard_ts>
                 <Case id={id} />
             </MainCard_ts>
@@ -62,7 +62,7 @@ function Case(props: CaseProps) {
     });
     return (
         <>
-            <h3>案件 </h3>
+            <h2>案件 </h2>
             <p>ここに案件の詳細情報が大きめに表示される予定</p>
         </>
     );

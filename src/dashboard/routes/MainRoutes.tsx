@@ -41,14 +41,14 @@ const SamplePage = Loadable(
     lazy(() => import("@/dashboard/views/sample-page")),
 );
 
-const Survey = Loadable(lazy(() => import("@/dashboard/views/firstForm")));
+const Survey = Loadable(lazy(() => import("@/dashboard/views/survey")));
 
 const Survey_Done = Loadable(
-    lazy(() => import("@/dashboard/views/firstForm/done")),
+    lazy(() => import("@/dashboard/views/survey/done")),
 );
 
 const Caselist = Loadable(
-    lazy(() => import("@/dashboard/views/firstForm/caselist")),
+    lazy(() => import("@/dashboard/views/survey/caselist")),
 );
 
 const Determine_lend = Loadable(

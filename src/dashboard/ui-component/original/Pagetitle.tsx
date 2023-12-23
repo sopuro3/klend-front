@@ -1,11 +1,11 @@
 import { Button, Card, Grid, Link, Typography } from "@mui/material";
 import { Box, useTheme } from "@mui/system";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 //@ts-expect-error jsxなので
 import { gridSpacing } from "@/dashboard/store/constant";
 export type BackButton = {
-    link: string;
-    text: string;
+    link?: string;
+    text?: string;
 };
 
 export type FuncButton = {
@@ -22,6 +22,10 @@ type TitleProps = {
 
 export default function PageTitle(props: TitleProps) {
     const theme = useTheme();
+    let navigate = useNavigate();
+    function goBack() {
+        navigate(-1);
+    }
 
     return (
         <>
@@ -71,17 +75,29 @@ export default function PageTitle(props: TitleProps) {
                                 >
                                     {props.title}
                                 </Typography> */}
-                                <Link
-                                    component={RouterLink}
-                                    underline="hover"
-                                    color="inherit"
-                                    to={props.backButton.link}
-                                    key={props.backButton.link}
-                                >
-                                    <Button color="primary">
-                                        {props.backButton.text + "に戻る"}
-                                    </Button>
-                                </Link>
+                                {props.backButton.link ? (
+                                    <Link
+                                        component={RouterLink}
+                                        underline="hover"
+                                        color="inherit"
+                                        to={props.backButton.link}
+                                        key={props.backButton.link}
+                                    >
+                                        <Button color="primary">
+                                            {(props.backButton.text
+                                                ? props.backButton.text + "に"
+                                                : "") + "戻る"}
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        underline="hover"
+                                        color="inherit"
+                                        onClick={goBack}
+                                    >
+                                        <Button color="primary">戻る</Button>
+                                    </Link>
+                                )}
                             </Grid>
                         )}
                     </Grid>

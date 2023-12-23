@@ -22,7 +22,7 @@ export default function Delend_select() {
 
     return (
         <>
-            <PageTitle title={"貸出数の確定"} />
+            <PageTitle title={"貸出数の確定"} backButton={{}} />
             <MainCard_ts>
                 <WithoutWrapper_Case />
 
