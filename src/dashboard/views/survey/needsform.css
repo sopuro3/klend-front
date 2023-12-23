@@ -7,6 +7,7 @@
 
     .single-row-table th {
         width: 100%;
+        font-weight: 700;
     }
 
     .single-row-table td {

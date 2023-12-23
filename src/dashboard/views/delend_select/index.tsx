@@ -21,12 +21,19 @@ export default function Delend_select() {
         console.log(value);
     };
 
+    const [title, setTitle] = useState<string>(" - ");
+
     return (
         <>
-            <PageTitle title={"貸出数の確定"} backButton={{}} />
+            <PageTitle
+                title={"貸出数の確定: 案件No." + title}
+                backButton={{}}
+            />
             <MainCard_ts>
                 <div className="survey">
-                    <WithoutWrapper_Case />
+                    <h3>案件の基本情報</h3>
+                    <WithoutWrapper_Case rollupTitle={setTitle} />
+                    <h3>資機材数の調整</h3>
 
                     <SelectableStockTable setVal={setValue} />
 

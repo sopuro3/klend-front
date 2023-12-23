@@ -49,9 +49,12 @@ export function CasePage() {
         </Suspense>
     );
 }
-
-export function WithoutWrapper_Case() {
+type WithoutWrapper_CaseProps = {
+    rollupTitle?: React.Dispatch<React.SetStateAction<string>>;
+};
+export function WithoutWrapper_Case(props: WithoutWrapper_CaseProps) {
     const { id } = useParams();
+    const { rollupTitle } = props;
     if (id === undefined) {
         return (
             <>
@@ -64,14 +67,14 @@ export function WithoutWrapper_Case() {
     }
     return (
         <Suspense fallback={<PageLoader />}>
-            <Case id={id} />
+            <Case id={id} rollupTitle={rollupTitle} />
         </Suspense>
     );
 }
 
 type CaseProps = {
     id: string;
-};
+} & WithoutWrapper_CaseProps;
 
 const caseData = {
     case: {
@@ -92,7 +95,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 function Case(props: CaseProps) {
-    const { id } = props;
+    const { id, rollupTitle } = props;
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["case", id],
         queryFn: () => sleepWithValue(1300, caseData),
@@ -100,6 +103,9 @@ function Case(props: CaseProps) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    //undefinedでなければ
+    if (rollupTitle) rollupTitle(caseData.case.displayId);
 
     const modalStyle = {
         position: "absolute",
@@ -115,8 +121,8 @@ function Case(props: CaseProps) {
 
     return (
         <>
-            <Card className="survey">
-                <CardContent>
+            <Card>
+                <CardContent sx={{ padding: 0 }}>
                     <TableContainer
                         sx={{ minWidth: "min(400px,100%)" }}
                         component={Paper}
