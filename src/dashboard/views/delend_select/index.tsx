@@ -7,6 +7,7 @@ import { Button, useTheme } from "@mui/material";
 // import { Button, useTheme } from "@mui/material";
 import { useState } from "react";
 // import { useForm } from "react-hook-form";
+import "./lend.css";
 
 export default function Delend_select() {
     const theme = useTheme();
@@ -24,22 +25,24 @@ export default function Delend_select() {
         <>
             <PageTitle title={"貸出数の確定"} backButton={{}} />
             <MainCard_ts>
-                <WithoutWrapper_Case />
+                <div className="survey">
+                    <WithoutWrapper_Case />
 
-                <SelectableStockTable setVal={setValue} />
+                    <SelectableStockTable setVal={setValue} />
 
-                <div style={{ display: "flex" }}>
-                    <Button
-                        onClick={onClick}
-                        variant="contained"
-                        sx={{
-                            marginLeft: "auto",
-                            background: theme.palette.primary.main,
-                        }}
-                        type="submit"
-                    >
-                        確認
-                    </Button>
+                    <div style={{ display: "flex" }}>
+                        <Button
+                            onClick={onClick}
+                            variant="contained"
+                            sx={{
+                                marginLeft: "auto",
+                                background: theme.palette.primary.main,
+                            }}
+                            type="submit"
+                        >
+                            確認
+                        </Button>
+                    </div>
                 </div>
             </MainCard_ts>
         </>

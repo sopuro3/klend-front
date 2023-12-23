@@ -270,6 +270,14 @@ export function InfoInputTable() {
             </FormProvider>
         </>
     );
+    type RowItemProps = {
+        row: rowData;
+        required?: boolean;
+        multiline?: boolean;
+
+        isConfirm?: boolean;
+        value?: string;
+    };
 
     function RowItem(props: RowItemProps) {
         const { row, multiline, required: require, isConfirm, value } = props;
@@ -313,12 +321,3 @@ export function InfoInputTable() {
         );
     }
 }
-
-type RowItemProps = {
-    row: rowData;
-    required?: boolean;
-    multiline?: boolean;
-
-    isConfirm?: boolean;
-    value?: string;
-};

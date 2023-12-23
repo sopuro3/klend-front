@@ -5,6 +5,7 @@ import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import CaseTable from "@/components/Case_Table/CaseTable";
 import { useState } from "react";
 import { Case } from "@/API/API_interface";
+
 export default function Borrow() {
     const [selected, setSelected] = useState<Case>();
     const navigate = useNavigate();
@@ -26,7 +27,6 @@ export default function Borrow() {
                 title={"貸出数の確定"}
                 backButton={{ text: "ホーム", link: "/dashboard/default" }}
             />
-
             <MainCard_ts>
                 <Link
                     component={RouterLink}

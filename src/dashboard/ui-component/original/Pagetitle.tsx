@@ -22,7 +22,7 @@ type TitleProps = {
 
 export default function PageTitle(props: TitleProps) {
     const theme = useTheme();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     function goBack() {
         navigate(-1);
     }
