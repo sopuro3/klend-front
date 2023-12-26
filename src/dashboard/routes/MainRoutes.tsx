@@ -10,7 +10,7 @@ import { CasePage } from "@/components/Case_Detail/Case_Page";
 // dashboard routing
 const DashboardDefault = Loadable(
     //@ts-expect-error jsxなので
-    lazy(() => import("@/dashboard/views/dashboard/Default")),
+    lazy(() => import("@/dashboard/views/dashboard/Default/index")),
 );
 
 // utilities routing
