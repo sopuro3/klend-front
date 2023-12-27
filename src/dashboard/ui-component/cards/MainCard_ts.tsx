@@ -21,6 +21,7 @@ const headerSX = {
 type MainCardProps = {
     children: React.ReactNode;
     sx?: object;
+    className?: string;
 };
 
 const MainCard_ts: React.FC<MainCardProps> = forwardRef(

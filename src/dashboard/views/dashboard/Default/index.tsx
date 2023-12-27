@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-
 // material-ui
 import { Grid } from "@mui/material";
 
-//@ts-expect-error JSXより
-import TotalGrowthBarChart from "./TotalGrowthBarChart";
 //@ts-expect-error JSXより
 import { gridSpacing } from "@/dashboard/store/constant";
 // import { NormWidget } from "./WidgetBtn";
 // import { blue } from "@mui/material/colors";
 import Notice from "./Custom/Notice";
+import Main from "./Custom/Main";
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 // type NormWidgetItem = {
@@ -20,11 +17,6 @@ import Notice from "./Custom/Notice";
 // };
 
 const Dashboard = () => {
-    const [isLoading, setLoading] = useState(true);
-    useEffect(() => {
-        setLoading(false);
-    }, []);
-
     return (
         <Grid container spacing={gridSpacing}>
             {/* <Grid item xs={12}>
@@ -50,7 +42,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={8}>
-                        <TotalGrowthBarChart isLoading={isLoading} />
+                        <Main />
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <Notice />

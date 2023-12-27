@@ -73,6 +73,11 @@ function _Notice() {
                         <p>{notice.created_at}</p>
                     </Card>
                 ))}
+                {dummyNoticeResponse.notices.length === 0 && (
+                    <Card component={Paper} elevation={3}>
+                        <p>お知らせはありません</p>
+                    </Card>
+                )}
             </div>
         </>
     );
