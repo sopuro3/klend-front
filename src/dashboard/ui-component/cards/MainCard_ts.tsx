@@ -20,6 +20,7 @@ const headerSX = {
 
 type MainCardProps = {
     children: React.ReactNode;
+    sx?: object;
 };
 
 const MainCard_ts: React.FC<MainCardProps> = forwardRef(
@@ -42,7 +43,6 @@ const MainCard_ts: React.FC<MainCardProps> = forwardRef(
             secondary,
             //@ts-expect-error jsxからの変換。何も考えたくない
             shadow,
-            //@ts-expect-error jsxからの変換。何も考えたくない
             sx = {},
             //@ts-expect-error jsxからの変換。何も考えたくない
             title,

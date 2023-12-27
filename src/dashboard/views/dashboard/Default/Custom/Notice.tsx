@@ -5,6 +5,7 @@ import { Card, Paper } from "@mui/material";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import "./Notice.css";
+import { height } from "@mui/system";
 export default function Notice() {
     return (
         <Suspense fallback={<PageLoader />}>
@@ -80,7 +81,7 @@ function _Notice() {
 
 function PageLoader() {
     return (
-        <MainCard_ts>
+        <MainCard_ts sx={{ height: "100%" }}>
             <Loader />
         </MainCard_ts>
     );
