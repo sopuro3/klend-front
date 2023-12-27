@@ -4,9 +4,7 @@ import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import { Button, useTheme } from "@mui/material";
-// import { Button, useTheme } from "@mui/material";
 import { useState } from "react";
-// import { useForm } from "react-hook-form";
 import "./lend.css";
 
 export default function Delend_select() {

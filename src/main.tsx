@@ -30,8 +30,6 @@ const darkTheme = createTheme({
 });
 
 (function () {
-    "use strict";
-
     const // 入力受付時間（1.5秒）
         wait = 1500,
         command = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],

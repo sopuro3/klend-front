@@ -280,7 +280,13 @@ export function InfoInputTable() {
     };
 
     function RowItem(props: RowItemProps) {
-        const { row, multiline, required: require, isConfirm, value } = props;
+        const {
+            row,
+            multiline,
+            required: requireType,
+            isConfirm,
+            value,
+        } = props;
         return (
             <>
                 <TableRow
@@ -306,12 +312,12 @@ export function InfoInputTable() {
                         ) : (
                             <TextField
                                 {...(multiline && { multiline: true, rows: 6 })}
-                                {...(require && { required: true })}
+                                {...(requireType && { required: true })}
                                 sx={{ width: "100%" }}
                                 label={row.example}
                                 variant="outlined"
                                 {...register(row.FormName, {
-                                    required: require,
+                                    required: requireType,
                                 })}
                             />
                         )}
