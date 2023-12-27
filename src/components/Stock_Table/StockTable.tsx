@@ -78,7 +78,11 @@ function StockTable_(props: StockTableProps) {
         isLocalRequest = true;
 
         return (
-            <TableContainer component={Paper} elevation={3}>
+            <TableContainer
+                component={Paper}
+                elevation={3}
+                className="stockTable"
+            >
                 <Table
                     sx={{ minWidth: 650 }}
                     size="small"
@@ -137,7 +141,7 @@ function StockTable_(props: StockTableProps) {
         );
     }
     return (
-        <TableContainer component={Paper} elevation={3}>
+        <TableContainer component={Paper} elevation={3} className="stockTable">
             <Table
                 sx={{ minWidth: 650 }}
                 size="small"
@@ -299,7 +303,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     return (
         <div>
-            <TableContainer component={Paper} elevation={3}>
+            <TableContainer
+                component={Paper}
+                elevation={3}
+                className="stockTable"
+            >
                 <Table sx={{ minWidth: "600px" }} className="bigTable">
                     <TableHead>
                         <TableRow>
