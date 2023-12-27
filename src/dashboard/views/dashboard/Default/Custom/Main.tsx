@@ -1,29 +1,15 @@
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
-import { Grid } from "@mui/material";
-import { useTheme } from "@mui/system";
+// import { Grid } from "@mui/material";
+// import { useTheme } from "@mui/system";
 import "./Main.css";
 export default function Main() {
-    const theme = useTheme();
+    // const theme = useTheme();
 
     return (
         <>
-            <Grid container spacing={2}>
-                <Grid item xs={10}>
-                    <PageTitle title="K-Lend ホーム" />
-                </Grid>
-                <Grid item xs={2}>
-                    <MainCard_ts
-                        className="home-right-btn"
-                        sx={{
-                            border: "1px solid",
-                            borderColor: theme.palette.primary[200] + 75,
-                        }}
-                    >
-                        <p>アカウント設定</p>
-                    </MainCard_ts>
-                </Grid>
-            </Grid>
+            <PageTitle title="K-Lend ホーム" />
+
             <MainCard_ts>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
