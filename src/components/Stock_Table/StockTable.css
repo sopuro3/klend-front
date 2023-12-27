@@ -9,3 +9,13 @@
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
+
+
+
+
+/* 450px以下ならclassName="sp_omission"を表示しない */
+@media screen and (max-width: 450px) {
+    .sp_omission {
+        display: none;
+    }
+}

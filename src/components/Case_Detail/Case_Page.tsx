@@ -134,7 +134,7 @@ function Case(props: CaseProps) {
                         >
                             <TableHead>
                                 <TableRow>
-                                    <StyledTableCell sx={{ width: 200 }}>
+                                    <StyledTableCell sx={{ width: 140 }}>
                                         項目
                                     </StyledTableCell>
                                     <StyledTableCell>入力</StyledTableCell>

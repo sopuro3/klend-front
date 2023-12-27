@@ -90,7 +90,11 @@ function StockTable_(props: StockTableProps) {
                                 資機材名
                             </TableCell>
 
-                            <TableCell align="left" sx={{ width: "120px" }}>
+                            <TableCell
+                                align="left"
+                                sx={{ width: "120px" }}
+                                className="sp_omission"
+                            >
                                 現在の在庫数
                             </TableCell>
                             <TableCell
@@ -114,7 +118,10 @@ function StockTable_(props: StockTableProps) {
                                 }}
                             >
                                 <TableCell scope="row">{equip.name}</TableCell>
-                                <TableCell align="right">
+                                <TableCell
+                                    align="right"
+                                    className="sp_omission"
+                                >
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="right">
@@ -145,7 +152,11 @@ function StockTable_(props: StockTableProps) {
                             保有数
                         </TableCell>
 
-                        <TableCell align="left" sx={{ width: "120px" }}>
+                        <TableCell
+                            align="left"
+                            sx={{ width: "120px" }}
+                            className="sp_omission"
+                        >
                             現在の在庫数
                         </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
@@ -173,7 +184,7 @@ function StockTable_(props: StockTableProps) {
                             <TableCell align="right">
                                 {equip.maxQuantity}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="right" className="sp_omission">
                                 {equip.currentQuantity}
                             </TableCell>
                             <TableCell align="left">
@@ -295,7 +306,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
-                            <TableCell align="left" sx={{ width: "120px" }}>
+                            <TableCell
+                                align="left"
+                                sx={{ width: "120px" }}
+                                className="sp_omission"
+                            >
                                 現在の在庫数
                             </TableCell>
 
@@ -320,7 +335,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                             >
                                 <TableCell scope="row">{equip.name}</TableCell>
 
-                                <TableCell align="right">
+                                <TableCell
+                                    align="right"
+                                    className="sp_omission"
+                                >
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell
