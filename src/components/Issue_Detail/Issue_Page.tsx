@@ -25,7 +25,7 @@ import {
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
 
-export function CasePage() {
+export function IssuePage() {
     const { id } = useParams();
 
     //idがundefinedなら、エラー画面へ遷移する
@@ -34,7 +34,7 @@ export function CasePage() {
             <>
                 <PageTitle title={"Error!"} />
                 <MainCard_ts>
-                    <h3>Case </h3>
+                    <h3>Issue </h3>
                 </MainCard_ts>
             </>
         );
@@ -44,15 +44,15 @@ export function CasePage() {
         <Suspense fallback={<PageLoader />}>
             <PageTitle title={`案件 #${id}`} backButton={{}} />
             <MainCard_ts>
-                <Case id={id} />
+                <Issue id={id} />
             </MainCard_ts>
         </Suspense>
     );
 }
-type WithoutWrapper_CaseProps = {
+type WithoutWrapper_IssueProps = {
     rollupTitle?: React.Dispatch<React.SetStateAction<string>>;
 };
-export function WithoutWrapper_Case(props: WithoutWrapper_CaseProps) {
+export function WithoutWrapper_Issue(props: WithoutWrapper_IssueProps) {
     const { id } = useParams();
     const { rollupTitle } = props;
     if (id === undefined) {
@@ -60,30 +60,30 @@ export function WithoutWrapper_Case(props: WithoutWrapper_CaseProps) {
             <>
                 <PageTitle title={"Error!"} />
                 <MainCard_ts>
-                    <h3>Case </h3>
+                    <h3>Issue </h3>
                 </MainCard_ts>
             </>
         );
     }
     return (
         <Suspense fallback={<PageLoader />}>
-            <Case id={id} rollupTitle={rollupTitle} />
+            <Issue id={id} rollupTitle={rollupTitle} />
         </Suspense>
     );
 }
 
-type CaseProps = {
+type IssueProps = {
     id: string;
-} & WithoutWrapper_CaseProps;
+} & WithoutWrapper_IssueProps;
 
-const caseData = {
-    case: {
+const issueData = {
+    issue: {
         adress: "久留米市小森野1丁目1-1",
         name: "Jane Smith",
         id: "234e5678-e89b-12d3-a456-426614174002",
         displayId: "0002",
         status: "In Progress",
-        note: "Another sample case.",
+        note: "Another sample issue.",
     },
 };
 
@@ -94,18 +94,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-function Case(props: CaseProps) {
+function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;
     /*const _ignore = */ useSuspenseQuery({
-        queryKey: ["case", id],
-        queryFn: () => sleepWithValue(1300, caseData),
+        queryKey: ["issue", id],
+        queryFn: () => sleepWithValue(1300, issueData),
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     //undefinedでなければ
-    if (rollupTitle) rollupTitle(caseData.case.displayId);
+    if (rollupTitle) rollupTitle(issueData.issue.displayId);
 
     const modalStyle = {
         position: "absolute",
@@ -143,17 +143,17 @@ function Case(props: CaseProps) {
                             <TableBody>
                                 <RowItem
                                     name="案件ID"
-                                    value={caseData.case.displayId}
+                                    value={issueData.issue.displayId}
                                 />
                                 <RowItem
                                     name="被災宅の代表者名"
-                                    value={caseData.case.name}
+                                    value={issueData.issue.name}
                                 />
                                 <RowItem
                                     name="住所"
                                     element={
                                         <div style={{ display: "flex" }}>
-                                            <div>{caseData.case.adress}</div>
+                                            <div>{issueData.issue.adress}</div>
 
                                             <Link
                                                 sx={{
@@ -168,11 +168,11 @@ function Case(props: CaseProps) {
                                 />
                                 <RowItem
                                     name="ステータス"
-                                    value={caseData.case.status}
+                                    value={issueData.issue.status}
                                 />
                                 <RowItem
                                     name="備考"
-                                    value={caseData.case.note}
+                                    value={issueData.issue.note}
                                 />
                             </TableBody>
                         </Table>
@@ -207,7 +207,7 @@ function Case(props: CaseProps) {
                         Google Mapを開きます。{" "}
                     </Typography>
                     <Typography>
-                        案件の住所({caseData.case.adress}
+                        案件の住所({issueData.issue.adress}
                         )をそのまま検索するため、表記のミスやブレにより正しい場所が表示されない可能性があります。
                     </Typography>
                     <br></br>
@@ -229,7 +229,7 @@ function Case(props: CaseProps) {
                                 handleClose();
                                 window.open(
                                     "https://www.google.com/maps/search/?api=1&query=" +
-                                        caseData.case.adress,
+                                        issueData.issue.adress,
                                 );
                             }}
                         >
