@@ -7,6 +7,7 @@
 
     .single-row-table th {
         width: 100%;
+        font-weight: 700;
     }
 
     .single-row-table td {
@@ -16,4 +17,13 @@
     .single-row-table thead {
         display: none;
     }
+}
+
+.survey {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.survey > div {
+    margin: 10px 0px;
 }

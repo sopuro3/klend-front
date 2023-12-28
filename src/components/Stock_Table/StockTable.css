@@ -1,0 +1,22 @@
+.bigTable {
+    /* 横方向へのスクロールを許可する */
+    overflow-x: scroll;
+}
+
+.text-overflow-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+/* 450px以下ならclassName="sp_omission"を表示しない */
+@media screen and (max-width: 450px) {
+    .sp_omission {
+        display: none;
+    }
+
+    .stockTable .MuiTextField-root {
+        width: 50px;
+    }
+}

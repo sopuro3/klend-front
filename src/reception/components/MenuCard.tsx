@@ -18,14 +18,14 @@ import fixImage from "../asset/fix_image.jpg";
 const menuList: CardProps[] = [
     {
         title: "貸出",
-        content: "ボランティアへの資器材貸出用フォームです。",
+        content: "ボランティアへの資機材貸出用フォームです。",
         image: borrowImage,
         href: "/reception/borrow",
     },
 
     {
         title: "返却",
-        content: "ボランティアおよび個人向け資器材返却用フォームです。",
+        content: "ボランティアおよび個人向け資機材返却用フォームです。",
         image: returnImage,
         href: "/reception/return",
     },

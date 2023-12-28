@@ -1,37 +1,69 @@
 import { lazy } from "react";
 
 // project imports
+//@ts-expect-error jsxなので
 import MainLayout from "@/dashboard/layout/MainLayout";
+//@ts-expect-error jsxなので
 import Loadable from "@/dashboard/ui-component/Loadable";
+import { CasePage } from "@/components/Case_Detail/Case_Page";
 
 // dashboard routing
 const DashboardDefault = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/dashboard/Default")),
 );
 
 // utilities routing
 const UtilsTypography = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/utilities/Typography")),
 );
 const UtilsColor = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/utilities/Color")),
 );
 const UtilsShadow = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/utilities/Shadow")),
 );
 const UtilsMaterialIcons = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/utilities/MaterialIcons")),
 );
 const UtilsTablerIcons = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/utilities/TablerIcons")),
 );
 
 // sample page routing
 const SamplePage = Loadable(
+    //@ts-expect-error jsxなので
     lazy(() => import("@/dashboard/views/sample-page")),
 );
 
-const Survey = Loadable(lazy(() => import("@/dashboard/views/firstForm")));
+const Survey = Loadable(lazy(() => import("@/dashboard/views/survey")));
+
+const Survey_Done = Loadable(
+    lazy(() => import("@/dashboard/views/survey/done")),
+);
+
+const Caselist = Loadable(
+    lazy(() => import("@/dashboard/views/survey/caselist")),
+);
+
+const Determine_lend = Loadable(
+    lazy(() => import("@/dashboard/views/determine_lend")),
+);
+
+const Determine_select = Loadable(
+    lazy(() => import("@/dashboard/views/delend_select")),
+);
+
+const AccountManagement = Loadable(
+    lazy(() => import("@/dashboard/views/account_manage")),
+);
+
+const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -110,6 +142,62 @@ const MainRoutes = {
                     element: <Survey />,
                 },
             ],
+        },
+        {
+            path: "survey",
+            children: [
+                {
+                    path: "firstForm/done",
+                    element: <Survey_Done />,
+                },
+            ],
+        },
+        {
+            path: "survey",
+            children: [
+                {
+                    path: "caselist",
+                    element: <Caselist></Caselist>,
+                },
+            ],
+        },
+        {
+            path: "survey",
+            children: [
+                {
+                    path: "caselist",
+                    element: <Caselist></Caselist>,
+                },
+            ],
+        },
+        {
+            path: "case/:id",
+            element: <CasePage></CasePage>,
+        },
+        {
+            path: "equipment/:id",
+            element: <CasePage></CasePage>,
+        },
+        {
+            path: "determine_lend",
+            element: <Determine_lend></Determine_lend>,
+        },
+        {
+            path: "determine_lend",
+            children: [
+                {
+                    path: "select/:id",
+                    element: <Determine_select></Determine_select>,
+                },
+            ],
+        },
+        {
+            path: "stocklist",
+            element: <Stocklist></Stocklist>,
+        },
+        {
+            path: "manage_account",
+            element: <AccountManagement></AccountManagement>,
         },
     ],
 };
