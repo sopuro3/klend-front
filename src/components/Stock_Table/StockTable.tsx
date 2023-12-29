@@ -32,7 +32,7 @@ const responseItem: Equipment = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
-            PlannedQuantity: 0,
+            PlannedQuantity: 5,
 
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
@@ -40,7 +40,7 @@ const responseItem: Equipment = {
             name: "ドライバー",
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
-            PlannedQuantity: 0,
+            PlannedQuantity: 10,
 
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
@@ -49,7 +49,7 @@ const responseItem: Equipment = {
             name: "ペンチ",
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
-            PlannedQuantity: 0,
+            PlannedQuantity: 3,
 
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
@@ -253,6 +253,7 @@ type EquipmentTmpItem = {
 
     setCount: React.Dispatch<React.SetStateAction<number>>;
     quantity: number;
+    PlannedQuantity: number;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
@@ -267,7 +268,8 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     const { setVal, delendmode } = props;
 
     for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(0);
+        const [count, setCount] = useState(rows[i].PlannedQuantity);
+
         items.push({
             name: rows[i].name,
             id: rows[i].id,
@@ -279,8 +281,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 setCount(value);
             },
             quantity: count,
+            PlannedQuantity: rows[i].PlannedQuantity,
         });
     }
+    console.log(items);
 
     function setItem(id: string, quantity: number) {
         const tmp: EquipmentSuper = {
