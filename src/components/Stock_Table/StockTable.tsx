@@ -219,12 +219,13 @@ function StockTable_(props: StockTableProps) {
     );
 }
 type SelectableStockTableProps = {
+    isReturnMode?: boolean;
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ setVal={props.setVal} />
+            <SelectableStockTable_ isReturnMode setVal={props.setVal} />
         </Suspense>
     );
 }
@@ -240,6 +241,7 @@ type EquipmentTmpItem = {
      * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
      */
     currentQuantity: number;
+    plannedQuantity?: number;
     note?: string; // 備考
 
     setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -255,7 +257,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal } = props;
+    const { setVal, isReturnMode } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(0);
@@ -318,11 +320,13 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 sx={{ width: "120px" }}
                                 className="sp_omission"
                             >
-                                現在の在庫数
+                                {isReturnMode ? "貸出個数" : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
-                                貸出を希望する個数
+                                {isReturnMode
+                                    ? "返却を行う個数"
+                                    : "貸出を希望する個数"}
                             </TableCell>
 
                             <TableCell sx={{ width: "200px" }} align="left">
@@ -346,7 +350,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    {isReturnMode
+                                        ? equip.plannedQuantity
+                                        : equip.currentQuantity}
                                 </TableCell>
                                 <TableCell
                                     align="left"

@@ -24,6 +24,7 @@ export default function 返却フォームの資機材入力画面() {
                         破損・紛失した資機材は除き、返却した資機材の数量を確認してください。
                     </p>
                     <SelectableStockTable
+                        isReturnMode={true}
                         setVal={setValue}
                     ></SelectableStockTable>
                     <br />
@@ -44,10 +45,8 @@ export default function 返却フォームの資機材入力画面() {
                 </>
             ) : (
                 <>
-                    <h3>返却した資機材の数量確認</h3>
-                    <p>
-                        破損・紛失した資機材は除き、返却した資機材の数量を確認してください。
-                    </p>
+                    <h3>返却受付の確認</h3>
+                    <p>以下の資機材の返却を受け付けます。ご確認ください。</p>
                     <StockTable displayItems={value.equipmentswithQuantity} />
                     <br />
 
