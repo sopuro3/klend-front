@@ -2,18 +2,18 @@ import { Link } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
-import CaseTable from "@/components/Case_Table/CaseTable";
+import IssueTable from "@/components/Issue_Table/IssueTable";
 import { useState } from "react";
-import { Case } from "@/API/API_interface";
+import { Issue } from "@/API/API_interface";
 
 export default function Borrow() {
-    const [selected, setSelected] = useState<Case>();
+    const [selected, setSelected] = useState<Issue>();
     const navigate = useNavigate();
 
     //selected使わねえな...せや！
     console.debug("selected" + selected);
 
-    const handleSetSelected = (issue: Case) => {
+    const handleSetSelected = (issue: Issue) => {
         console.log("issue", issue);
         setSelected(issue);
 
@@ -40,7 +40,7 @@ export default function Borrow() {
                 <h3>案件の選択</h3>
 
                 <h4>一覧から選択する</h4>
-                <CaseTable selectBtn setValue={handleSetSelected} />
+                <IssueTable selectBtn setValue={handleSetSelected} />
             </MainCard_ts>
         </>
     );

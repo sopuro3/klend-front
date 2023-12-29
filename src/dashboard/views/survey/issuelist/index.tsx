@@ -1,14 +1,14 @@
-import CaseTable from "@/components/Case_Table/CaseTable";
+import IssueTable from "@/components/Issue_Table/IssueTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 
-export default function Caselist() {
+export default function Issuelist() {
     return (
         <>
             <PageTitle title="登録済みの案件一覧" />
 
             <MainCard_ts>
-                <CaseTable></CaseTable>
+                <IssueTable></IssueTable>
             </MainCard_ts>
         </>
     );

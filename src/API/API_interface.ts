@@ -1,6 +1,6 @@
 // GET /form
 
-export type Case = {
+export type Issue = {
     adress: string; // 被災者宅の住所
     name: string; // 被災者宅の代表者名
     id: string; //uuid。ユーザーには表示しない
@@ -11,7 +11,7 @@ export type Case = {
 
 // /formをgetした時のレスポンス
 export type FormResponse = {
-    issue: Case[];
+    issue: Issue[];
 };
 
 // GET /form   end
