@@ -5,11 +5,11 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 
 export default function 返却フォームの資機材入力画面() {
-
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+    console.log(value);
     return (
         <>
             <h3>返却した資機材の数量確認</h3>
