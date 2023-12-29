@@ -48,10 +48,9 @@ export function CasePage() {
 
             <MainCard_ts>
                 <div className="survey">
-                <Case isStockTable id={id} />
+                    <Case isStockTable id={id} />
                 </div>
             </MainCard_ts>
-            
         </Suspense>
     );
 }
@@ -73,22 +72,22 @@ export function WithoutWrapper_Case(props: WithoutWrapper_CaseProps) {
     }
     return (
         <Suspense fallback={<PageLoader />}>
-            <Case id={id}  rollupTitle={rollupTitle} />
+            <Case id={id} rollupTitle={rollupTitle} />
         </Suspense>
     );
 }
 
 type CaseProps = {
     id: string;
-    isStockTable?:boolean
+    isStockTable?: boolean;
 } & WithoutWrapper_CaseProps;
 
 type caseDataTypes = {
-    case: Case,
-    equipments: EquipmentItem[]
-}
+    case: Case;
+    equipments: EquipmentItem[];
+};
 
-const caseData:caseDataTypes = {
+const caseData: caseDataTypes = {
     case: {
         adress: "久留米市小森野1丁目1-1",
         name: "Jane Smith",
@@ -103,7 +102,7 @@ const caseData:caseDataTypes = {
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
-            PlannedQuantity:3,
+            PlannedQuantity: 3,
             note: "",
         },
         {
@@ -111,7 +110,7 @@ const caseData:caseDataTypes = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
-            PlannedQuantity:3,
+            PlannedQuantity: 3,
 
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
@@ -119,7 +118,7 @@ const caseData:caseDataTypes = {
             name: "ドライバー",
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
-            PlannedQuantity:5,
+            PlannedQuantity: 5,
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
         },
@@ -127,7 +126,7 @@ const caseData:caseDataTypes = {
             name: "ペンチ",
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
-            PlannedQuantity:13,
+            PlannedQuantity: 13,
 
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
@@ -143,7 +142,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 function Case(props: CaseProps) {
-    const { id, rollupTitle,isStockTable } = props;
+    const { id, rollupTitle, isStockTable } = props;
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["case", id],
         queryFn: () => sleepWithValue(1300, caseData),
@@ -166,9 +165,6 @@ function Case(props: CaseProps) {
         boxShadow: 24,
         p: 4,
     };
-
-
-    
 
     return (
         <>
@@ -291,7 +287,6 @@ function Case(props: CaseProps) {
             </Modal>
 
             {isStockTable && <StockTable displayItems={caseData.equipments} />}
-            
         </>
     );
 }
