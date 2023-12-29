@@ -6,7 +6,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 export default function 返却フォームの資機材入力画面() {
     const [isConfirm, setIsConfirm] = useState(false);
-
+    //エラー出すので
+    setIsConfirm(true);
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
