@@ -38,20 +38,19 @@ export const lists: Pages = [
                 isDrawerButton: true,
                 subPages: [
                     {
-                        href: "/reception/return/select",
+                        href: "/reception/return/select/:id",
                         text: "返却数編集",
                         iconName: Info,
                         element: <返却フォームの資機材入力画面 />,
                         isDrawerButton: true,
-                        subPages: [
-                            {
-                                href: "/reception/return/done",
-                                text: "返却完了",
-                                iconName: Info,
-                                element: <Return_complete />,
-                                isDrawerButton: true,
-                            },
-                        ],
+          
+                    },
+                    {
+                        href: "/reception/return/done",
+                        text: "返却完了",
+                        iconName: Info,
+                        element: <Return_complete />,
+                        isDrawerButton: true,
                     },
                 ],
             },
