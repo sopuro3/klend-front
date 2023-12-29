@@ -43,7 +43,6 @@ export const lists: Pages = [
                         iconName: Info,
                         element: <返却フォームの資機材入力画面 />,
                         isDrawerButton: true,
-          
                     },
                     {
                         href: "/reception/return/done",
