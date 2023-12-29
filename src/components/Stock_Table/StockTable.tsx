@@ -225,7 +225,10 @@ type SelectableStockTableProps = {
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ isReturnMode setVal={props.setVal} />
+            <SelectableStockTable_
+                isReturnMode={props.isReturnMode}
+                setVal={props.setVal}
+            />
         </Suspense>
     );
 }
