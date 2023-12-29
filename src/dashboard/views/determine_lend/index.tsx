@@ -14,7 +14,7 @@ export default function Borrow() {
     console.debug("selected" + selected);
 
     const handleSetSelected = (issue: Case) => {
-        console.log("issue", issue);
+        // console.log("issue", issue);
         setSelected(issue);
 
         //react-router-domを用いて、URLを変更する。

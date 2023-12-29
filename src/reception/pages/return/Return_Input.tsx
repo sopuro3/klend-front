@@ -55,7 +55,7 @@ function App() {
         formState: { errors },
     } = useForm<FormValues>();
     const onSubmit = (data: FormValues) => {
-        console.log(data);
+        // console.log(data);
         //もし、numberが4桁の数字以外であれば、エラーを表示する
         if (!data.number.match(/^[0-9]{4}$/)) {
             alert("受付番号は4桁の数字で入力してください。");

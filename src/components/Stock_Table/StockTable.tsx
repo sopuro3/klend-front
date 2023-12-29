@@ -297,7 +297,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 });
             }
         }
-        console.log(tmp);
         setVal(tmp);
     }
 
