@@ -58,7 +58,7 @@ const dummyNoticeResponse: NoticeResponse = {
 
 function _Notice() {
     useSuspenseQuery({
-        queryKey: ["case", dummyNoticeResponse],
+        queryKey: ["issue", dummyNoticeResponse],
         queryFn: () => sleepWithValue(1300, dummyNoticeResponse),
     });
 

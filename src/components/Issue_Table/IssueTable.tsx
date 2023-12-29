@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Case, FormResponse } from "@/API/API_interface";
+import { Issue, FormResponse } from "@/API/API_interface";
 import { Button, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Suspense } from "react";
@@ -21,7 +21,7 @@ const responseItem: FormResponse = {
             id: "123e4567-e89b-12d3-a456-426614174001",
             displayId: "0001",
             status: "Pending",
-            note: "This is a sample case.",
+            note: "This is a sample issue.",
         },
         {
             adress: "456 Oak Ave",
@@ -29,20 +29,20 @@ const responseItem: FormResponse = {
             id: "234e5678-e89b-12d3-a456-426614174002",
             displayId: "0002",
             status: "In Progress",
-            note: "Another sample case.",
+            note: "Another sample issue.",
         },
-        // Add more cases as needed
+        // Add more issues as needed
     ],
 };
 
 const rows = responseItem.issue;
 
-type CaseTableProps = {
+type IssueTableProps = {
     selectBtn?: boolean;
-    setValue?: (issue: Case) => void;
+    setValue?: (issue: Issue) => void;
 };
 
-export default function CaseTable(props: CaseTableProps) {
+export default function IssueTable(props: IssueTableProps) {
     const { selectBtn, setValue } = props;
     return (
         <Suspense fallback={<Loader />}>
@@ -51,16 +51,16 @@ export default function CaseTable(props: CaseTableProps) {
     );
 }
 
-function Table_(props: CaseTableProps) {
+function Table_(props: IssueTableProps) {
     const { selectBtn, setValue } = props;
     const theme = useTheme();
 
     /*const _ignore = */ useSuspenseQuery({
-        queryKey: ["caseTable"],
-        queryFn: () => sleepWithValue(10, "caseTable"),
+        queryKey: ["issueTable"],
+        queryFn: () => sleepWithValue(10, "issueTable"),
     });
 
-    function handleChange(issue: Case) {
+    function handleChange(issue: Issue) {
         return function () {
             setValue && setValue(issue);
         };
@@ -100,7 +100,7 @@ function Table_(props: CaseTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((issue: Case) => (
+                    {rows.map((issue: Issue) => (
                         <TableRow
                             key={issue.name}
                             sx={{
@@ -120,8 +120,8 @@ function Table_(props: CaseTableProps) {
                                 <Link
                                     component={RouterLink}
                                     underline="hover"
-                                    to={"/case/" + issue.id}
-                                    key={"/case/" + issue.id}
+                                    to={"/issue/" + issue.id}
+                                    key={"/issue/" + issue.id}
                                 >
                                     詳細情報
                                 </Link>
