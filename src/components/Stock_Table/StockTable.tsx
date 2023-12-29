@@ -228,7 +228,7 @@ function StockTable_(props: StockTableProps) {
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     /*貸出数確定モード  */
-    delendmode?: boolean;
+    isDetermineLend?: boolean;
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
@@ -265,7 +265,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal, delendmode } = props;
+    const { setVal, isDetermineLend } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(rows[i].plannedQuantity);
@@ -332,7 +332,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 sx={{ width: "120px" }}
                                 className="sp_omission"
                             >
-                                {delendmode ? "推奨された個数" : "現在の在庫数"}
+                                {isDetermineLend
+                                    ? "推奨された個数"
+                                    : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
