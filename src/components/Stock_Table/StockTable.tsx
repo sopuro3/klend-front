@@ -24,6 +24,7 @@ const responseItem: Equipment = {
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
+            PlannedQuantity: 0,
             note: "",
         },
         {
@@ -31,12 +32,16 @@ const responseItem: Equipment = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
+            PlannedQuantity: 0,
+
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
         {
             name: "ドライバー",
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
+            PlannedQuantity: 0,
+
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
         },
@@ -44,6 +49,8 @@ const responseItem: Equipment = {
             name: "ペンチ",
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
+            PlannedQuantity: 0,
+
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
         },
@@ -51,7 +58,7 @@ const responseItem: Equipment = {
 };
 
 type StockTableProps = {
-    displayItems?: EquipmentItem_withQuantity[];
+    displayItems?: EquipmentItem[];
 };
 
 export function StockTable(props: StockTableProps) {
@@ -129,7 +136,7 @@ function StockTable_(props: StockTableProps) {
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {equip.quantity}
+                                    {equip.PlannedQuantity}
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
@@ -295,7 +302,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
-                    quantity: items[i].quantity,
+                    PlannedQuantity: items[i].quantity,
                 });
             }
         }
