@@ -24,7 +24,7 @@ const responseItem: Equipment = {
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
-            PlannedQuantity: 0,
+            plannedQuantity: 0,
             note: "",
         },
         {
@@ -32,7 +32,7 @@ const responseItem: Equipment = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
-            PlannedQuantity: 5,
+            plannedQuantity: 5,
 
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
@@ -40,7 +40,7 @@ const responseItem: Equipment = {
             name: "ドライバー",
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
-            PlannedQuantity: 10,
+            plannedQuantity: 10,
 
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
@@ -49,7 +49,7 @@ const responseItem: Equipment = {
             name: "ペンチ",
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
-            PlannedQuantity: 3,
+            plannedQuantity: 3,
 
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
@@ -136,7 +136,7 @@ function StockTable_(props: StockTableProps) {
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {equip.PlannedQuantity}
+                                    {equip.plannedQuantity}
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
@@ -253,7 +253,7 @@ type EquipmentTmpItem = {
 
     setCount: React.Dispatch<React.SetStateAction<number>>;
     quantity: number;
-    PlannedQuantity: number;
+    plannedQuantity: number;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
@@ -268,7 +268,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     const { setVal, delendmode } = props;
 
     for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(rows[i].PlannedQuantity);
+        const [count, setCount] = useState(rows[i].plannedQuantity);
 
         items.push({
             name: rows[i].name,
@@ -281,7 +281,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 setCount(value);
             },
             quantity: count,
-            PlannedQuantity: rows[i].PlannedQuantity,
+            plannedQuantity: rows[i].plannedQuantity,
         });
     }
     console.log(items);
@@ -306,7 +306,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
-                    PlannedQuantity: items[i].quantity,
+                    plannedQuantity: items[i].quantity,
                 });
             }
         }

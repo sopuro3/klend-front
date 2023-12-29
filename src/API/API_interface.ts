@@ -28,7 +28,7 @@ export type EquipmentItem = {
      * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
      */
     currentQuantity: number;
-    PlannedQuantity: number; // 必要な数量
+    plannedQuantity: number; // 必要な数量
     note?: string; // 備考
 };
 
