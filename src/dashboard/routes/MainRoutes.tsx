@@ -55,7 +55,7 @@ const Determine_lend = Loadable(
 );
 
 const Determine_select = Loadable(
-    lazy(() => import("@/dashboard/views/delend_select")),
+    lazy(() => import("@/dashboard/views/determine_lend_select")),
 );
 
 const AccountManagement = Loadable(

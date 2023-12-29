@@ -24,6 +24,7 @@ const responseItem: Equipment = {
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
+            plannedQuantity: 0,
             note: "",
         },
         {
@@ -31,12 +32,16 @@ const responseItem: Equipment = {
             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
+            plannedQuantity: 5,
+
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
         {
             name: "ドライバー",
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
+            plannedQuantity: 10,
+
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
         },
@@ -44,6 +49,8 @@ const responseItem: Equipment = {
             name: "ペンチ",
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
+            plannedQuantity: 3,
+
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
         },
@@ -51,7 +58,7 @@ const responseItem: Equipment = {
 };
 
 type StockTableProps = {
-    displayItems?: EquipmentItem_withQuantity[];
+    displayItems?: EquipmentItem[];
 };
 
 export function StockTable(props: StockTableProps) {
@@ -129,7 +136,7 @@ function StockTable_(props: StockTableProps) {
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {equip.quantity}
+                                    {equip.plannedQuantity}
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
@@ -220,6 +227,8 @@ function StockTable_(props: StockTableProps) {
 }
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
+    /*貸出数確定モード  */
+    isDetermineLend?: boolean;
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
@@ -244,6 +253,7 @@ type EquipmentTmpItem = {
 
     setCount: React.Dispatch<React.SetStateAction<number>>;
     quantity: number;
+    plannedQuantity: number;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
@@ -255,10 +265,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal } = props;
+    const { setVal, isDetermineLend } = props;
 
     for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(0);
+        const [count, setCount] = useState(rows[i].plannedQuantity);
+
         items.push({
             name: rows[i].name,
             id: rows[i].id,
@@ -270,8 +281,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 setCount(value);
             },
             quantity: count,
+            plannedQuantity: rows[i].plannedQuantity,
         });
     }
+    console.log(items);
 
     function setItem(id: string, quantity: number) {
         const tmp: EquipmentSuper = {
@@ -293,7 +306,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
-                    quantity: items[i].quantity,
+                    plannedQuantity: items[i].quantity,
                 });
             }
         }
@@ -319,7 +332,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 sx={{ width: "120px" }}
                                 className="sp_omission"
                             >
-                                現在の在庫数
+                                {isDetermineLend
+                                    ? "推奨された個数"
+                                    : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
