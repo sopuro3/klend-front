@@ -17,6 +17,7 @@ import "@/dashboard/assets/scss/style.scss";
 import config from "@/dashboard/config";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 //forstaffの時はbodyにクラスを適用することでCSSの切り替えに対応
 // import "./index.css";
@@ -125,6 +126,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 function ForGeneral() {
     return (
         <>
+                <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
             <div>
                 <BrowserRouter>
                     <ResponsiveAppBar></ResponsiveAppBar>
@@ -145,11 +148,12 @@ function ForGeneral() {
                     </div>
                 </BrowserRouter>
             </div>
+            </Provider>
+        </QueryClientProvider>
         </>
     );
 }
 
-const queryClient = new QueryClient();
 
 function ForStaff() {
     //bodyにforstaffクラスを追加する
