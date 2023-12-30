@@ -1,5 +1,5 @@
 //@ts-expect-error これは最初から読まれていたやつ
-import { IconDashboard, IconKey } from "@tabler/icons";
+import { IconKey } from "@tabler/icons";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -8,9 +8,9 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TourIcon from "@mui/icons-material/Tour";
 import ListIcon from "@mui/icons-material/List";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import HomeIcon from "@mui/icons-material/Home";
 
 const icons = {
-    IconDashboard: IconDashboard,
     IconKey: IconKey,
     OpenInNewIcon: OpenInNewIcon,
     KeyboardReturnIcon: KeyboardReturnIcon,
@@ -39,7 +39,7 @@ const menuItems = {
                     title: "ホーム",
                     type: "item",
                     url: "/dashboard/default",
-                    icon: IconDashboard,
+                    icon: HomeIcon,
                     breadcrumbs: false,
                 },
             ],
