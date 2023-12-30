@@ -1,38 +1,31 @@
 import Typography from "@mui/material/Typography";
-import { EventNote } from "@mui/icons-material";
+
+import shovelsvg from "./shovel.svg";
 
 export default function Logo() {
     return (
         <>
-            <EventNote sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <img
+                src={shovelsvg}
+                alt="logo"
+                width="25"
+                height="25"
+                style={{ marginRight: "10px" }}
+            />
             <Typography
                 variant="h6"
                 noWrap
                 sx={{
                     display: { xs: "none", md: "flex" },
                     fontFamily: "Noto Sans JP",
+                    fontSize: "1.4rem",
                     fontWeight: 700,
-                    letterSpacing: ".3rem",
+                    letterSpacing: ".2rem",
                     color: "inherit",
                     textDecoration: "none",
                 }}
             >
                 K-Lend
-            </Typography>
-            <Typography
-                variant="h6"
-                noWrap
-                sx={{
-                    mr: 2,
-                    display: { xs: "none", md: "flex" },
-                    fontWeight: 700,
-                    fontFamily: "Noto Sans JP",
-                    letterSpacing: ".rem",
-                    color: "inherit",
-                    textDecoration: "none",
-                }}
-            >
-                (仮)
             </Typography>
         </>
     );
