@@ -269,7 +269,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal, isReturnMode } = props;
+    const { setVal, isDetermineLend } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(rows[i].plannedQuantity);
