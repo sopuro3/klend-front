@@ -1,7 +1,7 @@
 import { EquipmentItem, POSTEquipmentItem } from "./API_interface";
 
 export type EquipmentItem_withQuantity = {
-    quantity: number; // 必要な数量
+    plannedQuantity: number; // 必要な数量
 } & EquipmentItem;
 
 export type EquipmentSuper = {

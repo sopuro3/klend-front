@@ -5,7 +5,7 @@ import { lazy } from "react";
 import MainLayout from "@/dashboard/layout/MainLayout";
 //@ts-expect-error jsxなので
 import Loadable from "@/dashboard/ui-component/Loadable";
-import { CasePage } from "@/components/Case_Detail/Case_Page";
+import { IssuePage } from "@/components/Issue_Detail/Issue_Page";
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -46,8 +46,8 @@ const Survey_Done = Loadable(
     lazy(() => import("@/dashboard/views/survey/done")),
 );
 
-const Caselist = Loadable(
-    lazy(() => import("@/dashboard/views/survey/caselist")),
+const IssueList = Loadable(
+    lazy(() => import("@/dashboard/views/survey/issuelist")),
 );
 
 const Determine_lend = Loadable(
@@ -55,7 +55,7 @@ const Determine_lend = Loadable(
 );
 
 const Determine_select = Loadable(
-    lazy(() => import("@/dashboard/views/delend_select")),
+    lazy(() => import("@/dashboard/views/determine_lend_select")),
 );
 
 const AccountManagement = Loadable(
@@ -155,8 +155,8 @@ const MainRoutes = {
             path: "survey",
             children: [
                 {
-                    path: "caselist",
-                    element: <Caselist></Caselist>,
+                    path: "issuelist",
+                    element: <IssueList></IssueList>,
                 },
             ],
         },
@@ -164,18 +164,18 @@ const MainRoutes = {
             path: "survey",
             children: [
                 {
-                    path: "caselist",
-                    element: <Caselist></Caselist>,
+                    path: "issuelist",
+                    element: <IssueList></IssueList>,
                 },
             ],
         },
         {
-            path: "case/:id",
-            element: <CasePage></CasePage>,
+            path: "issue/:id",
+            element: <IssuePage></IssuePage>,
         },
         {
             path: "equipment/:id",
-            element: <CasePage></CasePage>,
+            element: <IssuePage></IssuePage>,
         },
         {
             path: "determine_lend",
