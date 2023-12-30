@@ -1,12 +1,18 @@
 import Typography from "@mui/material/Typography";
 
 import shovelsvg from "./shovel.svg";
+import shovelWhite from "./shovel-white.svg";
 
-export default function Logo() {
+type LogoProps = {
+    colorMode?: boolean;
+};
+
+export default function Logo(props: LogoProps) {
+    const { colorMode } = props;
     return (
         <>
             <img
-                src={shovelsvg}
+                src={colorMode ? shovelWhite : shovelsvg}
                 alt="logo"
                 width="25"
                 height="25"

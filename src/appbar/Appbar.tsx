@@ -56,7 +56,7 @@ function ResponsiveAppBar() {
                         style={{ display: "flex" }}
                         to="#"
                     >
-                        <Logo />
+                        <Logo colorMode />
                     </ButtonBase>
 
                     <Box
