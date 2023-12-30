@@ -24,7 +24,7 @@ export default function Borrow() {
     return (
         <>
             <PageTitle
-                title={"貸出数の確定"}
+                title={"貸出数確認・確定"}
                 backButton={{ text: "ホーム", link: "/dashboard/default" }}
             />
             <MainCard_ts>

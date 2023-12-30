@@ -5,7 +5,7 @@ import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 export default function Issuelist() {
     return (
         <>
-            <PageTitle title="登録済みの案件一覧" />
+            <PageTitle title="登録済み案件一覧" />
 
             <MainCard_ts>
                 <IssueTable></IssueTable>
