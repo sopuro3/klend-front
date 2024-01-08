@@ -10,7 +10,7 @@ import { StockTable } from "@/components/Stock_Table/StockTable";
 export default function Borrow() {
     return (
         <>
-            <PageTitle title={"在庫状況の確認"} />
+            <PageTitle title={"管理在庫・貸出状況"} />
 
             <MainCard_ts>
                 <StockTable></StockTable>

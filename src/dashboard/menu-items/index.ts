@@ -1,5 +1,5 @@
 //@ts-expect-error これは最初から読まれていたやつ
-import { IconDashboard, IconKey } from "@tabler/icons";
+import { IconKey } from "@tabler/icons";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -8,9 +8,9 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TourIcon from "@mui/icons-material/Tour";
 import ListIcon from "@mui/icons-material/List";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import HomeIcon from "@mui/icons-material/Home";
 
 const icons = {
-    IconDashboard: IconDashboard,
     IconKey: IconKey,
     OpenInNewIcon: OpenInNewIcon,
     KeyboardReturnIcon: KeyboardReturnIcon,
@@ -39,14 +39,14 @@ const menuItems = {
                     title: "ホーム",
                     type: "item",
                     url: "/dashboard/default",
-                    icon: IconDashboard,
+                    icon: HomeIcon,
                     breadcrumbs: false,
                 },
             ],
         },
         {
             id: "needs",
-            title: "ボランティア案件調査",
+            title: "ニーズ依頼調査",
             type: "group",
             children: [
                 {
@@ -59,7 +59,7 @@ const menuItems = {
                 },
                 {
                     id: "viewAllNeeds",
-                    title: "登録済み案件の一覧",
+                    title: "登録済み案件一覧",
                     type: "item",
                     icon: icons.ListIcon,
                     breadcrumbs: false,
@@ -69,12 +69,12 @@ const menuItems = {
         },
         {
             id: "lends_returns",
-            title: "資機材の貸し出し",
+            title: "資機材貸出・返却",
             type: "group",
             children: [
                 {
                     id: "determine_Lend",
-                    title: "貸し出し数量の確定",
+                    title: "貸出数確認・確定",
                     type: "item",
                     icon: icons.AssignmentIcon,
                     breadcrumbs: false,
@@ -82,7 +82,7 @@ const menuItems = {
                 },
                 {
                     id: "jump_to_return",
-                    title: "資機材の返却",
+                    title: "資機材返却",
                     type: "item",
                     icon: OpenInNewIcon,
                     breadcrumbs: false,
@@ -104,7 +104,7 @@ const menuItems = {
             children: [
                 {
                     id: "stockStatus",
-                    title: "在庫状況の確認",
+                    title: "管理在庫・貸出状況",
                     type: "item",
                     icon: icons.SubjectIcon,
                     breadcrumbs: false,
@@ -112,7 +112,7 @@ const menuItems = {
                 },
                 {
                     id: "addOrDelete_stock",
-                    title: "物品の追加・削除",
+                    title: "資機材調達・廃棄",
                     type: "item",
                     icon: icons.AppRegistrationIcon,
                     breadcrumbs: false,
