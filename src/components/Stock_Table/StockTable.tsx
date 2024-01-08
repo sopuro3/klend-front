@@ -237,6 +237,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
             <SelectableStockTable_
                 isReturnMode={props.isReturnMode}
                 setVal={props.setVal}
+                isDetermineLend={props.isDetermineLend}
             />
         </Suspense>
     );
@@ -269,10 +270,12 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal, isDetermineLend } = props;
+    const { setVal, isDetermineLend, isReturnMode } = props;
 
     for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(rows[i].plannedQuantity);
+        const [count, setCount] = useState(
+            isDetermineLend ? rows[i].plannedQuantity : 0,
+        );
 
         items.push({
             name: rows[i].name,
@@ -316,7 +319,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         }
         setVal(tmp);
     }
-
+    console.log("isDetermineLend", isDetermineLend);
     return (
         <div>
             <TableContainer
@@ -336,12 +339,14 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 className="sp_omission"
                             >
                                 {isDetermineLend
-                                    ? "推奨された個数"
+                                    ? "資機材班による推奨個数"
+                                    : isReturnMode
+                                    ? "貸し出した個数"
                                     : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
-                                {isDetermineLend
+                                {isReturnMode
                                     ? "返却を行う個数"
                                     : "貸出を希望する個数"}
                             </TableCell>
@@ -367,7 +372,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {isDetermineLend
+                                    {isDetermineLend || isReturnMode
                                         ? equip.plannedQuantity
                                         : equip.currentQuantity}
                                 </TableCell>
