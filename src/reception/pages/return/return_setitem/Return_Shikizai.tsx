@@ -33,6 +33,8 @@ export default function 返却フォームの資機材入力画面() {
                             variant="contained"
                             sx={{ marginLeft: "auto" }}
                             onClick={() => {
+                                if (value.equipmentswithQuantity.length === 0) {
+                                }
                                 setIsConfirm(true);
                             }}
                         >
