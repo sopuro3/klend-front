@@ -25,7 +25,7 @@ import "./needsform.css";
 import { useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
-
+import { useNavigate } from "react-router-dom";
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
 //     FormValues: LendForm;
@@ -84,6 +84,7 @@ let rollup: FormValues = {
 export function InfoInputTable() {
     const { register, handleSubmit } = useForm<FormValues>();
     const theme = useTheme();
+    const navigate = useNavigate();
 
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
@@ -113,7 +114,11 @@ export function InfoInputTable() {
     };
 
     const onSubmitConfirm = () => {
-        // APIにデータを送る
+        console.log(rollup);
+
+        //ここに適当に処理かけな
+
+        navigate("/survey/firstform/done");
     };
 
     const [isConfirm, setIsConfirm] = useState(false);

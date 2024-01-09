@@ -55,7 +55,7 @@ function App() {
         formState: { errors },
     } = useForm<FormValues>();
     const onSubmit = (data: FormValues) => {
-        console.log(data);
+        // console.log(data);
         //もし、numberが4桁の数字以外であれば、エラーを表示する
         if (!data.number.match(/^[0-9]{4}$/)) {
             alert("受付番号は4桁の数字で入力してください。");
@@ -154,8 +154,8 @@ function App() {
                 component={RouterLink}
                 underline="hover"
                 color="inherit"
-                to={"/reception/return/select"}
-                key={"/reception/return/select"}
+                to={"/reception/return/select/1234"}
+                key={"/reception/return/select/1234"}
             >
                 返却個数入力画面へ
             </Link>

@@ -226,6 +226,7 @@ function StockTable_(props: StockTableProps) {
     );
 }
 type SelectableStockTableProps = {
+    isReturnMode?: boolean;
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
@@ -233,7 +234,11 @@ type SelectableStockTableProps = {
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ setVal={props.setVal} />
+            <SelectableStockTable_
+                isReturnMode={props.isReturnMode}
+                setVal={props.setVal}
+                isDetermineLend={props.isDetermineLend}
+            />
         </Suspense>
     );
 }
@@ -249,11 +254,11 @@ type EquipmentTmpItem = {
      * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
      */
     currentQuantity: number;
+    plannedQuantity?: number;
     note?: string; // 備考
 
     setCount: React.Dispatch<React.SetStateAction<number>>;
     quantity: number;
-    plannedQuantity: number;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
@@ -265,10 +270,12 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal, isDetermineLend } = props;
+    const { setVal, isDetermineLend, isReturnMode } = props;
 
     for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(rows[i].plannedQuantity);
+        const [count, setCount] = useState(
+            isDetermineLend ? rows[i].plannedQuantity : 0,
+        );
 
         items.push({
             name: rows[i].name,
@@ -310,10 +317,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 });
             }
         }
-        console.log(tmp);
         setVal(tmp);
     }
-
+    console.log("isDetermineLend", isDetermineLend);
     return (
         <div>
             <TableContainer
@@ -333,12 +339,16 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 className="sp_omission"
                             >
                                 {isDetermineLend
-                                    ? "推奨された個数"
+                                    ? "資機材班による推奨個数"
+                                    : isReturnMode
+                                    ? "貸し出した個数"
                                     : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
-                                貸出を希望する個数
+                                {isReturnMode
+                                    ? "返却を行う個数"
+                                    : "貸出を希望する個数"}
                             </TableCell>
 
                             <TableCell sx={{ width: "200px" }} align="left">
@@ -362,7 +372,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    {isDetermineLend || isReturnMode
+                                        ? equip.plannedQuantity
+                                        : equip.currentQuantity}
                                 </TableCell>
                                 <TableCell
                                     align="left"

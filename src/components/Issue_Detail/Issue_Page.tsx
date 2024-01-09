@@ -6,12 +6,9 @@ import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import {
-    Box,
-    Button,
     Card,
     CardContent,
     Link,
-    Modal,
     Paper,
     Table,
     TableBody,
@@ -23,8 +20,30 @@ import {
     styled,
     tableCellClasses,
 } from "@mui/material";
-import { Warning } from "@mui/icons-material";
 
+import "@material/web/button/filled-button.js";
+import "@material/web/button/outlined-button.js";
+import "@material/web/button/text-button.js";
+import "@material/web/checkbox/checkbox.js";
+import "@material/web/dialog/dialog.js";
+
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace JSX {
+        interface IntrinsicElements {
+            // eslint-disable-next-line
+            "md-checkbox": any;
+            // eslint-disable-next-line
+            "md-dialog": any;
+            // eslint-disable-next-line
+            "md-outlined-button": any;
+            // eslint-disable-next-line
+            "md-filled-button": any;
+            // eslint-disable-next-line
+            "md-text-button": any;
+        }
+    }
+}
 export function IssuePage() {
     const { id } = useParams();
 
@@ -100,24 +119,14 @@ function Issue(props: IssueProps) {
         queryKey: ["issue", id],
         queryFn: () => sleepWithValue(1300, issueData),
     });
-    const [open, setOpen] = useState(false);
+    const [isopen, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    console.log("open", isopen);
+
     //undefinedでなければ
     if (rollupTitle) rollupTitle(issueData.issue.displayId);
-
-    const modalStyle = {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 400,
-        bgcolor: "background.paper",
-        border: "2px solid #000",
-        boxShadow: 24,
-        p: 4,
-    };
 
     return (
         <>
@@ -159,7 +168,10 @@ function Issue(props: IssueProps) {
                                                 sx={{
                                                     marginLeft: "auto",
                                                 }}
-                                                onClick={handleOpen}
+                                                onClick={() => {
+                                                    console.log("click");
+                                                    handleOpen();
+                                                }}
                                             >
                                                 Google Map
                                             </Link>
@@ -180,29 +192,10 @@ function Issue(props: IssueProps) {
                 </CardContent>
             </Card>
             <br></br>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={modalStyle}>
-                    <div style={{ display: "flex" }}>
-                        <Warning
-                            sx={{
-                                color: "warning.dark",
-                            }}
-                        />
 
-                        <Typography
-                            id="modal-modal-title"
-                            variant="h3"
-                            sx={{ fontSize: "1.5rem" }}
-                            component="h2"
-                        >
-                            注意
-                        </Typography>
-                    </div>
+            <md-dialog {...(isopen ? { open: true } : {})}>
+                <div slot="headline">Dialog title</div>
+                <form slot="content" id="form-id" method="dialog">
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Google Mapを開きます。{" "}
                     </Typography>
@@ -211,33 +204,30 @@ function Issue(props: IssueProps) {
                         )をそのまま検索するため、表記のミスやブレにより正しい場所が表示されない可能性があります。
                     </Typography>
                     <br></br>
-                    <div style={{ display: "flex" }}>
-                        <Button
-                            sx={{
-                                marginRight: "auto",
-                            }}
-                            onClick={handleClose}
-                        >
-                            キャンセル
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                marginLeft: "auto",
-                            }}
-                            onClick={() => {
-                                handleClose();
-                                window.open(
-                                    "https://www.google.com/maps/search/?api=1&query=" +
-                                        issueData.issue.adress,
-                                );
-                            }}
-                        >
-                            決定
-                        </Button>
-                    </div>
-                </Box>
-            </Modal>
+                </form>
+                <div slot="actions">
+                    <md-text-button
+                        form="form-id"
+                        onClick={() => {
+                            handleClose();
+                        }}
+                    >
+                        キャンセル
+                    </md-text-button>
+                    <md-text-button
+                        form="form-id"
+                        onClick={() => {
+                            handleClose();
+                            window.open(
+                                "https://www.google.com/maps/search/?api=1&query=" +
+                                    issueData.issue.adress,
+                            );
+                        }}
+                    >
+                        決定
+                    </md-text-button>
+                </div>
+            </md-dialog>
         </>
     );
 }
