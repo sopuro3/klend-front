@@ -86,7 +86,7 @@ const MainLayout = () => {
                         : "none",
                 }}
             >
-                <Toolbar sx={{zIndex:1}}>
+                <Toolbar sx={{ zIndex: 1 }}>
                     <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
                 </Toolbar>
             </AppBar>

@@ -28,12 +28,18 @@ import "@material/web/checkbox/checkbox.js";
 import "@material/web/dialog/dialog.js";
 
 declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace JSX {
         interface IntrinsicElements {
+            // eslint-disable-next-line
             "md-checkbox": any;
+            // eslint-disable-next-line
             "md-dialog": any;
+            // eslint-disable-next-line
             "md-outlined-button": any;
+            // eslint-disable-next-line
             "md-filled-button": any;
+            // eslint-disable-next-line
             "md-text-button": any;
         }
     }
