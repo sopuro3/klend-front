@@ -1,7 +1,5 @@
 import { EquipmentSuper } from "@/API/Data_manage";
-import {
-    StockTable,
-} from "@/components/Stock_Table/StockTable";
+import { StockTable } from "@/components/Stock_Table/StockTable";
 import { SelectableStockTable } from "@/components/Stock_Table/Selectable_rewrite";
 import { Button, Link } from "@mui/material";
 import { useState } from "react";
@@ -10,8 +8,8 @@ import { useTheme } from "@mui/material/styles";
 import { detailIssue } from "@/API/API_rewrite_interface";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
-const detailIssueDummy:detailIssue = {
-    issue:{
+const detailIssueDummy: detailIssue = {
+    issue: {
         address: "東京都新宿区西新宿2-8-1",
         name: "山田太郎",
         id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -19,7 +17,7 @@ const detailIssueDummy:detailIssue = {
         note: "これは案件1です。",
         status: "in progress",
     },
-    equipments:[
+    equipments: [
         {
             name: "スコップ",
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -52,10 +50,10 @@ const detailIssueDummy:detailIssue = {
             plannedQuantity: 20,
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
-        }
+        },
     ],
-    totalEquipments:4
-}
+    totalEquipments: 4,
+};
 export default function 返却フォームの資機材入力画面() {
     const theme = useTheme();
 

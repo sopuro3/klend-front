@@ -1,14 +1,23 @@
-import {  detailIssue, getEquipmentItem } from "@/API/API_rewrite_interface";
-import {  useState } from "react";
+import { detailIssue, getEquipmentItem } from "@/API/API_rewrite_interface";
+import { useState } from "react";
 import { EquipmentItem_withQuantity, EquipmentSuper } from "@/API/Data_manage";
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, TextField } from "@mui/material";
+import {
+    TableContainer,
+    Paper,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    IconButton,
+    TextField,
+} from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
-
 
 import AddIcon from "@mui/icons-material/Add";
 
-const detailIssue:detailIssue = {
-    issue:{
+const detailIssue: detailIssue = {
+    issue: {
         address: "東京都新宿区西新宿2-8-1",
         name: "山田太郎",
         id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -16,7 +25,7 @@ const detailIssue:detailIssue = {
         note: "これは案件1です。",
         status: "in progress",
     },
-    equipments:[
+    equipments: [
         {
             name: "スコップ",
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -49,16 +58,14 @@ const detailIssue:detailIssue = {
             plannedQuantity: 20,
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
-        }
+        },
     ],
-    totalEquipments:4
-}
+    totalEquipments: 4,
+};
 
 type EquipmentTmpItem = {
     id: string; // uuid
     name: string; // 備品名
-
-
 
     /**
      * 変数名からもわかる通り、この値は最大値を表すが当然整数型である。
@@ -76,23 +83,22 @@ type EquipmentTmpItem = {
     returnQuantity: number;
 };
 
-
-
-
 export type SelectableStockTableProps = {
     isReturnMode?: boolean;
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
     latestItems?: EquipmentItem_withQuantity[];
-    response: Array<getEquipmentItem & {
-        plannedQuantity: number;
-    }>;
+    response: Array<
+        getEquipmentItem & {
+            plannedQuantity: number;
+        }
+    >;
 };
 
 export function SelectableStockTable(props: SelectableStockTableProps) {
-
-    const { setVal, isDetermineLend, isReturnMode, latestItems,response } = props;
+    const { setVal, isDetermineLend, isReturnMode, latestItems, response } =
+        props;
     const rows = response;
     if (latestItems && latestItems.length > 0) {
         for (let i = 0; i < latestItems.length; i++) {
@@ -108,9 +114,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(
-            isDetermineLend
-                ? rows[i].plannedQuantity
-                : 0
+            isDetermineLend ? rows[i].plannedQuantity : 0,
         );
 
         items.push({
@@ -144,8 +148,8 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                     id: items[i].id,
                     quantity: items[i].quantity,
                 });
-                if(isReturnMode && items[i].plannedQuantity===undefined){
-                    items[i].plannedQuantity=0;
+                if (isReturnMode && items[i].plannedQuantity === undefined) {
+                    items[i].plannedQuantity = 0;
                 }
                 tmp.equipmentswithQuantity.push({
                     id: items[i].id,
@@ -153,7 +157,9 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
-                    plannedQuantity: (isReturnMode?items[i].plannedQuantity!:items[i].quantity),
+                    plannedQuantity: isReturnMode
+                        ? items[i].plannedQuantity!
+                        : items[i].quantity,
                 });
             }
         }
@@ -180,8 +186,8 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                                 {isDetermineLend
                                     ? "資機材班による推奨個数"
                                     : isReturnMode
-                                        ? "貸し出した個数"
-                                        : "現在の在庫数"}
+                                    ? "貸し出した個数"
+                                    : "現在の在庫数"}
                             </TableCell>
 
                             <TableCell align="left" sx={{ width: "200px" }}>
@@ -211,11 +217,9 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-
-                                    
-                                    {isReturnMode?
-                                    equip.plannedQuantity:
-                                    equip.currentQuantity}
+                                    {isReturnMode
+                                        ? equip.plannedQuantity
+                                        : equip.currentQuantity}
                                 </TableCell>
                                 <TableCell
                                     align="left"
@@ -224,14 +228,16 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                                     <IconButton
                                         tabIndex={-1}
                                         onClick={() => {
-                                            const val = equip.quantity > 0
-                                                ? equip.quantity - 1
-                                                : 0;
+                                            const val =
+                                                equip.quantity > 0
+                                                    ? equip.quantity - 1
+                                                    : 0;
 
-                                            equip.setCount((count) => count > 0 ? count - 1 : 0
+                                            equip.setCount((count) =>
+                                                count > 0 ? count - 1 : 0,
                                             );
                                             setItem(equip.id, val);
-                                        } }
+                                        }}
                                     >
                                         <RemoveIcon />
                                     </IconButton>
@@ -254,7 +260,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                                             }
 
                                             setItem(equip.id, Number(value));
-                                        } }
+                                        }}
                                     ></TextField>
                                     <IconButton
                                         tabIndex={-1}
@@ -262,10 +268,10 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                                             const val = equip.quantity + 1;
 
                                             equip.setCount(
-                                                (count) => count + 1
+                                                (count) => count + 1,
                                             );
                                             setItem(equip.id, val);
-                                        } }
+                                        }}
                                     >
                                         <AddIcon />
                                     </IconButton>

@@ -10,8 +10,8 @@ import { detailIssue } from "@/API/API_rewrite_interface";
 import Loader from "@/components/Loader";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-const detailIssueDummy:detailIssue = {
-    issue:{
+const detailIssueDummy: detailIssue = {
+    issue: {
         address: "東京都新宿区西新宿2-8-1",
         name: "山田太郎",
         id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -19,7 +19,7 @@ const detailIssueDummy:detailIssue = {
         note: "これは案件1です。",
         status: "in progress",
     },
-    equipments:[
+    equipments: [
         {
             name: "スコップ",
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -52,10 +52,10 @@ const detailIssueDummy:detailIssue = {
             plannedQuantity: 20,
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
-        }
+        },
     ],
-    totalEquipments:4
-}
+    totalEquipments: 4,
+};
 export default function Delend_select() {
     const theme = useTheme();
 
@@ -69,7 +69,6 @@ export default function Delend_select() {
     };
 
     const [title, setTitle] = useState<string>(" - ");
-
 
     const response = useSuspenseQuery({
         queryKey: ["selectableStockTable"],
@@ -88,14 +87,13 @@ export default function Delend_select() {
                     <WithoutWrapper_Issue rollupTitle={setTitle} />
                     <h3>資機材数の調整</h3>
                     <Suspense fallback={<Loader />}>
-
-                    <SelectableStockTable
-                        latestItems={value.equipmentswithQuantity}
-                        isDetermineLend
-                        response={response.data.equipments}
-                        setVal={setValue}
-                    />
-                                </Suspense>
+                        <SelectableStockTable
+                            latestItems={value.equipmentswithQuantity}
+                            isDetermineLend
+                            response={response.data.equipments}
+                            setVal={setValue}
+                        />
+                    </Suspense>
 
                     <div style={{ display: "flex" }}>
                         <Button

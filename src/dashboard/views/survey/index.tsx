@@ -15,9 +15,7 @@ import {
 import { useForm } from "react-hook-form";
 import { LendForm } from "@/API/API_interface";
 import { EquipmentSuper } from "@/API/Data_manage";
-import {
-    StockTable,
-} from "@/components/Stock_Table/StockTable";
+import { StockTable } from "@/components/Stock_Table/StockTable";
 import { SelectableStockTable } from "@/components/Stock_Table/Selectable_rewrite";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
@@ -46,8 +44,8 @@ export default function NeedsForm() {
     );
 }
 
-const detailIssueDummy:detailIssue = {
-    issue:{
+const detailIssueDummy: detailIssue = {
+    issue: {
         address: "東京都新宿区西新宿2-8-1",
         name: "山田太郎",
         id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -55,7 +53,7 @@ const detailIssueDummy:detailIssue = {
         note: "これは案件1です。",
         status: "in progress",
     },
-    equipments:[
+    equipments: [
         {
             name: "スコップ",
             id: "a1b2c3d4-1111-2222-3333-123456789abc",
@@ -88,10 +86,10 @@ const detailIssueDummy:detailIssue = {
             plannedQuantity: 20,
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
-        }
+        },
     ],
-    totalEquipments:4
-}
+    totalEquipments: 4,
+};
 type rowData = {
     name: string;
     FormName: "name" | "address" | "note";
@@ -169,8 +167,8 @@ export function InfoInputTable() {
         //ここに適当に処理かけな
 
         navigate("/survey/firstform/done");
-    };    
-    
+    };
+
     const response = useSuspenseQuery({
         queryKey: ["selectableStockTable"],
         queryFn: () => sleepWithValue(10, detailIssueDummy),
@@ -180,83 +178,10 @@ export function InfoInputTable() {
     return (
         <>
             {/* <FormProvider {...methods}> */}
-                {!isConfirm ? (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="survey">
-                            <div>
-                                <h3>案件の基本情報</h3>
-
-                                <TableContainer
-                                    sx={{ minWidth: "min(400px,100%)" }}
-                                    component={Paper}
-                                    elevation={1}
-                                >
-                                    <Table
-                                        className="single-row-table"
-                                        aria-label="simple table"
-                                    >
-                                        <TableHead>
-                                            <TableRow>
-                                                <StyledTableCell
-                                                    sx={{ width: 200 }}
-                                                >
-                                                    項目
-                                                </StyledTableCell>
-                                                <StyledTableCell>
-                                                    入力欄
-                                                </StyledTableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            <RowItem required row={rows[0]} />
-                                            <RowItem required row={rows[1]} />
-                                            <RowItem
-                                                multiline={true}
-                                                row={rows[2]}
-                                            />
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                                <br></br>
-                                <Divider></Divider>
-                                <br></br>
-                            </div>
-                            <div>
-                                <h3>必要な資機材の見積り</h3>
-                                <Suspense fallback={<Loader />}>
-                                <SelectableStockTable
-                                    latestItems={value.equipmentswithQuantity}
-                                    response={response.data.equipments}
-                                    setVal={setValue}
-                                />
-                                </Suspense>
-                                <br></br>
-                                <Divider />
-                                <br></br>
-                                <div style={{ display: "flex" }}>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            marginLeft: "auto",
-                                            background:
-                                                theme.palette.primary.main,
-                                        }}
-                                        type="submit"
-                                    >
-                                        確認
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                ) : (
-                    <>
-                        <h3>確認</h3>
-                        <div className="survey">
-                            <p>
-                                以下の内容で間違えがないか、今一度ご確認ください。
-                            </p>
-
+            {!isConfirm ? (
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="survey">
+                        <div>
                             <h3>案件の基本情報</h3>
 
                             <TableContainer
@@ -276,26 +201,16 @@ export function InfoInputTable() {
                                                 項目
                                             </StyledTableCell>
                                             <StyledTableCell>
-                                                入力
+                                                入力欄
                                             </StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
+                                        <RowItem required row={rows[0]} />
+                                        <RowItem required row={rows[1]} />
                                         <RowItem
-                                            isConfirm
-                                            row={rows[0]}
-                                            value={rollup.name}
-                                        />
-                                        <RowItem
-                                            isConfirm
-                                            row={rows[1]}
-                                            value={rollup.address}
-                                        />
-                                        <RowItem
-                                            isConfirm
                                             multiline={true}
                                             row={rows[2]}
-                                            value={rollup.note}
                                         />
                                     </TableBody>
                                 </Table>
@@ -303,36 +218,114 @@ export function InfoInputTable() {
                             <br></br>
                             <Divider></Divider>
                             <br></br>
-                            <StockTable
-                                displayItems={value.equipmentswithQuantity}
-                            />
+                        </div>
+                        <div>
+                            <h3>必要な資機材の見積り</h3>
+                            <Suspense fallback={<Loader />}>
+                                <SelectableStockTable
+                                    latestItems={value.equipmentswithQuantity}
+                                    response={response.data.equipments}
+                                    setVal={setValue}
+                                />
+                            </Suspense>
+                            <br></br>
+                            <Divider />
                             <br></br>
                             <div style={{ display: "flex" }}>
                                 <Button
                                     variant="contained"
                                     sx={{
-                                        marginRight: "auto",
-                                        background: theme.palette.success.dark,
-                                    }}
-                                    onClick={onCancel}
-                                >
-                                    変更
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    sx={{
                                         marginLeft: "auto",
-                                        background: theme.palette.error.main,
+                                        background: theme.palette.primary.main,
                                     }}
-                                    onClick={onSubmitConfirm}
+                                    type="submit"
                                 >
-                                    決定
+                                    確認
                                 </Button>
                             </div>
-                            {/* 決定と前に戻るボタンを作る */}
                         </div>
-                    </>
-                )}
+                    </div>
+                </form>
+            ) : (
+                <>
+                    <h3>確認</h3>
+                    <div className="survey">
+                        <p>
+                            以下の内容で間違えがないか、今一度ご確認ください。
+                        </p>
+
+                        <h3>案件の基本情報</h3>
+
+                        <TableContainer
+                            sx={{ minWidth: "min(400px,100%)" }}
+                            component={Paper}
+                            elevation={1}
+                        >
+                            <Table
+                                className="single-row-table"
+                                aria-label="simple table"
+                            >
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell sx={{ width: 200 }}>
+                                            項目
+                                        </StyledTableCell>
+                                        <StyledTableCell>入力</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <RowItem
+                                        isConfirm
+                                        row={rows[0]}
+                                        value={rollup.name}
+                                    />
+                                    <RowItem
+                                        isConfirm
+                                        row={rows[1]}
+                                        value={rollup.address}
+                                    />
+                                    <RowItem
+                                        isConfirm
+                                        multiline={true}
+                                        row={rows[2]}
+                                        value={rollup.note}
+                                    />
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <br></br>
+                        <Divider></Divider>
+                        <br></br>
+                        <StockTable
+                            displayItems={value.equipmentswithQuantity}
+                        />
+                        <br></br>
+                        <div style={{ display: "flex" }}>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    marginRight: "auto",
+                                    background: theme.palette.success.dark,
+                                }}
+                                onClick={onCancel}
+                            >
+                                変更
+                            </Button>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    marginLeft: "auto",
+                                    background: theme.palette.error.main,
+                                }}
+                                onClick={onSubmitConfirm}
+                            >
+                                決定
+                            </Button>
+                        </div>
+                        {/* 決定と前に戻るボタンを作る */}
+                    </div>
+                </>
+            )}
             {/* </FormProvider> */}
         </>
     );

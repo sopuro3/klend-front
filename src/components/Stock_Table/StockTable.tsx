@@ -222,4 +222,3 @@ function StockTable_(props: StockTableProps) {
         </TableContainer>
     );
 }
-
