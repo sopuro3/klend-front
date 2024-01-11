@@ -1,6 +1,9 @@
 import { getEquipmentItem } from "@/API/API_rewrite_interface";
 import { useState } from "react";
-import { EquipmentItem_withPlanReturnQuantity, EquipmentSuper } from "@/API/Data_manage";
+import {
+    EquipmentItem_withPlanReturnQuantity,
+    EquipmentSuper,
+} from "@/API/Data_manage";
 import {
     TableContainer,
     Paper,
@@ -15,8 +18,6 @@ import {
 import RemoveIcon from "@mui/icons-material/Remove";
 
 import AddIcon from "@mui/icons-material/Add";
-
-
 
 type EquipmentTmpItem = {
     id: string; // uuid
@@ -111,8 +112,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
-                    returnQuantity: isReturnMode?
-                        items[i].quantity:0,
+                    returnQuantity: isReturnMode ? items[i].quantity : 0,
                     plannedQuantity: isReturnMode
                         ? items[i].plannedQuantity!
                         : items[i].quantity,

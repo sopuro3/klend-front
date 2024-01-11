@@ -4,7 +4,6 @@ export type EquipmentItem_withQuantity = {
     plannedQuantity: number;
 } & EquipmentItem;
 
-
 export type EquipmentItem_withPlanReturnQuantity = {
     returnQuantity: number;
     plannedQuantity: number; // 必要な数量
