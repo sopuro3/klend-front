@@ -6,7 +6,7 @@ import { Avatar, Box, ButtonBase } from "@mui/material";
 
 // project imports
 import LogoSection from "../LogoSection";
-import NotificationSection from "./NotificationSection";
+// import NotificationSection from "./NotificationSection";
 import LogoutSection from "./LogoutSection";
 
 // assets
@@ -62,7 +62,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* notification & logout */}
-            <NotificationSection />
+
+            {/* どうせ間に合わないだろうから一時無効化 */}
+            {/* <NotificationSection /> */}
             <LogoutSection />
         </>
     );
