@@ -59,19 +59,26 @@ const responseItem: Equipment = {
 
 type StockTableProps = {
     displayItems?: EquipmentItem[];
+    /**
+     * 資機材個数を更新するモードに入るかどうか
+     */
+    isUpdateMode?: boolean;
 };
 
 export function StockTable(props: StockTableProps) {
-    const { displayItems } = props;
+    const { displayItems, isUpdateMode } = props;
     return (
         <Suspense fallback={<Loader />}>
-            <StockTable_ displayItems={displayItems} />
+            <StockTable_
+                displayItems={displayItems}
+                isUpdateMode={isUpdateMode}
+            />
         </Suspense>
     );
 }
 
 function StockTable_(props: StockTableProps) {
-    const { displayItems } = props;
+    const { displayItems, isUpdateMode } = props;
     let rows;
     let isLocalRequest = false;
     if (!displayItems) {
@@ -85,66 +92,74 @@ function StockTable_(props: StockTableProps) {
         isLocalRequest = true;
 
         return (
-            <TableContainer
-                component={Paper}
-                elevation={3}
-                className="stockTable"
-            >
-                <Table
-                    sx={{ minWidth: 650 }}
-                    size="small"
-                    aria-label="a dense table"
+            <>
+                <TableContainer
+                    component={Paper}
+                    elevation={3}
+                    className="stockTable"
                 >
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="left" sx={{ width: "150px" }}>
-                                資機材名
-                            </TableCell>
+                    <Table
+                        sx={{ minWidth: 650 }}
+                        size="small"
+                        aria-label="a dense table"
+                    >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="left" sx={{ width: "150px" }}>
+                                    資機材名
+                                </TableCell>
 
-                            <TableCell
-                                align="left"
-                                sx={{ width: "120px" }}
-                                className="sp_omission"
-                            >
-                                現在の在庫数
-                            </TableCell>
-                            <TableCell
-                                align="left"
-                                sx={{ width: "100px", color: "red" }}
-                            >
-                                選択数
-                            </TableCell>
-
-                            <TableCell align="left">備考</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((equip: EquipmentItem_withQuantity) => (
-                            <TableRow
-                                key={equip.name}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
-                                }}
-                            >
-                                <TableCell scope="row">{equip.name}</TableCell>
                                 <TableCell
-                                    align="right"
+                                    align="left"
+                                    sx={{ width: "120px" }}
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    現在の在庫数
                                 </TableCell>
-                                <TableCell align="right">
-                                    {equip.plannedQuantity}
+                                <TableCell
+                                    align="left"
+                                    sx={{ width: "100px", color: "red" }}
+                                >
+                                    選択数
                                 </TableCell>
 
-                                <TableCell align="left">{equip.note}</TableCell>
+                                <TableCell align="left">備考</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((equip: EquipmentItem_withQuantity) => (
+                                <TableRow
+                                    key={equip.name}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell scope="row">
+                                        {equip.name}
+                                    </TableCell>
+                                    <TableCell
+                                        align="right"
+                                        className="sp_omission"
+                                    >
+                                        {equip.currentQuantity}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {equip.plannedQuantity}
+                                    </TableCell>
+
+                                    <TableCell align="left">
+                                        {equip.note}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                {isUpdateMode && <></>}
+            </>
         );
     }
     return (
@@ -179,6 +194,15 @@ function StockTable_(props: StockTableProps) {
                             sx={{ width: "100px" }}
                             align="left"
                         ></TableCell>
+                        {/* isUpdateModeならこの後についか */}
+
+                        {isUpdateMode && (
+                            <>
+                                <TableCell sx={{ width: "150px" }} align="left">
+                                    調達・破棄
+                                </TableCell>
+                            </>
+                        )}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -218,6 +242,19 @@ function StockTable_(props: StockTableProps) {
                                     詳細情報
                                 </Link>
                             </TableCell>
+
+                            {/* isUpdateModeならこの後についか */}
+
+                            {isUpdateMode && (
+                                <>
+                                    <TableCell
+                                        sx={{ width: "100px" }}
+                                        align="left"
+                                    >
+                                        個数調整
+                                    </TableCell>
+                                </>
+                            )}
                         </TableRow>
                     ))}
                 </TableBody>
