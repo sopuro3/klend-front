@@ -301,6 +301,9 @@ function StockTable_Manage_() {
             maxQuantity: equip.maxQuantity,
             currentQuantity: equip.currentQuantity,
         });
+        //初期化
+        setAdjustQuantity(0);
+        setAfterQuantity(equip.currentQuantity);
         handleOpen();
     }
 

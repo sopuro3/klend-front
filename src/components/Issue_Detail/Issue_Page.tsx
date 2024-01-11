@@ -72,11 +72,11 @@ export function WithoutWrapper_Issue(props: WithoutWrapper_IssueProps) {
     );
 }
 
-type IssueProps = {
+export type IssueProps = {
     id: string;
 } & WithoutWrapper_IssueProps;
 
-const issueData = {
+export const issueData = {
     issue: {
         adress: "久留米市小森野1丁目1-1",
         name: "Jane Smith",
@@ -87,7 +87,7 @@ const issueData = {
     },
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
@@ -255,7 +255,7 @@ type RowItemProps = {
     element?: JSX.Element;
 };
 
-function RowItem(props: RowItemProps) {
+export function RowItem(props: RowItemProps) {
     const { element, value, name } = props;
     return (
         <>
