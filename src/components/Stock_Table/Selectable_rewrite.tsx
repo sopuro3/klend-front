@@ -1,6 +1,6 @@
-import { detailIssue, getEquipmentItem } from "@/API/API_rewrite_interface";
+import { getEquipmentItem } from "@/API/API_rewrite_interface";
 import { useState } from "react";
-import { EquipmentItem_withQuantity, EquipmentSuper } from "@/API/Data_manage";
+import { EquipmentItem_withPlanReturnQuantity, EquipmentSuper } from "@/API/Data_manage";
 import {
     TableContainer,
     Paper,
@@ -16,52 +16,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import AddIcon from "@mui/icons-material/Add";
 
-const detailIssue: detailIssue = {
-    issue: {
-        address: "東京都新宿区西新宿2-8-1",
-        name: "山田太郎",
-        id: "a1b2c3d4-1111-2222-3333-123456789abc",
-        displayId: "001",
-        note: "これは案件1です。",
-        status: "in progress",
-    },
-    equipments: [
-        {
-            name: "スコップ",
-            id: "a1b2c3d4-1111-2222-3333-123456789abc",
-            maxQuantity: 10,
-            currentQuantity: 5,
 
-            plannedQuantity: 2,
-            note: "",
-        },
-        {
-            name: "ハンマー",
-            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
-            maxQuantity: 20,
-            currentQuantity: 15,
-            plannedQuantity: 5,
-            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
-        },
-        {
-            name: "ドライバー",
-            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
-            maxQuantity: 8,
-            plannedQuantity: 3,
-            currentQuantity: 3,
-            note: "これは装備アイテム3です。",
-        },
-        {
-            name: "ペンチ",
-            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
-            maxQuantity: 25,
-            plannedQuantity: 20,
-            currentQuantity: 20,
-            note: "これは装備アイテム4です。",
-        },
-    ],
-    totalEquipments: 4,
-};
 
 type EquipmentTmpItem = {
     id: string; // uuid
@@ -88,7 +43,7 @@ export type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
-    latestItems?: EquipmentItem_withQuantity[];
+    latestItems?: EquipmentItem_withPlanReturnQuantity[];
     response: Array<
         getEquipmentItem & {
             plannedQuantity: number;
@@ -132,7 +87,6 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
             returnQuantity: 0,
         });
     }
-    console.log(items);
 
     function setItem(id: string, quantity: number) {
         const tmp: EquipmentSuper = {
@@ -157,6 +111,8 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
                     note: items[i].note,
+                    returnQuantity: isReturnMode?
+                        items[i].quantity:0,
                     plannedQuantity: isReturnMode
                         ? items[i].plannedQuantity!
                         : items[i].quantity,
