@@ -36,6 +36,7 @@ export default function 返却フォームの資機材入力画面() {
                     </p>
                     <SelectableStockTable
                         isReturnMode={true}
+                        latestItems={value.equipmentswithQuantity}
                         setVal={setValue}
                     ></SelectableStockTable>
                     <br />

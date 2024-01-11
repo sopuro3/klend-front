@@ -57,7 +57,6 @@ const darkTheme = createTheme({
                 standby = false; // 処理中にコマンドを受け付けないようにする
                 index = 0; // コマンドリセット
 
-                console.log("コマンド入力成功");
                 /*
   
             何かしらの処理

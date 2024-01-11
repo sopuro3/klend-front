@@ -230,6 +230,7 @@ type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
+    latestItems?: EquipmentItem_withQuantity[];
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
@@ -238,6 +239,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                 isReturnMode={props.isReturnMode}
                 setVal={props.setVal}
                 isDetermineLend={props.isDetermineLend}
+                latestItems={props.latestItems}
             />
         </Suspense>
     );
@@ -267,14 +269,24 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         queryFn: () => sleepWithValue(10, responseItem),
     });
     const rows = response.data.equipments;
+    const { setVal, isDetermineLend, isReturnMode,latestItems } = props;
+
+    if(latestItems && latestItems.length > 0){
+        for(let i = 0; i < latestItems.length; i++){
+            for(let j = 0; j < rows.length; j++){
+                if(latestItems[i].id === rows[j].id){
+                    rows[j].plannedQuantity = latestItems[i].plannedQuantity;
+                }
+            }
+        }
+    }
 
     const items: EquipmentTmpItem[] = [];
 
-    const { setVal, isDetermineLend, isReturnMode } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(
-            isDetermineLend ? rows[i].plannedQuantity : 0,
+            isDetermineLend ? rows[i].plannedQuantity : isReturnMode ? rows[i].plannedQuantity : 0,
         );
 
         items.push({
@@ -319,7 +331,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         }
         setVal(tmp);
     }
-    console.log("isDetermineLend", isDetermineLend);
     return (
         <div>
             <TableContainer
@@ -392,9 +403,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                                 count > 0 ? count - 1 : 0,
                                             );
                                             setItem(equip.id, val);
-                                            // console.log(items);
-
-                                            // console.log(equip.quantity);
                                         }}
                                     >
                                         <RemoveIcon />
@@ -433,13 +441,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     >
                                         <AddIcon />
                                     </IconButton>
-                                    {/* <IconButton
-                                        onClick={() => {
-                                            console.log(equip.quantity);
-                                        }}
-                                    >
-                                        <AddIcon />
-                                    </IconButton> */}
+            
                                 </TableCell>
 
                                 <TableCell align="left">{equip.note}</TableCell>
