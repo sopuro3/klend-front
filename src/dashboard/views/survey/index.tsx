@@ -12,20 +12,24 @@ import {
     tableCellClasses,
     styled,
 } from "@mui/material";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { LendForm } from "@/API/API_interface";
 import { EquipmentSuper } from "@/API/Data_manage";
 import {
-    SelectableStockTable,
     StockTable,
 } from "@/components/Stock_Table/StockTable";
+import { SelectableStockTable } from "@/components/Stock_Table/Selectable_rewrite";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import "./needsform.css";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import Loader from "@/components/Loader";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+import { detailIssue } from "@/API/API_rewrite_interface";
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
 //     FormValues: LendForm;
@@ -42,6 +46,52 @@ export default function NeedsForm() {
     );
 }
 
+const detailIssueDummy:detailIssue = {
+    issue:{
+        address: "東京都新宿区西新宿2-8-1",
+        name: "山田太郎",
+        id: "a1b2c3d4-1111-2222-3333-123456789abc",
+        displayId: "001",
+        note: "これは案件1です。",
+        status: "in progress",
+    },
+    equipments:[
+        {
+            name: "スコップ",
+            id: "a1b2c3d4-1111-2222-3333-123456789abc",
+            maxQuantity: 10,
+            currentQuantity: 5,
+
+            plannedQuantity: 2,
+            note: "",
+        },
+        {
+            name: "ハンマー",
+            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+            maxQuantity: 20,
+            currentQuantity: 15,
+            plannedQuantity: 5,
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+        },
+        {
+            name: "ドライバー",
+            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+            maxQuantity: 8,
+            plannedQuantity: 3,
+            currentQuantity: 3,
+            note: "これは装備アイテム3です。",
+        },
+        {
+            name: "ペンチ",
+            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+            maxQuantity: 25,
+            plannedQuantity: 20,
+            currentQuantity: 20,
+            note: "これは装備アイテム4です。",
+        }
+    ],
+    totalEquipments:4
+}
 type rowData = {
     name: string;
     FormName: "name" | "address" | "note";
@@ -98,10 +148,10 @@ export function InfoInputTable() {
         setIsConfirm(true);
     };
 
-    const methods = useForm({
-        mode: "onChange",
-        criteriaMode: "all",
-    });
+    // const methods = useForm({
+    //     mode: "onChange",
+    //     criteriaMode: "all",
+    // });
 
     const onCancel = () => {
         // setValueの値を初期化する
@@ -119,12 +169,17 @@ export function InfoInputTable() {
         //ここに適当に処理かけな
 
         navigate("/survey/firstform/done");
-    };
+    };    
+    
+    const response = useSuspenseQuery({
+        queryKey: ["selectableStockTable"],
+        queryFn: () => sleepWithValue(10, detailIssueDummy),
+    });
 
     const [isConfirm, setIsConfirm] = useState(false);
     return (
         <>
-            <FormProvider {...methods}>
+            {/* <FormProvider {...methods}> */}
                 {!isConfirm ? (
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="survey">
@@ -168,7 +223,13 @@ export function InfoInputTable() {
                             </div>
                             <div>
                                 <h3>必要な資機材の見積り</h3>
-                                <SelectableStockTable latestItems={value.equipmentswithQuantity} setVal={setValue} />
+                                <Suspense fallback={<Loader />}>
+                                <SelectableStockTable
+                                    latestItems={value.equipmentswithQuantity}
+                                    response={response.data.equipments}
+                                    setVal={setValue}
+                                />
+                                </Suspense>
                                 <br></br>
                                 <Divider />
                                 <br></br>
@@ -272,7 +333,7 @@ export function InfoInputTable() {
                         </div>
                     </>
                 )}
-            </FormProvider>
+            {/* </FormProvider> */}
         </>
     );
     type RowItemProps = {
