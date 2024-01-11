@@ -5,7 +5,7 @@ import {
 } from "@/components/Stock_Table/StockTable";
 import { Button, Link } from "@mui/material";
 import { useState } from "react";
-import { Link as RouterLink,useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 
 export default function 返却フォームの資機材入力画面() {
@@ -19,10 +19,9 @@ export default function 返却フォームの資機材入力画面() {
     });
 
     const onSubmitConfirm = () => {
-  
         const navigate = useNavigate();
         //ここに適当に処理かけな
-        console.log("value", value)
+        console.log("value", value);
         navigate("/reception/return/done");
     };
 
@@ -62,29 +61,29 @@ export default function 返却フォームの資機材入力画面() {
                     <StockTable displayItems={value.equipmentswithQuantity} />
                     <br />
                     <div style={{ display: "flex" }}>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        marginRight: "auto",
-                                        background: theme.palette.success.dark,
-                                    }}
-                                    onClick={function(){
-                                        setIsConfirm(false);
-                                    }}
-                                >
-                                    変更
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        marginLeft: "auto",
-                                        background: theme.palette.error.main,
-                                    }}
-                                    onClick={onSubmitConfirm}
-                                >
-                                    決定
-                                </Button>
-                            </div>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                marginRight: "auto",
+                                background: theme.palette.success.dark,
+                            }}
+                            onClick={function () {
+                                setIsConfirm(false);
+                            }}
+                        >
+                            変更
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                marginLeft: "auto",
+                                background: theme.palette.error.main,
+                            }}
+                            onClick={onSubmitConfirm}
+                        >
+                            決定
+                        </Button>
+                    </div>
                     <Link component={RouterLink} to="/reception/return/done">
                         完了画面へ
                     </Link>
@@ -92,8 +91,4 @@ export default function 返却フォームの資機材入力画面() {
             )}
         </>
     );
-
-    
 }
-
-
