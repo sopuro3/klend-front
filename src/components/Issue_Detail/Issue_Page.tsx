@@ -24,7 +24,47 @@ import {
     tableCellClasses,
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
+import { StockTable } from "../Stock_Table/StockTable";
+import { Equipment } from "@/API/API_interface";
+export const responseItem: Equipment = {
+    equipments: [
+        {
+            name: "スコップ",
+            id: "a1b2c3d4-1111-2222-3333-123456789abc",
+            maxQuantity: 10,
+            currentQuantity: 5,
+            plannedQuantity: 0,
+            note: "",
+        },
+        {
+            name: "ハンマー",
+            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+            maxQuantity: 20,
+            currentQuantity: 15,
+            plannedQuantity: 5,
 
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+        },
+        {
+            name: "ドライバー",
+            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+            maxQuantity: 8,
+            plannedQuantity: 10,
+
+            currentQuantity: 3,
+            note: "これは装備アイテム3です。",
+        },
+        {
+            name: "ペンチ",
+            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+            maxQuantity: 25,
+            plannedQuantity: 3,
+
+            currentQuantity: 20,
+            note: "これは装備アイテム4です。",
+        },
+    ],
+};
 export function IssuePage() {
     const { id } = useParams();
 
@@ -45,6 +85,7 @@ export function IssuePage() {
             <PageTitle title={`案件 #${id}`} backButton={{}} />
             <MainCard_ts>
                 <Issue id={id} />
+                <StockTable displayItems={responseItem.equipments}></StockTable>
             </MainCard_ts>
         </Suspense>
     );
@@ -68,6 +109,7 @@ export function WithoutWrapper_Issue(props: WithoutWrapper_IssueProps) {
     return (
         <Suspense fallback={<PageLoader />}>
             <Issue id={id} rollupTitle={rollupTitle} />
+            <StockTable></StockTable>
         </Suspense>
     );
 }
@@ -96,7 +138,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;
-    /*const _ignore = */ useSuspenseQuery({
+    useSuspenseQuery({
         queryKey: ["issue", id],
         queryFn: () => sleepWithValue(1300, issueData),
     });

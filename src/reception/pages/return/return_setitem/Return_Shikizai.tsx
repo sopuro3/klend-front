@@ -2,12 +2,13 @@ import { EquipmentSuper } from "@/API/Data_manage";
 import { StockTable } from "@/components/Stock_Table/StockTable";
 import { SelectableStockTable } from "@/components/Stock_Table/Selectable_rewrite";
 import { Button, Link } from "@mui/material";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { detailIssue } from "@/API/API_rewrite_interface";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+import Loader from "@/components/Loader";
 const detailIssueDummy: detailIssue = {
     issue: {
         address: "東京都新宿区西新宿2-8-1",
@@ -74,7 +75,8 @@ export default function 返却フォームの資機材入力画面() {
         queryKey: ["selectableStockTable"],
         queryFn: () => sleepWithValue(10, detailIssueDummy),
     });
-    // console.log(value);
+
+    console.log(value);
     return (
         <>
             {!isConfirm ? (
@@ -83,12 +85,15 @@ export default function 返却フォームの資機材入力画面() {
                     <p>
                         破損・紛失した資機材は除き、返却した資機材の数量を確認してください。
                     </p>
-                    <SelectableStockTable
-                        isReturnMode={true}
-                        latestItems={value.equipmentswithQuantity}
-                        response={response.data.equipments}
-                        setVal={setValue}
-                    ></SelectableStockTable>
+                    <Suspense fallback={<Loader />}>
+                        <SelectableStockTable
+                            isReturnMode={true}
+                            latestItems={value.equipmentswithQuantity}
+                            response={response.data.equipments}
+                            setVal={setValue}
+                        />
+                    </Suspense>
+
                     <br />
                     <div style={{ display: "flex" }}>
                         <Button

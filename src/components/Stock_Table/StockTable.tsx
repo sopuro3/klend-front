@@ -56,19 +56,25 @@ export const responseItem: Equipment = {
 
 type StockTableProps = {
     displayItems?: EquipmentItem[];
+    isReturnMode?: boolean;
+    isIssueMode?: boolean;
 };
 
 export function StockTable(props: StockTableProps) {
-    const { displayItems } = props;
+    const { displayItems, isReturnMode, isIssueMode } = props;
     return (
         <Suspense fallback={<Loader />}>
-            <StockTable_ displayItems={displayItems} />
+            <StockTable_
+                displayItems={displayItems}
+                isReturnMode={isReturnMode}
+                isIssueMode={isIssueMode}
+            />
         </Suspense>
     );
 }
 
 function StockTable_(props: StockTableProps) {
-    const { displayItems } = props;
+    const { displayItems, isReturnMode /*,isIssueMode*/ } = props;
     let rows;
     let isLocalRequest = false;
     if (!displayItems) {
@@ -103,13 +109,15 @@ function StockTable_(props: StockTableProps) {
                                 sx={{ width: "120px" }}
                                 className="sp_omission"
                             >
-                                現在の在庫数
+                                {isReturnMode
+                                    ? "貸し出した個数"
+                                    : "現在の在庫数"}
                             </TableCell>
                             <TableCell
                                 align="left"
                                 sx={{ width: "100px", color: "red" }}
                             >
-                                選択数
+                                {isReturnMode ? "返却する個数" : "選択数"}
                             </TableCell>
 
                             <TableCell align="left">備考</TableCell>
