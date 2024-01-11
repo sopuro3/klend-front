@@ -24,7 +24,6 @@ import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { Warning } from "@mui/icons-material";
 const responseItem: Equipment = {
     equipments: [
         {
@@ -273,8 +272,6 @@ export function StockTable_Manage() {
 function StockTable_Manage_() {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    let rows;
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -341,7 +338,7 @@ function StockTable_Manage_() {
         }
     }, [open]);
 
-    rows = response.data.equipments;
+    const rows = response.data.equipments;
     const modalStyle = {
         position: "absolute",
         top: "50%",
@@ -516,10 +513,12 @@ function StockTable_Manage_() {
                                                 onChange={(e) => {
                                                     e.target.value =
                                                         e.target.value.replace(
+                                                            //これは正規表現やねん
+                                                            //eslint-disable-next-line no-useless-escape
                                                             /[^A-Z0-9\-]/g,
                                                             "",
                                                         );
-                                                    // １文字目以外にハイフンが入力された場合は削除する
+                                                    // １文字目以外にハイフンが入力されたら削除する
                                                     e.target.value =
                                                         e.target.value.replace(
                                                             /(?<=.)-+/g,
