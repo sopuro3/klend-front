@@ -16,20 +16,20 @@ import { useTheme } from "@mui/material/styles";
 const responseItem: FormResponse = {
     issue: [
         {
-            adress: "123 Main St",
-            name: "John Doe",
+            adress: "福岡県久留米市小森野1丁目1-1",
+            name: "久留米 太郎",
             id: "123e4567-e89b-12d3-a456-426614174001",
             displayId: "0001",
-            status: "Pending",
-            note: "This is a sample issue.",
+            status: "ニーズ依頼調査",
+            note: "なし",
         },
         {
-            adress: "456 Oak Ave",
-            name: "Jane Smith",
+            adress: "福岡県久留米市城南町１５−３",
+            name: "筑後 次郎",
             id: "234e5678-e89b-12d3-a456-426614174002",
             displayId: "0002",
-            status: "In Progress",
-            note: "Another sample issue.",
+            status: "貸し出し中",
+            note: "なし",
         },
         // Add more issues as needed
     ],
