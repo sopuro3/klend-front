@@ -14,6 +14,7 @@ import {
     IconButton,
     Link,
     Modal,
+    Tab,
     Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -275,6 +276,12 @@ function StockTable_Manage_() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    function cancelModal() {
+        setIsConfirm(false);
+        handleClose();
+    }
+
     const response = useSuspenseQuery({
         queryKey: ["stockTable"],
         queryFn: () => sleepWithValue(10, responseItem),
@@ -310,31 +317,16 @@ function StockTable_Manage_() {
     function refreshbyTotal(number: number) {
         setAfterQuantity(number);
         setAdjustQuantity(number - equipModal.currentQuantity);
-
-        console.log(`
-        afterQuantity:${afterQuantity}
-        adjustQuantity:${adjustQuantity}
-        number:${number}
-        `);
-
-        console.log("refreshbyTotal");
     }
 
     function refreshbyAdjust(number: number) {
         setAdjustQuantity(number);
         setAfterQuantity(equipModal.currentQuantity + number);
-
-        console.log(`
-        afterQuantity:${afterQuantity}
-        adjustQuantity:${adjustQuantity}
-        number:${number}
-        `);
-
-        console.log("refreshbyAdjust");
     }
 
+    const [isConfirm, setIsConfirm] = useState(false);
+
     useEffect(() => {
-        console.log(open);
         // モーダルが開いた後にinputにフォーカスを当てる
         if (open && inputRef.current) {
             inputRef.current.focus();
@@ -349,10 +341,37 @@ function StockTable_Manage_() {
         transform: "translate(-50%, -50%)",
         width: 600,
         bgcolor: "background.paper",
-        border: "2px solid #000",
+        borderRadius: "12px",
         boxShadow: 24,
         p: 4,
     };
+
+    function moveConfirm() {
+        console.log(equipModal);
+        setIsConfirm(true);
+    }
+
+    function POST(){
+        type PUTequip = {
+            name: string;
+            maxQuantity: number;
+            currentQuantity: number;
+        }
+        const putEquip:PUTequip = {
+            name:equipModal.name,
+            maxQuantity:equipModal.maxQuantity,
+            currentQuantity:afterQuantity
+        }
+
+        console.log(putEquip);
+        cancelModal();
+
+        // /equipment/:id   にPUTリクエストを送る
+
+        
+
+    }
+
     return (
         <>
             <TableContainer
@@ -467,161 +486,274 @@ function StockTable_Manage_() {
             <>
                 <Modal
                     open={open}
-                    onClose={handleClose}
+                    onClose={cancelModal}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <Box sx={modalStyle}>
-                        <div style={{ display: "flex" }}>
-                            <Typography
-                                id="modal-modal-title"
-                                variant="h3"
-                                sx={{ fontSize: "1.5rem" }}
-                                component="h2"
-                            >
-                                資機材の追加・破棄数入力
-                            </Typography>
-                        </div>
-                        <br />
-                        <Typography>
-                            「調達・破棄する個数」に、調達を行ったのなら正の個数を、破棄を行ったのなら負の数量を入力してください。
-                        </Typography>
-                        <Typography>
-                            または、「変更後の資機材個数」で個数を設定することも可能です。
-                        </Typography>
+                    {!isConfirm ? (
+                        <>
+                            <Box sx={modalStyle}>
+                                <div style={{ display: "flex" }}>
+                                    <Typography
+                                        id="modal-modal-title"
+                                        variant="h3"
+                                        sx={{ fontSize: "1.5rem" }}
+                                        component="h2"
+                                    >
+                                        資機材の追加・破棄数入力
+                                    </Typography>
+                                </div>
+                                <br />
+                                <Typography>
+                                    「調達・破棄する個数」に、調達を行ったのなら正の個数を、破棄を行ったのなら負の数量を入力してください。
+                                </Typography>
+                                <Typography>
+                                    または、「変更後の資機材個数」で個数を設定することも可能です。
+                                </Typography>
 
-                        <h4>選択した資機材:{equipModal.name}</h4>
+                                <h4>選択した資機材:{equipModal.name}</h4>
 
-                        <TableContainer component={Paper} elevation={3}>
-                            <Table>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell sx={{ width: "150px" }}>
-                                            現在の資機材個数
-                                        </TableCell>
-                                        <TableCell>
-                                            調達・破棄する個数
-                                        </TableCell>
-                                        <TableCell>
-                                            変更後の資機材個数
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell align="right">
-                                            {equipModal.currentQuantity}
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <TextField
-                                                value={adjustQuantity}
-                                                onChange={(e) => {
-                                                    e.target.value =
-                                                        e.target.value.replace(
-                                                            //これは正規表現やねん
-                                                            //eslint-disable-next-line no-useless-escape
-                                                            /[^A-Z0-9\-]/g,
-                                                            "",
-                                                        );
-                                                    // １文字目以外にハイフンが入力されたら削除する
-                                                    e.target.value =
-                                                        e.target.value.replace(
-                                                            /(?<=.)-+/g,
-                                                            "",
-                                                        );
+                                <TableContainer component={Paper} elevation={3}>
+                                    <Table>
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell
+                                                    sx={{ width: "150px" }}
+                                                >
+                                                    現在の資機材個数
+                                                </TableCell>
+                                                <TableCell>
+                                                    調達・破棄する個数
+                                                </TableCell>
+                                                <TableCell>
+                                                    変更後の資機材個数
+                                                </TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align="right">
+                                                    {equipModal.currentQuantity}
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <TextField
+                                                        value={adjustQuantity}
+                                                        onChange={(e) => {
+                                                            e.target.value =
+                                                                e.target.value.replace(
+                                                                    //これは正規表現やねん
+                                                                    //eslint-disable-next-line no-useless-escape
+                                                                    /[^A-Z0-9\-]/g,
+                                                                    "",
+                                                                );
+                                                            // １文字目以外にハイフンが入力されたら削除する
+                                                            e.target.value =
+                                                                e.target.value.replace(
+                                                                    /(?<=.)-+/g,
+                                                                    "",
+                                                                );
 
-                                                    refreshbyAdjust(
-                                                        Number(e.target.value),
-                                                    );
-                                                }}
-                                            ></TextField>
-                                        </TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                autoFocus={true}
-                                                sx={{ width: "100%" }}
-                                                onKeyDown={(e) => {
-                                                    if (e.key === "Enter") {
-                                                        console.log(
-                                                            "Enter key was pressed",
-                                                        );
-                                                    }
-                                                }}
-                                                value={afterQuantity}
-                                                onChange={(e) => {
-                                                    const value =
-                                                        e.target.value;
+                                                            refreshbyAdjust(
+                                                                Number(
+                                                                    e.target
+                                                                        .value,
+                                                                ),
+                                                            );
+                                                        }}
+                                                    ></TextField>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <TextField
+                                                        autoFocus={true}
+                                                        sx={{ width: "100%" }}
+                                                        onKeyDown={(e) => {
+                                                            if (
+                                                                e.key ===
+                                                                "Enter"
+                                                            ) {
+                                                                moveConfirm();
+                                                            }
+                                                        }}
+                                                        value={afterQuantity}
+                                                        onChange={(e) => {
+                                                            const value =
+                                                                e.target.value;
 
-                                                    //valueがNaNになってしまったら0にする
-                                                    if (isNaN(Number(value))) {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
-                                                        );
-                                                        return;
-                                                    }
+                                                            //valueがNaNになってしまったら0にする
+                                                            if (
+                                                                isNaN(
+                                                                    Number(
+                                                                        value,
+                                                                    ),
+                                                                )
+                                                            ) {
+                                                                setEquipModal(
+                                                                    (
+                                                                        equipModal,
+                                                                    ) => {
+                                                                        return {
+                                                                            ...equipModal,
+                                                                            afterQuantity: 0,
+                                                                        };
+                                                                    },
+                                                                );
+                                                                return;
+                                                            }
 
-                                                    if (value === "") {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
-                                                        );
-                                                    } else {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity:
-                                                                        parseInt(
-                                                                            value,
-                                                                        ),
-                                                                };
-                                                            },
-                                                        );
-                                                    }
+                                                            if (value === "") {
+                                                                setEquipModal(
+                                                                    (
+                                                                        equipModal,
+                                                                    ) => {
+                                                                        return {
+                                                                            ...equipModal,
+                                                                            afterQuantity: 0,
+                                                                        };
+                                                                    },
+                                                                );
+                                                            } else {
+                                                                setEquipModal(
+                                                                    (
+                                                                        equipModal,
+                                                                    ) => {
+                                                                        return {
+                                                                            ...equipModal,
+                                                                            afterQuantity:
+                                                                                parseInt(
+                                                                                    value,
+                                                                                ),
+                                                                        };
+                                                                    },
+                                                                );
+                                                            }
 
-                                                    refreshbyTotal(
-                                                        Number(value),
-                                                    );
-                                                }}
-                                            ></TextField>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                                                            refreshbyTotal(
+                                                                Number(value),
+                                                            );
+                                                        }}
+                                                    ></TextField>
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                <br></br>
+                                <div style={{ display: "flex" }}>
+                                    <Button
+                                        sx={{
+                                            marginRight: "auto",
+                                        }}
+                                        onClick={cancelModal}
+                                    >
+                                        キャンセル
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            marginLeft: "auto",
+                                        }}
+                                        onClick={moveConfirm}
+                                    >
+                                        決定
+                                    </Button>
+                                </div>
+                            </Box>
+                        </>
+                    ) : (
+                        <>
+                            <Box sx={modalStyle}>
+                                <div style={{ display: "flex" }}>
+                                    <Typography
+                                        id="modal-modal-title"
+                                        variant="h3"
+                                        sx={{ fontSize: "1.5rem" }}
+                                        component="h2"
+                                    >
+                                        資機材数変更の確認
+                                    </Typography>
+                                </div>
+                                <br />
+                                <Typography>
+                                    以下の操作を実行します。よろしいですか？
+                                </Typography>
 
-                        <Typography></Typography>
-                        <br></br>
-                        <div style={{ display: "flex" }}>
-                            <Button
-                                sx={{
-                                    marginRight: "auto",
-                                }}
-                                onClick={handleClose}
-                            >
-                                キャンセル
-                            </Button>
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    marginLeft: "auto",
-                                }}
-                                onClick={() => {
-                                    console.log(equipModal);
-                                    handleClose();
-                                }}
-                            >
-                                決定
-                            </Button>
-                        </div>
-                    </Box>
+                                <h4>選択した資機材:{equipModal.name}</h4>
+
+                                <TableContainer component={Paper} elevation={3}>
+                                    <Table>
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell
+                                                    sx={{ width: "150px" }}
+                                                >
+                                                    現在の資機材個数
+                                                </TableCell>
+                                                <TableCell>
+                                                    変更後の資機材個数
+                                                </TableCell>
+                                
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align="right"
+                                                        sx={{fontSize:"1.3rem"}}
+                                                        >
+                                                    {equipModal.currentQuantity}
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Typography
+                                                        sx={{fontSize:"1.3rem"}}
+                                                    >
+
+                                                        {afterQuantity}(
+                                                        <span
+                                                            style={{
+                                                                color:
+                                                                    adjustQuantity >=
+                                                                    0
+                                                                        ? "green"
+                                                                        : "red",
+                                                            }}
+                                                        >
+                                                            {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
+                                                            {adjustQuantity === 0
+                                                                ? "±"
+                                                                : adjustQuantity >
+                                                                  0
+                                                                ? "+"
+                                                                : ""}
+                                                            {adjustQuantity}
+                                                        </span>
+                                                        )
+                                                    </Typography>
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+
+                                <br></br>
+                                <div style={{ display: "flex" }}>
+                                    <Button
+                                        sx={{
+                                            marginRight: "auto",
+                                        }}
+                                        onClick={()=>{
+                                            setIsConfirm(false)
+                                        }}
+                                    >
+                                        変更
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            marginLeft: "auto",
+                                        }}
+                                        onClick={POST}
+                                    >
+                                        決定
+                                    </Button>
+                                </div>
+                            </Box>
+                        </>
+                    )}
                 </Modal>
             </>
         </>
