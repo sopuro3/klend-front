@@ -40,7 +40,6 @@ const responseItem: Equipment = {
             maxQuantity: 20,
             currentQuantity: 15,
             plannedQuantity: 5,
-
             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
         },
         {
@@ -48,7 +47,6 @@ const responseItem: Equipment = {
             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
             plannedQuantity: 10,
-
             currentQuantity: 3,
             note: "これは装備アイテム3です。",
         },
@@ -57,12 +55,164 @@ const responseItem: Equipment = {
             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
             plannedQuantity: 3,
-
             currentQuantity: 20,
             note: "これは装備アイテム4です。",
         },
+        // Add more dummy equipment items here
+        {
+            name: "ドリル",
+            id: "e5f6g7h8-5555-6666-7777-56789abcdefg",
+            maxQuantity: 12,
+            plannedQuantity: 8,
+            currentQuantity: 10,
+            note: "これは装備アイテム5です。",
+        },
+        {
+            name: "ノコギリ",
+            id: "f6g7h8i9-6666-7777-8888-6789abcdefghi",
+            maxQuantity: 15,
+            plannedQuantity: 5,
+            currentQuantity: 12,
+            note: "これは装備アイテム6です。",
+        },
+
     ],
 };
+
+// const responseItem: Equipment = {
+//     equipments: [
+//         {
+//             name: "スコップ",
+//             id: "a1b2c3d4-1111-2222-3333-123456789abc",
+//             maxQuantity: 10,
+//             currentQuantity: 5,
+//             plannedQuantity: 0,
+//             note: "",
+//         },
+//         {
+//             name: "ハンマー",
+//             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+//             maxQuantity: 20,
+//             currentQuantity: 15,
+//             plannedQuantity: 5,
+//             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+//         },
+//         {
+//             name: "ドライバー",
+//             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+//             maxQuantity: 8,
+//             plannedQuantity: 10,
+//             currentQuantity: 3,
+//             note: "これは装備アイテム3です。",
+//         },
+//         {
+//             name: "ペンチ",
+//             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+//             maxQuantity: 25,
+//             plannedQuantity: 3,
+//             currentQuantity: 20,
+//             note: "これは装備アイテム4です。",
+//         },
+//         // Add more dummy equipment items here
+//         {
+//             name: "ドリル",
+//             id: "e5f6g7h8-5555-6666-7777-56789abcdefg",
+//             maxQuantity: 12,
+//             plannedQuantity: 8,
+//             currentQuantity: 10,
+//             note: "これは装備アイテム5です。",
+//         },
+//         {
+//             name: "ノコギリ",
+//             id: "f6g7h8i9-6666-7777-8888-6789abcdefghi",
+//             maxQuantity: 15,
+//             plannedQuantity: 5,
+//             currentQuantity: 12,
+//             note: "これは装備アイテム6です。",
+//         },
+//         // Add 10 more dummy equipment items here
+//         {
+//             name: "Item 7",
+//             id: "g7h8i9j0-7777-8888-9999-7890abcdefghij",
+//             maxQuantity: 5,
+//             plannedQuantity: 2,
+//             currentQuantity: 3,
+//             note: "This is equipment item 7.",
+//         },
+//         {
+//             name: "Item 8",
+//             id: "h8i9j0k1-8888-9999-0000-8901abcdefghijk",
+//             maxQuantity: 18,
+//             plannedQuantity: 12,
+//             currentQuantity: 6,
+//             note: "This is equipment item 8.",
+//         },
+//         {
+//             name: "Item 9",
+//             id: "i9j0k1l2-9999-0000-1111-9012abcdefghijkl",
+//             maxQuantity: 7,
+//             plannedQuantity: 4,
+//             currentQuantity: 3,
+//             note: "This is equipment item 9.",
+//         },
+//         {
+//             name: "Item 10",
+//             id: "j0k1l2m3-0000-1111-2222-0123abcdefghijklm",
+//             maxQuantity: 14,
+//             plannedQuantity: 8,
+//             currentQuantity: 6,
+//             note: "This is equipment item 10.",
+//         },
+//         {
+//             name: "Item 11",
+//             id: "k1l2m3n4-1111-2222-3333-1234abcdefghijklmn",
+//             maxQuantity: 9,
+//             plannedQuantity: 6,
+//             currentQuantity: 3,
+//             note: "This is equipment item 11.",
+//         },
+//         {
+//             name: "Item 12",
+//             id: "l2m3n4o5-2222-3333-4444-2345abcdefghijklmno",
+//             maxQuantity: 20,
+//             plannedQuantity: 15,
+//             currentQuantity: 5,
+//             note: "This is equipment item 12.",
+//         },
+//         {
+//             name: "Item 13",
+//             id: "m3n4o5p6-3333-4444-5555-3456abcdefghijklmnop",
+//             maxQuantity: 11,
+//             plannedQuantity: 7,
+//             currentQuantity: 4,
+//             note: "This is equipment item 13.",
+//         },
+//         {
+//             name: "Item 14",
+//             id: "n4o5p6q7-4444-5555-6666-4567abcdefghijklmnopq",
+//             maxQuantity: 16,
+//             plannedQuantity: 10,
+//             currentQuantity: 6,
+//             note: "This is equipment item 14.",
+//         },
+//         {
+//             name: "Item 15",
+//             id: "o5p6q7r8-5555-6666-7777-5678abcdefghijklmnopqr",
+//             maxQuantity: 13,
+//             plannedQuantity: 9,
+//             currentQuantity: 4,
+//             note: "This is equipment item 15.",
+//         },
+//         {
+//             name: "Item 16",
+//             id: "p6q7r8s9-6666-7777-8888-6789abcdefghijklmnopqrs",
+//             maxQuantity: 6,
+//             plannedQuantity: 3,
+//             currentQuantity: 3,
+//             note: "This is equipment item 16.",
+//         },
+//     ],
+// };
 
 type StockTableProps = {
     displayItems?: EquipmentItem[];
@@ -789,6 +939,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 component={Paper}
                 elevation={3}
                 className="stockTable"
+                sx={{
+                    maxHeight: "600px",
+                }}
             >
                 <Table sx={{ minWidth: "600px" }} className="bigTable">
                     <TableHead>
