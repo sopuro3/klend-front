@@ -152,17 +152,38 @@ function ForGeneral() {
 const queryClient = new QueryClient();
 
 function ForStaff() {
-    //bodyにforstaffクラスを追加する
     document.body.classList.add("forstaff");
+
+    //bodyにforstaffクラスを追加する
 
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 {/* index.cssをインポートする */}
                 <BrowserRouter basename={config.basename}>
+                    <LoginJudge />
                     <App />
                 </BrowserRouter>
             </Provider>
         </QueryClientProvider>
     );
+}
+
+function LoginJudge() {
+    if (location.pathname !== "/dashboard/pages/login/login3") {
+        //sessinStorageにtokenがあるか確認する
+        const token = sessionStorage.getItem("token");
+        //cookieにtokenがあるか確認する
+        const cookies = document.cookie;
+        //cookiesのなかにloginがあるか確認する
+        const isLogin = cookies.includes("login");
+        //tokenがない場合はログイン画面に飛ばす
+
+        console.log("token", token, "isLogin", isLogin);
+
+        if (token === null && !isLogin) {
+            location.href = "/dashboard/pages/login/login3";
+        }
+    }
+    return <></>;
 }

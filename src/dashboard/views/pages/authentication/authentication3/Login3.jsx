@@ -74,6 +74,7 @@ const Login = () => {
                                             >
                                                 K-Lend 職員用
                                             </Typography>
+
                                             <Typography
                                                 variant="caption"
                                                 fontSize="16px"
@@ -83,7 +84,7 @@ const Login = () => {
                                                         : "inherit"
                                                 }
                                             >
-                                                K-Lendにサインイン
+                                                デモ版のため、IDとパスワードは必要ありません。サインインボタンをクリックしてください。
                                             </Typography>
                                         </Stack>
                                     </Grid>
