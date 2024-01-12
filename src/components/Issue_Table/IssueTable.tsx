@@ -106,15 +106,33 @@ function Table_(props: IssueTableProps) {
     function search(searchWord: string) {
         setSearchWord(searchWord);
     }
-    const docs = rows.map((row) => {
-        Object.fromEntries(
-            Object.entries(row).flatMap(([key, value]) => [
-                [key, value],
-                [`search_${key}`, encode(value)],
-                [`tokenized_${key}`, tokenize(value)],
-            ]),
-        );
-    }) as unknown as Issue[]; //TODO: ここで型が壊れている
+
+    //eslint-disable-next-line  @typescript-eslint/no-array-constructor
+    const docs = new Array();
+    rows.forEach((row) => {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const _row: any = new Object();
+        Object.keys(row).forEach((key: string) => {
+            //@ts-expect-error これでいいのか？
+            _row[key] = row[key];
+            //@ts-expect-error これでいいのか？
+            _row[`search_${key}`] = encode(row[key]);
+            //@ts-expect-error これでいいのか？
+            _row[`tokenized_${key}`] = tokenize(row[key]);
+        });
+        docs.push(_row);
+    });
+
+    // const docs = rows.map((row) => {
+    //     Object.fromEntries(
+    //         Object.entries(row).flatMap(([key, value]) => [
+    //             [key, value],
+    //             [`search_${key}`, encode(value)],
+    //             [`tokenized_${key}`, tokenize(value)],
+    //         ]),
+    //     );
+    // }) as unknown as Issue[]; //TODO: ここで型が壊れている
+    console.log(docs);
     const fuse = new Fuse(docs, {
         includeScore: true,
         useExtendedSearch: true,
@@ -125,7 +143,7 @@ function Table_(props: IssueTableProps) {
             searchById ? "displayId" : "",
         ],
     });
-
+    console.log(fuse);
     // const tmprow = rows.filter(searchWordFilter);
     let tmprow = fuse.search(searchWord).map((item) => item.item);
 
