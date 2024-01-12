@@ -1,8 +1,4 @@
-import { Suspense, useState } from "react";
-import { useParams } from "react-router-dom";
-import Loader from "../Loader";
-import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
-import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
+import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import {
@@ -15,90 +11,19 @@ import {
     Paper,
     Table,
     TableBody,
-    TableCell,
     TableContainer,
     TableHead,
     TableRow,
     Typography,
-    styled,
-    tableCellClasses,
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
+import { IssueProps, issueData, StyledTableCell, RowItem } from "./Issue_Page";
 
-export function IssuePage() {
-    const { id } = useParams();
-
-    //idがundefinedなら、エラー画面へ遷移する
-    if (id === undefined) {
-        return (
-            <>
-                <PageTitle title={"Error!"} />
-                <MainCard_ts>
-                    <h3>Issue </h3>
-                </MainCard_ts>
-            </>
-        );
-    }
-
-    return (
-        <Suspense fallback={<PageLoader />}>
-            <PageTitle title={`案件 #${id}`} backButton={{}} />
-            <MainCard_ts>
-                <Issue id={id} />
-            </MainCard_ts>
-        </Suspense>
-    );
-}
-type WithoutWrapper_IssueProps = {
-    rollupTitle?: React.Dispatch<React.SetStateAction<string>>;
-};
-export function WithoutWrapper_Issue(props: WithoutWrapper_IssueProps) {
-    const { id } = useParams();
-    const { rollupTitle } = props;
-    if (id === undefined) {
-        return (
-            <>
-                <PageTitle title={"Error!"} />
-                <MainCard_ts>
-                    <h3>Issue </h3>
-                </MainCard_ts>
-            </>
-        );
-    }
-    return (
-        <Suspense fallback={<PageLoader />}>
-            <Issue id={id} rollupTitle={rollupTitle} />
-        </Suspense>
-    );
-}
-
-export type IssueProps = {
-    id: string;
-} & WithoutWrapper_IssueProps;
-
-export const issueData = {
-    issue: {
-        adress: "久留米市小森野1丁目1-1",
-        name: "Jane Smith",
-        id: "234e5678-e89b-12d3-a456-426614174002",
-        displayId: "0002",
-        status: "In Progress",
-        note: "Another sample issue.",
-    },
-};
-
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-}));
-
-function Issue(props: IssueProps) {
+export function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["issue", id],
-        queryFn: () => sleepWithValue(10, issueData),
+        queryFn: () => sleepWithValue(1300, issueData),
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -114,6 +39,7 @@ function Issue(props: IssueProps) {
         transform: "translate(-50%, -50%)",
         width: 400,
         bgcolor: "background.paper",
+        border: "2px solid #000",
         boxShadow: 24,
         p: 4,
     };
@@ -237,40 +163,6 @@ function Issue(props: IssueProps) {
                     </div>
                 </Box>
             </Modal>
-        </>
-    );
-}
-
-function PageLoader() {
-    return (
-        <MainCard_ts>
-            <Loader />
-        </MainCard_ts>
-    );
-}
-type RowItemProps = {
-    name: string;
-    value?: string;
-    element?: JSX.Element;
-};
-
-export function RowItem(props: RowItemProps) {
-    const { element, value, name } = props;
-    return (
-        <>
-            <TableRow
-                key={name}
-                sx={{
-                    "&:last-child td, &:last-child th": {
-                        border: 0,
-                    },
-                }}
-            >
-                <TableCell component="th" scope="row">
-                    {name}
-                </TableCell>
-                <TableCell>{element ?? value ?? "なし"}</TableCell>
-            </TableRow>
         </>
     );
 }

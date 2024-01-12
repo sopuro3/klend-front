@@ -62,6 +62,10 @@ const AccountManagement = Loadable(
     lazy(() => import("@/dashboard/views/account_manage")),
 );
 
+const Manage_stock = Loadable(
+    lazy(() => import("@/dashboard/views/manage_stock")),
+);
+
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -166,6 +170,16 @@ const MainRoutes = {
                 {
                     path: "issuelist",
                     element: <IssueList></IssueList>,
+                },
+            ],
+        },
+        {
+            path: "survey",
+
+            children: [
+                {
+                    path: "manage_stock",
+                    element: <Manage_stock></Manage_stock>,
                 },
             ],
         },

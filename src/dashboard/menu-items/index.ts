@@ -116,7 +116,7 @@ const menuItems = {
                     type: "item",
                     icon: icons.AppRegistrationIcon,
                     breadcrumbs: false,
-                    url: "/survey/issuelist",
+                    url: "/survey/manage_stock",
                 },
             ],
         },
