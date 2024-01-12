@@ -41,7 +41,7 @@ const dummyNoticeResponse: NoticeResponse = {
             id: 2,
             title: "セキュリティ意識向上キャンペーン実施中",
             content:
-                "ハッカーからの不正アクセスを防ぐには、一人ひとりのセキュリティ意識の向上も重要です。定期的にパスワードを変更し、不正アクセスを防ぎましょう。",
+                "ハッカーからの不正アクセスを防ぐには、一人ひとりのセキュリティ意識の向上も重要です。定期的にパスワードを変更し、不正アクセスを防止しましょう。",
 
             created_at: 1694980854259,
             updated_at: 1694980854259,
@@ -71,7 +71,10 @@ function _Notice() {
                     <Card key={notice.id} component={Paper} elevation={3}>
                         <h3>{notice.title}</h3>
                         <p>{notice.content}</p>
-                        <p>{new Date(notice.created_at).toLocaleString()}</p>
+                        <p>
+                            投稿日時:{" "}
+                            {new Date(notice.created_at).toLocaleString()}
+                        </p>
                     </Card>
                 ))}
                 {dummyNoticeResponse.notices.length === 0 && (
