@@ -145,37 +145,32 @@ function Table_(props: IssueTableProps) {
     });
     console.log(fuse);
     // const tmprow = rows.filter(searchWordFilter);
-    let tmprow = fuse.search(searchWord).map((item) => item.item);
+    let tmprow = fuse
+        .search(searchWord)
+        .map((item) => item.item)
+        .filter((item) => {
+            if (filterByStatus === "全て") {
+                return true;
+            } else {
+                console.log(item.status);
+                return item.status === filterByStatus;
+            }
+        });
 
     console.log(tmprow);
     //条件が初期状態で、tmprowが空の時は、全ての案件を表示する
     if (searchWord === "" && filterByStatus === "全て") {
         tmprow = rows;
+    } else if (searchWord === "") {
+        tmprow = rows.filter((item) => {
+            if (filterByStatus === "全て") {
+                return true;
+            } else {
+                console.log(item.status);
+                return item.status === filterByStatus;
+            }
+        });
     }
-
-    // function searchWordFilter(issue: Issue) {
-    //     if (
-    //         filterByStatus !== "全て" &&
-    //         !issue.status.includes(filterByStatus)
-    //     ) {
-    //         return false;
-    //     }
-
-    //     if (searchByAddress && issue.adress.includes(searchWord)) {
-    //         return true;
-    //     }
-    //     if (searchByname && issue.name.includes(searchWord)) {
-    //         return true;
-    //     }
-    //     if (searchBynote && issue.note.includes(searchWord)) {
-    //         return true;
-    //     }
-    //     if (searchById && issue.displayId.includes(searchWord)) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
 
     return (
         <>
