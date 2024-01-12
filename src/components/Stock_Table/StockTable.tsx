@@ -75,7 +75,6 @@ const responseItem: Equipment = {
             currentQuantity: 12,
             note: "これは装備アイテム6です。",
         },
-
     ],
 };
 
