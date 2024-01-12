@@ -353,11 +353,17 @@ function SearchWindow(props: SearchWindowProps) {
                                                     control={
                                                         <Checkbox
                                                             checked={props.ID}
-                                                            onChange={() =>
-                                                                props.setID(
-                                                                    !props.setID,
-                                                                )
-                                                            }
+                                                            onChange={() => {
+                                                                if (props.ID) {
+                                                                    props.setID(
+                                                                        false,
+                                                                    );
+                                                                } else {
+                                                                    props.setID(
+                                                                        true,
+                                                                    );
+                                                                }
+                                                            }}
                                                         />
                                                     }
                                                     label="受付ID"
@@ -368,11 +374,19 @@ function SearchWindow(props: SearchWindowProps) {
                                                             checked={
                                                                 props.Address
                                                             }
-                                                            onChange={() =>
-                                                                props.setAddress(
-                                                                    !props.setAddress,
-                                                                )
-                                                            }
+                                                            onChange={() => {
+                                                                if (
+                                                                    props.Address
+                                                                ) {
+                                                                    props.setAddress(
+                                                                        false,
+                                                                    );
+                                                                } else {
+                                                                    props.setAddress(
+                                                                        true,
+                                                                    );
+                                                                }
+                                                            }}
                                                         />
                                                     }
                                                     label="住所"
@@ -381,11 +395,19 @@ function SearchWindow(props: SearchWindowProps) {
                                                     control={
                                                         <Checkbox
                                                             checked={props.Name}
-                                                            onChange={() =>
-                                                                props.setName(
-                                                                    !props.setName,
-                                                                )
-                                                            }
+                                                            onChange={() => {
+                                                                if (
+                                                                    props.Name
+                                                                ) {
+                                                                    props.setName(
+                                                                        false,
+                                                                    );
+                                                                } else {
+                                                                    props.setName(
+                                                                        true,
+                                                                    );
+                                                                }
+                                                            }}
                                                         />
                                                     }
                                                     label="名前"
@@ -394,11 +416,19 @@ function SearchWindow(props: SearchWindowProps) {
                                                     control={
                                                         <Checkbox
                                                             checked={props.Note}
-                                                            onChange={() =>
-                                                                props.setNote(
-                                                                    !props.setNote,
-                                                                )
-                                                            }
+                                                            onChange={() => {
+                                                                if (
+                                                                    props.Note
+                                                                ) {
+                                                                    props.setNote(
+                                                                        false,
+                                                                    );
+                                                                } else {
+                                                                    props.setNote(
+                                                                        true,
+                                                                    );
+                                                                }
+                                                            }}
                                                         />
                                                     }
                                                     label="概要"
