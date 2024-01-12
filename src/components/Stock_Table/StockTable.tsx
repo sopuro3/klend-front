@@ -14,6 +14,7 @@ import {
     IconButton,
     Link,
     Modal,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -851,7 +852,7 @@ type SelectableStockTableProps = {
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ setVal={props.setVal} />
+            <SelectableStockTable_ setVal={props.setVal} isDetermineLend={props.isDetermineLend} />
         </Suspense>
     );
 }
@@ -872,6 +873,10 @@ type EquipmentTmpItem = {
     setCount: React.Dispatch<React.SetStateAction<number>>;
     quantity: number;
     plannedQuantity: number;
+
+    handleOpen: () => void;
+    handleClose: () => void;
+    fieldopen: boolean;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
@@ -888,6 +893,16 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(rows[i].plannedQuantity);
 
+        //全角入力モードになっていたら怒る
+        const [fieldopen, setFieldOpen] = useState(false);
+
+        const handleClose = () => {
+            setFieldOpen(false);
+        };
+
+        const handleOpen = () => {
+            setFieldOpen(true);
+        };
         items.push({
             name: rows[i].name,
             id: rows[i].id,
@@ -900,6 +915,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             },
             quantity: count,
             plannedQuantity: rows[i].plannedQuantity,
+            handleOpen: handleOpen,
+            handleClose: handleClose,
+            fieldopen: fieldopen,
         });
     }
     console.log(items);
@@ -1008,27 +1026,40 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     >
                                         <RemoveIcon />
                                     </IconButton>
-                                    <TextField
-                                        value={equip.quantity}
-                                        sx={{ width: "100%" }}
-                                        onChange={(e) => {
-                                            const value = e.target.value;
+                                    <Tooltip
+                                        open={equip.fieldopen}
+                                        title="半角数字のみ有効です"
+                                    >
+                                        <TextField
+                                            value={equip.quantity}
+                                            sx={{ width: "100%" }}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
 
-                                            //valueがNaNになってしまったら0にする
-                                            if (isNaN(Number(value))) {
-                                                setItem(equip.id, 0);
-                                                return;
-                                            }
+                                                //valueがNaNになってしまったら0にする
+                                                if (isNaN(Number(value))) {
+                                                    equip.handleOpen();
 
-                                            if (value === "") {
-                                                equip.setCount(0);
-                                            } else {
-                                                equip.setCount(parseInt(value));
-                                            }
+                                                    setItem(equip.id, 0);
+                                                    return;
+                                                }
 
-                                            setItem(equip.id, Number(value));
-                                        }}
-                                    ></TextField>
+                                                if (value === "") {
+                                                    equip.setCount(0);
+                                                } else {
+                                                    equip.handleClose();
+                                                    equip.setCount(
+                                                        parseInt(value),
+                                                    );
+                                                }
+
+                                                setItem(
+                                                    equip.id,
+                                                    Number(value),
+                                                );
+                                            }}
+                                        ></TextField>
+                                    </Tooltip>
                                     <IconButton
                                         tabIndex={-1}
                                         onClick={() => {

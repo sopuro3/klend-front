@@ -37,6 +37,7 @@ export function Issue(props: IssueProps) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
+        borderRadius: "12px",
         width: 400,
         bgcolor: "background.paper",
         border: "2px solid #000",
