@@ -14,7 +14,6 @@ import {
     IconButton,
     Link,
     Modal,
-    Tab,
     Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -351,25 +350,22 @@ function StockTable_Manage_() {
         setIsConfirm(true);
     }
 
-    function POST(){
+    function POST() {
         type PUTequip = {
             name: string;
             maxQuantity: number;
             currentQuantity: number;
-        }
-        const putEquip:PUTequip = {
-            name:equipModal.name,
-            maxQuantity:equipModal.maxQuantity,
-            currentQuantity:afterQuantity
-        }
+        };
+        const putEquip: PUTequip = {
+            name: equipModal.name,
+            maxQuantity: equipModal.maxQuantity,
+            currentQuantity: afterQuantity,
+        };
 
         console.log(putEquip);
         cancelModal();
 
         // /equipment/:id   にPUTリクエストを送る
-
-        
-
     }
 
     return (
@@ -689,19 +685,20 @@ function StockTable_Manage_() {
                                                 <TableCell>
                                                     変更後の資機材個数
                                                 </TableCell>
-                                
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="right"
-                                                        sx={{fontSize:"1.3rem"}}
-                                                        >
+                                                <TableCell
+                                                    align="right"
+                                                    sx={{ fontSize: "1.3rem" }}
+                                                >
                                                     {equipModal.currentQuantity}
                                                 </TableCell>
                                                 <TableCell align="right">
                                                     <Typography
-                                                        sx={{fontSize:"1.3rem"}}
+                                                        sx={{
+                                                            fontSize: "1.3rem",
+                                                        }}
                                                     >
-
                                                         {afterQuantity}(
                                                         <span
                                                             style={{
@@ -713,7 +710,8 @@ function StockTable_Manage_() {
                                                             }}
                                                         >
                                                             {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
-                                                            {adjustQuantity === 0
+                                                            {adjustQuantity ===
+                                                            0
                                                                 ? "±"
                                                                 : adjustQuantity >
                                                                   0
@@ -735,8 +733,8 @@ function StockTable_Manage_() {
                                         sx={{
                                             marginRight: "auto",
                                         }}
-                                        onClick={()=>{
-                                            setIsConfirm(false)
+                                        onClick={() => {
+                                            setIsConfirm(false);
                                         }}
                                     >
                                         変更
