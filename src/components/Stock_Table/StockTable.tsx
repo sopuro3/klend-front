@@ -69,23 +69,19 @@ type StockTableProps = {
     /**
      * 資機材個数を更新するモードに入るかどうか
      */
-    isUpdateMode?: boolean;
 };
 
 export function StockTable(props: StockTableProps) {
-    const { displayItems, isUpdateMode } = props;
+    const { displayItems } = props;
     return (
         <Suspense fallback={<Loader />}>
-            <StockTable_
-                displayItems={displayItems}
-                isUpdateMode={isUpdateMode}
-            />
+            <StockTable_ displayItems={displayItems} />
         </Suspense>
     );
 }
 
 function StockTable_(props: StockTableProps) {
-    const { displayItems, isUpdateMode } = props;
+    const { displayItems } = props;
     let rows;
     let isLocalRequest = false;
     if (!displayItems) {
@@ -193,13 +189,6 @@ function StockTable_(props: StockTableProps) {
                             sx={{ width: "100px" }}
                             align="left"
                         ></TableCell>
-                        {/* isUpdateModeならこの後についか */}
-
-                        {isUpdateMode && (
-                            <TableCell sx={{ width: "150px" }} align="left">
-                                調達・破棄
-                            </TableCell>
-                        )}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -239,14 +228,6 @@ function StockTable_(props: StockTableProps) {
                                     詳細情報
                                 </Link>
                             </TableCell>
-
-                            {/* isUpdateModeならこの後についか */}
-
-                            {isUpdateMode && (
-                                <TableCell sx={{ width: "100px" }} align="left">
-                                    個数調整
-                                </TableCell>
-                            )}
                         </TableRow>
                     ))}
                 </TableBody>
