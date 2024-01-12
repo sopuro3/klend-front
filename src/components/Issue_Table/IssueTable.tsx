@@ -23,7 +23,9 @@ import React, { Suspense, useState } from "react";
 import Loader from "../Loader";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import Fuse from "fuse.js";
 import { useTheme } from "@mui/material/styles";
+import { encode, tokenize } from "@/Search/encodeAndTokenize";
 const responseItem: FormResponse = {
     issue: [
         {
@@ -102,43 +104,74 @@ function Table_(props: IssueTableProps) {
     function search(searchWord: string) {
         setSearchWord(searchWord);
     }
-    const tmprow = rows.filter(searchWordFilter);
+    const docs = rows.map((row) => {
+        Object.fromEntries(
+            Object.entries(row).flatMap(([key, value]) => [
+                [key, value],
+                [`search_${key}`, encode(value)],
+                [`tokenized_${key}`, tokenize(value)],
+            ]),
+        );
+    }) as unknown as Issue[]; //TODO: ここで型が壊れている
+    const fuse = new Fuse(docs, {
+        includeScore: true,
+        useExtendedSearch: true,
+        keys: [
+            searchByAddress ? "adress" : "",
+            searchByname ? "name" : "",
+            searchBynote ? "note" : "",
+            searchById ? "displayId" : "",
+        ],
+    });
 
-    function searchWordFilter(issue: Issue) {
-        if (
-            filterByStatus !== "全て" &&
-            !issue.status.includes(filterByStatus)
-        ) {
-            return false;
-        }
+    // const tmprow = rows.filter(searchWordFilter);
+    let tmprow = fuse.search(searchWord).map((item) => item.item);
 
-        if (searchByAddress && issue.adress.includes(searchWord)) {
-            return true;
-        }
-        if (searchByname && issue.name.includes(searchWord)) {
-            return true;
-        }
-        if (searchBynote && issue.note.includes(searchWord)) {
-            return true;
-        }
-        if (searchById && issue.displayId.includes(searchWord)) {
-            return true;
-        }
-
-        return false;
+    console.log(tmprow);
+    //条件が初期状態で、tmprowが空の時は、全ての案件を表示する
+    if (searchWord === "" && filterByStatus === "全て") {
+        tmprow = rows;
     }
+
+    // function searchWordFilter(issue: Issue) {
+    //     if (
+    //         filterByStatus !== "全て" &&
+    //         !issue.status.includes(filterByStatus)
+    //     ) {
+    //         return false;
+    //     }
+
+    //     if (searchByAddress && issue.adress.includes(searchWord)) {
+    //         return true;
+    //     }
+    //     if (searchByname && issue.name.includes(searchWord)) {
+    //         return true;
+    //     }
+    //     if (searchBynote && issue.note.includes(searchWord)) {
+    //         return true;
+    //     }
+    //     if (searchById && issue.displayId.includes(searchWord)) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 
     return (
         <>
             <SearchWindow
                 setAddress={setAddress}
+                Address={searchByAddress}
                 setName={setName}
+                Name={searchByname}
                 setNote={setNote}
+                Note={searchBynote}
                 setSearch={search}
                 setStatus={statusHandleChange}
                 Status={filterByStatus}
                 SearchWord={searchWord}
                 setID={setId}
+                ID={searchById}
             />
             <TableContainer component={Paper} elevation={3}>
                 <Table
@@ -239,12 +272,15 @@ function Table_(props: IssueTableProps) {
         </>
     );
 }
-
 type SearchWindowProps = {
     setID: React.Dispatch<React.SetStateAction<boolean>>;
+    ID: boolean;
     setAddress: React.Dispatch<React.SetStateAction<boolean>>;
+    Address: boolean;
     setName: React.Dispatch<React.SetStateAction<boolean>>;
+    Name: boolean;
     setNote: React.Dispatch<React.SetStateAction<boolean>>;
+    Note: boolean;
     setStatus: (event: SelectChangeEvent | string) => void;
     Status: string;
     //Searchだけは関数
@@ -252,6 +288,7 @@ type SearchWindowProps = {
     SearchWord: string;
     // searchRequest: () => void;
 };
+
 function SearchWindow(props: SearchWindowProps) {
     return (
         <>
@@ -291,7 +328,7 @@ function SearchWindow(props: SearchWindowProps) {
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
-                                                        defaultChecked
+                                                        checked={props.ID}
                                                         onChange={() =>
                                                             props.setID(
                                                                 !props.setID,
@@ -304,7 +341,7 @@ function SearchWindow(props: SearchWindowProps) {
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
-                                                        defaultChecked
+                                                        checked={props.Address}
                                                         onChange={() =>
                                                             props.setAddress(
                                                                 !props.setAddress,
@@ -317,7 +354,7 @@ function SearchWindow(props: SearchWindowProps) {
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
-                                                        defaultChecked
+                                                        checked={props.Name}
                                                         onChange={() =>
                                                             props.setName(
                                                                 !props.setName,
@@ -330,7 +367,7 @@ function SearchWindow(props: SearchWindowProps) {
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
-                                                        defaultChecked
+                                                        checked={props.Note}
                                                         onChange={() =>
                                                             props.setNote(
                                                                 !props.setNote,
