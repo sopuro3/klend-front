@@ -132,7 +132,7 @@ function Table_(props: IssueTableProps) {
     //         ]),
     //     );
     // }) as unknown as Issue[]; //TODO: ここで型が壊れている
-    console.log(docs);
+    // console.log(docs);
     const fuse = new Fuse(docs, {
         includeScore: true,
         useExtendedSearch: true,
@@ -143,7 +143,7 @@ function Table_(props: IssueTableProps) {
             searchById ? "displayId" : "",
         ],
     });
-    console.log(fuse);
+    // console.log(fuse);
     // const tmprow = rows.filter(searchWordFilter);
     let tmprow = fuse
         .search(searchWord)
@@ -157,7 +157,7 @@ function Table_(props: IssueTableProps) {
             }
         });
 
-    console.log(tmprow);
+    // console.log(tmprow);
     //条件が初期状態で、tmprowが空の時は、全ての案件を表示する
     if (searchWord === "" && filterByStatus === "全て") {
         tmprow = rows;
@@ -492,6 +492,7 @@ function SearchWindow(props: SearchWindowProps) {
                                                     props.setAddress(true);
                                                     props.setName(true);
                                                     props.setNote(true);
+                                                    props.setID(true);
                                                     props.setStatus("全て");
                                                     props.setSearch("");
                                                 }}
