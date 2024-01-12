@@ -196,11 +196,9 @@ function StockTable_(props: StockTableProps) {
                         {/* isUpdateModeならこの後についか */}
 
                         {isUpdateMode && (
-                            <>
                                 <TableCell sx={{ width: "150px" }} align="left">
                                     調達・破棄
                                 </TableCell>
-                            </>
                         )}
                     </TableRow>
                 </TableHead>
@@ -245,14 +243,12 @@ function StockTable_(props: StockTableProps) {
                             {/* isUpdateModeならこの後についか */}
 
                             {isUpdateMode && (
-                                <>
                                     <TableCell
                                         sx={{ width: "100px" }}
                                         align="left"
                                     >
                                         個数調整
                                     </TableCell>
-                                </>
                             )}
                         </TableRow>
                     ))}
@@ -407,11 +403,9 @@ function StockTable_Manage_() {
                             ></TableCell>
                             {/* isUpdateModeならこの後についか */}
 
-                            <>
                                 <TableCell sx={{ width: "150px" }} align="left">
                                     調達・破棄
                                 </TableCell>
-                            </>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -457,7 +451,6 @@ function StockTable_Manage_() {
 
                                 {/* isUpdateModeならこの後についか */}
 
-                                <>
                                     <TableCell
                                         sx={{ width: "100px" }}
                                         align="left"
@@ -473,13 +466,11 @@ function StockTable_Manage_() {
                                             個数調整
                                         </Link>
                                     </TableCell>
-                                </>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <>
                 <Modal
                     open={open}
                     onClose={cancelModal}
@@ -487,7 +478,6 @@ function StockTable_Manage_() {
                     aria-describedby="modal-modal-description"
                 >
                     {!isConfirm ? (
-                        <>
                             <Box sx={modalStyle}>
                                 <div style={{ display: "flex" }}>
                                     <Typography
@@ -652,9 +642,7 @@ function StockTable_Manage_() {
                                     </Button>
                                 </div>
                             </Box>
-                        </>
                     ) : (
-                        <>
                             <Box sx={modalStyle}>
                                 <div style={{ display: "flex" }}>
                                     <Typography
@@ -750,10 +738,8 @@ function StockTable_Manage_() {
                                     </Button>
                                 </div>
                             </Box>
-                        </>
                     )}
                 </Modal>
-            </>
         </>
     );
 }
