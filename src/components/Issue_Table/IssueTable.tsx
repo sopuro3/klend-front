@@ -345,7 +345,7 @@ function SearchWindow(props: SearchWindowProps) {
                                                 paddingRight: "5px",
                                             }}
                                         >
-                                            <div>
+                                            <div style={{ paddingTop: "10px" }}>
                                                 <Typography>
                                                     次の項目から検索:
                                                 </Typography>
