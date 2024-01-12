@@ -28,6 +28,9 @@ export default function Borrow() {
                 backButton={{ text: "ホーム", link: "/dashboard/default" }}
             />
             <MainCard_ts>
+                <h3>案件を選択する</h3>
+                <IssueTable selectBtn setValue={handleSetSelected} />
+                <br />
                 <Link
                     component={RouterLink}
                     underline="hover"
@@ -37,10 +40,6 @@ export default function Borrow() {
                 >
                     貸出完了
                 </Link>
-                <h3>案件の選択</h3>
-
-                <h4>一覧から選択する</h4>
-                <IssueTable selectBtn setValue={handleSetSelected} />
             </MainCard_ts>
         </>
     );

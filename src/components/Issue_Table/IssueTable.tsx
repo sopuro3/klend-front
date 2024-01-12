@@ -8,7 +8,9 @@ import Paper from "@mui/material/Paper";
 import { Issue, FormResponse } from "@/API/API_interface";
 import {
     Button,
+    Card,
     Checkbox,
+    FormControl,
     FormControlLabel,
     InputLabel,
     Link,
@@ -292,144 +294,172 @@ type SearchWindowProps = {
 function SearchWindow(props: SearchWindowProps) {
     return (
         <>
-            <h3>案件の絞り込み</h3>
-            <TableContainer component={Paper} elevation={3}>
-                <Table size="small" aria-label="a dense table">
-                    <TableBody>
-                        <TableRow>
-                            <TableCell align="left" sx={{ flexGrow: "1" }}>
-                                <TextField
-                                    sx={{ width: "100%" }}
-                                    value={props.SearchWord}
-                                    label="例: 城南町"
-                                    onChange={(e) =>
-                                        props.setSearch(e.target.value)
-                                    }
-                                ></TextField>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                    }}
-                                >
+            <Card
+                component={Paper}
+                elevation={3}
+                sx={{
+                    padding: "10px",
+                }}
+            >
+                <Typography variant="h4" align="left">
+                    案件を絞り込む
+                </Typography>
+                <TableContainer>
+                    <Table size="small" aria-label="a dense table">
+                        <TableBody>
+                            <TableRow>
+                                <TableCell align="left" sx={{ flexGrow: "1" }}>
+                                    <TextField
+                                        sx={{ width: "100%" }}
+                                        value={props.SearchWord}
+                                        label="例: 城南町"
+                                        onChange={(e) =>
+                                            props.setSearch(e.target.value)
+                                        }
+                                    ></TextField>
                                     <div
                                         style={{
-                                            flexGrow: "1",
                                             display: "flex",
                                             flexWrap: "wrap",
-                                            justifyContent: "space-between",
-                                            paddingRight: "5px",
                                         }}
                                     >
-                                        <div>
-                                            <Typography>
-                                                次の項目から検索:
-                                            </Typography>
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={props.ID}
-                                                        onChange={() =>
-                                                            props.setID(
-                                                                !props.setID,
-                                                            )
-                                                        }
-                                                    />
-                                                }
-                                                label="受付ID"
-                                            />
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={props.Address}
-                                                        onChange={() =>
-                                                            props.setAddress(
-                                                                !props.setAddress,
-                                                            )
-                                                        }
-                                                    />
-                                                }
-                                                label="住所"
-                                            />
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={props.Name}
-                                                        onChange={() =>
-                                                            props.setName(
-                                                                !props.setName,
-                                                            )
-                                                        }
-                                                    />
-                                                }
-                                                label="名前"
-                                            />
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={props.Note}
-                                                        onChange={() =>
-                                                            props.setNote(
-                                                                !props.setNote,
-                                                            )
-                                                        }
-                                                    />
-                                                }
-                                                label="概要"
-                                            />
-                                        </div>
-                                        <div>
-                                            <InputLabel id="demo-simple-select-label">
-                                                検索対象
-                                            </InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
-                                                value={props.Status}
-                                                onChange={props.setStatus}
-                                            >
-                                                <MenuItem value={"全て"}>
-                                                    全て
-                                                </MenuItem>
-                                                <MenuItem
-                                                    value={"ニーズ依頼調査"}
-                                                >
-                                                    ニーズ依頼調査
-                                                </MenuItem>
-                                                <MenuItem value={"貸し出し中"}>
-                                                    貸し出し中
-                                                </MenuItem>
-                                            </Select>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            //上下中央寄せ
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                        }}
-                                    >
-                                        <Button
-                                            sx={{
-                                                marginRight: "auto",
+                                        <div
+                                            style={{
+                                                flexGrow: "1",
+                                                display: "flex",
+                                                flexWrap: "wrap",
+                                                justifyContent: "space-between",
+                                                paddingRight: "5px",
                                             }}
-                                            onClick={() => {
-                                                props.setAddress(true);
-                                                props.setName(true);
-                                                props.setNote(true);
-                                                props.setStatus("全て");
-                                                props.setSearch("");
-                                            }}
-                                            variant="contained"
                                         >
-                                            リセット
-                                        </Button>
+                                            <div>
+                                                <Typography>
+                                                    次の項目から検索:
+                                                </Typography>
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            checked={props.ID}
+                                                            onChange={() =>
+                                                                props.setID(
+                                                                    !props.setID,
+                                                                )
+                                                            }
+                                                        />
+                                                    }
+                                                    label="受付ID"
+                                                />
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            checked={
+                                                                props.Address
+                                                            }
+                                                            onChange={() =>
+                                                                props.setAddress(
+                                                                    !props.setAddress,
+                                                                )
+                                                            }
+                                                        />
+                                                    }
+                                                    label="住所"
+                                                />
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            checked={props.Name}
+                                                            onChange={() =>
+                                                                props.setName(
+                                                                    !props.setName,
+                                                                )
+                                                            }
+                                                        />
+                                                    }
+                                                    label="名前"
+                                                />
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            checked={props.Note}
+                                                            onChange={() =>
+                                                                props.setNote(
+                                                                    !props.setNote,
+                                                                )
+                                                            }
+                                                        />
+                                                    }
+                                                    label="概要"
+                                                />
+                                            </div>
+                                            <div>
+                                                <FormControl
+                                                    sx={{
+                                                        m: 1,
+                                                        minWidth: 120,
+                                                        marginTop: "10px",
+                                                    }}
+                                                    size="small"
+                                                >
+                                                    <InputLabel id="demo-simple-select-label">
+                                                        検索対象
+                                                    </InputLabel>
+                                                    <Select
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={props.Status}
+                                                        onChange={
+                                                            props.setStatus
+                                                        }
+                                                    >
+                                                        <MenuItem
+                                                            value={"全て"}
+                                                        >
+                                                            全て
+                                                        </MenuItem>
+                                                        <MenuItem
+                                                            value={
+                                                                "ニーズ依頼調査"
+                                                            }
+                                                        >
+                                                            ニーズ依頼調査
+                                                        </MenuItem>
+                                                        <MenuItem
+                                                            value={"貸し出し中"}
+                                                        >
+                                                            貸し出し中
+                                                        </MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                //上下中央寄せ
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                            }}
+                                        >
+                                            <Button
+                                                sx={{
+                                                    marginRight: "auto",
+                                                }}
+                                                onClick={() => {
+                                                    props.setAddress(true);
+                                                    props.setName(true);
+                                                    props.setNote(true);
+                                                    props.setStatus("全て");
+                                                    props.setSearch("");
+                                                }}
+                                                variant="contained"
+                                            >
+                                                リセット
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </TableCell>
-                            {/* 
+                                </TableCell>
+                                {/* 
                             <TableCell align="left" sx={{ width: "70px" }}>
                                 <Button
                                     sx={{
@@ -439,10 +469,11 @@ function SearchWindow(props: SearchWindowProps) {
                                     検索
                                 </Button>
                             </TableCell> */}
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Card>
             <br />
         </>
     );

@@ -16,7 +16,6 @@ import {
     Modal,
     Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../Loader";
 import "./StockTable.css";
@@ -334,10 +333,10 @@ function StockTable_(props: StockTableProps) {
                         </TableCell>
 
                         <TableCell align="left">備考</TableCell>
-                        <TableCell
+                        {/* <TableCell
                             sx={{ width: "100px" }}
                             align="left"
-                        ></TableCell>
+                        ></TableCell> */}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -367,7 +366,7 @@ function StockTable_(props: StockTableProps) {
                                 %
                             </TableCell>
                             <TableCell align="left">{equip.note}</TableCell>
-                            <TableCell align="left">
+                            {/* <TableCell align="left">
                                 <Link
                                     component={RouterLink}
                                     underline="hover"
@@ -376,7 +375,7 @@ function StockTable_(props: StockTableProps) {
                                 >
                                     詳細情報
                                 </Link>
-                            </TableCell>
+                            </TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>
@@ -524,10 +523,10 @@ function StockTable_Manage_() {
                             </TableCell>
 
                             <TableCell align="left">備考</TableCell>
-                            <TableCell
+                            {/* <TableCell
                                 sx={{ width: "100px" }}
                                 align="left"
-                            ></TableCell>
+                            ></TableCell> */}
                             {/* isUpdateModeならこの後についか */}
 
                             <TableCell sx={{ width: "150px" }} align="left">
@@ -565,7 +564,7 @@ function StockTable_Manage_() {
                                     %
                                 </TableCell>
                                 <TableCell align="left">{equip.note}</TableCell>
-                                <TableCell align="left">
+                                {/* <TableCell align="left">
                                     <Link
                                         component={RouterLink}
                                         underline="hover"
@@ -574,7 +573,7 @@ function StockTable_Manage_() {
                                     >
                                         詳細情報
                                     </Link>
-                                </TableCell>
+                                </TableCell> */}
 
                                 {/* isUpdateModeならこの後についか */}
 
