@@ -852,7 +852,10 @@ type SelectableStockTableProps = {
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
-            <SelectableStockTable_ setVal={props.setVal} isDetermineLend={props.isDetermineLend} />
+            <SelectableStockTable_
+                setVal={props.setVal}
+                isDetermineLend={props.isDetermineLend}
+            />
         </Suspense>
     );
 }
