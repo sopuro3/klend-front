@@ -19,8 +19,8 @@ type NoticeData = {
     id: number;
     title: string;
     content: string;
-    created_at: string;
-    updated_at: string;
+    created_at: number;
+    updated_at: number;
 };
 
 type NoticeResponse = {
@@ -31,27 +31,28 @@ const dummyNoticeResponse: NoticeResponse = {
     notices: [
         {
             id: 1,
-            title: "重要なお知らせ",
+            title: "資機材個数の確認作業の実施のお知らせ",
             content:
-                "今週末はメンテナンス作業が行われます。ご迷惑をおかけいたしますが、ご理解とご協力をお願いいたします。",
-            created_at: "2023-01-15T10:30:00Z",
-            updated_at: "2023-01-15T10:30:00Z",
+                "次の日時にて、記録された資機材数と実際に所有する資機材数が正しく一致しているか確認する作業を行います。\n個数の確認を担当する職員は、各資機材の在庫数を担当者に報告してください。",
+            created_at: 1704980941495,
+            updated_at: 1704980941495,
         },
         {
             id: 2,
-            title: "新しい機材追加のお知らせ",
+            title: "セキュリティ意識向上キャンペーン実施中",
             content:
-                "新たにキャンプ用テントと寝袋が追加されました。ご利用の際は事前に予約をお願いいたします。",
-            created_at: "2023-02-01T14:45:00Z",
-            updated_at: "2023-02-01T14:45:00Z",
+                "ハッカーからの不正アクセスを防ぐには、一人ひとりのセキュリティ意識の向上も重要です。定期的にパスワードを変更し、不正アクセスを防ぎましょう。",
+
+            created_at: 1694980854259,
+            updated_at: 1694980854259,
         },
         {
             id: 3,
-            title: "重要な連絡事項",
+            title: "サービス開始のお知らせ",
             content:
-                "特定の機材が不足しており、ご返却いただける方がいればお知らせください。ご協力をお願いいたします。",
-            created_at: "2023-03-10T08:20:00Z",
-            updated_at: "2023-03-10T08:20:00Z",
+                "K-Lend(デモ)の運用を開始しました。以後よろしくお願いいたします。",
+            created_at: 1689980869495,
+            updated_at: 1689980869495,
         },
     ],
 };
@@ -59,7 +60,7 @@ const dummyNoticeResponse: NoticeResponse = {
 function _Notice() {
     useSuspenseQuery({
         queryKey: ["issue", dummyNoticeResponse],
-        queryFn: () => sleepWithValue(1300, dummyNoticeResponse),
+        queryFn: () => sleepWithValue(10, dummyNoticeResponse),
     });
 
     return (
@@ -70,7 +71,7 @@ function _Notice() {
                     <Card key={notice.id} component={Paper} elevation={3}>
                         <h3>{notice.title}</h3>
                         <p>{notice.content}</p>
-                        <p>{notice.created_at}</p>
+                        <p>{new Date(notice.created_at).toLocaleString()}</p>
                     </Card>
                 ))}
                 {dummyNoticeResponse.notices.length === 0 && (

@@ -7,7 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Page, lists } from "./reception/Recep_page.tsx";
 import ResponsiveAppBar from "./appbar/Appbar.tsx";
 import "./App.css";
-import BreadCrumb from "./reception/components/BreadCrumb.tsx";
+// import BreadCrumb from "./reception/components/BreadCrumb.tsx";
 import Error404 from "./pages/other/error/Error404.tsx";
 //@ts-expect-error:TS7017
 import App from "@/dashboard/App.jsx";
@@ -97,7 +97,7 @@ function getPages(Item: Page): JSX.Element[] {
                     path={Item.href}
                     element={
                         <>
-                            <BreadCrumb></BreadCrumb>
+                            {/* <BreadCrumb></BreadCrumb> */}
 
                             {Item.element}
                         </>

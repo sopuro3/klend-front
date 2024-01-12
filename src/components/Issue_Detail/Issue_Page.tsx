@@ -98,7 +98,7 @@ function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;
     /*const _ignore = */ useSuspenseQuery({
         queryKey: ["issue", id],
-        queryFn: () => sleepWithValue(1300, issueData),
+        queryFn: () => sleepWithValue(10, issueData),
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
