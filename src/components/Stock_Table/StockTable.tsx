@@ -223,6 +223,14 @@ type StockTableProps = {
 
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
+
+    //     //<ErrorBoundary fallback={<h2>Error!!!!</h2>}>
+    //   <Suspense fallback={<h1>Loading...</h1>}>
+    //   <Component />
+    // </Suspense>
+    // </ErrorBoundary>
+    //https://zenn.dev/renoa/articles/zenn-suspense-errorboundary
+
     return (
         <Suspense fallback={<Loader />}>
             <StockTable_ displayItems={displayItems} />
@@ -846,15 +854,19 @@ function StockTable_Manage_() {
 
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
+    latestVal?: EquipmentSuper;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
+    isReturn?: boolean;
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
             <SelectableStockTable_
                 setVal={props.setVal}
+                isReturn={props.isReturn}
                 isDetermineLend={props.isDetermineLend}
+                latestVal={props.latestVal}
             />
         </Suspense>
     );
@@ -883,6 +895,10 @@ type EquipmentTmpItem = {
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
+    const { setVal, isDetermineLend, isReturn, latestVal } = props;
+    if (latestVal) {
+        console.log("latestval", latestVal);
+    }
     const response = useSuspenseQuery({
         queryKey: ["selectableStockTable"],
         queryFn: () => sleepWithValue(10, responseItem),
@@ -890,8 +906,6 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     const rows = response.data.equipments;
 
     const items: EquipmentTmpItem[] = [];
-
-    const { setVal, isDetermineLend } = props;
 
     for (let i = 0; i < rows.length; i++) {
         const [count, setCount] = useState(rows[i].plannedQuantity);
@@ -969,18 +983,29 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
+
                             <TableCell
                                 align="left"
-                                sx={{ width: "120px" }}
+                                sx={{ width: "100px" }}
                                 className="sp_omission"
                             >
-                                {isDetermineLend
-                                    ? "推奨された個数"
-                                    : "現在の在庫数"}
+                                {isReturn ? "貸し出した個数" : "現在の在庫数"}
                             </TableCell>
 
+                            {isDetermineLend && (
+                                <TableCell
+                                    align="left"
+                                    sx={{ width: "140px" }}
+                                    className="sp_omission"
+                                >
+                                    初期調査での見積り
+                                </TableCell>
+                            )}
+
                             <TableCell align="left" sx={{ width: "200px" }}>
-                                貸出を希望する個数
+                                {!isReturn
+                                    ? "貸し出しを行う個数"
+                                    : "返却を行う個数"}
                             </TableCell>
 
                             <TableCell sx={{ width: "200px" }} align="left">
@@ -1006,6 +1031,14 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                 >
                                     {equip.currentQuantity}
                                 </TableCell>
+                                {isDetermineLend && (
+                                    <TableCell
+                                        align="right"
+                                        className="sp_omission"
+                                    >
+                                        {equip.plannedQuantity}
+                                    </TableCell>
+                                )}
                                 <TableCell
                                     align="left"
                                     sx={{ display: "flex" }}

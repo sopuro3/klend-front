@@ -33,10 +33,7 @@ export default function Delend_select() {
                     <WithoutWrapper_Issue rollupTitle={setTitle} />
                     <h3>資機材数の調整</h3>
 
-                    <SelectableStockTable
-                        isDetermineLend={true}
-                        setVal={setValue}
-                    />
+                    <SelectableStockTable isDetermineLend setVal={setValue} />
 
                     <div style={{ display: "flex" }}>
                         <Button
