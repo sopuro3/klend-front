@@ -1,6 +1,6 @@
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import DoneMark from "../../../../components/checkmark/Checkmark";
-import "./borrow_complete.css";
+import "../../../../components/checkmark/borrow_complete.css";
 import { Card, CardContent, Paper, Typography } from "@mui/material";
 
 export default function Borrow_complete() {

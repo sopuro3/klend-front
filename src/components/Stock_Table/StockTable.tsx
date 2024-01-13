@@ -859,6 +859,7 @@ type SelectableStockTableProps = {
     isDetermineLend?: boolean;
     isReturn?: boolean;
 };
+let isFirst = true;
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
@@ -965,6 +966,16 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
         }
         console.log(tmp);
         setVal(tmp);
+    }
+
+    //説明しよう！
+    //初回時は親の持つデータは空なので、そのまま確認を押すとたとえ貸出数確定とかでおススメ値が入っていても、
+    //それを無視して空のデータを送信してしまう。
+    //そこで、初回時は謎のデータに対して0を送信することで、
+    //無理やりSetValを実行させる
+    if (isFirst) {
+        isFirst = false;
+        setItem("fake-Item", 0);
     }
 
     return (

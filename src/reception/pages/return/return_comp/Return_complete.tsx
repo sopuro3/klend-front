@@ -1,5 +1,6 @@
 import DoneMark from "../../../../components/checkmark/Checkmark";
-import "./borrow_complete.css";
+import "../../../../components/checkmark/borrow_complete.css";
+
 // import { Card, CardContent, Typography } from "@mui/material";
 
 export default function Return_complete() {

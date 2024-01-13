@@ -66,6 +66,10 @@ const Manage_stock = Loadable(
     lazy(() => import("@/dashboard/views/manage_stock")),
 );
 
+const Determine_lend_done = Loadable(
+    lazy(() => import("@/dashboard/views/determine_lend_done")),
+);
+
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -201,6 +205,15 @@ const MainRoutes = {
                 {
                     path: "select/:id",
                     element: <Determine_select></Determine_select>,
+                },
+            ],
+        },
+        {
+            path: "determine_lend",
+            children: [
+                {
+                    path: "done/:id",
+                    element: <Determine_lend_done></Determine_lend_done>,
                 },
             ],
         },
