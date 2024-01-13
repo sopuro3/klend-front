@@ -110,6 +110,7 @@ function Issue(props: IssueProps) {
     const modalStyle = {
         position: "absolute",
         top: "50%",
+        borderRadius: "12px",
         left: "50%",
         transform: "translate(-50%, -50%)",
         width: 400,

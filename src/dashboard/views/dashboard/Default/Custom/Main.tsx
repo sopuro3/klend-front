@@ -10,7 +10,7 @@ export default function Main() {
         <>
             <PageTitle title="K-Lend ホーム" />
 
-            <MainCard_ts>
+            <MainCard_ts sx={{ minHeight: "400px" }}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna

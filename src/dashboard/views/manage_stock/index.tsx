@@ -11,6 +11,9 @@ export default function App() {
                 <h3>
                     注：この機能はシステムを担当する職員がPCから利用する想定です。
                 </h3>
+                <p>
+                    「管理在庫・貸出状況」はすべての職員が閲覧できるページ、このページはシステム管理用となるページです。
+                </p>
             </MainCard_ts>
             <br></br>
             <MainCard_ts>

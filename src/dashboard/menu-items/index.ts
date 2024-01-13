@@ -122,8 +122,6 @@ const menuItems = {
         },
         {
             id: "pages",
-            title: "Pages",
-            caption: "Pages Caption",
             type: "group",
             children: [
                 {
