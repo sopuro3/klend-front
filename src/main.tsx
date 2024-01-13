@@ -107,7 +107,9 @@ function getPages(Item: Page): JSX.Element[] {
         );
     }
 }
-
+if (!location.pathname.includes("/dashboard")) {
+    document.title = "久留米市資機材返却システム ( 開発版 )";
+}
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
         {location.pathname.includes("/dashboard") ? (
