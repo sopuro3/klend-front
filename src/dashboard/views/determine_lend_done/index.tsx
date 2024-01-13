@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import "./delend_done.css";
 import { useState } from "react";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
+import Print from "@/components/print/Print";
 
 export default function Borrow_complete() {
     const [done, setDone] = useState(false);
@@ -31,6 +32,9 @@ export default function Borrow_complete() {
                 <p>印刷後は、資機材の個数を変更することはできなくなります。</p>
                 <Button variant="contained">印刷を行う</Button>
             </MainCard_ts>
+
+            <h5>プリントプレビュー</h5>
+            <Print></Print>
         </>
     );
 }
