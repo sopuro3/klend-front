@@ -1,13 +1,19 @@
 .printArea * {
     background-color: white;
+    margin: 5mm;
 }
 
+.printArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
 .printParent {
-    min-width: 1040px;
+    width: 780px;
     text-align: left;
-   padding:5mm;
-    font-size: 1.3rem;
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 h2 {

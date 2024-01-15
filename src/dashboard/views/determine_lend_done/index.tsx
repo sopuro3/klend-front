@@ -2,7 +2,6 @@ import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 
 import "./../../../components/checkmark/borrow_complete.css";
 import DoneMark from "@/components/checkmark/Checkmark";
-import { Button } from "@mui/material";
 import "./delend_done.css";
 import { useState } from "react";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
@@ -84,13 +83,8 @@ export default function Borrow_complete() {
                     />
                 </div>
             )}
-            <MainCard_ts>
-                <p>このまま印刷を行うことも可能です。</p>
-                <p>印刷後は、資機材の個数を変更することはできなくなります。</p>
-                <Button variant="contained">印刷を行う</Button>
-            </MainCard_ts>
 
-            <h5>プリントプレビュー</h5>
+            <br />
 
             <Print issue={dummyData}></Print>
         </>

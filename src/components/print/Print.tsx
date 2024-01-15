@@ -4,6 +4,8 @@ import { useReactToPrint } from "react-to-print";
 import PrintExample from "./PrintContainer";
 import "./Printarea.css";
 import { detailIssue } from "@/API/API_interface_rewrite";
+import { Button, Card, Paper } from "@mui/material";
+import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 
 type PrintOrganizerProps = {
     issue: detailIssue;
@@ -56,23 +58,33 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
 
     return (
         <>
-            <div className="p-4">
-                <div className="flex justify-center">
-                    <div className="w-1/4">
-                        <button
-                            onClick={handlePrint}
-                            className={
-                                "w-full h-9 font-semibold rounded-medium border border-gray-darkest text-white bg-blue-500 hover:bg-indigo-700"
-                            }
-                        >
-                            印刷
-                        </button>
-                    </div>
-                </div>
-                <div className="printArea">
+            <MainCard_ts>
+                <>
+                    <p>
+                        印刷を行うと、それ以降は資機材の個数を変更することはできなくなります。
+                    </p>
+                    <p>
+                        ただし、内容の変更を伴わない印刷は何度でも可能であるほか、印刷までは資機材数の変更が可能です。
+                    </p>
+
+                    <Button onClick={handlePrint} variant="contained">
+                        印刷を行う
+                    </Button>
+                </>
+            </MainCard_ts>
+            <br />
+            <MainCard_ts className="printArea">
+                <h2>印刷プレビュー</h2>
+                <Card
+                    component={Paper}
+                    elevation={4}
+                    sx={{
+                        borderRadius: "0",
+                    }}
+                >
                     <PrintExample issue={issue} componentRef={componentRef} />
-                </div>
-            </div>
+                </Card>
+            </MainCard_ts>
         </>
     );
 };
