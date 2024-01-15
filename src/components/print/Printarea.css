@@ -2,9 +2,11 @@
     background-color: white;
 }
 
+
 .printParent {
     min-width: 1040px;
     text-align: left;
+   padding:5mm;
     font-size: 1.3rem;
 }
 

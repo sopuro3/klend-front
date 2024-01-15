@@ -15,7 +15,6 @@ interface Props {
     issue: detailIssue;
 }
 
-
 const StyledTableCell = styled(TableCell)(() => ({
     //全てに適用
     fontSize: "1.2rem",
@@ -51,7 +50,9 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                                 >
                                     受付ID
                                 </StyledTableCell>
-                                <StyledTableCell>{issue.issue.displayId}</StyledTableCell>
+                                <StyledTableCell>
+                                    {issue.issue.displayId}
+                                </StyledTableCell>
                             </TableRow>
                             <TableRow>
                                 <StyledTableCell
@@ -77,7 +78,9 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                                 >
                                     住所
                                 </StyledTableCell>
-                                <StyledTableCell>{issue.issue.address}</StyledTableCell>
+                                <StyledTableCell>
+                                    {issue.issue.address}
+                                </StyledTableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -197,7 +200,9 @@ function RowItem(rows: EquipmentItem[]) {
                 {" "}
                 <StyledTableCell align="left">{i}</StyledTableCell>
                 <StyledTableCell scope="row">{equip.name}</StyledTableCell>
-                <StyledTableCell align="left">{equip.plannedQuantity}</StyledTableCell>
+                <StyledTableCell align="left">
+                    {equip.plannedQuantity}
+                </StyledTableCell>
             </TableRow>,
         );
     }
