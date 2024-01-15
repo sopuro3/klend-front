@@ -80,7 +80,6 @@ export type IssueProps = {
     id: string;
 } & WithoutWrapper_IssueProps;
 
-
 const detailIssue: detailIssue = {
     issue: {
         address: "久留米市小森野1丁目1-1",
@@ -247,13 +246,13 @@ function Issue(props: IssueProps) {
                 </Card>
             </MainCard_ts>
             <br />
-            {data.issue.status === "finish" || data.issue.status === "survey" ? (
-        <></>
+            {data.issue.status === "finish" ||
+            data.issue.status === "survey" ? (
+                <></>
             ) : (
-                
                 <>
-                <InLend data={data}></InLend>
-            </>
+                    <InLend data={data}></InLend>
+                </>
             )}
             <Modal
                 open={open}
@@ -319,17 +318,15 @@ function Issue(props: IssueProps) {
 
 function InLend(props: { data: detailIssue }) {
     const { data } = props;
-    const msg = (
-        data.issue.status === "check" ? "資機材貸出数量の確定"
-        :"発注書の再印刷"
-    )
+    const msg =
+        data.issue.status === "check"
+            ? "資機材貸出数量の確定"
+            : "発注書の再印刷";
 
     return (
         <>
             <MainCard_ts>
-                <h2>
-                    {msg}
-                </h2>
+                <h2>{msg}</h2>
             </MainCard_ts>
             <br />
             <PrintOrganizer issue={data}></PrintOrganizer>
