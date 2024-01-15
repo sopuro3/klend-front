@@ -5,11 +5,13 @@ import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+import "./issuepage.css";
 import {
     Box,
     Button,
     Card,
     CardContent,
+    Divider,
     Link,
     Modal,
     Paper,
@@ -24,6 +26,9 @@ import {
     tableCellClasses,
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
+import { detailIssue } from "@/API/API_interface_rewrite";
+import { StockTable } from "../Stock_Table/StockTable";
+import PrintOrganizer from "../print/Print";
 
 export function IssuePage() {
     const { id } = useParams();
@@ -43,9 +48,8 @@ export function IssuePage() {
     return (
         <Suspense fallback={<PageLoader />}>
             <PageTitle title={`案件 #${id}`} backButton={{}} />
-            <MainCard_ts>
-                <Issue id={id} />
-            </MainCard_ts>
+
+            <Issue id={id} />
         </Suspense>
     );
 }
@@ -78,13 +82,76 @@ export type IssueProps = {
 
 export const issueData = {
     issue: {
-        adress: "久留米市小森野1丁目1-1",
+        address: "久留米市小森野1丁目1-1",
         name: "Jane Smith",
         id: "234e5678-e89b-12d3-a456-426614174002",
         displayId: "0002",
         status: "In Progress",
         note: "Another sample issue.",
     },
+};
+
+const detailIssue: detailIssue = {
+    issue: {
+        address: "久留米市小森野1丁目1-1",
+        name: "Jane Smith",
+        id: "234e5678-e89b-12d3-a456-426614174002",
+        displayId: "0002",
+        status: "In Progress",
+        note: "Another sample issue.",
+    },
+    equipments: [
+        {
+            name: "スコップ",
+            id: "a1b2c3d4-1111-2222-3333-123456789abc",
+            maxQuantity: 10,
+            currentQuantity: 5,
+            plannedQuantity: 0,
+            note: "",
+        },
+        {
+            name: "ハンマー",
+            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+            maxQuantity: 20,
+            currentQuantity: 15,
+            plannedQuantity: 5,
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+        },
+        {
+            name: "ドライバー",
+            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+            maxQuantity: 8,
+            plannedQuantity: 10,
+            currentQuantity: 3,
+            note: "これは装備アイテム3です。",
+        },
+        {
+            name: "ペンチ",
+            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+            maxQuantity: 25,
+            plannedQuantity: 3,
+            currentQuantity: 20,
+            note: "これは装備アイテム4です。",
+        },
+        // Add more dummy equipment items here
+        {
+            name: "ドリル",
+            id: "e5f6g7h8-5555-6666-7777-56789abcdefg",
+            maxQuantity: 12,
+            plannedQuantity: 8,
+            currentQuantity: 10,
+            note: "これは装備アイテム5です。",
+        },
+        {
+            name: "ノコギリ",
+            id: "f6g7h8i9-6666-7777-8888-6789abcdefghi",
+            maxQuantity: 15,
+            plannedQuantity: 5,
+            currentQuantity: 12,
+            note: "これは装備アイテム6です。",
+        },
+    ],
+    totalEquipments: 6,
 };
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -96,16 +163,17 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;
-    /*const _ignore = */ useSuspenseQuery({
+    const response = useSuspenseQuery({
         queryKey: ["issue", id],
-        queryFn: () => sleepWithValue(10, issueData),
+        queryFn: () => sleepWithValue(10, detailIssue),
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     //undefinedでなければ
-    if (rollupTitle) rollupTitle(issueData.issue.displayId);
+    if (rollupTitle) rollupTitle(response.data.issue.displayId);
+    const data = response.data;
 
     const modalStyle = {
         position: "absolute",
@@ -121,65 +189,81 @@ function Issue(props: IssueProps) {
 
     return (
         <>
-            <Card>
-                <CardContent sx={{ padding: 0 }}>
-                    <TableContainer
-                        sx={{ minWidth: "min(400px,100%)" }}
-                        component={Paper}
-                        elevation={1}
-                    >
-                        <Table
-                            className="single-row-table"
-                            aria-label="simple table"
-                        >
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell sx={{ width: 140 }}>
-                                        項目
-                                    </StyledTableCell>
-                                    <StyledTableCell>入力</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                <RowItem
-                                    name="案件ID"
-                                    value={issueData.issue.displayId}
-                                />
-                                <RowItem
-                                    name="被災宅の代表者名"
-                                    value={issueData.issue.name}
-                                />
-                                <RowItem
-                                    name="住所"
-                                    element={
-                                        <div style={{ display: "flex" }}>
-                                            <div>{issueData.issue.adress}</div>
+            <MainCard_ts>
+                <Card>
+                    <CardContent className="issueCard" sx={{ padding: 0 }}>
+                        <Typography variant="h2">案件の基本情報</Typography>
 
-                                            <Link
-                                                sx={{
-                                                    marginLeft: "auto",
-                                                }}
-                                                onClick={handleOpen}
-                                            >
-                                                Google Map
-                                            </Link>
-                                        </div>
-                                    }
-                                />
-                                <RowItem
-                                    name="ステータス"
-                                    value={issueData.issue.status}
-                                />
-                                <RowItem
-                                    name="備考"
-                                    value={issueData.issue.note}
-                                />
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
-            <br></br>
+                        <TableContainer
+                            sx={{ minWidth: "min(400px,100%)" }}
+                            component={Paper}
+                            elevation={1}
+                        >
+                            <Table
+                                className="single-row-table"
+                                aria-label="simple table"
+                            >
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell sx={{ width: 140 }}>
+                                            項目
+                                        </StyledTableCell>
+                                        <StyledTableCell>入力</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <RowItem
+                                        name="案件ID"
+                                        value={data.issue.displayId}
+                                    />
+                                    <RowItem
+                                        name="被災宅の代表者名"
+                                        value={data.issue.name}
+                                    />
+                                    <RowItem
+                                        name="住所"
+                                        element={
+                                            <div style={{ display: "flex" }}>
+                                                <div>{data.issue.address}</div>
+
+                                                <Link
+                                                    sx={{
+                                                        marginLeft: "auto",
+                                                    }}
+                                                    onClick={handleOpen}
+                                                >
+                                                    Google Map
+                                                </Link>
+                                            </div>
+                                        }
+                                    />
+                                    <RowItem
+                                        name="ステータス"
+                                        value={data.issue.status}
+                                    />
+                                    <RowItem
+                                        name="備考"
+                                        value={data.issue.note}
+                                    />
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <br />
+                        <Divider></Divider>
+                        <br />
+                        <Typography variant="h2">資機材情報</Typography>
+                        <StockTable displayItems={data.equipments}></StockTable>
+                    </CardContent>
+                </Card>
+            </MainCard_ts>
+            <br />
+            {data.issue.status === "In Progress" ? (
+                <>
+                    <InLend data={data}></InLend>
+                </>
+            ) : (
+                <></>
+            )}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -207,7 +291,7 @@ function Issue(props: IssueProps) {
                         Google Mapを開きます。{" "}
                     </Typography>
                     <Typography>
-                        案件の住所({issueData.issue.adress}
+                        案件の住所({data.issue.address}
                         )をそのまま検索するため、表記のミスやブレにより正しい場所が表示されない可能性があります。
                     </Typography>
                     <br></br>
@@ -229,7 +313,7 @@ function Issue(props: IssueProps) {
                                 handleClose();
                                 window.open(
                                     "https://www.google.com/maps/search/?api=1&query=" +
-                                        issueData.issue.adress,
+                                        data.issue.address,
                                 );
                             }}
                         >
@@ -238,6 +322,19 @@ function Issue(props: IssueProps) {
                     </div>
                 </Box>
             </Modal>
+        </>
+    );
+}
+
+function InLend(props: { data: detailIssue }) {
+    const { data } = props;
+    return (
+        <>
+            <MainCard_ts>
+                <h2>資機材貸出数量の確定</h2>
+            </MainCard_ts>
+            <br />
+            <PrintOrganizer issue={data}></PrintOrganizer>
         </>
     );
 }

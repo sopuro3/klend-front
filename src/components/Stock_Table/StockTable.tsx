@@ -275,11 +275,8 @@ function StockTable_(props: StockTableProps) {
                             >
                                 現在の在庫数
                             </TableCell>
-                            <TableCell
-                                align="left"
-                                sx={{ width: "100px", color: "red" }}
-                            >
-                                選択数
+                            <TableCell align="left" sx={{ width: "100px" }}>
+                                数量
                             </TableCell>
 
                             <TableCell align="left">備考</TableCell>

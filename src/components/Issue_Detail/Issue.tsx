@@ -79,7 +79,7 @@ export function Issue(props: IssueProps) {
                                     name="住所"
                                     element={
                                         <div style={{ display: "flex" }}>
-                                            <div>{issueData.issue.adress}</div>
+                                            <div>{issueData.issue.address}</div>
 
                                             <Link
                                                 sx={{
@@ -133,7 +133,7 @@ export function Issue(props: IssueProps) {
                         Google Mapを開きます。{" "}
                     </Typography>
                     <Typography>
-                        案件の住所({issueData.issue.adress}
+                        案件の住所({issueData.issue.address}
                         )をそのまま検索するため、表記のミスやブレにより正しい場所が表示されない可能性があります。
                     </Typography>
                     <br></br>
@@ -155,7 +155,7 @@ export function Issue(props: IssueProps) {
                                 handleClose();
                                 window.open(
                                     "https://www.google.com/maps/search/?api=1&query=" +
-                                        issueData.issue.adress,
+                                        issueData.issue.address,
                                 );
                             }}
                         >
