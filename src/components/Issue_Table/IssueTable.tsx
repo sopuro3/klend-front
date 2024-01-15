@@ -285,12 +285,16 @@ function Table_(props: IssueTableProps) {
                             <TableCell align="left" sx={{ width: "180px" }}>
                                 被災者の代表者名
                             </TableCell>
-                            <TableCell align="left">住所</TableCell>
+                            <TableCell align="left" sx={{ minWidth: "150px" }}>
+                                住所
+                            </TableCell>
 
-                            <TableCell align="left" sx={{ width: "180px" }}>
+                            <TableCell align="left" sx={{ width: "150px" }}>
                                 現在の状態
                             </TableCell>
-                            <TableCell align="left">概要</TableCell>
+                            <TableCell align="left" sx={{ minWidth: "150px" }}>
+                                概要
+                            </TableCell>
                             <TableCell
                                 align="left"
                                 sx={{ width: "100px" }}
@@ -352,6 +356,12 @@ function Table_(props: IssueTableProps) {
                                                 color: theme.palette.secondary
                                                     .light,
                                             }}
+                                            disabled={
+                                                !(
+                                                    issue.status === "survey" ||
+                                                    issue.status === "check"
+                                                )
+                                            }
                                             onClick={handleChange(issue)}
                                         >
                                             選択
