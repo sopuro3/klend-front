@@ -104,10 +104,10 @@ export function InfoInputTable() {
 
     const onCancel = () => {
         // setValueの値を初期化する
-        setValue({
-            equipmentsRequired: [],
-            equipmentswithQuantity: [],
-        });
+        // setValue({
+        //     equipmentsRequired: [],
+        //     equipmentswithQuantity: [],
+        // });
 
         setIsConfirm(false);
     };
@@ -120,7 +120,7 @@ export function InfoInputTable() {
     return (
         <>
             <FormProvider {...methods}>
-                {!isConfirm ? (
+                <div className={isConfirm ? "hide" : "visible"}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="survey">
                             <div>
@@ -163,7 +163,10 @@ export function InfoInputTable() {
                             </div>
                             <div>
                                 <h3>必要な資機材の見積り</h3>
-                                <SelectableStockTable setVal={setValue} />
+                                <SelectableStockTable
+                                    latestVal={value}
+                                    setVal={setValue}
+                                />
                                 <br></br>
                                 <Divider />
                                 <br></br>
@@ -183,90 +186,85 @@ export function InfoInputTable() {
                             </div>
                         </div>
                     </form>
-                ) : (
-                    <>
-                        <h3>確認</h3>
-                        <div className="survey">
-                            <p>
-                                以下の内容で間違えがないか、今一度ご確認ください。
-                            </p>
+                </div>
+                <div className={!isConfirm ? "hide" : "visible"}>
+                    <h3>確認</h3>
+                    <div className="survey">
+                        <p>
+                            以下の内容で間違えがないか、今一度ご確認ください。
+                        </p>
 
-                            <h3>案件の基本情報</h3>
+                        <h3>案件の基本情報</h3>
 
-                            <TableContainer
-                                sx={{ minWidth: "min(400px,100%)" }}
-                                component={Paper}
-                                elevation={1}
+                        <TableContainer
+                            sx={{ minWidth: "min(400px,100%)" }}
+                            component={Paper}
+                            elevation={1}
+                        >
+                            <Table
+                                className="single-row-table"
+                                aria-label="simple table"
                             >
-                                <Table
-                                    className="single-row-table"
-                                    aria-label="simple table"
-                                >
-                                    <TableHead>
-                                        <TableRow>
-                                            <StyledTableCell
-                                                sx={{ width: 200 }}
-                                            >
-                                                項目
-                                            </StyledTableCell>
-                                            <StyledTableCell>
-                                                入力
-                                            </StyledTableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <RowItem
-                                            isConfirm
-                                            row={rows[0]}
-                                            value={rollup.name}
-                                        />
-                                        <RowItem
-                                            isConfirm
-                                            row={rows[1]}
-                                            value={rollup.address}
-                                        />
-                                        <RowItem
-                                            isConfirm
-                                            multiline={true}
-                                            row={rows[2]}
-                                            value={rollup.note}
-                                        />
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                            <br></br>
-                            <Divider></Divider>
-                            <br></br>
-                            <StockTable
-                                displayItems={value.equipmentswithQuantity}
-                            />
-                            <br></br>
-                            <div style={{ display: "flex" }}>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        marginRight: "auto",
-                                        background: theme.palette.success.dark,
-                                    }}
-                                    onClick={onCancel}
-                                >
-                                    変更
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        marginLeft: "auto",
-                                        background: theme.palette.error.main,
-                                    }}
-                                    onClick={onSubmitConfirm}
-                                >
-                                    決定
-                                </Button>
-                            </div>
-                            {/* 決定と前に戻るボタンを作る */}
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell sx={{ width: 200 }}>
+                                            項目
+                                        </StyledTableCell>
+                                        <StyledTableCell>入力</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <RowItem
+                                        isConfirm
+                                        row={rows[0]}
+                                        value={rollup.name}
+                                    />
+                                    <RowItem
+                                        isConfirm
+                                        row={rows[1]}
+                                        value={rollup.address}
+                                    />
+                                    <RowItem
+                                        isConfirm
+                                        multiline={true}
+                                        row={rows[2]}
+                                        value={rollup.note}
+                                    />
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <br></br>
+                        <Divider></Divider>
+                        <br></br>
+                        <StockTable
+                            displayItems={value.equipmentswithQuantity}
+                        />
+                        <br></br>
+                        <div style={{ display: "flex" }}>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    marginRight: "auto",
+                                    background: theme.palette.success.dark,
+                                }}
+                                onClick={onCancel}
+                            >
+                                変更
+                            </Button>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    marginLeft: "auto",
+                                    background: theme.palette.error.main,
+                                }}
+                                onClick={onSubmitConfirm}
+                            >
+                                決定
+                            </Button>
                         </div>
-                    </>
-                )}
+                        {/* 決定と前に戻るボタンを作る */}
+                    </div>
+                </div>
             </FormProvider>
         </>
     );

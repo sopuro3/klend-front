@@ -1,0 +1,36 @@
+.parent-donemark {
+    transition: all 1s;
+    /* 4秒後からfadeOutを実行 */
+    animation: fadeOut 5s 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+}
+
+.fadeIn {
+    animation-name: fadeInAnime;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInAnime {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
