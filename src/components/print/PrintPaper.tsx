@@ -178,33 +178,27 @@ function StockTable_(props: StockTableProps) {
                     </StyledTableCell>
                 </TableRow>
             </TableHead>
-            <TableBody>{RowItem(rows)}</TableBody>
+            <TableBody>
+                {rows.map((equip, index) => (
+                    <TableRow
+                        key={equip.name}
+                        sx={{
+                            "&:last-child td, &:last-child th": {
+                                border: 0,
+                            },
+                        }}
+                    >
+                        {" "}
+                        <StyledTableCell align="left">{index}</StyledTableCell>
+                        <StyledTableCell scope="row">
+                            {equip.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                            {equip.plannedQuantity}
+                        </StyledTableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
         </Table>
     );
-}
-
-function RowItem(rows: EquipmentItem[]) {
-    //iが必要なのでmapではなくfor文を使う
-    const rowItems = [];
-    for (let i = 0; i < rows.length; i++) {
-        const equip = rows[i];
-        rowItems.push(
-            <TableRow
-                key={equip.name}
-                sx={{
-                    "&:last-child td, &:last-child th": {
-                        border: 0,
-                    },
-                }}
-            >
-                {" "}
-                <StyledTableCell align="left">{i}</StyledTableCell>
-                <StyledTableCell scope="row">{equip.name}</StyledTableCell>
-                <StyledTableCell align="left">
-                    {equip.plannedQuantity}
-                </StyledTableCell>
-            </TableRow>,
-        );
-    }
-    return rowItems;
 }
