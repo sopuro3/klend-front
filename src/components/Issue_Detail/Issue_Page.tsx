@@ -331,7 +331,7 @@ function InLend(props: { data: detailIssue }) {
     return (
         <>
             <MainCard_ts>
-                <h2>資機材貸出数量の確定</h2>
+                <h2>{data.issue.status === ""?"資機材貸出数量の確定":""}</h2>
             </MainCard_ts>
             <br />
             <PrintOrganizer issue={data}></PrintOrganizer>
