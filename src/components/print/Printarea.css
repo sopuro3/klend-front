@@ -1,12 +1,11 @@
 .printArea * {
     background-color: white;
-    margin: 5mm;
 }
 
 .printParent {
     min-width: 1040px;
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 h2 {

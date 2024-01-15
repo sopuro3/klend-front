@@ -30,6 +30,10 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
       tr    { break-inside:avoid; break-after:auto }
       td    { break-inside:avoid; break-after:auto }
     }
+
+    .printParent * {
+        margin: 5mm;
+    }
   `;
 
     /**

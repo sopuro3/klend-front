@@ -6,6 +6,7 @@ import {
     TableCell,
     TableBody,
     TableHead,
+    styled,
 } from "@mui/material";
 import { EquipmentItem } from "@/API/API_interface";
 
@@ -13,6 +14,12 @@ interface Props {
     componentRef: React.MutableRefObject<HTMLDivElement | null>;
     issue: detailIssue;
 }
+
+
+const StyledTableCell = styled(TableCell)(() => ({
+    //全てに適用
+    fontSize: "1.2rem",
+}));
 
 const PrintExample: React.FC<Props> = (props: Props) => {
     const { componentRef, issue } = props;
@@ -35,7 +42,7 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                     <Table size="small" sx={{ width: 450 }}>
                         <TableBody>
                             <TableRow>
-                                <TableCell
+                                <StyledTableCell
                                     sx={{
                                         width: 150,
                                         background: "#444!important",
@@ -43,11 +50,11 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                                     }}
                                 >
                                     受付ID
-                                </TableCell>
-                                <TableCell>{issue.issue.displayId}</TableCell>
+                                </StyledTableCell>
+                                <StyledTableCell>{issue.issue.displayId}</StyledTableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell
+                                <StyledTableCell
                                     sx={{
                                         width: 150,
                                         background: "#444!important",
@@ -55,13 +62,13 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                                     }}
                                 >
                                     受付日
-                                </TableCell>
-                                <TableCell>
+                                </StyledTableCell>
+                                <StyledTableCell>
                                     {new Date().toLocaleDateString()}
-                                </TableCell>
+                                </StyledTableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell
+                                <StyledTableCell
                                     sx={{
                                         width: 150,
                                         background: "#444!important",
@@ -69,8 +76,8 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                                     }}
                                 >
                                     住所
-                                </TableCell>
-                                <TableCell>{issue.issue.address}</TableCell>
+                                </StyledTableCell>
+                                <StyledTableCell>{issue.issue.address}</StyledTableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -135,7 +142,7 @@ function StockTable_(props: StockTableProps) {
         >
             <TableHead>
                 <TableRow>
-                    <TableCell
+                    <StyledTableCell
                         align="left"
                         sx={{
                             background: "#444!important",
@@ -144,8 +151,8 @@ function StockTable_(props: StockTableProps) {
                         }}
                     >
                         No.
-                    </TableCell>
-                    <TableCell
+                    </StyledTableCell>
+                    <StyledTableCell
                         align="left"
                         sx={{
                             background: "#444!important",
@@ -154,9 +161,9 @@ function StockTable_(props: StockTableProps) {
                         }}
                     >
                         資機材名
-                    </TableCell>
+                    </StyledTableCell>
 
-                    <TableCell
+                    <StyledTableCell
                         align="left"
                         sx={{
                             background: "#444!important",
@@ -165,7 +172,7 @@ function StockTable_(props: StockTableProps) {
                         className="sp_omission"
                     >
                         数量
-                    </TableCell>
+                    </StyledTableCell>
                 </TableRow>
             </TableHead>
             <TableBody>{RowItem(rows)}</TableBody>
@@ -188,9 +195,9 @@ function RowItem(rows: EquipmentItem[]) {
                 }}
             >
                 {" "}
-                <TableCell align="left">{i}</TableCell>
-                <TableCell scope="row">{equip.name}</TableCell>
-                <TableCell align="left">{equip.plannedQuantity}</TableCell>
+                <StyledTableCell align="left">{i}</StyledTableCell>
+                <StyledTableCell scope="row">{equip.name}</StyledTableCell>
+                <StyledTableCell align="left">{equip.plannedQuantity}</StyledTableCell>
             </TableRow>,
         );
     }
