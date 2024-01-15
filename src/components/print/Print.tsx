@@ -3,9 +3,15 @@ import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import PrintExample from "./PrintContainer";
 import "./Printarea.css";
-const PrintOrganizer: React.FC = () => {
-    const componentRef = useRef<HTMLDivElement | null>(null);
+import { detailIssue } from "@/API/API_interface_rewrite";
 
+type PrintOrganizerProps = {
+    issue: detailIssue;
+};
+
+const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
+    const componentRef = useRef<HTMLDivElement | null>(null);
+    const { issue } = props;
     /**
      * 印刷時のスタイル設定（印刷仕様に応じてスタイリングを調整します）
      *NOTE
@@ -60,7 +66,7 @@ const PrintOrganizer: React.FC = () => {
                     </div>
                 </div>
                 <div className="printArea">
-                    <PrintExample componentRef={componentRef} />
+                    <PrintExample issue={issue} componentRef={componentRef} />
                 </div>
             </div>
         </>
