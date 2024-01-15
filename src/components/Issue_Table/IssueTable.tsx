@@ -14,9 +14,10 @@ import {
     FormControlLabel,
     InputLabel,
     Link,
+    ListItemText,
     MenuItem,
+    OutlinedInput,
     Select,
-    SelectChangeEvent,
     TextField,
     Typography,
 } from "@mui/material";
@@ -35,7 +36,7 @@ const responseItem: FormResponse = {
             name: "久留米 太郎",
             id: "123e4567-e89b-12d3-a456-426614174001",
             displayId: "0001",
-            status: "ニーズ依頼調査",
+            status: "survey",
             note: "なし",
         },
         {
@@ -43,7 +44,7 @@ const responseItem: FormResponse = {
             name: "筑後 次郎",
             id: "234e5678-e89b-12d3-a456-426614174002",
             displayId: "0002",
-            status: "貸し出し中",
+            status: "confirm",
             note: "なし",
         },
         {
@@ -51,7 +52,7 @@ const responseItem: FormResponse = {
             name: "宝満 三郎",
             id: "32e0567-e89b-12d3-a456-426614174001",
             displayId: "0003",
-            status: "ニーズ依頼調査",
+            status: "check",
             note: "被害甚大、複数日の支援を要する可能性",
         },
         {
@@ -59,7 +60,7 @@ const responseItem: FormResponse = {
             name: "くるっぱ",
             id: "23235678-e89b-12d3-a456-426614174002",
             displayId: "0004",
-            status: "貸し出し中",
+            status: "return",
             note: "なし",
         },
         // Add more issues as needed
@@ -70,7 +71,28 @@ type IssueTableProps = {
     selectBtn?: boolean;
     setValue?: (issue: Issue) => void;
 };
-
+const statusMsg = [
+    {
+        key: "survey",
+        text: "ニーズ依頼調査",
+    },
+    {
+        key: "check",
+        text: "貸出数確定待ち",
+    },
+    {
+        key: "confirm",
+        text: "貸し出し中",
+    },
+    {
+        key: "return",
+        text: "未返却機材あり",
+    },
+    {
+        key: "finish",
+        text: "返却完了",
+    },
+];
 export default function IssueTable(props: IssueTableProps) {
     const { selectBtn, setValue } = props;
     return (
@@ -99,16 +121,32 @@ function Table_(props: IssueTableProps) {
     const [searchByAddress, setAddress] = useState(true);
     const [searchByname, setName] = useState(true);
     const [searchBynote, setNote] = useState(true);
-    const [filterByStatus, setStatus] = useState("全て");
     const [searchWord, setSearchWord] = useState("");
+    const [filterByStatusArray, setArrayStatus] = React.useState<string[]>([
+        "全て",
+    ]);
     const [searchById, setId] = useState(true);
-    const statusHandleChange = (event: SelectChangeEvent | string) => {
-        //stringなら
-        if (typeof event === "string") {
-            setStatus(event);
-        } else {
-            setStatus(event.target.value);
+    const statusHandleChange = (event: string[]) => {
+        if (event.indexOf("全て") > -1 && event.length > 1) {
+            event.splice(event.indexOf("全て"), 1);
+            //statusMsgから、eventに含まれていないものを抽出
+            const tmp = statusMsg.filter((item) => {
+                return event.indexOf(item.text) === -1;
+            });
+            setArrayStatus(tmp.map((item) => item.text));
+            return;
         }
+        //statusMsgから、eventに含まれていないものを抽出
+        const tmp = statusMsg.filter((item) => {
+            return event.indexOf(item.text) === -1;
+        });
+        //tmpの大きさが0なら、全てが選択されている
+        if (tmp.length === 0) {
+            setArrayStatus(["全て"]);
+            return;
+        }
+
+        setArrayStatus(event);
     };
 
     // console.log(`
@@ -165,25 +203,54 @@ function Table_(props: IssueTableProps) {
         .search(searchWord)
         .map((item) => item.item)
         .filter((item) => {
-            if (filterByStatus === "全て") {
+            // if (filterByStatus === "全て") {
+            //     return true;
+            // } else {
+            //     console.log(item.status);
+            //     return item.status === filterByStatus;
+            // }
+
+            if (filterByStatusArray.indexOf("全て") > -1) {
                 return true;
-            } else {
-                console.log(item.status);
-                return item.status === filterByStatus;
             }
+            return filterByStatusArray.indexOf(item.status) > -1;
         });
+
+    //ディープコピーする
+    let filterByStatusArray_convert = filterByStatusArray.concat();
+    //全てが選択されている時は、全ての案件を表示する
+    if (filterByStatusArray.indexOf("全て") != -1) {
+        //削除
+        filterByStatusArray_convert.splice(
+            filterByStatusArray.indexOf("全て"),
+            1,
+        );
+    }
+    const tmp = filterByStatusArray.map((item) => {
+        for (let i = 0; i < statusMsg.length; i++) {
+            if (statusMsg[i].text === item) {
+                return statusMsg[i].key;
+            }
+        }
+    });
+    filterByStatusArray_convert = tmp.filter((item) => {
+        return item != undefined;
+    }) as string[];
 
     // console.log(tmprow);
     //条件が初期状態で、tmprowが空の時は、全ての案件を表示する
-    if (searchWord === "" && filterByStatus === "全て") {
+    if (searchWord === "" && filterByStatusArray.includes("全て")) {
         tmprow = rows;
     } else if (searchWord === "") {
         tmprow = rows.filter((item) => {
-            if (filterByStatus === "全て") {
+            if (filterByStatusArray.includes("全て")) {
                 return true;
             } else {
-                console.log(item.status);
-                return item.status === filterByStatus;
+                if (filterByStatusArray_convert.includes(item.status)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
     }
@@ -199,7 +266,7 @@ function Table_(props: IssueTableProps) {
                 Note={searchBynote}
                 setSearch={search}
                 setStatus={statusHandleChange}
-                Status={filterByStatus}
+                Status={filterByStatusArray}
                 SearchWord={searchWord}
                 setID={setId}
                 ID={searchById}
@@ -254,7 +321,11 @@ function Table_(props: IssueTableProps) {
                                     {issue.adress}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {issue.status}
+                                    {statusMsg.map((item) => {
+                                        if (item.key === issue.status) {
+                                            return item.text;
+                                        }
+                                    })}
                                 </TableCell>
                                 <TableCell align="left">{issue.note}</TableCell>
                                 <TableCell align="left">
@@ -303,6 +374,15 @@ function Table_(props: IssueTableProps) {
         </>
     );
 }
+
+const MenuProps = {
+    PaperProps: {
+        style: {
+            width: 250,
+        },
+    },
+};
+
 type SearchWindowProps = {
     setID: React.Dispatch<React.SetStateAction<boolean>>;
     ID: boolean;
@@ -312,8 +392,10 @@ type SearchWindowProps = {
     Name: boolean;
     setNote: React.Dispatch<React.SetStateAction<boolean>>;
     Note: boolean;
-    setStatus: (event: SelectChangeEvent | string) => void;
-    Status: string;
+    setStatus: (event: string[]) => void;
+    // setStatus: (event: SelectChangeEvent | string[]) => void;
+    //
+    Status: string[];
     //Searchだけは関数
     setSearch: (searchWord: string) => void;
     SearchWord: string;
@@ -451,7 +533,7 @@ function SearchWindow(props: SearchWindowProps) {
                                                 />
                                             </div>
                                             <div>
-                                                <FormControl
+                                                {/* <FormControl
                                                     sx={{
                                                         m: 1,
                                                         minWidth: 120,
@@ -470,23 +552,83 @@ function SearchWindow(props: SearchWindowProps) {
                                                             props.setStatus
                                                         }
                                                     >
-                                                        <MenuItem
-                                                            value={"全て"}
-                                                        >
+                                                        <MenuItem value={"all"}>
                                                             全て
                                                         </MenuItem>
                                                         <MenuItem
-                                                            value={
-                                                                "ニーズ依頼調査"
-                                                            }
+                                                            value={"survey"}
                                                         >
                                                             ニーズ依頼調査
                                                         </MenuItem>
                                                         <MenuItem
-                                                            value={"貸し出し中"}
+                                                            value={"check"}
                                                         >
                                                             貸し出し中
                                                         </MenuItem>
+                                                    </Select>
+                                                </FormControl> */}
+                                                <FormControl
+                                                    sx={{ m: 1, width: 300 }}
+                                                >
+                                                    <InputLabel id="demo-multiple-checkbox-label">
+                                                        状態ごとに絞り込む
+                                                    </InputLabel>
+                                                    <Select
+                                                        labelId="demo-multiple-checkbox-label"
+                                                        id="demo-multiple-checkbox"
+                                                        multiple
+                                                        value={props.Status}
+                                                        onChange={(event) => {
+                                                            console.log(
+                                                                event!.target!
+                                                                    .value,
+                                                                "event",
+                                                            );
+                                                            props.setStatus(
+                                                                event!.target!
+                                                                    .value as string[],
+                                                            );
+                                                        }}
+                                                        input={
+                                                            <OutlinedInput label="状態ごとに絞り込む" />
+                                                        }
+                                                        renderValue={(
+                                                            selected,
+                                                        ) =>
+                                                            selected.join(", ")
+                                                        }
+                                                        MenuProps={MenuProps}
+                                                    >
+                                                        {statusMsg.map(
+                                                            (name) => (
+                                                                <MenuItem
+                                                                    key={
+                                                                        name.key
+                                                                    }
+                                                                    value={
+                                                                        name.text
+                                                                    }
+                                                                >
+                                                                    <Checkbox
+                                                                        checked={
+                                                                            props.Status.indexOf(
+                                                                                name.text,
+                                                                            ) >
+                                                                                -1 ||
+                                                                            props.Status.indexOf(
+                                                                                "全て",
+                                                                            ) >
+                                                                                -1
+                                                                        }
+                                                                    />
+                                                                    <ListItemText
+                                                                        primary={
+                                                                            name.text
+                                                                        }
+                                                                    />
+                                                                </MenuItem>
+                                                            ),
+                                                        )}
                                                     </Select>
                                                 </FormControl>
                                             </div>
@@ -509,8 +651,15 @@ function SearchWindow(props: SearchWindowProps) {
                                                     props.setName(true);
                                                     props.setNote(true);
                                                     props.setID(true);
-                                                    props.setStatus("全て");
+                                                    // props.setStatus("全て");
                                                     props.setSearch("");
+                                                    props.setStatus(
+                                                        statusMsg.map(
+                                                            (item) => {
+                                                                return item.text;
+                                                            },
+                                                        ),
+                                                    );
                                                 }}
                                                 variant="contained"
                                             >
