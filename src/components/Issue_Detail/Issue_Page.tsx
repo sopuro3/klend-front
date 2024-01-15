@@ -80,16 +80,6 @@ export type IssueProps = {
     id: string;
 } & WithoutWrapper_IssueProps;
 
-export const issueData = {
-    issue: {
-        address: "久留米市小森野1丁目1-1",
-        name: "Jane Smith",
-        id: "234e5678-e89b-12d3-a456-426614174002",
-        displayId: "0002",
-        status: "In Progress",
-        note: "Another sample issue.",
-    },
-};
 
 const detailIssue: detailIssue = {
     issue: {
@@ -97,7 +87,7 @@ const detailIssue: detailIssue = {
         name: "Jane Smith",
         id: "234e5678-e89b-12d3-a456-426614174002",
         displayId: "0002",
-        status: "In Progress",
+        status: "check",
         note: "Another sample issue.",
     },
     equipments: [
@@ -257,12 +247,13 @@ function Issue(props: IssueProps) {
                 </Card>
             </MainCard_ts>
             <br />
-            {data.issue.status === "In Progress" ? (
-                <>
-                    <InLend data={data}></InLend>
-                </>
+            {data.issue.status === "finish" || data.issue.status === "survey" ? (
+        <></>
             ) : (
-                <></>
+                
+                <>
+                <InLend data={data}></InLend>
+            </>
             )}
             <Modal
                 open={open}
@@ -328,10 +319,17 @@ function Issue(props: IssueProps) {
 
 function InLend(props: { data: detailIssue }) {
     const { data } = props;
+    const msg = (
+        data.issue.status === "check" ? "資機材貸出数量の確定"
+        :"発注書の再印刷"
+    )
+
     return (
         <>
             <MainCard_ts>
-                <h2>{data.issue.status === ""?"資機材貸出数量の確定":""}</h2>
+                <h2>
+                    {msg}
+                </h2>
             </MainCard_ts>
             <br />
             <PrintOrganizer issue={data}></PrintOrganizer>
