@@ -3,15 +3,12 @@ import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import ButtonBase from "@mui/material/ButtonBase";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { EventNote } from "@mui/icons-material";
 
 import Logo from "@/ui-component/Logo";
 
@@ -32,9 +29,9 @@ function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
+    // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorElNav(event.currentTarget);
+    // };
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -65,7 +62,7 @@ function ResponsiveAppBar() {
                             display: { xs: "flex", md: "none" },
                         }}
                     >
-                        <IconButton
+                        {/* <IconButton
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -74,7 +71,7 @@ function ResponsiveAppBar() {
                             color="inherit"
                         >
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -105,9 +102,7 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-                    <EventNote
-                        sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-                    />
+
                     <Typography
                         variant="h5"
                         noWrap

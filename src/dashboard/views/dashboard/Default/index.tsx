@@ -42,10 +42,10 @@ const Dashboard = () => {
             </Grid> */}
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={12} md={8}>
+                        <Grid item xs={12} lg={8}>
                             <Main />
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} lg={4}>
                             <Notice />
                         </Grid>
                     </Grid>
