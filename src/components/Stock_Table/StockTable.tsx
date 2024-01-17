@@ -495,10 +495,10 @@ function StockTable_Manage_() {
 
     function refreshbyTotal(number: number) {
         setAfterQuantity(number);
-        if(number - equipModal.currentQuantity >= 0){
+        if (number - equipModal.currentQuantity >= 0) {
             setIsPlus(true);
             setAdjustQuantity(number - equipModal.currentQuantity);
-        }else{
+        } else {
             setIsPlus(false);
             // number - equipModal.currentQuantityの値がマイナスになるので、絶対値をとる
             setAdjustQuantity(Math.abs(number - equipModal.currentQuantity));
@@ -507,15 +507,14 @@ function StockTable_Manage_() {
 
     function refreshbyAdjust(number: number) {
         setAdjustQuantity(number);
-        if(isPlus){
+        if (isPlus) {
             setAfterQuantity(equipModal.currentQuantity + number);
-        }else{
+        } else {
             setAfterQuantity(equipModal.currentQuantity - number);
         }
     }
 
     const [isConfirm, setIsConfirm] = useState(false);
-
 
     //調達か破棄か
     const [isPlus, setIsPlus] = useState(true);
@@ -713,21 +712,29 @@ function StockTable_Manage_() {
                                         <TableCell align="right">
                                             {equipModal.currentQuantity}
                                         </TableCell>
-                                        <TableCell sx={{display:"flex",alignItems:"center"}}>
+                                        <TableCell
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                            }}
+                                        >
                                             <FormControl>
-                                            
                                                 <RadioGroup
-                                                    value={isPlus ? "plus" : "minus"}
-                                                    sx={{width:"100px"}}
+                                                    value={
+                                                        isPlus
+                                                            ? "plus"
+                                                            : "minus"
+                                                    }
+                                                    sx={{ width: "100px" }}
                                                     name="radio-buttons-group"
                                                     onChange={(e) => {
-                                                        
                                                         setIsPlus(
                                                             e.target.value ===
                                                                 "plus",
                                                         );
-                                                        setAdjustQuantity(adjustQuantity)
-                                                    
+                                                        setAdjustQuantity(
+                                                            adjustQuantity,
+                                                        );
                                                     }}
                                                 >
                                                     <FormControlLabel
@@ -740,7 +747,6 @@ function StockTable_Manage_() {
                                                         control={<Radio />}
                                                         label="破棄"
                                                     />
-
                                                 </RadioGroup>
                                             </FormControl>
                                             <TextField
@@ -749,11 +755,9 @@ function StockTable_Manage_() {
                                                     e.target.value =
                                                         e.target.value.replace(
                                                             //これは正規表現やねん
-                                                            //eslint-disable-next-line no-useless-escape
                                                             /[^A-Z0-9]/g,
                                                             "",
                                                         );
-                   
 
                                                     refreshbyAdjust(
                                                         Number(e.target.value),
