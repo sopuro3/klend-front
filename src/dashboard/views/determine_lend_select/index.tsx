@@ -10,6 +10,9 @@ import { Button, useTheme } from "@mui/material";
 import { useState } from "react";
 import "./lend.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { detailIssueDummy } from "@/components/Issue_Detail/detailIssue";
 
 export default function Delend_select() {
     const theme = useTheme();
@@ -19,7 +22,14 @@ export default function Delend_select() {
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+    const response = useSuspenseQuery({
+        queryKey: ["issue", id],
+        queryFn: () => sleepWithValue(1390, detailIssueDummy),
+    });
 
+    // let POSTData
+
+    console.log(response.data);
     const onSubmit = () => {
         setIsConfirm(true);
     };
@@ -27,9 +37,22 @@ export default function Delend_select() {
         setIsConfirm(false);
     };
     const onSubmitConfirm = () => {
-        console.log(value.equipmentsRequired);
-        //こいつと基本情報を投げる
-        console.log("id", id);
+        console.log("value", value);
+
+        const equipments = value.equipmentsRequired.map((item) => {
+            return {
+                equipmentId: item.id,
+                plannedQuantity: item.quantity,
+            };
+        });
+
+        const res = {
+            issue: response.data.issue,
+            equipments: equipments,
+        };
+
+        //あとはこれを投げるだけ
+        console.log("res", res, "\nid", id);
 
         navigate("/determine_lend/done/" + id);
     };
@@ -46,9 +69,11 @@ export default function Delend_select() {
             <MainCard_ts>
                 <div className="survey">
                     <div className={isConfirm ? "hide" : "visible"}>
-                        <h3>案件の基本情報</h3>
-                        <WithoutWrapper_Issue rollupTitle={setTitle} />
-                        <h3>資機材数の調整</h3>
+                        <WithoutWrapper_Issue
+                            isneedEquip
+                            rollupTitle={setTitle}
+                        />
+                        <h2>資機材数の調整</h2>
 
                         <SelectableStockTable
                             isDetermineLend
@@ -74,7 +99,10 @@ export default function Delend_select() {
                         <p>
                             以下の内容で間違えがないか、今一度ご確認ください。
                         </p>
-                        <WithoutWrapper_Issue rollupTitle={setTitle} />
+                        <WithoutWrapper_Issue
+                            isneedEquip
+                            rollupTitle={setTitle}
+                        />
 
                         <StockTable
                             displayItems={value.equipmentswithQuantity}

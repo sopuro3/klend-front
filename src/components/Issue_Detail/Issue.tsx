@@ -17,7 +17,8 @@ import {
     Typography,
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
-import { IssueProps, issueData, StyledTableCell, RowItem } from "./Issue_Page";
+import { IssueProps, StyledTableCell, RowItem } from "./Issue_Page";
+import { detailIssueDummy as issueData } from "./detailIssue";
 
 export function Issue(props: IssueProps) {
     const { id, rollupTitle } = props;

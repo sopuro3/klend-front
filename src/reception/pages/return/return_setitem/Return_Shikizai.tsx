@@ -1,7 +1,18 @@
-import { CallTable } from "@/components/shikizai-table/Shikizai_Table";
+import { EquipmentSuper } from "@/API/Data_manage";
+import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 export default function 返却フォームの資機材入力画面() {
+    const [value, setValue] = useState<EquipmentSuper>({
+        equipmentsRequired: [],
+        equipmentswithQuantity: [],
+    });
+
+    const handleSubmit = () => {
+        console.log(value);
+    };
+
     return (
         <>
             <h3>返却した資機材の数量確認</h3>
@@ -10,14 +21,10 @@ export default function 返却フォームの資機材入力画面() {
             </p>
             <p>ここにテーブルコンポーネントが入ります</p>
 
-            <CallTable></CallTable>
+            <SelectableStockTable isReturn setVal={setValue} />
 
             <div style={{ display: "flex" }}>
-                <Button
-                    variant="contained"
-                    href="/reception/return/done"
-                    sx={{ marginLeft: "auto" }}
-                >
+                <Button onClick={handleSubmit} sx={{ marginLeft: "auto" }}>
                     送信
                 </Button>
             </div>

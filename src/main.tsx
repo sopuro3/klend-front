@@ -127,26 +127,30 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 function ForGeneral() {
     return (
         <>
-            <div>
-                <BrowserRouter>
-                    <ResponsiveAppBar></ResponsiveAppBar>
+            <QueryClientProvider client={queryClient}>
+                <Provider store={store}>
+                    <div>
+                        <BrowserRouter>
+                            <ResponsiveAppBar></ResponsiveAppBar>
 
-                    <div className="main">
-                        <Routes>
-                            {lists.map((Item: Page) => {
-                                return getPages(Item);
-                            })}
+                            <div className="main">
+                                <Routes>
+                                    {lists.map((Item: Page) => {
+                                        return getPages(Item);
+                                    })}
 
-                            <Route
-                                path="*"
-                                element={Error404({
-                                    pathname: location.pathname,
-                                })}
-                            />
-                        </Routes>
+                                    <Route
+                                        path="*"
+                                        element={Error404({
+                                            pathname: location.pathname,
+                                        })}
+                                    />
+                                </Routes>
+                            </div>
+                        </BrowserRouter>
                     </div>
-                </BrowserRouter>
-            </div>
+                </Provider>
+            </QueryClientProvider>
         </>
     );
 }
