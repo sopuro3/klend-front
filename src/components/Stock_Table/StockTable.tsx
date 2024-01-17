@@ -536,6 +536,7 @@ function StockTable_Manage_() {
         borderRadius: "12px",
         boxShadow: 24,
         p: 4,
+        width: "min(100%,600px)",
     };
 
     function moveConfirm() {
@@ -670,7 +671,6 @@ function StockTable_Manage_() {
                 onClose={cancelModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-                sx={{ width: "100%" }}
             >
                 {!isConfirm ? (
                     <Box sx={modalStyle} className="classmodal">
@@ -694,7 +694,7 @@ function StockTable_Manage_() {
 
                         <h4>選択した資機材:{equipModal.name}</h4>
 
-                        <div style={{ containerType: "inline-size" }}>
+                        <div>
                             <h4 className="miniDisplay">
                                 現在の資器材個数: {equipModal.currentQuantity}
                             </h4>
@@ -703,12 +703,12 @@ function StockTable_Manage_() {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell
-                                                sx={{ width: "150px" }}
+                                                sx={{ width: "110px" }}
                                                 className="miniOmmit"
                                             >
                                                 現在の資機材個数
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell sx={{ width: "150px" }}>
                                                 調達・破棄する個数
                                             </TableCell>
                                             <TableCell>
@@ -725,6 +725,7 @@ function StockTable_Manage_() {
                                             <TableCell
                                                 sx={{
                                                     display: "flex",
+                                                    flexGrow: 1,
                                                     alignItems: "center",
                                                 }}
                                             >
@@ -761,6 +762,7 @@ function StockTable_Manage_() {
                                                     </RadioGroup>
                                                 </FormControl>
                                                 <TextField
+                                                    sx={{ width: "100px" }}
                                                     value={adjustQuantity}
                                                     onChange={(e) => {
                                                         e.target.value =
@@ -778,10 +780,10 @@ function StockTable_Manage_() {
                                                     }}
                                                 ></TextField>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell sx={{ width: 100 }}>
                                                 <TextField
                                                     autoFocus={true}
-                                                    sx={{ width: "100%" }}
+                                                    sx={{ width: "100px" }}
                                                     onKeyDown={(e) => {
                                                         if (e.key === "Enter") {
                                                             moveConfirm();
@@ -915,7 +917,7 @@ function StockTable_Manage_() {
                                                 <span
                                                     style={{
                                                         color:
-                                                            adjustQuantity >= 0
+                                                            isPlus === true
                                                                 ? "green"
                                                                 : "red",
                                                     }}
@@ -923,9 +925,9 @@ function StockTable_Manage_() {
                                                     {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
                                                     {adjustQuantity === 0
                                                         ? "±"
-                                                        : adjustQuantity > 0
+                                                        : isPlus
                                                         ? "+"
-                                                        : ""}
+                                                        : "-"}
                                                     {adjustQuantity}
                                                 </span>
                                                 )
