@@ -19,6 +19,7 @@ import {
     OutlinedInput,
     Select,
     TextField,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -347,25 +348,42 @@ function Table_(props: IssueTableProps) {
                                         align="left"
                                         sx={{ width: "100px" }}
                                     >
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor:
-                                                    theme.palette.secondary
-                                                        .dark,
-                                                color: theme.palette.secondary
-                                                    .light,
-                                            }}
-                                            disabled={
+                                        <Tooltip
+                                            title={
                                                 !(
                                                     issue.status === "survey" ||
                                                     issue.status === "check"
                                                 )
+                                                    ? "この案件は既に貸出数確定が行われているので、選択できません。"
+                                                    : ""
                                             }
-                                            onClick={handleChange(issue)}
                                         >
-                                            選択
-                                        </Button>
+                                            <span>
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        backgroundColor:
+                                                            theme.palette
+                                                                .secondary.dark,
+                                                        color: theme.palette
+                                                            .secondary.light,
+                                                    }}
+                                                    disabled={
+                                                        !(
+                                                            issue.status ===
+                                                                "survey" ||
+                                                            issue.status ===
+                                                                "check"
+                                                        )
+                                                    }
+                                                    onClick={handleChange(
+                                                        issue,
+                                                    )}
+                                                >
+                                                    選択
+                                                </Button>
+                                            </span>
+                                        </Tooltip>
                                     </TableCell>
                                 )}
                             </TableRow>
