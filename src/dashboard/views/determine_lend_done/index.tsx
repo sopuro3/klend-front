@@ -86,7 +86,7 @@ export default function Borrow_complete() {
 
             <br />
 
-            <Print issue={dummyData}></Print>
+            <Print needequipTable issue={dummyData}></Print>
         </>
     );
 }
