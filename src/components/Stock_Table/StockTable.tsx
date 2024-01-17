@@ -532,7 +532,6 @@ function StockTable_Manage_() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-
         bgcolor: "background.paper",
         borderRadius: "12px",
         boxShadow: 24,
@@ -671,9 +670,10 @@ function StockTable_Manage_() {
                 onClose={cancelModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                sx={{ width: "100%" }}
             >
                 {!isConfirm ? (
-                    <Box sx={modalStyle}>
+                    <Box sx={modalStyle} className="classmodal">
                         <div style={{ display: "flex" }}>
                             <Typography
                                 id="modal-modal-title"
@@ -694,137 +694,159 @@ function StockTable_Manage_() {
 
                         <h4>選択した資機材:{equipModal.name}</h4>
 
-                        <TableContainer component={Paper} elevation={3}>
-                            <Table>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell sx={{ width: "150px" }}>
-                                            現在の資機材個数
-                                        </TableCell>
-                                        <TableCell>
-                                            調達・破棄する個数
-                                        </TableCell>
-                                        <TableCell>
-                                            変更後の資機材個数
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell align="right">
-                                            {equipModal.currentQuantity}
-                                        </TableCell>
-                                        <TableCell
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormControl>
-                                                <RadioGroup
-                                                    value={
-                                                        isPlus
-                                                            ? "plus"
-                                                            : "minus"
-                                                    }
-                                                    sx={{ width: "100px" }}
-                                                    name="radio-buttons-group"
+                        <div style={{ containerType: "inline-size" }}>
+                            <h4 className="miniDisplay">
+                                現在の資器材個数: {equipModal.currentQuantity}
+                            </h4>
+                            <TableContainer component={Paper} elevation={3}>
+                                <Table>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell
+                                                sx={{ width: "150px" }}
+                                                className="miniOmmit"
+                                            >
+                                                現在の資機材個数
+                                            </TableCell>
+                                            <TableCell>
+                                                調達・破棄する個数
+                                            </TableCell>
+                                            <TableCell>
+                                                変更後の資機材個数
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell
+                                                align="right"
+                                                className="miniOmmit"
+                                            >
+                                                {equipModal.currentQuantity}
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                }}
+                                            >
+                                                <FormControl>
+                                                    <RadioGroup
+                                                        value={
+                                                            isPlus
+                                                                ? "plus"
+                                                                : "minus"
+                                                        }
+                                                        sx={{ width: "100px" }}
+                                                        name="radio-buttons-group"
+                                                        onChange={(e) => {
+                                                            setIsPlus(
+                                                                e.target
+                                                                    .value ===
+                                                                    "plus",
+                                                            );
+                                                            setAdjustQuantity(
+                                                                adjustQuantity,
+                                                            );
+                                                        }}
+                                                    >
+                                                        <FormControlLabel
+                                                            value="plus"
+                                                            control={<Radio />}
+                                                            label="調達"
+                                                        />
+                                                        <FormControlLabel
+                                                            value="minus"
+                                                            control={<Radio />}
+                                                            label="破棄"
+                                                        />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <TextField
+                                                    value={adjustQuantity}
                                                     onChange={(e) => {
-                                                        setIsPlus(
-                                                            e.target.value ===
-                                                                "plus",
-                                                        );
-                                                        setAdjustQuantity(
-                                                            adjustQuantity,
+                                                        e.target.value =
+                                                            e.target.value.replace(
+                                                                //これは正規表現やねん
+                                                                /[^A-Z0-9]/g,
+                                                                "",
+                                                            );
+
+                                                        refreshbyAdjust(
+                                                            Number(
+                                                                e.target.value,
+                                                            ),
                                                         );
                                                     }}
-                                                >
-                                                    <FormControlLabel
-                                                        value="plus"
-                                                        control={<Radio />}
-                                                        label="調達"
-                                                    />
-                                                    <FormControlLabel
-                                                        value="minus"
-                                                        control={<Radio />}
-                                                        label="破棄"
-                                                    />
-                                                </RadioGroup>
-                                            </FormControl>
-                                            <TextField
-                                                value={adjustQuantity}
-                                                onChange={(e) => {
-                                                    e.target.value =
-                                                        e.target.value.replace(
-                                                            //これは正規表現やねん
-                                                            /[^A-Z0-9]/g,
-                                                            "",
-                                                        );
+                                                ></TextField>
+                                            </TableCell>
+                                            <TableCell>
+                                                <TextField
+                                                    autoFocus={true}
+                                                    sx={{ width: "100%" }}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === "Enter") {
+                                                            moveConfirm();
+                                                        }
+                                                    }}
+                                                    value={afterQuantity}
+                                                    onChange={(e) => {
+                                                        const value =
+                                                            e.target.value;
 
-                                                    refreshbyAdjust(
-                                                        Number(e.target.value),
-                                                    );
-                                                }}
-                                            ></TextField>
-                                        </TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                autoFocus={true}
-                                                sx={{ width: "100%" }}
-                                                onKeyDown={(e) => {
-                                                    if (e.key === "Enter") {
-                                                        moveConfirm();
-                                                    }
-                                                }}
-                                                value={afterQuantity}
-                                                onChange={(e) => {
-                                                    const value =
-                                                        e.target.value;
+                                                        //valueがNaNになってしまったら0にする
+                                                        if (
+                                                            isNaN(Number(value))
+                                                        ) {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity: 0,
+                                                                    };
+                                                                },
+                                                            );
+                                                            return;
+                                                        }
 
-                                                    //valueがNaNになってしまったら0にする
-                                                    if (isNaN(Number(value))) {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
-                                                        );
-                                                        return;
-                                                    }
+                                                        if (value === "") {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity: 0,
+                                                                    };
+                                                                },
+                                                            );
+                                                        } else {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity:
+                                                                            parseInt(
+                                                                                value,
+                                                                            ),
+                                                                    };
+                                                                },
+                                                            );
+                                                        }
 
-                                                    if (value === "") {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
+                                                        refreshbyTotal(
+                                                            Number(value),
                                                         );
-                                                    } else {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity:
-                                                                        parseInt(
-                                                                            value,
-                                                                        ),
-                                                                };
-                                                            },
-                                                        );
-                                                    }
-
-                                                    refreshbyTotal(
-                                                        Number(value),
-                                                    );
-                                                }}
-                                            ></TextField>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                                                    }}
+                                                ></TextField>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
                         <br></br>
                         <div style={{ display: "flex" }}>
                             <Button

@@ -596,7 +596,9 @@ function SearchWindow(props: SearchWindowProps) {
                                                     </Select>
                                                 </FormControl> */}
                                                 <FormControl
-                                                    sx={{ m: 1, width: 300 }}
+                                                    sx={{
+                                                        width: 200,
+                                                    }}
                                                 >
                                                     <InputLabel id="demo-multiple-checkbox-label">
                                                         状態ごとに絞り込む

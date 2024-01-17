@@ -20,3 +20,17 @@
         width: 50px;
     }
 }
+
+.miniDisplay {
+    display: none;
+}
+
+@container (max-width:500px) {
+    .miniOmmit {
+        display: none;
+    }
+
+    .miniDisplay {
+        display: block;
+    }
+}
