@@ -283,14 +283,14 @@ function Table_(props: IssueTableProps) {
                             <TableCell align="left" sx={{ width: "80px" }}>
                                 受付ID
                             </TableCell>
-                            <TableCell align="left" sx={{ width: "180px" }}>
+                            <TableCell align="left" sx={{ minWidth: "130px" }}>
                                 被災者の代表者名
                             </TableCell>
                             <TableCell align="left" sx={{ minWidth: "150px" }}>
                                 住所
                             </TableCell>
 
-                            <TableCell align="left" sx={{ width: "150px" }}>
+                            <TableCell align="left" sx={{ minWidth: "130px" }}>
                                 現在の状態
                             </TableCell>
                             <TableCell align="left" sx={{ minWidth: "150px" }}>
@@ -598,6 +598,7 @@ function SearchWindow(props: SearchWindowProps) {
                                                 <FormControl
                                                     sx={{
                                                         width: 200,
+                                                        marginTop: "10px",
                                                     }}
                                                 >
                                                     <InputLabel id="demo-multiple-checkbox-label">

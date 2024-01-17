@@ -696,7 +696,33 @@ function StockTable_Manage_() {
 
                         <div>
                             <h4 className="miniDisplay">
-                                現在の資器材個数: {equipModal.currentQuantity}
+                                現在の資器材個数:{" "}
+                                <span style={{ fontSize: "1.3rem" }}>
+                                    {equipModal.currentQuantity}
+                                </span>
+                            </h4>
+                            <h4 className="miniDisplay">
+                                変更後の資機材個数:{" "}
+                                <span style={{ fontSize: "1.3rem" }}>
+                                    {equipModal.currentQuantity}
+                                    <span
+                                        style={{
+                                            color:
+                                                isPlus === true
+                                                    ? "green"
+                                                    : "red",
+                                        }}
+                                    >
+                                        {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
+                                        {adjustQuantity === 0
+                                            ? "±"
+                                            : isPlus
+                                            ? "+"
+                                            : "-"}
+                                        {adjustQuantity}
+                                    </span>
+                                    <span>={afterQuantity}</span>
+                                </span>
                             </h4>
                             <TableContainer component={Paper} elevation={3}>
                                 <Table>
@@ -719,8 +745,28 @@ function StockTable_Manage_() {
                                             <TableCell
                                                 align="right"
                                                 className="miniOmmit"
+                                                sx={{
+                                                    fontSize: "1.3rem",
+                                                }}
                                             >
-                                                {equipModal.currentQuantity}
+                                                {equipModal.currentQuantity}(
+                                                <span
+                                                    style={{
+                                                        color:
+                                                            isPlus === true
+                                                                ? "green"
+                                                                : "red",
+                                                    }}
+                                                >
+                                                    {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
+                                                    {adjustQuantity === 0
+                                                        ? "±"
+                                                        : isPlus
+                                                        ? "+"
+                                                        : "-"}
+                                                    {adjustQuantity}
+                                                </span>
+                                                )
                                             </TableCell>
                                             <TableCell
                                                 sx={{
