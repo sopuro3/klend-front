@@ -11,9 +11,13 @@ import { EquipmentItem_withQuantity, EquipmentSuper } from "@/API/Data_manage";
 import {
     Box,
     Button,
+    FormControl,
+    FormControlLabel,
     IconButton,
     Link,
     Modal,
+    Radio,
+    RadioGroup,
     Tooltip,
     Typography,
 } from "@mui/material";
@@ -24,6 +28,7 @@ import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import { GETAPI_equipment } from "@/API/API_interface_rewrite";
 const responseItem: Equipment = {
     equipments: [
         {
@@ -77,7 +82,54 @@ const responseItem: Equipment = {
         },
     ],
 };
-
+const GETequipmentItem: GETAPI_equipment = {
+    equipments: [
+        {
+            name: "スコップ",
+            id: "a1b2c3d4-1111-2222-3333-123456789abc",
+            maxQuantity: 10,
+            currentQuantity: 5,
+            note: "",
+        },
+        {
+            name: "ハンマー",
+            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+            maxQuantity: 20,
+            currentQuantity: 15,
+            note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
+        },
+        {
+            name: "ドライバー",
+            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+            maxQuantity: 8,
+            currentQuantity: 3,
+            note: "これは装備アイテム3です。",
+        },
+        {
+            name: "ペンチ",
+            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+            maxQuantity: 25,
+            currentQuantity: 20,
+            note: "これは装備アイテム4です。",
+        },
+        // Add more dummy equipment items here
+        {
+            name: "ドリル",
+            id: "e5f6g7h8-5555-6666-7777-56789abcdefg",
+            maxQuantity: 12,
+            currentQuantity: 10,
+            note: "これは装備アイテム5です。",
+        },
+        {
+            name: "ノコギリ",
+            id: "f6g7h8i9-6666-7777-8888-6789abcdefghi",
+            maxQuantity: 15,
+            currentQuantity: 12,
+            note: "これは装備アイテム6です。",
+        },
+    ],
+    totalEquipments: 6,
+};
 // const responseItem: Equipment = {
 //     equipments: [
 //         {
@@ -443,15 +495,30 @@ function StockTable_Manage_() {
 
     function refreshbyTotal(number: number) {
         setAfterQuantity(number);
-        setAdjustQuantity(number - equipModal.currentQuantity);
+        if(number - equipModal.currentQuantity >= 0){
+            setIsPlus(true);
+            setAdjustQuantity(number - equipModal.currentQuantity);
+        }else{
+            setIsPlus(false);
+            // number - equipModal.currentQuantityの値がマイナスになるので、絶対値をとる
+            setAdjustQuantity(Math.abs(number - equipModal.currentQuantity));
+        }
     }
 
     function refreshbyAdjust(number: number) {
         setAdjustQuantity(number);
-        setAfterQuantity(equipModal.currentQuantity + number);
+        if(isPlus){
+            setAfterQuantity(equipModal.currentQuantity + number);
+        }else{
+            setAfterQuantity(equipModal.currentQuantity - number);
+        }
     }
 
     const [isConfirm, setIsConfirm] = useState(false);
+
+
+    //調達か破棄か
+    const [isPlus, setIsPlus] = useState(true);
 
     useEffect(() => {
         // モーダルが開いた後にinputにフォーカスを当てる
@@ -466,7 +533,7 @@ function StockTable_Manage_() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 600,
+
         bgcolor: "background.paper",
         borderRadius: "12px",
         boxShadow: 24,
@@ -474,7 +541,7 @@ function StockTable_Manage_() {
     };
 
     function moveConfirm() {
-        console.log(equipModal);
+        // console.log(equipModal);
         setIsConfirm(true);
     }
 
@@ -620,7 +687,7 @@ function StockTable_Manage_() {
                         </div>
                         <br />
                         <Typography>
-                            「調達・破棄する個数」に、調達を行ったのなら正の個数を、破棄を行ったのなら負の数量を入力してください。
+                            「調達・破棄する個数」に、調達および破棄を行った数量を入力してください。
                         </Typography>
                         <Typography>
                             または、「変更後の資機材個数」で個数を設定することも可能です。
@@ -646,7 +713,36 @@ function StockTable_Manage_() {
                                         <TableCell align="right">
                                             {equipModal.currentQuantity}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell sx={{display:"flex",alignItems:"center"}}>
+                                            <FormControl>
+                                            
+                                                <RadioGroup
+                                                    value={isPlus ? "plus" : "minus"}
+                                                    sx={{width:"100px"}}
+                                                    name="radio-buttons-group"
+                                                    onChange={(e) => {
+                                                        
+                                                        setIsPlus(
+                                                            e.target.value ===
+                                                                "plus",
+                                                        );
+                                                        setAdjustQuantity(adjustQuantity)
+                                                    
+                                                    }}
+                                                >
+                                                    <FormControlLabel
+                                                        value="plus"
+                                                        control={<Radio />}
+                                                        label="調達"
+                                                    />
+                                                    <FormControlLabel
+                                                        value="minus"
+                                                        control={<Radio />}
+                                                        label="破棄"
+                                                    />
+
+                                                </RadioGroup>
+                                            </FormControl>
                                             <TextField
                                                 value={adjustQuantity}
                                                 onChange={(e) => {
@@ -654,15 +750,10 @@ function StockTable_Manage_() {
                                                         e.target.value.replace(
                                                             //これは正規表現やねん
                                                             //eslint-disable-next-line no-useless-escape
-                                                            /[^A-Z0-9\-]/g,
+                                                            /[^A-Z0-9]/g,
                                                             "",
                                                         );
-                                                    // １文字目以外にハイフンが入力されたら削除する
-                                                    e.target.value =
-                                                        e.target.value.replace(
-                                                            /(?<=.)-+/g,
-                                                            "",
-                                                        );
+                   
 
                                                     refreshbyAdjust(
                                                         Number(e.target.value),
@@ -896,45 +987,89 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     if (latestVal) {
         console.log("latestval", latestVal);
     }
-    const response = useSuspenseQuery({
-        queryKey: ["selectableStockTable"],
-        queryFn: () => sleepWithValue(10, responseItem),
-    });
-    const rows = response.data.equipments;
 
     const items: EquipmentTmpItem[] = [];
-
-    for (let i = 0; i < rows.length; i++) {
-        const [count, setCount] = useState(rows[i].plannedQuantity);
-
-        //全角入力モードになっていたら怒る
-        const [fieldopen, setFieldOpen] = useState(false);
-
-        const handleClose = () => {
-            setFieldOpen(false);
-        };
-
-        const handleOpen = () => {
-            setFieldOpen(true);
-        };
-        items.push({
-            name: rows[i].name,
-            id: rows[i].id,
-            maxQuantity: rows[i].maxQuantity,
-            currentQuantity: rows[i].currentQuantity,
-            note: rows[i].note,
-
-            setCount: (value) => {
-                setCount(value);
-            },
-            quantity: count,
-            plannedQuantity: rows[i].plannedQuantity,
-            handleOpen: handleOpen,
-            handleClose: handleClose,
-            fieldopen: fieldopen,
+    if (isReturn || isDetermineLend) {
+        const response = useSuspenseQuery({
+            queryKey: ["selectableStockTable"],
+            queryFn: () => sleepWithValue(10, responseItem),
         });
+        const rows = response.data.equipments;
+
+        for (let i = 0; i < rows.length; i++) {
+            //getEquipmentItemの場合
+
+            const [count, setCount] = useState(rows[i].plannedQuantity);
+
+            //全角入力モードになっていたら怒る
+            const [fieldopen, setFieldOpen] = useState(false);
+
+            const handleClose = () => {
+                setFieldOpen(false);
+            };
+
+            const handleOpen = () => {
+                setFieldOpen(true);
+            };
+            items.push({
+                name: rows[i].name,
+                id: rows[i].id,
+                maxQuantity: rows[i].maxQuantity,
+                currentQuantity: rows[i].currentQuantity,
+                note: rows[i].note,
+
+                setCount: (value) => {
+                    setCount(value);
+                },
+                quantity: count,
+                plannedQuantity: rows[i].plannedQuantity,
+                handleOpen: handleOpen,
+                handleClose: handleClose,
+                fieldopen: fieldopen,
+            });
+        }
+    } else {
+        const response = useSuspenseQuery({
+            queryKey: ["selectableStockTable"],
+            queryFn: () => sleepWithValue(10, GETequipmentItem),
+        });
+        const rows = response.data.equipments;
+
+        for (let i = 0; i < rows.length; i++) {
+            //getEquipmentItemの場合
+
+            const [count, setCount] = useState(0);
+
+            //全角入力モードになっていたら怒る
+            const [fieldopen, setFieldOpen] = useState(false);
+
+            const handleClose = () => {
+                setFieldOpen(false);
+            };
+
+            const handleOpen = () => {
+                setFieldOpen(true);
+            };
+            items.push({
+                name: rows[i].name,
+                id: rows[i].id,
+                maxQuantity: rows[i].maxQuantity,
+                currentQuantity: rows[i].currentQuantity,
+                note: rows[i].note,
+
+                setCount: (value) => {
+                    setCount(value);
+                },
+                quantity: count,
+                plannedQuantity: 0,
+                handleOpen: handleOpen,
+                handleClose: handleClose,
+                fieldopen: fieldopen,
+            });
+        }
     }
-    console.log(items);
+
+    // console.log(items);
 
     function setItem(id: string, quantity: number) {
         const tmp: EquipmentSuper = {
@@ -960,7 +1095,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 });
             }
         }
-        console.log(tmp);
+        // console.log(tmp);
         setVal(tmp);
     }
 
@@ -1036,7 +1171,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    {isReturn
+                                        ? equip.plannedQuantity
+                                        : equip.currentQuantity}
                                 </TableCell>
                                 {isDetermineLend && (
                                     <TableCell
