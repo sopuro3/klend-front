@@ -1019,8 +1019,8 @@ type SelectableStockTableProps = {
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
     isReturn?: boolean;
+    value: EquipmentSuper;
 };
-let isFirst = true;
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
@@ -1029,6 +1029,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                 isReturn={props.isReturn}
                 isDetermineLend={props.isDetermineLend}
                 latestVal={props.latestVal}
+                value={props.value}
             />
         </Suspense>
     );
@@ -1057,7 +1058,7 @@ type EquipmentTmpItem = {
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
-    const { setVal, isDetermineLend, isReturn, latestVal } = props;
+    const { setVal, isDetermineLend, isReturn, latestVal,value } = props;
     if (latestVal) {
         console.log("latestval", latestVal);
     }
@@ -1178,8 +1179,8 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     //それを無視して空のデータを送信してしまう。
     //そこで、初回時は謎のデータに対して0を送信することで、
     //無理やりSetValを実行させる
-    if (isFirst) {
-        isFirst = false;
+    console.log(value)
+    if (value.equipmentsRequired.length === 0) {
         setItem("fake-Item", 0);
     }
 

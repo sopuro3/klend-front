@@ -165,6 +165,8 @@ export function InfoInputTable() {
                                 <h3>必要な資機材の見積り</h3>
                                 <SelectableStockTable
                                     latestVal={value}
+                            value={value}
+
                                     setVal={setValue}
                                 />
                                 <br></br>

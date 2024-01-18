@@ -78,6 +78,7 @@ export default function Delend_select() {
                         <SelectableStockTable
                             isDetermineLend
                             setVal={setValue}
+                            value={value}
                         />
 
                         <div style={{ display: "flex" }}>
