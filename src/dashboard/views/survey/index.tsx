@@ -310,7 +310,7 @@ export function InfoInputTable() {
                                 {...(multiline && { multiline: true, rows: 6 })}
                                 {...(requireType && { required: true })}
                                 sx={{ width: "100%" }}
-                                label={row.example}
+                                helperText={row.example}
                                 variant="outlined"
                                 {...register(row.FormName, {
                                     required: requireType,
