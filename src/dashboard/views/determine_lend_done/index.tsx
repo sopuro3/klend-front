@@ -15,7 +15,7 @@ const dummyData: detailIssue = {
         name: "Issue Name",
         id: "dgihoihoadgdgihoihoadihoihosihos1",
         displayId: "0001",
-        status: "Open",
+        status: "survey",
         note: "This is a note",
     },
     equipments: [
