@@ -27,7 +27,7 @@ import {
 } from "@mui/material";
 import { Warning } from "@mui/icons-material";
 import { detailIssue } from "@/API/API_interface_rewrite";
-import { StockTable } from "../Stock_Table/StockTable";
+import { StockTable } from "../Stock_Table/NormStockTable";
 import PrintOrganizer from "../print/Print";
 import { detailIssueDummy } from "./detailIssue";
 

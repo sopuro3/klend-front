@@ -1,5 +1,5 @@
 import { EquipmentSuper } from "@/API/Data_manage";
-import { SelectableStockTable } from "@/components/Stock_Table/StockTable";
+import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTable";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
