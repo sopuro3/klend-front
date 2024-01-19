@@ -58,7 +58,6 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
         removeAfterPrint: true, // 印刷後に印刷用のiframeを削除する
     });
     const [width] = useWindowSize();
-    console.log(width);
     return (
         <>
             <MainCard_ts>

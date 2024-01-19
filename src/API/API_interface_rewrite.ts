@@ -38,7 +38,7 @@ export type issueItem = {
     name: string;
     id: string;
     displayId: string;
-    status: string;
+    status: "finish" | "survey" | "return" | "finish" | "check";
     note: string;
 };
 export type GETAPI_issue = {

@@ -28,8 +28,6 @@ export default function Delend_select() {
     });
 
     // let POSTData
-
-    console.log(response.data);
     const onSubmit = () => {
         setIsConfirm(true);
     };
