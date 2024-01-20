@@ -195,6 +195,7 @@ function StockTable_Manage_() {
         maxQuantity: number;
         currentQuantity: number;
     };
+    const modal = useRef(null);
 
     const [adjustQuantity, setAdjustQuantity] = useState<number>(0);
     const [afterQuantity, setAfterQuantity] = useState<number>(0);
@@ -262,11 +263,40 @@ function StockTable_Manage_() {
         p: 4,
         width: "min(100%,600px)",
     };
-
     function moveConfirm() {
         // console.log(equipModal);
         setIsConfirm(true);
     }
+    function cancelConfirm() {
+        setIsConfirm(false);
+    }
+
+    // ...
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Enter") {
+                console.log("Enter key pressed");
+                console.log(isConfirm);
+                // Handle Enter key press
+                // Call the function you want to execute
+            } else if (event.key === "ArrowLeft") {
+                cancelConfirm();
+            }
+        };
+
+        // Add event listeners when the modal is open
+        if (open) {
+            document.addEventListener("keydown", handleKeyDown);
+        }
+
+        // Remove event listeners when the modal is closed
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [open, isConfirm]);
+
+    // ...
 
     function POST() {
         type PUTequip = {
@@ -391,6 +421,7 @@ function StockTable_Manage_() {
                 </Table>
             </TableContainer>
             <Modal
+                ref={modal}
                 open={open}
                 onClose={cancelModal}
                 aria-labelledby="modal-modal-title"
@@ -715,7 +746,7 @@ function StockTable_Manage_() {
                                     marginRight: "auto",
                                 }}
                                 onClick={() => {
-                                    setIsConfirm(false);
+                                    cancelConfirm();
                                 }}
                             >
                                 変更

@@ -122,7 +122,7 @@ function Issue(props: IssueProps) {
     return (
         <>
             <MainCard_ts>
-                <Card>
+                <Card className="survey">
                     <CardContent className="issueCard" sx={{ padding: 0 }}>
                         <Typography variant="h2">案件の基本情報</Typography>
 
