@@ -56,6 +56,9 @@ type EquipmentTmpItem = {
 
     handleOpen: () => void;
     handleClose: () => void;
+    setTooltipMsg: React.Dispatch<React.SetStateAction<string>>;
+    tooltipMsg: string;
+
     fieldopen: boolean;
 };
 
@@ -88,6 +91,8 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             const handleOpen = () => {
                 setFieldOpen(true);
             };
+            const [tooltipMsg, setTooltipMsg] = useState("");
+
             items.push({
                 name: rows[i].name,
                 id: rows[i].id,
@@ -102,7 +107,9 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 plannedQuantity: rows[i].plannedQuantity,
                 handleOpen: handleOpen,
                 handleClose: handleClose,
+                tooltipMsg: tooltipMsg,
                 fieldopen: fieldopen,
+                setTooltipMsg: setTooltipMsg,
             });
         }
     } else {
@@ -127,6 +134,8 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             const handleOpen = () => {
                 setFieldOpen(true);
             };
+            const [tooltipMsg, setTooltipMsg] = useState("");
+
             items.push({
                 name: rows[i].name,
                 id: rows[i].id,
@@ -141,7 +150,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 plannedQuantity: 0,
                 handleOpen: handleOpen,
                 handleClose: handleClose,
+                tooltipMsg: tooltipMsg,
+
                 fieldopen: fieldopen,
+                setTooltipMsg: setTooltipMsg,
             });
         }
     }
@@ -285,7 +297,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     </IconButton>
                                     <Tooltip
                                         open={equip.fieldopen}
-                                        title="半角数字のみ有効です"
+                                        title={equip.tooltipMsg}
                                     >
                                         <TextField
                                             value={equip.quantity}
@@ -295,12 +307,29 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
                                                 //valueがNaNになってしまったら0にする
                                                 if (isNaN(Number(value))) {
+                                                    equip.setTooltipMsg(
+                                                        "半角数字のみ有効です",
+                                                    );
                                                     equip.handleOpen();
 
                                                     setItem(equip.id, 0);
                                                     return;
                                                 }
 
+                                                const maxVal = isReturn
+                                                    ? equip.plannedQuantity
+                                                    : equip.currentQuantity;
+                                                if (parseInt(value) > maxVal) {
+                                                    if (maxVal === 0) {
+                                                        return;
+                                                    }
+                                                    equip.setTooltipMsg(
+                                                        `最大値は${maxVal}です`,
+                                                    );
+                                                    equip.handleOpen();
+
+                                                    return;
+                                                }
                                                 if (value === "") {
                                                     equip.setCount(0);
                                                 } else {
