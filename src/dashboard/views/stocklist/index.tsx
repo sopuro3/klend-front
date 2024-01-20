@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
-import { StockTable } from "@/components/Stock_Table/StockTable";
+import { StockTable } from "@/components/Stock_Table/NormStockTable";
 export default function Borrow() {
     return (
         <>

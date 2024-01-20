@@ -1,4 +1,4 @@
-import { StockTable_Manage } from "@/components/Stock_Table/StockTable";
+import { StockTable_Manage } from "@/components/Stock_Table/ManageStockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 

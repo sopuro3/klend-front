@@ -15,10 +15,8 @@ import {
 import { useForm, FormProvider } from "react-hook-form";
 import { LendForm } from "@/API/API_interface";
 import { EquipmentSuper } from "@/API/Data_manage";
-import {
-    SelectableStockTable,
-    StockTable,
-} from "@/components/Stock_Table/StockTable";
+import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTable";
+import { StockTable } from "@/components/Stock_Table/NormStockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import "./needsform.css";
@@ -312,7 +310,7 @@ export function InfoInputTable() {
                                 {...(multiline && { multiline: true, rows: 6 })}
                                 {...(requireType && { required: true })}
                                 sx={{ width: "100%" }}
-                                label={row.example}
+                                helperText={row.example}
                                 variant="outlined"
                                 {...register(row.FormName, {
                                     required: requireType,
