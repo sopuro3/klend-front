@@ -57,6 +57,12 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
         content: reactToPrintContent, // 印刷エリアを指定
         removeAfterPrint: true, // 印刷後に印刷用のiframeを削除する
     });
+
+    function print() {
+        //ここでAPIを叩く
+        handlePrint();
+    }
+
     const [width] = useWindowSize();
     return (
         <>
@@ -69,7 +75,7 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
                         ただし、内容の変更を伴わない印刷は何度でも可能であるほか、印刷までは資機材数の変更が可能です。
                     </p>
 
-                    <Button onClick={handlePrint} variant="contained">
+                    <Button onClick={print} variant="contained">
                         印刷を行う
                     </Button>
                 </>

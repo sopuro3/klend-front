@@ -63,10 +63,7 @@ type EquipmentTmpItem = {
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
-    const { setVal, isDetermineLend, isReturn, latestVal } = props;
-    if (latestVal) {
-        console.log("latestval", latestVal);
-    }
+    const { setVal, isDetermineLend, isReturn } = props;
 
     const items: EquipmentTmpItem[] = [];
     if (isReturn || isDetermineLend) {
