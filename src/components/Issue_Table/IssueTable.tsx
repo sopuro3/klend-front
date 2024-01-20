@@ -21,7 +21,7 @@ const responseItem: FormResponse = {
         {
             adress: "福岡県久留米市小森野1丁目1-1",
             name: "久留米 太郎",
-            id: "123e4567-e89b-12d3-a456-426614174001",
+            issueId: "123e4567-e89b-12d3-a456-426614174001",
             displayId: "0001",
             status: "survey",
             note: "なし",
@@ -29,7 +29,7 @@ const responseItem: FormResponse = {
         {
             adress: "福岡県久留米市城南町１５−３",
             name: "筑後 次郎",
-            id: "234e5678-e89b-12d3-a456-426614174002",
+            issueId: "234e5678-e89b-12d3-a456-426614174002",
             displayId: "0002",
             status: "confirm",
             note: "なし",
@@ -37,7 +37,7 @@ const responseItem: FormResponse = {
         {
             adress: "福岡県久留米市東櫛原町999-1",
             name: "宝満 三郎",
-            id: "32e0567-e89b-12d3-a456-426614174001",
+            issueId: "32e0567-e89b-12d3-a456-426614174001",
             displayId: "0003",
             status: "check",
             note: "被害甚大、複数日の支援を要する可能性",
@@ -45,7 +45,7 @@ const responseItem: FormResponse = {
         {
             adress: "〒830-0002 福岡県久留米市高野１丁目２−１",
             name: "くるっぱ",
-            id: "23235678-e89b-12d3-a456-426614174002",
+            issueId: "23235678-e89b-12d3-a456-426614174002",
             displayId: "0004",
             status: "return",
             note: "なし",
@@ -323,8 +323,8 @@ function Table_(props: IssueTableProps) {
                                     <Link
                                         component={RouterLink}
                                         underline="hover"
-                                        to={"/issue/" + issue.id}
-                                        key={"/issue/" + issue.id}
+                                        to={"/issue/" + issue.issueId}
+                                        key={"/issue/" + issue.issueId}
                                     >
                                         詳細情報
                                     </Link>

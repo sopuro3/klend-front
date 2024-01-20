@@ -65,7 +65,7 @@ function StockTable_Manage_() {
     type equipModalType = {
         name: string;
         maxQuantity: number;
-        currentQuantity: number;
+        note: string;
         id: string;
     };
     const modal = useRef(null);
@@ -76,7 +76,7 @@ function StockTable_Manage_() {
     const [equipModal, setEquipModal] = useState<equipModalType>({
         name: "",
         maxQuantity: 0,
-        currentQuantity: 0,
+        note: "",
         id: "",
     });
 
@@ -84,33 +84,34 @@ function StockTable_Manage_() {
         setEquipModal({
             name: equip.name,
             maxQuantity: equip.maxQuantity,
-            currentQuantity: equip.currentQuantity,
-            id: equip.id,
+            note: equip.note,
+            id: equip.equipmentId,
         });
+        console.log(equip);
         //初期化
         setAdjustQuantity(0);
-        setAfterQuantity(equip.currentQuantity);
+        setAfterQuantity(equip.maxQuantity);
         handleOpen();
     }
 
     function refreshbyTotal(number: number) {
         setAfterQuantity(number);
-        if (number - equipModal.currentQuantity >= 0) {
+        if (number - equipModal.maxQuantity >= 0) {
             setIsPlus(true);
-            setAdjustQuantity(number - equipModal.currentQuantity);
+            setAdjustQuantity(number - equipModal.maxQuantity);
         } else {
             setIsPlus(false);
             // number - equipModal.currentQuantityの値がマイナスになるので、絶対値をとる
-            setAdjustQuantity(Math.abs(number - equipModal.currentQuantity));
+            setAdjustQuantity(Math.abs(number - equipModal.maxQuantity));
         }
     }
 
     function refreshbyAdjust(number: number) {
         setAdjustQuantity(number);
         if (isPlus) {
-            setAfterQuantity(equipModal.currentQuantity + number);
+            setAfterQuantity(equipModal.maxQuantity + number);
         } else {
-            setAfterQuantity(equipModal.currentQuantity - number);
+            setAfterQuantity(equipModal.maxQuantity - number);
         }
     }
 
@@ -172,23 +173,35 @@ function StockTable_Manage_() {
     }, [open, isConfirm]);
 
     // ...
-
+    type PUTequip = {
+        name: string;
+        maxQuantity: number;
+        note: string;
+    };
     function POST() {
-        type PUTequip = {
-            name: string;
-            maxQuantity: number;
-            currentQuantity: number;
-        };
         const putEquip: PUTequip = {
             name: equipModal.name,
-            maxQuantity: equipModal.maxQuantity,
-            currentQuantity: afterQuantity,
+            maxQuantity: afterQuantity,
+            note: equipModal.note,
         };
 
         console.log(equipModal.id, putEquip);
+        PUTEquipments(equipModal.id, putEquip);
+
+        //テーブルを更新し、再描画する
+        setTimeout(() => {
+            response.refetch();
+        }, 300);
+
         cancelModal();
 
-        // /equipment/:id   にPUTリクエストを送る
+        async function PUTEquipments(
+            id: string,
+            PUTequip: PUTequip,
+        ): Promise<void> {
+            const response = await authAxios.put("/equipment/" + id, PUTequip);
+            return response.data;
+        }
     }
 
     return (
@@ -282,7 +295,7 @@ function StockTable_Manage_() {
                                     {" "}
                                     <Link
                                         underline="hover"
-                                        key={"/equipment/" + equip.id}
+                                        key={"/equipment/" + equip.equipmentId}
                                         onClick={() => {
                                             applyModal(equip);
                                         }}
@@ -328,13 +341,13 @@ function StockTable_Manage_() {
                             <h4 className="miniDisplay">
                                 現在の資器材個数:{" "}
                                 <span style={{ fontSize: "1.3rem" }}>
-                                    {equipModal.currentQuantity}
+                                    {equipModal.maxQuantity}
                                 </span>
                             </h4>
                             <h4 className="miniDisplay">
                                 変更後の資機材個数:{" "}
                                 <span style={{ fontSize: "1.3rem" }}>
-                                    {equipModal.currentQuantity}
+                                    {equipModal.maxQuantity}
                                     <span
                                         style={{
                                             color:
@@ -379,7 +392,7 @@ function StockTable_Manage_() {
                                                     fontSize: "1.3rem",
                                                 }}
                                             >
-                                                {equipModal.currentQuantity}(
+                                                {equipModal.maxQuantity}(
                                                 <span
                                                     style={{
                                                         color:
@@ -581,7 +594,7 @@ function StockTable_Manage_() {
                                             align="right"
                                             sx={{ fontSize: "1.3rem" }}
                                         >
-                                            {equipModal.currentQuantity}
+                                            {equipModal.maxQuantity}
                                         </TableCell>
                                         <TableCell align="right">
                                             <Typography

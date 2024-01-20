@@ -8,7 +8,6 @@ export default function App() {
     return (
         <>
             <PageTitle title={"資機材調達・破棄(資機材個数調整)"} />
-
             <MainCard_ts>
                 <h3>
                     注：この機能はシステムを担当する職員がPCから利用する想定です。

@@ -13,7 +13,7 @@ const dummyData: detailIssue = {
     issue: {
         address: "123 Main St",
         name: "Issue Name",
-        id: "dgihoihoadgdgihoihoadihoihosihos1",
+        issueId: "dgihoihoadgdgihoihoadihoihosihos1",
         displayId: "0001",
         status: "survey",
         note: "This is a note",
@@ -21,7 +21,7 @@ const dummyData: detailIssue = {
     equipments: [
         {
             name: "スコップ",
-            id: "a1b2c3d4-1111-2222-3333-123456789abc",
+            equipmentId: "a1b2c3d4-1111-2222-3333-123456789abc",
             maxQuantity: 10,
             currentQuantity: 5,
             plannedQuantity: 0,
@@ -29,7 +29,7 @@ const dummyData: detailIssue = {
         },
         {
             name: "ハンマー",
-            id: "b2c3d4e5-2222-3333-4444-23456789abcd",
+            equipmentId: "b2c3d4e5-2222-3333-4444-23456789abcd",
             maxQuantity: 20,
             currentQuantity: 15,
             plannedQuantity: 5,
@@ -38,7 +38,7 @@ const dummyData: detailIssue = {
         },
         {
             name: "ドライバー",
-            id: "c3d4e5f6-3333-4444-5555-3456789abcde",
+            equipmentId: "c3d4e5f6-3333-4444-5555-3456789abcde",
             maxQuantity: 8,
             plannedQuantity: 10,
 
@@ -47,7 +47,7 @@ const dummyData: detailIssue = {
         },
         {
             name: "ペンチ",
-            id: "d4e5f6g7-4444-5555-6666-456789abcdef",
+            equipmentId: "d4e5f6g7-4444-5555-6666-456789abcdef",
             maxQuantity: 25,
             plannedQuantity: 3,
 

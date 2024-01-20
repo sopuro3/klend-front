@@ -94,7 +94,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
             items.push({
                 name: rows[i].name,
-                id: rows[i].id,
+                id: rows[i].equipmentId,
                 maxQuantity: rows[i].maxQuantity,
                 currentQuantity: rows[i].currentQuantity,
                 note: rows[i].note,
@@ -137,7 +137,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
             items.push({
                 name: rows[i].name,
-                id: rows[i].id,
+                id: rows[i].equipmentId,
                 maxQuantity: rows[i].maxQuantity,
                 currentQuantity: rows[i].currentQuantity,
                 note: rows[i].note,
@@ -174,7 +174,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     quantity: items[i].quantity,
                 });
                 tmp.equipmentswithQuantity.push({
-                    id: items[i].id,
+                    equipmentId: items[i].id,
                     name: items[i].name,
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,

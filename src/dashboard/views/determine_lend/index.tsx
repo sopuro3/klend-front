@@ -19,7 +19,7 @@ export default function Borrow() {
         //react-router-domを用いて、URLを変更する。
         // navigate("/determine_lend/select/" + issue.id);
         //react-router-domだとなぜかいろいろと不安定になるので、location.hrefを使う。
-        location.href = "/dashboard/determine_lend/select/" + issue.id;
+        location.href = "/dashboard/determine_lend/select/" + issue.issueId;
     };
 
     return (
