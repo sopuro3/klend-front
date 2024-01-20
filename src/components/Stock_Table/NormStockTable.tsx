@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "react-error-boundary";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -5,15 +6,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { EquipmentItem } from "@/API/API_interface";
 import { EquipmentItem_withQuantity } from "@/API/Data_manage";
 import { Suspense } from "react";
 import Loader from "../Loader";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { responseItem } from "./responseItem";
 import { StockTableProps } from "./common";
+import { authAxios } from "@/API/axios";
+import {
+    GETAPI_equipment,
+    getEquipmentItem,
+} from "@/API/API_interface_rewrite";
 
+async function fetchEquipments(): Promise<GETAPI_equipment> {
+    const response = await authAxios.get("/equipment");
+    return response.data;
+}
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
 
@@ -24,9 +31,11 @@ export function StockTable(props: StockTableProps) {
     // </ErrorBoundary>
     //https://zenn.dev/renoa/articles/zenn-suspense-errorboundary
     return (
-        <Suspense fallback={<Loader />}>
-            <StockTable_ displayItems={displayItems} />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <StockTable_ displayItems={displayItems} />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 function StockTable_(props: StockTableProps) {
@@ -36,7 +45,9 @@ function StockTable_(props: StockTableProps) {
     if (!displayItems) {
         const response = useSuspenseQuery({
             queryKey: ["stockTable"],
-            queryFn: () => sleepWithValue(10, responseItem),
+            //         queryFn: () => sleepWithValue(10, responseItem),
+            //queryFn: () => authAxios.get("/equipment").then((res) => { console.log(res.data); return responseItem; })
+            queryFn: fetchEquipments,
         });
         rows = response.data.equipments;
     } else {
@@ -138,7 +149,7 @@ function StockTable_(props: StockTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((equip: EquipmentItem) => (
+                    {rows.map((equip: getEquipmentItem) => (
                         <TableRow
                             key={equip.name}
                             sx={{
