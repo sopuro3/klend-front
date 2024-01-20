@@ -351,6 +351,23 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                         onClick={() => {
                                             const val = equip.quantity + 1;
 
+                                            const maxVal = isReturn
+                                                ? equip.plannedQuantity
+                                                : equip.currentQuantity;
+                                            if (val > maxVal) {
+                                                if (maxVal === 0) {
+                                                    return;
+                                                }
+                                                equip.setTooltipMsg(
+                                                    `最大値は${maxVal}です`,
+                                                );
+                                                equip.handleOpen();
+                                                setTimeout(() => {
+                                                    equip.handleClose();
+                                                }, 4000);
+                                                return;
+                                            }
+
                                             equip.setCount(
                                                 (count) => count + 1,
                                             );
