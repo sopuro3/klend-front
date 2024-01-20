@@ -70,6 +70,8 @@ const Determine_lend_done = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend_done")),
 );
 
+const Error404 = Loadable(lazy(() => import("@/dashboard/views/Error404")));
+
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -224,6 +226,11 @@ const MainRoutes = {
         {
             path: "manage_account",
             element: <AccountManagement></AccountManagement>,
+        },
+
+        {
+            path: "404",
+            element: <Error404 />,
         },
     ],
 };
