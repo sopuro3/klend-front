@@ -34,7 +34,7 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                     }}
                 >
                     <h1>発注書</h1>
-                    <div style={{ fontSize: "1.5em" }}>K-Lend</div>
+                    {/* <div style={{ fontSize: "1.5em" }}>K-Lend</div> */}
                 </div>
                 <div>
                     <h3 style={{ textAlign: "left" }}>受付情報</h3>
