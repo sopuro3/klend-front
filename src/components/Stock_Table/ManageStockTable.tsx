@@ -9,7 +9,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { EquipmentItem } from "@/API/API_interface";
 import {
     Box,
     Button,
@@ -23,10 +22,16 @@ import {
 } from "@mui/material";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../Loader";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { responseItem } from "./responseItem";
-
+import { authAxios } from "@/API/axios";
+import {
+    GETAPI_equipment,
+    getEquipmentItem,
+} from "@/API/API_interface_rewrite";
+async function fetchEquipments(): Promise<GETAPI_equipment> {
+    const response = await authAxios.get("/equipment");
+    return response.data;
+}
 /**
  * 個数の調整ができるタイプの資機材テーブル
  *
@@ -53,7 +58,8 @@ function StockTable_Manage_() {
 
     const response = useSuspenseQuery({
         queryKey: ["stockTable"],
-        queryFn: () => sleepWithValue(10, responseItem),
+        // queryFn: () => sleepWithValue(10, responseItem),
+        queryFn: fetchEquipments,
     });
 
     type equipModalType = {
@@ -74,7 +80,7 @@ function StockTable_Manage_() {
         id: "",
     });
 
-    function applyModal(equip: EquipmentItem) {
+    function applyModal(equip: getEquipmentItem) {
         setEquipModal({
             name: equip.name,
             maxQuantity: equip.maxQuantity,
@@ -230,7 +236,7 @@ function StockTable_Manage_() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((equip: EquipmentItem) => (
+                        {rows.map((equip: getEquipmentItem) => (
                             <TableRow
                                 key={equip.name}
                                 sx={{
