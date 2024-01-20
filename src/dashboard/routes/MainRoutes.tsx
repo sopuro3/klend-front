@@ -232,6 +232,12 @@ const MainRoutes = {
             path: "404",
             element: <Error404 />,
         },
+
+        //404
+        {
+            path: "*",
+            element: <Error404 />,
+        },
     ],
 };
 
