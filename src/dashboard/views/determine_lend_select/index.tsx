@@ -74,6 +74,7 @@ export default function Delend_select() {
                         <h2>資機材数の調整</h2>
 
                         <SelectableStockTable
+                            val={value}
                             isDetermineLend
                             id={id}
                             setVal={setValue}

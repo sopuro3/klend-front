@@ -23,8 +23,8 @@ type SelectableStockTableProps = {
     isDetermineLend?: boolean;
     isReturn?: boolean;
     id: string;
+    val?: EquipmentSuper;
 };
-let isFirst = true;
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
         <Suspense fallback={<Loader />}>
@@ -34,6 +34,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                 isDetermineLend={props.isDetermineLend}
                 latestVal={props.latestVal}
                 id={props.id}
+                val={props.val}
             />
         </Suspense>
     );
@@ -65,8 +66,8 @@ type EquipmentTmpItem = {
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
-    const { setVal, isDetermineLend, isReturn } = props;
-
+    const { setVal, isDetermineLend, isReturn, val } = props;
+    console.log("val", val);
     const items: EquipmentTmpItem[] = [];
     if (isReturn || isDetermineLend) {
         const response = useSuspenseQuery({
@@ -192,8 +193,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     //それを無視して空のデータを送信してしまう。
     //そこで、初回時は謎のデータに対して0を送信することで、
     //無理やりSetValを実行させる
-    if (isFirst) {
-        isFirst = false;
+    if (val?.equipmentsRequired.length === 0) {
         setItem("fake-Item", 0);
     }
 
