@@ -32,9 +32,9 @@ function ResponsiveAppBar() {
     // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     //     setAnchorElNav(event.currentTarget);
     // };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -112,10 +112,11 @@ function ResponsiveAppBar() {
                             mr: 2,
                             display: { xs: "flex", md: "none" },
                             flexGrow: 1,
-                            fontFamily: "monospace",
+                            fontFamily: "Noto Sans JP",
                             fontWeight: 700,
                             letterSpacing: ".3rem",
                             color: "inherit",
+
                             textDecoration: "none",
                         }}
                     >
@@ -142,9 +143,9 @@ function ResponsiveAppBar() {
                             flexGrow: 0,
                         }}
                     >
-                        <Typography onClick={handleOpenUserMenu}>
+                        {/* <Typography onClick={handleOpenUserMenu}>
                             職員用メニュー
-                        </Typography>
+                        </Typography> */}
 
                         {/* <IconButton
                                 onClick={handleOpenUserMenu}

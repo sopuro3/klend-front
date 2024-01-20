@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Issue, FormResponse } from "@/API/API_interface";
-import { Button, Link } from "@mui/material";
+import { Button, Link, Tooltip } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import React, { Suspense, useState } from "react";
 import Loader from "../Loader";
@@ -269,14 +269,14 @@ function Table_(props: IssueTableProps) {
                             <TableCell align="left" sx={{ width: "80px" }}>
                                 受付ID
                             </TableCell>
-                            <TableCell align="left" sx={{ width: "180px" }}>
+                            <TableCell align="left" sx={{ minWidth: "130px" }}>
                                 被災者の代表者名
                             </TableCell>
                             <TableCell align="left" sx={{ minWidth: "150px" }}>
                                 住所
                             </TableCell>
 
-                            <TableCell align="left" sx={{ width: "150px" }}>
+                            <TableCell align="left" sx={{ minWidth: "130px" }}>
                                 現在の状態
                             </TableCell>
                             <TableCell align="left" sx={{ minWidth: "150px" }}>
@@ -334,25 +334,42 @@ function Table_(props: IssueTableProps) {
                                         align="left"
                                         sx={{ width: "100px" }}
                                     >
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor:
-                                                    theme.palette.secondary
-                                                        .dark,
-                                                color: theme.palette.secondary
-                                                    .light,
-                                            }}
-                                            disabled={
+                                        <Tooltip
+                                            title={
                                                 !(
                                                     issue.status === "survey" ||
                                                     issue.status === "check"
                                                 )
+                                                    ? "この案件は既に貸出数確定が行われているので、選択できません。"
+                                                    : ""
                                             }
-                                            onClick={handleChange(issue)}
                                         >
-                                            選択
-                                        </Button>
+                                            <span>
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        backgroundColor:
+                                                            theme.palette
+                                                                .secondary.dark,
+                                                        color: theme.palette
+                                                            .secondary.light,
+                                                    }}
+                                                    disabled={
+                                                        !(
+                                                            issue.status ===
+                                                                "survey" ||
+                                                            issue.status ===
+                                                                "check"
+                                                        )
+                                                    }
+                                                    onClick={handleChange(
+                                                        issue,
+                                                    )}
+                                                >
+                                                    選択
+                                                </Button>
+                                            </span>
+                                        </Tooltip>
                                     </TableCell>
                                 )}
                             </TableRow>

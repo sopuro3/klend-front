@@ -15,7 +15,7 @@ const dummyData: detailIssue = {
         name: "Issue Name",
         id: "dgihoihoadgdgihoihoadihoihosihos1",
         displayId: "0001",
-        status: "Open",
+        status: "survey",
         note: "This is a note",
     },
     equipments: [
@@ -86,7 +86,7 @@ export default function Borrow_complete() {
 
             <br />
 
-            <Print issue={dummyData}></Print>
+            <Print needequipTable issue={dummyData}></Print>
         </>
     );
 }

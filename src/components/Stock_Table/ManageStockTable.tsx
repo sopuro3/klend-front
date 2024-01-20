@@ -256,11 +256,11 @@ function StockTable_Manage_() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-
         bgcolor: "background.paper",
         borderRadius: "12px",
         boxShadow: 24,
         p: 4,
+        width: "min(100%,600px)",
     };
 
     function moveConfirm() {
@@ -397,7 +397,7 @@ function StockTable_Manage_() {
                 aria-describedby="modal-modal-description"
             >
                 {!isConfirm ? (
-                    <Box sx={modalStyle}>
+                    <Box sx={modalStyle} className="classmodal">
                         <div style={{ display: "flex" }}>
                             <Typography
                                 id="modal-modal-title"
@@ -418,137 +418,207 @@ function StockTable_Manage_() {
 
                         <h4>選択した資機材:{equipModal.name}</h4>
 
-                        <TableContainer component={Paper} elevation={3}>
-                            <Table>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell sx={{ width: "150px" }}>
-                                            現在の資機材個数
-                                        </TableCell>
-                                        <TableCell>
-                                            調達・破棄する個数
-                                        </TableCell>
-                                        <TableCell>
-                                            変更後の資機材個数
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell align="right">
-                                            {equipModal.currentQuantity}
-                                        </TableCell>
-                                        <TableCell
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormControl>
-                                                <RadioGroup
-                                                    value={
-                                                        isPlus
-                                                            ? "plus"
-                                                            : "minus"
-                                                    }
-                                                    sx={{ width: "100px" }}
-                                                    name="radio-buttons-group"
-                                                    onChange={(e) => {
-                                                        setIsPlus(
-                                                            e.target.value ===
-                                                                "plus",
-                                                        );
-                                                        setAdjustQuantity(
-                                                            adjustQuantity,
-                                                        );
+                        <div>
+                            <h4 className="miniDisplay">
+                                現在の資器材個数:{" "}
+                                <span style={{ fontSize: "1.3rem" }}>
+                                    {equipModal.currentQuantity}
+                                </span>
+                            </h4>
+                            <h4 className="miniDisplay">
+                                変更後の資機材個数:{" "}
+                                <span style={{ fontSize: "1.3rem" }}>
+                                    {equipModal.currentQuantity}
+                                    <span
+                                        style={{
+                                            color:
+                                                isPlus === true
+                                                    ? "green"
+                                                    : "red",
+                                        }}
+                                    >
+                                        {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
+                                        {adjustQuantity === 0
+                                            ? "±"
+                                            : isPlus
+                                            ? "+"
+                                            : "-"}
+                                        {adjustQuantity}
+                                    </span>
+                                    <span>={afterQuantity}</span>
+                                </span>
+                            </h4>
+                            <TableContainer component={Paper} elevation={3}>
+                                <Table>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell
+                                                sx={{ width: "110px" }}
+                                                className="miniOmmit"
+                                            >
+                                                現在の資機材個数
+                                            </TableCell>
+                                            <TableCell sx={{ width: "150px" }}>
+                                                調達・破棄する個数
+                                            </TableCell>
+                                            <TableCell>
+                                                変更後の資機材個数
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell
+                                                align="right"
+                                                className="miniOmmit"
+                                                sx={{
+                                                    fontSize: "1.3rem",
+                                                }}
+                                            >
+                                                {equipModal.currentQuantity}(
+                                                <span
+                                                    style={{
+                                                        color:
+                                                            isPlus === true
+                                                                ? "green"
+                                                                : "red",
                                                     }}
                                                 >
-                                                    <FormControlLabel
-                                                        value="plus"
-                                                        control={<Radio />}
-                                                        label="調達"
-                                                    />
-                                                    <FormControlLabel
-                                                        value="minus"
-                                                        control={<Radio />}
-                                                        label="破棄"
-                                                    />
-                                                </RadioGroup>
-                                            </FormControl>
-                                            <TextField
-                                                value={adjustQuantity}
-                                                onChange={(e) => {
-                                                    e.target.value =
-                                                        e.target.value.replace(
-                                                            //これは正規表現やねん
-                                                            /[^A-Z0-9]/g,
-                                                            "",
-                                                        );
-
-                                                    refreshbyAdjust(
-                                                        Number(e.target.value),
-                                                    );
+                                                    {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
+                                                    {adjustQuantity === 0
+                                                        ? "±"
+                                                        : isPlus
+                                                        ? "+"
+                                                        : "-"}
+                                                    {adjustQuantity}
+                                                </span>
+                                                )
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{
+                                                    display: "flex",
+                                                    flexGrow: 1,
+                                                    alignItems: "center",
                                                 }}
-                                            ></TextField>
-                                        </TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                autoFocus={true}
-                                                sx={{ width: "100%" }}
-                                                onKeyDown={(e) => {
-                                                    if (e.key === "Enter") {
-                                                        moveConfirm();
-                                                    }
-                                                }}
-                                                value={afterQuantity}
-                                                onChange={(e) => {
-                                                    const value =
-                                                        e.target.value;
+                                            >
+                                                <FormControl>
+                                                    <RadioGroup
+                                                        value={
+                                                            isPlus
+                                                                ? "plus"
+                                                                : "minus"
+                                                        }
+                                                        sx={{ width: "100px" }}
+                                                        name="radio-buttons-group"
+                                                        onChange={(e) => {
+                                                            setIsPlus(
+                                                                e.target
+                                                                    .value ===
+                                                                    "plus",
+                                                            );
+                                                            setAdjustQuantity(
+                                                                adjustQuantity,
+                                                            );
+                                                        }}
+                                                    >
+                                                        <FormControlLabel
+                                                            value="plus"
+                                                            control={<Radio />}
+                                                            label="調達"
+                                                        />
+                                                        <FormControlLabel
+                                                            value="minus"
+                                                            control={<Radio />}
+                                                            label="破棄"
+                                                        />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <TextField
+                                                    sx={{ width: "100px" }}
+                                                    value={adjustQuantity}
+                                                    onChange={(e) => {
+                                                        e.target.value =
+                                                            e.target.value.replace(
+                                                                //これは正規表現やねん
+                                                                /[^A-Z0-9]/g,
+                                                                "",
+                                                            );
 
-                                                    //valueがNaNになってしまったら0にする
-                                                    if (isNaN(Number(value))) {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
+                                                        refreshbyAdjust(
+                                                            Number(
+                                                                e.target.value,
+                                                            ),
                                                         );
-                                                        return;
-                                                    }
+                                                    }}
+                                                ></TextField>
+                                            </TableCell>
+                                            <TableCell sx={{ width: 100 }}>
+                                                <TextField
+                                                    autoFocus={true}
+                                                    sx={{ width: "100px" }}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === "Enter") {
+                                                            moveConfirm();
+                                                        }
+                                                    }}
+                                                    value={afterQuantity}
+                                                    onChange={(e) => {
+                                                        const value =
+                                                            e.target.value;
 
-                                                    if (value === "") {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity: 0,
-                                                                };
-                                                            },
-                                                        );
-                                                    } else {
-                                                        setEquipModal(
-                                                            (equipModal) => {
-                                                                return {
-                                                                    ...equipModal,
-                                                                    afterQuantity:
-                                                                        parseInt(
-                                                                            value,
-                                                                        ),
-                                                                };
-                                                            },
-                                                        );
-                                                    }
+                                                        //valueがNaNになってしまったら0にする
+                                                        if (
+                                                            isNaN(Number(value))
+                                                        ) {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity: 0,
+                                                                    };
+                                                                },
+                                                            );
+                                                            return;
+                                                        }
 
-                                                    refreshbyTotal(
-                                                        Number(value),
-                                                    );
-                                                }}
-                                            ></TextField>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                                                        if (value === "") {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity: 0,
+                                                                    };
+                                                                },
+                                                            );
+                                                        } else {
+                                                            setEquipModal(
+                                                                (
+                                                                    equipModal,
+                                                                ) => {
+                                                                    return {
+                                                                        ...equipModal,
+                                                                        afterQuantity:
+                                                                            parseInt(
+                                                                                value,
+                                                                            ),
+                                                                    };
+                                                                },
+                                                            );
+                                                        }
+
+                                                        refreshbyTotal(
+                                                            Number(value),
+                                                        );
+                                                    }}
+                                                ></TextField>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
                         <br></br>
                         <div style={{ display: "flex" }}>
                             <Button
@@ -617,7 +687,7 @@ function StockTable_Manage_() {
                                                 <span
                                                     style={{
                                                         color:
-                                                            adjustQuantity >= 0
+                                                            isPlus === true
                                                                 ? "green"
                                                                 : "red",
                                                     }}
@@ -625,9 +695,9 @@ function StockTable_Manage_() {
                                                     {/* 増減なしなら±を表示し、増加アリなら+を表示する */}
                                                     {adjustQuantity === 0
                                                         ? "±"
-                                                        : adjustQuantity > 0
+                                                        : isPlus
                                                         ? "+"
-                                                        : ""}
+                                                        : "-"}
                                                     {adjustQuantity}
                                                 </span>
                                                 )
