@@ -1,7 +1,7 @@
 import { EquipmentSuper } from "@/API/Data_manage";
 import { StockTable } from "@/components/Stock_Table/NormStockTable";
 import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTable";
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, useTheme } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./index.css";
@@ -13,7 +13,6 @@ export default function 返却フォームの資機材入力画面() {
     });
 
     const handleSubmit = () => {
-        console.log(value);
         setConfirm(true);
     };
 
@@ -28,6 +27,8 @@ export default function 返却フォームの資機材入力画面() {
     const onSubmitConfirm = () => {
         console.log("value", value);
     };
+    const theme = useTheme();
+
     return (
         <>
             <div className={confirm ? "hide" : "visible"}>
@@ -60,12 +61,17 @@ export default function 返却フォームの資機材入力画面() {
             <div className={!confirm ? "hide" : "visible"}>
                 <h3>確認</h3>
                 <p>以下の内容で送信します。よろしいですか？</p>
+                <br />
+
                 <StockTable displayItems={value.equipmentswithQuantity} />
+                <br />
+
                 <div style={{ display: "flex" }}>
                     <Button
                         variant="contained"
                         sx={{
                             marginRight: "auto",
+                            background: theme.palette.success.dark,
                         }}
                         onClick={onCancel}
                     >
@@ -75,6 +81,7 @@ export default function 返却フォームの資機材入力画面() {
                         variant="contained"
                         sx={{
                             marginLeft: "auto",
+                            background: theme.palette.error.main,
                         }}
                         onClick={onSubmitConfirm}
                     >

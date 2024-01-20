@@ -67,7 +67,6 @@ type EquipmentTmpItem = {
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
     const { setVal, isDetermineLend, isReturn, val } = props;
-    console.log("val", val);
     const items: EquipmentTmpItem[] = [];
     if (isReturn || isDetermineLend) {
         const response = useSuspenseQuery({
