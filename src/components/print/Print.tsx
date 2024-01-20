@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import PrintExample from "./PrintContainer";
@@ -6,9 +6,11 @@ import "./Printarea.css";
 import { detailIssue } from "@/API/API_interface_rewrite";
 import { Button, Card, Paper } from "@mui/material";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
+import { WithoutWrapper_Issue } from "../Issue_Detail/Issue_Page";
 
 type PrintOrganizerProps = {
     issue: detailIssue;
+    needequipTable?: boolean;
 };
 
 const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
@@ -55,7 +57,7 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
         content: reactToPrintContent, // 印刷エリアを指定
         removeAfterPrint: true, // 印刷後に印刷用のiframeを削除する
     });
-
+    const [width] = useWindowSize();
     return (
         <>
             <MainCard_ts>
@@ -73,20 +75,49 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
                 </>
             </MainCard_ts>
             <br />
-            <MainCard_ts className="printArea">
-                <h2>印刷プレビュー</h2>
-                <Card
-                    component={Paper}
-                    elevation={4}
-                    sx={{
-                        borderRadius: "0",
-                    }}
-                >
-                    <PrintExample issue={issue} componentRef={componentRef} />
-                </Card>
-            </MainCard_ts>
+
+            {width > 800 && (
+                <MainCard_ts className="printArea">
+                    <h2>印刷プレビュー</h2>
+                    <Card
+                        component={Paper}
+                        elevation={4}
+                        sx={{
+                            borderRadius: "0",
+                        }}
+                    >
+                        <PrintExample
+                            issue={issue}
+                            componentRef={componentRef}
+                        />
+                    </Card>
+                </MainCard_ts>
+            )}
+
+            {width <= 800 && props.needequipTable != undefined && (
+                <>
+                    <MainCard_ts>
+                        <WithoutWrapper_Issue />
+                    </MainCard_ts>
+                </>
+            )}
         </>
     );
 };
 
 export default PrintOrganizer;
+
+const useWindowSize = (): number[] => {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+        const updateSize = (): void => {
+            setSize([window.innerWidth, window.innerHeight]);
+        };
+
+        window.addEventListener("resize", updateSize);
+        updateSize();
+
+        return () => window.removeEventListener("resize", updateSize);
+    }, []);
+    return size;
+};

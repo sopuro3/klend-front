@@ -188,7 +188,6 @@ function StockTable_(props: StockTableProps) {
                             },
                         }}
                     >
-                        {" "}
                         <StyledTableCell align="left">{index}</StyledTableCell>
                         <StyledTableCell scope="row">
                             {equip.name}
