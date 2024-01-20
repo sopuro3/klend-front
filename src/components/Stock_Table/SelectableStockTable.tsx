@@ -22,6 +22,7 @@ type SelectableStockTableProps = {
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
     isReturn?: boolean;
+    id: string;
 };
 let isFirst = true;
 export function SelectableStockTable(props: SelectableStockTableProps) {
@@ -32,6 +33,7 @@ export function SelectableStockTable(props: SelectableStockTableProps) {
                 isReturn={props.isReturn}
                 isDetermineLend={props.isDetermineLend}
                 latestVal={props.latestVal}
+                id={props.id}
             />
         </Suspense>
     );

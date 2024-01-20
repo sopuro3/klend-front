@@ -56,6 +56,8 @@ export default function Delend_select() {
 
     const [isConfirm, setIsConfirm] = useState(false);
 
+    if (id === undefined) throw new Error("idがありません");
+
     return (
         <>
             <PageTitle
@@ -73,6 +75,7 @@ export default function Delend_select() {
 
                         <SelectableStockTable
                             isDetermineLend
+                            id={id}
                             setVal={setValue}
                         />
 

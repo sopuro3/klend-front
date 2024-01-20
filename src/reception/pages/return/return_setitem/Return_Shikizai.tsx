@@ -2,6 +2,7 @@ import { EquipmentSuper } from "@/API/Data_manage";
 import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTable";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function 返却フォームの資機材入力画面() {
     const [value, setValue] = useState<EquipmentSuper>({
@@ -13,6 +14,9 @@ export default function 返却フォームの資機材入力画面() {
         console.log(value);
     };
 
+    const { id } = useParams<{ id: string }>();
+    if (id == undefined) throw new Error("idがありません");
+    console.log("仮置きよう", id);
     return (
         <>
             <h3>返却した資機材の数量確認</h3>
@@ -21,7 +25,7 @@ export default function 返却フォームの資機材入力画面() {
             </p>
             <p>ここにテーブルコンポーネントが入ります</p>
 
-            <SelectableStockTable isReturn setVal={setValue} />
+            <SelectableStockTable id={id} isReturn setVal={setValue} />
 
             <div style={{ display: "flex" }}>
                 <Button onClick={handleSubmit} sx={{ marginLeft: "auto" }}>

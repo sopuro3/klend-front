@@ -60,6 +60,7 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
 
     function print() {
         //ここでAPIを叩く
+        console.log(issue.issue.id);
         handlePrint();
     }
 

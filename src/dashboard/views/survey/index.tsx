@@ -165,6 +165,8 @@ export function InfoInputTable() {
                             <div>
                                 <h3>必要な資機材の見積り</h3>
                                 <SelectableStockTable
+                                    //カス実装だが、isReturnとisDetermineLendのいずれもfalseならidは使われずEquipmentsをGETするのみなので問題ない
+                                    id=""
                                     latestVal={value}
                                     setVal={setValue}
                                 />
