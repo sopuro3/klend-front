@@ -112,6 +112,7 @@ export function InfoInputTable() {
 
     const onSubmitConfirm = () => {
         // APIにデータを送る
+        console.log(rollup);
     };
 
     const [isConfirm, setIsConfirm] = useState(false);
