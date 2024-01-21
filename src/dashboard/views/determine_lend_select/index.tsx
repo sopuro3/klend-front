@@ -8,21 +8,22 @@ import { Button, useTheme } from "@mui/material";
 import { useState } from "react";
 import "./lend.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { detailIssueDummy } from "@/components/Issue_Detail/detailIssue";
+import { PATCHIssue, fetchDetailIssue } from "@/API/fetch";
 
 export default function Delend_select() {
     const theme = useTheme();
     const { id } = useParams();
-    const navigate = useNavigate();
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+    const navigate = useNavigate();
+    if (id === undefined) throw new Error("idがありません");
+
     const response = useSuspenseQuery({
-        queryKey: ["issue", id],
-        queryFn: () => sleepWithValue(1390, detailIssueDummy),
+        queryKey: ["selectableStockTable"],
+        queryFn: () => fetchDetailIssue(id),
     });
 
     // let POSTData
@@ -37,7 +38,7 @@ export default function Delend_select() {
 
         const equipments = value.equipmentsRequired.map((item) => {
             return {
-                equipmentId: item.id,
+                equipmentId: item.equipmentId,
                 plannedQuantity: item.quantity,
             };
         });
@@ -50,11 +51,17 @@ export default function Delend_select() {
         //あとはこれを投げるだけ
         console.log("res", res, "\nid", id);
 
-        navigate("/determine_lend/done/" + id);
+        PATCHIssue(id, res).then((res) => {
+            console.log("res", res);
+
+            navigate("/determine_lend/done/" + id);
+        });
     };
     const [title, setTitle] = useState<string>(" - ");
 
     const [isConfirm, setIsConfirm] = useState(false);
+
+    if (id === undefined) throw new Error("idがありません");
 
     return (
         <>
@@ -72,10 +79,12 @@ export default function Delend_select() {
                         <h2>資機材数の調整</h2>
 
                         <SelectableStockTable
+                            val={value}
                             isDetermineLend
+                            id={id}
                             setVal={setValue}
                         />
-
+                        <br />
                         <div style={{ display: "flex" }}>
                             <Button
                                 onClick={onSubmit}
@@ -103,7 +112,7 @@ export default function Delend_select() {
                         <StockTable
                             displayItems={value.equipmentswithQuantity}
                         />
-
+                        <br />
                         <div style={{ display: "flex" }}>
                             <Button
                                 variant="contained"

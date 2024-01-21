@@ -23,6 +23,10 @@ import "./needsform.css";
 import { useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
+// import { useNavigate } from "react-router-dom";
+import { POSTSurvey } from "@/API/fetch";
+import { surveyPost } from "@/API/API_interface_rewrite";
+import { useNavigate } from "react-router-dom";
 
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
@@ -82,11 +86,12 @@ let rollup: FormValues = {
 export function InfoInputTable() {
     const { register, handleSubmit } = useForm<FormValues>();
     const theme = useTheme();
-
+    // const navigate = useNavigate();
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+    const navigate = useNavigate();
 
     const onSubmit = (data: FormValues) => {
         rollup = data;
@@ -112,6 +117,23 @@ export function InfoInputTable() {
 
     const onSubmitConfirm = () => {
         // APIにデータを送る
+        const data: surveyPost = {
+            issue: {
+                name: rollup.name,
+                address: rollup.address,
+                note: rollup.note,
+            },
+            equipments: rollup.equipments.map((item) => {
+                return {
+                    equipmentId: item.equipmentId,
+                    plannedQuantity: item.quantity,
+                };
+            }),
+        };
+        console.log(data);
+        POSTSurvey(data).then(() => {
+            navigate("/survey/firstform/done");
+        });
     };
 
     const [isConfirm, setIsConfirm] = useState(false);
@@ -162,6 +184,8 @@ export function InfoInputTable() {
                             <div>
                                 <h3>必要な資機材の見積り</h3>
                                 <SelectableStockTable
+                                    //カス実装だが、isReturnとisDetermineLendのいずれもfalseならidは使われずEquipmentsをGETするのみなので問題ない
+                                    id=""
                                     latestVal={value}
                                     setVal={setValue}
                                 />

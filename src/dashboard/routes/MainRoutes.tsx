@@ -70,6 +70,8 @@ const Determine_lend_done = Loadable(
     lazy(() => import("@/dashboard/views/determine_lend_done")),
 );
 
+const Error404 = Loadable(lazy(() => import("@/dashboard/views/Error404")));
+
 const Stocklist = Loadable(lazy(() => import("@/dashboard/views/stocklist")));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -191,10 +193,7 @@ const MainRoutes = {
             path: "issue/:id",
             element: <IssuePage></IssuePage>,
         },
-        {
-            path: "equipment/:id",
-            element: <IssuePage></IssuePage>,
-        },
+
         {
             path: "determine_lend",
             element: <Determine_lend></Determine_lend>,
@@ -224,6 +223,17 @@ const MainRoutes = {
         {
             path: "manage_account",
             element: <AccountManagement></AccountManagement>,
+        },
+
+        {
+            path: "404",
+            element: <Error404 />,
+        },
+
+        //404
+        {
+            path: "*",
+            element: <Error404 />,
         },
     ],
 };

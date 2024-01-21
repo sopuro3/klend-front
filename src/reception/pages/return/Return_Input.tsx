@@ -154,8 +154,8 @@ function App() {
                 component={RouterLink}
                 underline="hover"
                 color="inherit"
-                to={"/reception/return/select"}
-                key={"/reception/return/select"}
+                to={"/reception/return/select/152380"}
+                key={"/reception/return/select/215387"}
             >
                 返却個数入力画面へ
             </Link>

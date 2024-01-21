@@ -1,15 +1,23 @@
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import DoneMark from "../../../../components/checkmark/Checkmark";
 import "../../../../components/checkmark/borrow_complete.css";
-import { Card, CardContent, Paper, Typography } from "@mui/material";
+// import { Card, CardContent, Paper, Typography } from "@mui/material";
 
 export default function Borrow_complete() {
+    //履歴をクリアする
+
     return (
         <>
             <MainCard_ts>
                 <DoneMark></DoneMark>
                 <div className="text-container">手続きが完了しました！</div>
                 <br></br>
+            </MainCard_ts>
+        </>
+    );
+}
+
+/*
                 <Card
                     sx={{
                         maxWidth: 300,
@@ -28,7 +36,4 @@ export default function Borrow_complete() {
                         <Typography>この番号を控えてください。</Typography>
                     </CardContent>
                 </Card>
-            </MainCard_ts>
-        </>
-    );
-}
+*/

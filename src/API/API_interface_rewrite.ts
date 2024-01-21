@@ -6,7 +6,7 @@ export type surveyPost_info = {
 
 export type throwEquipment = {
     equipmentId: string;
-    quantity: number;
+    plannedQuantity: number;
 };
 
 export type surveyPost = {
@@ -19,7 +19,7 @@ export type surveyPost = {
 //資器材数取得
 // GET /equipment
 export type getEquipmentItem = {
-    id: string; // uuid
+    equipmentId: string; // uuid
     name: string; // 備品名
     maxQuantity: number; // 必要な数量
     currentQuantity: number; // 現在の数量
@@ -36,7 +36,7 @@ export type GETAPI_equipment = {
 export type issueItem = {
     address: string;
     name: string;
-    id: string;
+    issueId: string;
     displayId: string;
     status: "survey" | "check" | "confirm" | "return" | "finish";
     note: string;
