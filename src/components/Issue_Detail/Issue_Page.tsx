@@ -28,16 +28,16 @@ import { Warning } from "@mui/icons-material";
 import { detailIssue } from "@/API/API_interface_rewrite";
 import { StockTable } from "../Stock_Table/NormStockTable";
 import PrintOrganizer from "../print/Print";
-import { authAxios } from "@/API/axios";
 import { ErrorBoundary } from "react-error-boundary";
 import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { detailIssueDummy } from "./detailIssue";
 import { statusMsg } from "../Issue_Table/IssueTable";
 
-async function fetchDetailIssue(id: string): Promise<detailIssue> {
-    const response = await authAxios.get("/issue/" + id);
-    return response.data;
-}
+// import { authAxios } from "@/API/axios";
+// async function fetchDetailIssue(id: string): Promise<detailIssue> {
+//     const response = await authAxios.get("/issue/" + id);
+//     return response.data;
+// }
 
 export function IssuePage() {
     const { id } = useParams();
@@ -106,14 +106,6 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
         color: theme.palette.common.white,
     },
 }));
-
-function nanimo_sinai_func() {
-    fetchDetailIssue("1");
-    sleepWithValue(10, detailIssueDummy);
-}
-if (new Date().getFullYear() === 10) {
-    nanimo_sinai_func();
-}
 
 function Issue(props: IssueProps) {
     const { id, rollupTitle, isneedEquip } = props;
