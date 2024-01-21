@@ -26,6 +26,7 @@ import { useTheme } from "@mui/material/styles";
 // import { useNavigate } from "react-router-dom";
 import { POSTSurvey } from "@/API/fetch";
 import { surveyPost } from "@/API/API_interface_rewrite";
+import { useNavigate } from "react-router-dom";
 
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
@@ -121,13 +122,17 @@ export function InfoInputTable() {
                 address: rollup.address,
                 note: rollup.note,
             },
-            equipments: rollup.equipments,
+            equipments: rollup.equipments.map((item) => {
+                return {
+                    equipmentId: item.equipmentId,
+                    plannedQuantity: item.quantity,
+                };
+            }),
         };
         console.log(data);
         POSTSurvey(data).then(() => {
-            location.replace("/dashboard/survey/firstform/done");
-
-            // navigate("/survey/firstform/done");
+            const navigate = useNavigate();
+            navigate("/survey/firstform/done");
         });
     };
 

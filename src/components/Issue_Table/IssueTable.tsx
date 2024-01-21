@@ -16,6 +16,7 @@ import { useTheme } from "@mui/material/styles";
 import { encode, tokenize } from "@/Search/encodeAndTokenize";
 import { SearchWindow } from "./SearchWindow";
 import { fetchIssueList } from "@/API/fetch";
+import { ErrorBoundary } from "react-error-boundary";
 
 // const responseItem: FormResponse = {
 //     issue: [
@@ -84,9 +85,11 @@ export const statusMsg = [
 export default function IssueTable(props: IssueTableProps) {
     const { selectBtn, setValue } = props;
     return (
-        <Suspense fallback={<Loader />}>
-            <Table_ selectBtn={selectBtn} setValue={setValue} />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <Table_ selectBtn={selectBtn} setValue={setValue} />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 

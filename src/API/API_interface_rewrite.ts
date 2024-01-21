@@ -6,7 +6,7 @@ export type surveyPost_info = {
 
 export type throwEquipment = {
     equipmentId: string;
-    quantity: number;
+    plannedQuantity: number;
 };
 
 export type surveyPost = {

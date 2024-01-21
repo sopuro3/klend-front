@@ -43,3 +43,8 @@ export async function POSTSurvey(issue: surveyPost) {
     const response = await authAxios.post("/issue/survey", issue);
     return response.data;
 }
+
+export async function PATCHIssue(id: string, issue: surveyPost) {
+    const response = await authAxios.patch("/issue/" + id, issue);
+    return response.data;
+}

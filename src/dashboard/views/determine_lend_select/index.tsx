@@ -9,12 +9,11 @@ import { useState } from "react";
 import "./lend.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { fetchDetailIssue } from "@/API/fetch";
+import { PATCHIssue, fetchDetailIssue } from "@/API/fetch";
 
 export default function Delend_select() {
     const theme = useTheme();
     const { id } = useParams();
-    const navigate = useNavigate();
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
@@ -52,7 +51,11 @@ export default function Delend_select() {
         //あとはこれを投げるだけ
         console.log("res", res, "\nid", id);
 
-        navigate("/determine_lend/done/" + id);
+        PATCHIssue(id, res).then((res) => {
+            console.log("res", res);
+            const navigate = useNavigate();
+            navigate("/dashboard/determine_lend/done/" + id);
+        });
     };
     const [title, setTitle] = useState<string>(" - ");
 
@@ -109,7 +112,7 @@ export default function Delend_select() {
                         <StockTable
                             displayItems={value.equipmentswithQuantity}
                         />
-
+                        <br />
                         <div style={{ display: "flex" }}>
                             <Button
                                 variant="contained"
