@@ -15,7 +15,16 @@ import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { responseItem, GETequipmentItem } from "./responseItem";
+import { authAxios } from "@/API/axios";
+
+import { responseItem } from "./responseItem";
+import { GETAPI_equipment } from "@/API/API_interface_rewrite";
+
+async function fetchEquipments(): Promise<GETAPI_equipment> {
+    const response = await authAxios.get("/equipment");
+    return response.data;
+}
+
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     latestVal?: EquipmentSuper;
@@ -114,7 +123,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     } else {
         const response = useSuspenseQuery({
             queryKey: ["selectableStockTable"],
-            queryFn: () => sleepWithValue(10, GETequipmentItem),
+            queryFn: () => fetchEquipments(),
         });
         const rows = response.data.equipments;
 

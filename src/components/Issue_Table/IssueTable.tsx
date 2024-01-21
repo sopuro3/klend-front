@@ -5,54 +5,61 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Issue, FormResponse } from "@/API/API_interface";
+import { Issue } from "@/API/API_interface";
 import { Button, Link, Tooltip } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import React, { Suspense, useState } from "react";
 import Loader from "../Loader";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
 import { useTheme } from "@mui/material/styles";
 import { encode, tokenize } from "@/Search/encodeAndTokenize";
 import { SearchWindow } from "./SearchWindow";
-const responseItem: FormResponse = {
-    issue: [
-        {
-            adress: "福岡県久留米市小森野1丁目1-1",
-            name: "久留米 太郎",
-            issueId: "123e4567-e89b-12d3-a456-426614174001",
-            displayId: "0001",
-            status: "survey",
-            note: "なし",
-        },
-        {
-            adress: "福岡県久留米市城南町１５−３",
-            name: "筑後 次郎",
-            issueId: "234e5678-e89b-12d3-a456-426614174002",
-            displayId: "0002",
-            status: "confirm",
-            note: "なし",
-        },
-        {
-            adress: "福岡県久留米市東櫛原町999-1",
-            name: "宝満 三郎",
-            issueId: "32e0567-e89b-12d3-a456-426614174001",
-            displayId: "0003",
-            status: "check",
-            note: "被害甚大、複数日の支援を要する可能性",
-        },
-        {
-            adress: "〒830-0002 福岡県久留米市高野１丁目２−１",
-            name: "くるっぱ",
-            issueId: "23235678-e89b-12d3-a456-426614174002",
-            displayId: "0004",
-            status: "return",
-            note: "なし",
-        },
-        // Add more issues as needed
-    ],
-};
+import { authAxios } from "@/API/axios";
+import { GETAPI_issue } from "@/API/API_interface_rewrite";
+
+// const responseItem: FormResponse = {
+//     issue: [
+//         {
+//             adress: "福岡県久留米市小森野1丁目1-1",
+//             name: "久留米 太郎",
+//             issueId: "123e4567-e89b-12d3-a456-426614174001",
+//             displayId: "0001",
+//             status: "survey",
+//             note: "なし",
+//         },
+//         {
+//             adress: "福岡県久留米市城南町１５−３",
+//             name: "筑後 次郎",
+//             issueId: "234e5678-e89b-12d3-a456-426614174002",
+//             displayId: "0002",
+//             status: "confirm",
+//             note: "なし",
+//         },
+//         {
+//             adress: "福岡県久留米市東櫛原町999-1",
+//             name: "宝満 三郎",
+//             issueId: "32e0567-e89b-12d3-a456-426614174001",
+//             displayId: "0003",
+//             status: "check",
+//             note: "被害甚大、複数日の支援を要する可能性",
+//         },
+//         {
+//             adress: "〒830-0002 福岡県久留米市高野１丁目２−１",
+//             name: "くるっぱ",
+//             issueId: "23235678-e89b-12d3-a456-426614174002",
+//             displayId: "0004",
+//             status: "return",
+//             note: "なし",
+//         },
+//         // Add more issues as needed
+//     ],
+// };
+
+async function fetchIssueList(): Promise<GETAPI_issue> {
+    const response = await authAxios.get("/issue");
+    return response.data;
+}
 
 type IssueTableProps = {
     selectBtn?: boolean;
@@ -95,7 +102,7 @@ function Table_(props: IssueTableProps) {
 
     const response = useSuspenseQuery({
         queryKey: ["issueTable"],
-        queryFn: () => sleepWithValue(10, responseItem),
+        queryFn: () => fetchIssueList(),
     });
 
     const rows = response.data.issue;

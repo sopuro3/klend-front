@@ -3,12 +3,12 @@
 ## NormStockTable
 
 取得するデータ：
-Equipments (GET /equipment)
+DONE Equipments (GET /equipment)
 
 ## ManageStockTable
 
 取得するデータ：
-Equipments (GET /equipment)
+DONE Equipments (GET /equipment)
 
 ## SelectableStockTable.tsx
 
@@ -16,7 +16,7 @@ Equipments (GET /equipment)
 idはpropsに入ってるからそれで解決できる
 ただし、初期調査の場合はGET /Equipmentを使うのでidは不要。めんどくさいので""を渡した
 
-70行目 Equipments (GET /equipment)
+DONE 70行目 Equipments (GET /equipment)
 
 113行目 GET /form/:id
 
@@ -53,7 +53,7 @@ PATCH /issue/:issueID
 63行目
 PUT /issue/:issueID
 
-## ManageStockTable.tsx
+## ManageStockTable.tsx DONE
 
 function POST()の中
 PUT /equipment/:id
