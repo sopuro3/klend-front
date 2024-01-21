@@ -1,6 +1,7 @@
 import {
     GETAPI_equipment,
     GETAPI_issue,
+    POSTAPI_return,
     detailIssue,
     surveyPost,
 } from "./API_interface_rewrite";
@@ -46,5 +47,13 @@ export async function POSTSurvey(issue: surveyPost) {
 
 export async function PATCHIssue(id: string, issue: surveyPost) {
     const response = await authAxios.patch("/issue/" + id, issue);
+    return response.data;
+}
+
+export async function POSTReturn(id: string, returnEquipment: POSTAPI_return) {
+    const response = await authAxios.post(
+        "/issue/" + id + "/return",
+        returnEquipment,
+    );
     return response.data;
 }

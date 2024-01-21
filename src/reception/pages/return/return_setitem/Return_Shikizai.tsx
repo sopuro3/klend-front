@@ -5,6 +5,8 @@ import { Button, Divider, useTheme } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./index.css";
+import { POSTAPI_return } from "@/API/API_interface_rewrite";
+import { POSTReturn } from "@/API/fetch";
 
 export default function 返却フォームの資機材入力画面() {
     const [value, setValue] = useState<EquipmentSuper>({
@@ -29,7 +31,19 @@ export default function 返却フォームの資機材入力画面() {
     const onSubmitConfirm = () => {
         console.log("value", value);
 
-        navigate("/reception/return/done");
+        const res: POSTAPI_return = {
+            equipments: value.equipmentsRequired.map((item) => {
+                return {
+                    equipmentId: item.equipmentId,
+                    returnQuantity: item.quantity,
+                };
+            }),
+        };
+
+        POSTReturn(id, res).then((res) => {
+            console.log("res", res);
+            navigate("/reception/return/done");
+        });
     };
     const theme = useTheme();
 
