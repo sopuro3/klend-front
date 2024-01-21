@@ -91,6 +91,7 @@ export function InfoInputTable() {
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+    const navigate = useNavigate();
 
     const onSubmit = (data: FormValues) => {
         rollup = data;
@@ -131,7 +132,6 @@ export function InfoInputTable() {
         };
         console.log(data);
         POSTSurvey(data).then(() => {
-            const navigate = useNavigate();
             navigate("/survey/firstform/done");
         });
     };

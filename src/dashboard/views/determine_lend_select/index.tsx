@@ -18,7 +18,7 @@ export default function Delend_select() {
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
-
+    const navigate = useNavigate();
     if (id === undefined) throw new Error("idがありません");
 
     const response = useSuspenseQuery({
@@ -53,8 +53,8 @@ export default function Delend_select() {
 
         PATCHIssue(id, res).then((res) => {
             console.log("res", res);
-            const navigate = useNavigate();
-            navigate("/dashboard/determine_lend/done/" + id);
+
+            navigate("/determine_lend/done/" + id);
         });
     };
     const [title, setTitle] = useState<string>(" - ");
