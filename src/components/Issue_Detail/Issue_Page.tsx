@@ -139,7 +139,7 @@ function Issue(props: IssueProps) {
                         <Card
                             sx={{ margin: "3px" }}
                             component={Paper}
-                            elevation={1}
+                            elevation={3}
                         >
                             <TableContainer
                                 sx={{ minWidth: "min(400px,100%)" }}
