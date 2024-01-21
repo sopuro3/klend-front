@@ -70,7 +70,6 @@ function StockTable_(props: StockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
-
                             <TableCell
                                 align="left"
                                 sx={{ width: "120px" }}
@@ -78,6 +77,7 @@ function StockTable_(props: StockTableProps) {
                             >
                                 現在の在庫数
                             </TableCell>
+
                             <TableCell align="left" sx={{ width: "100px" }}>
                                 数量
                             </TableCell>
@@ -100,8 +100,9 @@ function StockTable_(props: StockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    {equip.maxQuantity - equip.currentQuantity}
                                 </TableCell>
+
                                 <TableCell align="right">
                                     {equip.plannedQuantity}
                                 </TableCell>
@@ -137,6 +138,13 @@ function StockTable_(props: StockTableProps) {
                         >
                             現在の在庫数
                         </TableCell>
+                        <TableCell
+                            align="left"
+                            sx={{ width: "120px" }}
+                            className="sp_omission"
+                        >
+                            現在の貸出数
+                        </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
                             {isLocalRequest ? "選択数" : "使用率"}
                         </TableCell>
@@ -163,12 +171,14 @@ function StockTable_(props: StockTableProps) {
                                 {equip.maxQuantity}
                             </TableCell>
                             <TableCell align="right" className="sp_omission">
+                                {equip.maxQuantity - equip.currentQuantity}
+                            </TableCell>
+                            <TableCell align="right" className="sp_omission">
                                 {equip.currentQuantity}
                             </TableCell>
                             <TableCell align="left">
                                 {Math.round(
-                                    ((equip.maxQuantity -
-                                        equip.currentQuantity) /
+                                    (equip.currentQuantity /
                                         equip.maxQuantity) *
                                         10000,
                                 ) / 100}
