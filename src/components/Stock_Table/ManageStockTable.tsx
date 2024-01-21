@@ -28,6 +28,7 @@ import {
     GETAPI_equipment,
     getEquipmentItem,
 } from "@/API/API_interface_rewrite";
+import { ErrorBoundary } from "react-error-boundary";
 async function fetchEquipments(): Promise<GETAPI_equipment> {
     const response = await authAxios.get("/equipment");
     return response.data;
@@ -39,9 +40,11 @@ async function fetchEquipments(): Promise<GETAPI_equipment> {
  */
 export function StockTable_Manage() {
     return (
-        <Suspense fallback={<Loader />}>
-            <StockTable_Manage_ />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <StockTable_Manage_ />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 function StockTable_Manage_() {

@@ -19,6 +19,7 @@ import { authAxios } from "@/API/axios";
 
 import { responseItem } from "./responseItem";
 import { GETAPI_equipment } from "@/API/API_interface_rewrite";
+import { ErrorBoundary } from "react-error-boundary";
 
 async function fetchEquipments(): Promise<GETAPI_equipment> {
     const response = await authAxios.get("/equipment");
@@ -36,16 +37,18 @@ type SelectableStockTableProps = {
 };
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
-        <Suspense fallback={<Loader />}>
-            <SelectableStockTable_
-                setVal={props.setVal}
-                isReturn={props.isReturn}
-                isDetermineLend={props.isDetermineLend}
-                latestVal={props.latestVal}
-                id={props.id}
-                val={props.val}
-            />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <SelectableStockTable_
+                    setVal={props.setVal}
+                    isReturn={props.isReturn}
+                    isDetermineLend={props.isDetermineLend}
+                    latestVal={props.latestVal}
+                    id={props.id}
+                    val={props.val}
+                />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 

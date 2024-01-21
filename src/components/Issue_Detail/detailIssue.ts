@@ -6,7 +6,7 @@ export const detailIssueDummy: detailIssue = {
         name: "Jane Smith",
         issueId: "234e5678-e89b-12d3-a456-426614174002",
         displayId: "0002",
-        status: "survey",
+        status: "check",
         note: "Another sample issue.",
     },
     equipments: [

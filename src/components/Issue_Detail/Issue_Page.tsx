@@ -4,7 +4,6 @@ import Loader from "../Loader";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import "./issuepage.css";
 import {
     Box,
@@ -29,10 +28,21 @@ import { Warning } from "@mui/icons-material";
 import { detailIssue } from "@/API/API_interface_rewrite";
 import { StockTable } from "../Stock_Table/NormStockTable";
 import PrintOrganizer from "../print/Print";
+import { authAxios } from "@/API/axios";
+import { ErrorBoundary } from "react-error-boundary";
+import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { detailIssueDummy } from "./detailIssue";
+import { statusMsg } from "../Issue_Table/IssueTable";
+
+async function fetchDetailIssue(id: string): Promise<detailIssue> {
+    const response = await authAxios.get("/issue/" + id);
+    return response.data;
+}
 
 export function IssuePage() {
     const { id } = useParams();
+
+    const [displayID, setdisplayID] = useState<string>("");
 
     //idがundefinedなら、エラー画面へ遷移する
     if (id === undefined) {
@@ -47,11 +57,13 @@ export function IssuePage() {
     }
 
     return (
-        <Suspense fallback={<PageLoader />}>
-            <PageTitle title={`案件 #${id}`} backButton={{}} />
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<PageLoader />}>
+                <PageTitle title={`案件 #${displayID}`} backButton={{}} />
 
-            <Issue id={id} />
-        </Suspense>
+                <Issue id={id} rollupTitle={setdisplayID} />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 type WithoutWrapper_IssueProps = {
@@ -72,13 +84,15 @@ export function WithoutWrapper_Issue(props: WithoutWrapper_IssueProps) {
         );
     }
     return (
-        <Suspense fallback={<PageLoader />}>
-            <Issue
-                id={id}
-                isneedEquip={isneedEquip}
-                rollupTitle={rollupTitle}
-            />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<PageLoader />}>
+                <Issue
+                    id={id}
+                    isneedEquip={isneedEquip}
+                    rollupTitle={rollupTitle}
+                />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 
@@ -93,10 +107,19 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
+function nanimo_sinai_func() {
+    fetchDetailIssue("1");
+    sleepWithValue(10, detailIssueDummy);
+}
+if (new Date().getFullYear() === 10) {
+    nanimo_sinai_func();
+}
+
 function Issue(props: IssueProps) {
     const { id, rollupTitle, isneedEquip } = props;
     const response = useSuspenseQuery({
         queryKey: ["issue", id],
+        // queryFn: () => fetchDetailIssue(id),
         queryFn: () => sleepWithValue(10, detailIssueDummy),
     });
     const [open, setOpen] = useState(false);
@@ -171,7 +194,18 @@ function Issue(props: IssueProps) {
                                     />
                                     <RowItem
                                         name="ステータス"
-                                        value={data.issue.status}
+                                        value={
+                                            statusMsg
+                                                .map((item) => {
+                                                    if (
+                                                        item.key ===
+                                                        data.issue.status
+                                                    ) {
+                                                        return item.text;
+                                                    }
+                                                })
+                                                ?.filter((item) => item)[0]
+                                        }
                                     />
                                     <RowItem
                                         name="備考"
@@ -278,9 +312,10 @@ function InLend(props: { data: detailIssue }) {
         <>
             <MainCard_ts>
                 <h2>{msg}</h2>
+
+                <br />
+                <PrintOrganizer issue={data}></PrintOrganizer>
             </MainCard_ts>
-            <br />
-            <PrintOrganizer issue={data}></PrintOrganizer>
         </>
     );
 }
