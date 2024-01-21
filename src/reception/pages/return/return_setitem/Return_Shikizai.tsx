@@ -3,7 +3,7 @@ import { StockTable } from "@/components/Stock_Table/NormStockTable";
 import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTable";
 import { Button, Divider, useTheme } from "@mui/material";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./index.css";
 
 export default function 返却フォームの資機材入力画面() {
@@ -16,6 +16,8 @@ export default function 返却フォームの資機材入力画面() {
         setConfirm(true);
     };
 
+    const navigate = useNavigate();
+
     const { id } = useParams<{ id: string }>();
     if (id == undefined) throw new Error("idがありません");
     console.log("仮置きよう", id);
@@ -26,6 +28,8 @@ export default function 返却フォームの資機材入力画面() {
     };
     const onSubmitConfirm = () => {
         console.log("value", value);
+
+        navigate(`/reception/return/done`);
     };
     const theme = useTheme();
 

@@ -21,6 +21,7 @@ async function fetchEquipments(): Promise<GETAPI_equipment> {
     const response = await authAxios.get("/equipment");
     return response.data;
 }
+
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
 

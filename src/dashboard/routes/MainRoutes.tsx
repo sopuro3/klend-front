@@ -193,10 +193,7 @@ const MainRoutes = {
             path: "issue/:id",
             element: <IssuePage></IssuePage>,
         },
-        {
-            path: "equipment/:id",
-            element: <IssuePage></IssuePage>,
-        },
+
         {
             path: "determine_lend",
             element: <Determine_lend></Determine_lend>,

@@ -29,15 +29,15 @@ import { detailIssue } from "@/API/API_interface_rewrite";
 import { StockTable } from "../Stock_Table/NormStockTable";
 import PrintOrganizer from "../print/Print";
 import { ErrorBoundary } from "react-error-boundary";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
-import { detailIssueDummy } from "./detailIssue";
-import { statusMsg } from "../Issue_Table/IssueTable";
 
-// import { authAxios } from "@/API/axios";
-// async function fetchDetailIssue(id: string): Promise<detailIssue> {
-//     const response = await authAxios.get("/issue/" + id);
-//     return response.data;
-// }
+import { statusMsg } from "../Issue_Table/IssueTable";
+// import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
+// import { detailIssueDummy } from "./detailIssue";
+import { authAxios } from "@/API/axios";
+async function fetchDetailIssue(id: string): Promise<detailIssue> {
+    const response = await authAxios.get("/issue/" + id);
+    return response.data;
+}
 
 export function IssuePage() {
     const { id } = useParams();
@@ -111,8 +111,8 @@ function Issue(props: IssueProps) {
     const { id, rollupTitle, isneedEquip } = props;
     const response = useSuspenseQuery({
         queryKey: ["issue", id],
-        // queryFn: () => fetchDetailIssue(id),
-        queryFn: () => sleepWithValue(10, detailIssueDummy),
+        queryFn: () => fetchDetailIssue(id),
+        // queryFn: () => sleepWithValue(10, detailIssueDummy),
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
