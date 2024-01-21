@@ -7,6 +7,7 @@ import { detailIssue } from "@/API/API_interface_rewrite";
 import { Button, Card, Paper } from "@mui/material";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import { WithoutWrapper_Issue } from "../Issue_Detail/Issue_Page";
+import { PUTPrint } from "@/API/fetch";
 
 type PrintOrganizerProps = {
     issue: detailIssue;
@@ -61,7 +62,9 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
     function print() {
         //ここでAPIを叩く
         console.log(issue.issue.issueId);
-        handlePrint();
+        PUTPrint(issue.issue.issueId).then(() => {
+            handlePrint();
+        });
     }
 
     const [width] = useWindowSize();

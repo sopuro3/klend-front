@@ -32,3 +32,8 @@ export async function PUTEquipments(
     const response = await authAxios.put("/equipment/" + id, PUTequip);
     return response.data;
 }
+
+export async function PUTPrint(id: string): Promise<void> {
+    const response = await authAxios.put("/issue/" + id, {});
+    return response.data;
+}

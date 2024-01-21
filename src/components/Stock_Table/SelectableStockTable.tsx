@@ -11,14 +11,12 @@ import { IconButton, Tooltip } from "@mui/material";
 import { Suspense, useState } from "react";
 import Loader from "../Loader";
 import "./StockTable.css";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 
-import { responseItem } from "./responseItem";
 import { ErrorBoundary } from "react-error-boundary";
-import { fetchEquipments } from "@/API/fetch";
+import { fetchDetailIssue, fetchEquipments } from "@/API/fetch";
 
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
@@ -72,12 +70,12 @@ type EquipmentTmpItem = {
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
-    const { setVal, isDetermineLend, isReturn, val } = props;
+    const { setVal, isDetermineLend, isReturn, val, id } = props;
     const items: EquipmentTmpItem[] = [];
     if (isReturn || isDetermineLend) {
         const response = useSuspenseQuery({
             queryKey: ["selectableStockTable"],
-            queryFn: () => sleepWithValue(10, responseItem),
+            queryFn: () => fetchDetailIssue(id),
         });
         const rows = response.data.equipments;
 

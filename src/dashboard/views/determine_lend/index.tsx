@@ -1,5 +1,3 @@
-import { Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import IssueTable from "@/components/Issue_Table/IssueTable";
@@ -31,16 +29,6 @@ export default function Borrow() {
             <MainCard_ts>
                 <h3>案件を選択する</h3>
                 <IssueTable selectBtn setValue={handleSetSelected} />
-                <br />
-                <Link
-                    component={RouterLink}
-                    underline="hover"
-                    color="inherit"
-                    to={"/survey/firstform/done"}
-                    key={"/survey/firstform/done"}
-                >
-                    貸出完了
-                </Link>
             </MainCard_ts>
         </>
     );

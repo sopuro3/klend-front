@@ -8,9 +8,8 @@ import { Button, useTheme } from "@mui/material";
 import { useState } from "react";
 import "./lend.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { detailIssueDummy } from "@/components/Issue_Detail/detailIssue";
+import { fetchDetailIssue } from "@/API/fetch";
 
 export default function Delend_select() {
     const theme = useTheme();
@@ -20,9 +19,12 @@ export default function Delend_select() {
         equipmentsRequired: [],
         equipmentswithQuantity: [],
     });
+
+    if (id === undefined) throw new Error("idがありません");
+
     const response = useSuspenseQuery({
-        queryKey: ["issue", id],
-        queryFn: () => sleepWithValue(1390, detailIssueDummy),
+        queryKey: ["selectableStockTable"],
+        queryFn: () => fetchDetailIssue(id),
     });
 
     // let POSTData
@@ -79,7 +81,7 @@ export default function Delend_select() {
                             id={id}
                             setVal={setValue}
                         />
-
+                        <br />
                         <div style={{ display: "flex" }}>
                             <Button
                                 onClick={onSubmit}
