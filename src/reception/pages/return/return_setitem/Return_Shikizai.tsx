@@ -29,7 +29,7 @@ export default function 返却フォームの資機材入力画面() {
     const onSubmitConfirm = () => {
         console.log("value", value);
 
-        navigate(`/reception/return/done`);
+        navigate("/reception/return/done");
     };
     const theme = useTheme();
 

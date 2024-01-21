@@ -15,16 +15,10 @@ import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { authAxios } from "@/API/axios";
 
 import { responseItem } from "./responseItem";
-import { GETAPI_equipment } from "@/API/API_interface_rewrite";
 import { ErrorBoundary } from "react-error-boundary";
-
-async function fetchEquipments(): Promise<GETAPI_equipment> {
-    const response = await authAxios.get("/equipment");
-    return response.data;
-}
+import { fetchEquipments } from "@/API/fetch";
 
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;

@@ -23,16 +23,11 @@ import {
 import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../Loader";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { authAxios } from "@/API/axios";
-import {
-    GETAPI_equipment,
-    getEquipmentItem,
-} from "@/API/API_interface_rewrite";
+
+import { getEquipmentItem } from "@/API/API_interface_rewrite";
 import { ErrorBoundary } from "react-error-boundary";
-async function fetchEquipments(): Promise<GETAPI_equipment> {
-    const response = await authAxios.get("/equipment");
-    return response.data;
-}
+import { PUTEquipments, PUTequip, fetchEquipments } from "@/API/fetch";
+
 /**
  * 個数の調整ができるタイプの資機材テーブル
  *
@@ -176,11 +171,7 @@ function StockTable_Manage_() {
     }, [open, isConfirm]);
 
     // ...
-    type PUTequip = {
-        name: string;
-        maxQuantity: number;
-        note: string;
-    };
+
     function POST() {
         const putEquip: PUTequip = {
             name: equipModal.name,
@@ -197,14 +188,6 @@ function StockTable_Manage_() {
         }, 300);
 
         cancelModal();
-
-        async function PUTEquipments(
-            id: string,
-            PUTequip: PUTequip,
-        ): Promise<void> {
-            const response = await authAxios.put("/equipment/" + id, PUTequip);
-            return response.data;
-        }
     }
 
     return (

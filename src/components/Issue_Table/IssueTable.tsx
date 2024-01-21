@@ -15,8 +15,7 @@ import Fuse from "fuse.js";
 import { useTheme } from "@mui/material/styles";
 import { encode, tokenize } from "@/Search/encodeAndTokenize";
 import { SearchWindow } from "./SearchWindow";
-import { authAxios } from "@/API/axios";
-import { GETAPI_issue } from "@/API/API_interface_rewrite";
+import { fetchIssueList } from "@/API/fetch";
 
 // const responseItem: FormResponse = {
 //     issue: [
@@ -55,11 +54,6 @@ import { GETAPI_issue } from "@/API/API_interface_rewrite";
 //         // Add more issues as needed
 //     ],
 // };
-
-async function fetchIssueList(): Promise<GETAPI_issue> {
-    const response = await authAxios.get("/issue");
-    return response.data;
-}
 
 type IssueTableProps = {
     selectBtn?: boolean;

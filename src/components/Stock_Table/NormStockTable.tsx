@@ -11,16 +11,8 @@ import { Suspense } from "react";
 import Loader from "../Loader";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { StockTableProps } from "./common";
-import { authAxios } from "@/API/axios";
-import {
-    GETAPI_equipment,
-    getEquipmentItem,
-} from "@/API/API_interface_rewrite";
-
-async function fetchEquipments(): Promise<GETAPI_equipment> {
-    const response = await authAxios.get("/equipment");
-    return response.data;
-}
+import { getEquipmentItem } from "@/API/API_interface_rewrite";
+import { fetchEquipments } from "@/API/fetch";
 
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;

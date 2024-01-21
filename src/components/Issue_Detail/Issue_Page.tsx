@@ -31,13 +31,9 @@ import PrintOrganizer from "../print/Print";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { statusMsg } from "../Issue_Table/IssueTable";
+import { fetchDetailIssue } from "@/API/fetch";
 // import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 // import { detailIssueDummy } from "./detailIssue";
-import { authAxios } from "@/API/axios";
-async function fetchDetailIssue(id: string): Promise<detailIssue> {
-    const response = await authAxios.get("/issue/" + id);
-    return response.data;
-}
 
 export function IssuePage() {
     const { id } = useParams();
