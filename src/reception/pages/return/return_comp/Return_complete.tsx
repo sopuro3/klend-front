@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import DoneMark from "../../../../components/checkmark/Checkmark";
 import "../../../../components/checkmark/borrow_complete.css";
 
@@ -10,6 +11,20 @@ export default function Return_complete() {
             <div className="text-container">返却手続きが完了しました。</div>
             <p>ご協力ありがとうございました。</p>
             <br></br>
+
+            <Button
+                variant="contained"
+                sx={{
+                    marginLeft: "auto",
+                    background: "#1e88e5",
+                }}
+                onClick={() => {
+                    window.close();
+                }}
+            >
+                このページを閉じる
+            </Button>
+
             {/* <Card
                 sx={{
                     maxWidth: 300,

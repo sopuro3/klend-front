@@ -4,7 +4,7 @@ import { SelectableStockTable } from "@/components/Stock_Table/SelectableStockTa
 import { StockTable } from "@/components/Stock_Table/NormStockTable";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
-import { Button, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { useState } from "react";
 import "./lend.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -77,13 +77,18 @@ export default function Delend_select() {
                             rollupTitle={setTitle}
                         />
                         <h2>資機材数の調整</h2>
-
-                        <SelectableStockTable
-                            val={value}
-                            isDetermineLend
-                            id={id}
-                            setVal={setValue}
-                        />
+                        <Box
+                            sx={{
+                                margin: "0 24px",
+                            }}
+                        >
+                            <SelectableStockTable
+                                val={value}
+                                isDetermineLend
+                                id={id}
+                                setVal={setValue}
+                            />
+                        </Box>
                         <br />
                         <div style={{ display: "flex" }}>
                             <Button
