@@ -136,72 +136,83 @@ function Issue(props: IssueProps) {
                 <Card className="survey">
                     <CardContent className="issueCard" sx={{ padding: 0 }}>
                         <Typography variant="h2">案件の基本情報</Typography>
-
-                        <TableContainer
-                            sx={{ minWidth: "min(400px,100%)" }}
+                        <Card
+                            sx={{ margin: "3px" }}
                             component={Paper}
                             elevation={1}
                         >
-                            <Table
-                                className="single-row-table"
-                                aria-label="simple table"
+                            <TableContainer
+                                sx={{ minWidth: "min(400px,100%)" }}
                             >
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell sx={{ width: 140 }}>
-                                            項目
-                                        </StyledTableCell>
-                                        <StyledTableCell>入力</StyledTableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <RowItem
-                                        name="案件ID"
-                                        value={data.issue.displayId}
-                                    />
-                                    <RowItem
-                                        name="被災宅の代表者名"
-                                        value={data.issue.name}
-                                    />
-                                    <RowItem
-                                        name="住所"
-                                        element={
-                                            <div style={{ display: "flex" }}>
-                                                <div>{data.issue.address}</div>
-
-                                                <Link
-                                                    sx={{
-                                                        marginLeft: "auto",
-                                                    }}
-                                                    onClick={handleOpen}
+                                <Table
+                                    className="single-row-table"
+                                    aria-label="simple table"
+                                >
+                                    <TableHead>
+                                        <TableRow>
+                                            <StyledTableCell
+                                                sx={{ width: 140 }}
+                                            >
+                                                項目
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                入力
+                                            </StyledTableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <RowItem
+                                            name="案件ID"
+                                            value={data.issue.displayId}
+                                        />
+                                        <RowItem
+                                            name="被災宅の代表者名"
+                                            value={data.issue.name}
+                                        />
+                                        <RowItem
+                                            name="住所"
+                                            element={
+                                                <div
+                                                    style={{ display: "flex" }}
                                                 >
-                                                    Google Map
-                                                </Link>
-                                            </div>
-                                        }
-                                    />
-                                    <RowItem
-                                        name="ステータス"
-                                        value={
-                                            statusMsg
-                                                .map((item) => {
-                                                    if (
-                                                        item.key ===
-                                                        data.issue.status
-                                                    ) {
-                                                        return item.text;
-                                                    }
-                                                })
-                                                ?.filter((item) => item)[0]
-                                        }
-                                    />
-                                    <RowItem
-                                        name="備考"
-                                        value={data.issue.note}
-                                    />
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                                                    <div>
+                                                        {data.issue.address}
+                                                    </div>
+
+                                                    <Link
+                                                        sx={{
+                                                            marginLeft: "auto",
+                                                        }}
+                                                        onClick={handleOpen}
+                                                    >
+                                                        Google Map
+                                                    </Link>
+                                                </div>
+                                            }
+                                        />
+                                        <RowItem
+                                            name="ステータス"
+                                            value={
+                                                statusMsg
+                                                    .map((item) => {
+                                                        if (
+                                                            item.key ===
+                                                            data.issue.status
+                                                        ) {
+                                                            return item.text;
+                                                        }
+                                                    })
+                                                    ?.filter((item) => item)[0]
+                                            }
+                                        />
+                                        <RowItem
+                                            name="備考"
+                                            value={data.issue.note}
+                                        />
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Card>
                         <br />
                         <Divider></Divider>
                         <br />
@@ -210,9 +221,11 @@ function Issue(props: IssueProps) {
                         ) : (
                             <>
                                 <Typography variant="h2">資機材情報</Typography>
-                                <StockTable
-                                    displayItems={data.equipments}
-                                ></StockTable>
+                                <Card>
+                                    <StockTable
+                                        displayItems={data.equipments}
+                                    ></StockTable>
+                                </Card>
                             </>
                         )}
                     </CardContent>

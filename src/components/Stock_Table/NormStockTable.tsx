@@ -13,6 +13,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { StockTableProps } from "./common";
 import { getEquipmentItem } from "@/API/API_interface_rewrite";
 import { fetchEquipments } from "@/API/fetch";
+import { Card } from "@mui/material";
 
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
@@ -48,11 +49,72 @@ function StockTable_(props: StockTableProps) {
         isLocalRequest = true;
 
         return (
-            <TableContainer
-                component={Paper}
-                elevation={3}
-                className="stockTable"
-            >
+            <Card component={Paper} elevation={3} sx={{ margin: "5px" }}>
+                <TableContainer className="stockTable">
+                    <Table
+                        sx={{ minWidth: 650, padding: "5px" }}
+                        size="small"
+                        aria-label="a dense table"
+                    >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="left" sx={{ width: "150px" }}>
+                                    資機材名
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ width: "120px" }}
+                                    className="sp_omission"
+                                >
+                                    現在の在庫数
+                                </TableCell>
+
+                                <TableCell align="left" sx={{ width: "100px" }}>
+                                    数量
+                                </TableCell>
+
+                                <TableCell align="left">備考</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((equip: EquipmentItem_withQuantity) => (
+                                <TableRow
+                                    key={equip.name}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell scope="row">
+                                        {equip.name}
+                                    </TableCell>
+                                    <TableCell
+                                        align="right"
+                                        className="sp_omission"
+                                    >
+                                        {equip.maxQuantity -
+                                            equip.currentQuantity}
+                                    </TableCell>
+
+                                    <TableCell align="right">
+                                        {equip.plannedQuantity}
+                                    </TableCell>
+
+                                    <TableCell align="left">
+                                        {equip.note}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Card>
+        );
+    }
+    return (
+        <Card component={Paper} elevation={3} sx={{ margin: "5px" }}>
+            <TableContainer className="stockTable">
                 <Table
                     sx={{ minWidth: 650 }}
                     size="small"
@@ -63,6 +125,10 @@ function StockTable_(props: StockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
+                            <TableCell align="left" sx={{ width: "100px" }}>
+                                保有数
+                            </TableCell>
+
                             <TableCell
                                 align="left"
                                 sx={{ width: "120px" }}
@@ -70,16 +136,26 @@ function StockTable_(props: StockTableProps) {
                             >
                                 現在の在庫数
                             </TableCell>
-
+                            <TableCell
+                                align="left"
+                                sx={{ width: "120px" }}
+                                className="sp_omission"
+                            >
+                                現在の貸出数
+                            </TableCell>
                             <TableCell align="left" sx={{ width: "100px" }}>
-                                数量
+                                {isLocalRequest ? "選択数" : "使用率"}
                             </TableCell>
 
                             <TableCell align="left">備考</TableCell>
+                            {/* <TableCell
+                sx={{ width: "100px" }}
+                align="left"
+            ></TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((equip: EquipmentItem_withQuantity) => (
+                        {rows.map((equip: getEquipmentItem) => (
                             <TableRow
                                 key={equip.name}
                                 sx={{
@@ -89,96 +165,31 @@ function StockTable_(props: StockTableProps) {
                                 }}
                             >
                                 <TableCell scope="row">{equip.name}</TableCell>
+                                <TableCell align="right">
+                                    {equip.maxQuantity}
+                                </TableCell>
                                 <TableCell
                                     align="right"
                                     className="sp_omission"
                                 >
                                     {equip.maxQuantity - equip.currentQuantity}
                                 </TableCell>
-
-                                <TableCell align="right">
-                                    {equip.plannedQuantity}
+                                <TableCell
+                                    align="right"
+                                    className="sp_omission"
+                                >
+                                    {equip.currentQuantity}
                                 </TableCell>
-
+                                <TableCell align="left">
+                                    {Math.round(
+                                        (equip.currentQuantity /
+                                            equip.maxQuantity) *
+                                            10000,
+                                    ) / 100}
+                                    %
+                                </TableCell>
                                 <TableCell align="left">{equip.note}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        );
-    }
-    return (
-        <TableContainer component={Paper} elevation={3} className="stockTable">
-            <Table
-                sx={{ minWidth: 650 }}
-                size="small"
-                aria-label="a dense table"
-            >
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="left" sx={{ width: "150px" }}>
-                            資機材名
-                        </TableCell>
-                        <TableCell align="left" sx={{ width: "100px" }}>
-                            保有数
-                        </TableCell>
-
-                        <TableCell
-                            align="left"
-                            sx={{ width: "120px" }}
-                            className="sp_omission"
-                        >
-                            現在の在庫数
-                        </TableCell>
-                        <TableCell
-                            align="left"
-                            sx={{ width: "120px" }}
-                            className="sp_omission"
-                        >
-                            現在の貸出数
-                        </TableCell>
-                        <TableCell align="left" sx={{ width: "100px" }}>
-                            {isLocalRequest ? "選択数" : "使用率"}
-                        </TableCell>
-
-                        <TableCell align="left">備考</TableCell>
-                        {/* <TableCell
-                sx={{ width: "100px" }}
-                align="left"
-            ></TableCell> */}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((equip: getEquipmentItem) => (
-                        <TableRow
-                            key={equip.name}
-                            sx={{
-                                "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                },
-                            }}
-                        >
-                            <TableCell scope="row">{equip.name}</TableCell>
-                            <TableCell align="right">
-                                {equip.maxQuantity}
-                            </TableCell>
-                            <TableCell align="right" className="sp_omission">
-                                {equip.maxQuantity - equip.currentQuantity}
-                            </TableCell>
-                            <TableCell align="right" className="sp_omission">
-                                {equip.currentQuantity}
-                            </TableCell>
-                            <TableCell align="left">
-                                {Math.round(
-                                    (equip.currentQuantity /
-                                        equip.maxQuantity) *
-                                        10000,
-                                ) / 100}
-                                %
-                            </TableCell>
-                            <TableCell align="left">{equip.note}</TableCell>
-                            {/* <TableCell align="left">
+                                {/* <TableCell align="left">
                         <Link
                             component={RouterLink}
                             underline="hover"
@@ -188,10 +199,11 @@ function StockTable_(props: StockTableProps) {
                             詳細情報
                         </Link>
                     </TableCell> */}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Card>
     );
 }
