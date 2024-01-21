@@ -38,7 +38,7 @@ export type Equipment = {
 
 //必要な数量を返すEquipmentItem
 export type POSTEquipmentItem = {
-    id: string; // uuid
+    equipmentId: string; // uuid
     quantity: number; // 必要な数量
 };
 

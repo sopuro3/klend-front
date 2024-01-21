@@ -2,6 +2,7 @@ import {
     GETAPI_equipment,
     GETAPI_issue,
     detailIssue,
+    surveyPost,
 } from "./API_interface_rewrite";
 import { authAxios } from "./axios";
 
@@ -35,5 +36,10 @@ export async function PUTEquipments(
 
 export async function PUTPrint(id: string): Promise<void> {
     const response = await authAxios.put("/issue/" + id, {});
+    return response.data;
+}
+
+export async function POSTSurvey(issue: surveyPost) {
+    const response = await authAxios.post("/issue/survey", issue);
     return response.data;
 }

@@ -23,7 +23,9 @@ import "./needsform.css";
 import { useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { POSTSurvey } from "@/API/fetch";
+import { surveyPost } from "@/API/API_interface_rewrite";
 
 // type FormStates = {
 //     EquipmentSuper: EquipmentSuper;
@@ -83,7 +85,7 @@ let rollup: FormValues = {
 export function InfoInputTable() {
     const { register, handleSubmit } = useForm<FormValues>();
     const theme = useTheme();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [value, setValue] = useState<EquipmentSuper>({
         equipmentsRequired: [],
         equipmentswithQuantity: [],
@@ -113,8 +115,20 @@ export function InfoInputTable() {
 
     const onSubmitConfirm = () => {
         // APIにデータを送る
-        console.log(rollup);
-        navigate("/survey/firstform/done");
+        const data: surveyPost = {
+            issue: {
+                name: rollup.name,
+                address: rollup.address,
+                note: rollup.note,
+            },
+            equipments: rollup.equipments,
+        };
+        console.log(data);
+        POSTSurvey(data).then(() => {
+            location.replace("/dashboard/survey/firstform/done");
+
+            // navigate("/survey/firstform/done");
+        });
     };
 
     const [isConfirm, setIsConfirm] = useState(false);

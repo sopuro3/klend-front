@@ -39,7 +39,7 @@ export default function Delend_select() {
 
         const equipments = value.equipmentsRequired.map((item) => {
             return {
-                equipmentId: item.id,
+                equipmentId: item.equipmentId,
                 plannedQuantity: item.quantity,
             };
         });

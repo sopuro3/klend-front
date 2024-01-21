@@ -174,7 +174,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             }
             if (items[i].quantity > 0) {
                 tmp.equipmentsRequired.push({
-                    id: items[i].id,
+                    equipmentId: items[i].id,
                     quantity: items[i].quantity,
                 });
                 tmp.equipmentswithQuantity.push({
