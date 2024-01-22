@@ -255,12 +255,21 @@ function StockTable_Manage_() {
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {Math.round(
-                                        ((equip.maxQuantity -
-                                            equip.currentQuantity) /
-                                            equip.maxQuantity) *
-                                            10000,
-                                    ) / 100}
+                                    {(() => {
+                                        const rate =
+                                            Math.round(
+                                                ((equip.maxQuantity -
+                                                    equip.currentQuantity) /
+                                                    equip.maxQuantity) *
+                                                    10000,
+                                            ) / 100;
+
+                                        //rateがNaNやinfinityになったら0にする
+                                        if (isNaN(rate) || !isFinite(rate)) {
+                                            return 0;
+                                        }
+                                        return rate;
+                                    })()}
                                     %
                                 </TableCell>
                                 <TableCell align="left">{equip.note}</TableCell>
