@@ -81,7 +81,7 @@ function StockTable_(props: StockTableProps) {
                     <TableBody>
                         {rows.map((equip: EquipmentItem_withQuantity) => (
                             <TableRow
-                                key={equip.name}
+                                key={equip.equipmentId}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -152,7 +152,7 @@ function StockTable_(props: StockTableProps) {
                 <TableBody>
                     {rows.map((equip: getEquipmentItem) => (
                         <TableRow
-                            key={equip.name}
+                            key={equip.equipmentId}
                             sx={{
                                 "&:last-child td, &:last-child th": {
                                     border: 0,
@@ -188,16 +188,6 @@ function StockTable_(props: StockTableProps) {
                                 %
                             </TableCell>
                             <TableCell align="left">{equip.note}</TableCell>
-                            {/* <TableCell align="left">
-                        <Link
-                            component={RouterLink}
-                            underline="hover"
-                            to={"/equipment/" + equip.id}
-                            key={"/equipment/" + equip.id}
-                        >
-                            詳細情報
-                        </Link>
-                    </TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>

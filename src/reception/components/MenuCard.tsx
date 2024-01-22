@@ -46,7 +46,7 @@ export default function MenuCard() {
             </div>
             <div className="CardGrid">
                 {menuList.map((menu: CardProps) => (
-                    <Link key={menu.title} to={menu.href}>
+                    <Link key={menu.href} to={menu.href}>
                         <ActionAreaCard
                             title={menu.title}
                             content={menu.content}

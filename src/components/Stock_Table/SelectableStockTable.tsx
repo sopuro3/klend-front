@@ -249,7 +249,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     <TableBody>
                         {items.map((equip: EquipmentTmpItem) => (
                             <TableRow
-                                key={equip.name}
+                                key={equip.id}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,

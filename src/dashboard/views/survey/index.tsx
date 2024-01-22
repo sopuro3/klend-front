@@ -310,7 +310,6 @@ export function InfoInputTable() {
         return (
             <>
                 <TableRow
-                    key={row.name}
                     sx={{
                         "&:last-child td, &:last-child th": {
                             border: 0,
