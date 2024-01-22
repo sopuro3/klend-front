@@ -129,14 +129,15 @@ function StockTable_(props: StockTableProps) {
                             sx={{ width: "120px" }}
                             className="sp_omission"
                         >
-                            現在の在庫数
+                            現在の貸出数
+                            
                         </TableCell>
                         <TableCell
                             align="left"
                             sx={{ width: "120px" }}
                             className="sp_omission"
                         >
-                            現在の貸出数
+                            現在の在庫数
                         </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
                             {isLocalRequest ? "選択数" : "使用率"}
