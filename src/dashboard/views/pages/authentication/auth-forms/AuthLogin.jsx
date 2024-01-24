@@ -45,10 +45,21 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
+    function login() {
+        //cookieの有効期限
+        const cookieDate = 86400 * 15;
+
+        //cookieにログイン情報を保存
+        document.cookie = `login=true; max-age=${cookieDate}; path=/`;
+        sessionStorage.setItem("login", false);
+        console.log("login");
+        location.href = "/dashboard";
+    }
+
     return (
         <Formik
             initialValues={{
-                email: "info@codedthemes.com",
+                email: "guest@klend.com",
                 password: "123456",
                 submit: null,
             }}
@@ -207,6 +218,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 type="submit"
                                 variant="contained"
                                 color="secondary"
+                                onClick={login}
                             >
                                 サインイン
                             </Button>

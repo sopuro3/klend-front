@@ -12,6 +12,11 @@ const LogoutSection = () => {
     const theme = useTheme();
     const handleLogout = async () => {
         console.log("Logout");
+        sessionStorage.removeItem("login");
+        //cookieからloginを削除する
+        document.cookie = "login=; max-age=0";
+        //ログイン画面に遷移する
+        window.location.href = "/dashboard/pages/login/login3";
     };
 
     return (
