@@ -1,5 +1,3 @@
-import { Link } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PageTitle from "@/dashboard/ui-component/original/Pagetitle";
 import MainCard_ts from "@/dashboard/ui-component/cards/MainCard_ts";
 import IssueTable from "@/components/Issue_Table/IssueTable";
@@ -8,17 +6,18 @@ import { Issue } from "@/API/API_interface";
 
 export default function Borrow() {
     const [selected, setSelected] = useState<Issue>();
-    const navigate = useNavigate();
 
     //selected使わねえな...せや！
-    console.debug("selected" + selected);
+    selected;
 
     const handleSetSelected = (issue: Issue) => {
         console.log("issue", issue);
         setSelected(issue);
 
         //react-router-domを用いて、URLを変更する。
-        navigate("/determine_lend/select/" + issue.id);
+        // navigate("/determine_lend/select/" + issue.id);
+        //react-router-domだとなぜかいろいろと不安定になるので、location.hrefを使う。
+        location.href = "/dashboard/determine_lend/select/" + issue.issueId;
     };
 
     return (
@@ -30,16 +29,6 @@ export default function Borrow() {
             <MainCard_ts>
                 <h3>案件を選択する</h3>
                 <IssueTable selectBtn setValue={handleSetSelected} />
-                <br />
-                <Link
-                    component={RouterLink}
-                    underline="hover"
-                    color="inherit"
-                    to={"/survey/firstform/done"}
-                    key={"/survey/firstform/done"}
-                >
-                    貸出完了
-                </Link>
             </MainCard_ts>
         </>
     );

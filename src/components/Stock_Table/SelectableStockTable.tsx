@@ -11,29 +11,36 @@ import { IconButton, Tooltip } from "@mui/material";
 import { Suspense, useState } from "react";
 import Loader from "../Loader";
 import "./StockTable.css";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { responseItem, GETequipmentItem } from "./responseItem";
+
+import { ErrorBoundary } from "react-error-boundary";
+import { fetchDetailIssue, fetchEquipments } from "@/API/fetch";
+
 type SelectableStockTableProps = {
     setVal: React.Dispatch<React.SetStateAction<EquipmentSuper>>;
     latestVal?: EquipmentSuper;
     /*貸出数確定モード  */
     isDetermineLend?: boolean;
     isReturn?: boolean;
+    id: string;
+    val?: EquipmentSuper;
 };
-let isFirst = true;
 export function SelectableStockTable(props: SelectableStockTableProps) {
     return (
-        <Suspense fallback={<Loader />}>
-            <SelectableStockTable_
-                setVal={props.setVal}
-                isReturn={props.isReturn}
-                isDetermineLend={props.isDetermineLend}
-                latestVal={props.latestVal}
-            />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <SelectableStockTable_
+                    setVal={props.setVal}
+                    isReturn={props.isReturn}
+                    isDetermineLend={props.isDetermineLend}
+                    latestVal={props.latestVal}
+                    id={props.id}
+                    val={props.val}
+                />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 
@@ -56,20 +63,19 @@ type EquipmentTmpItem = {
 
     handleOpen: () => void;
     handleClose: () => void;
+    setTooltipMsg: React.Dispatch<React.SetStateAction<string>>;
+    tooltipMsg: string;
+
     fieldopen: boolean;
 };
 
 function SelectableStockTable_(props: SelectableStockTableProps) {
-    const { setVal, isDetermineLend, isReturn, latestVal } = props;
-    if (latestVal) {
-        console.log("latestval", latestVal);
-    }
-
+    const { setVal, isDetermineLend, isReturn, val, id } = props;
     const items: EquipmentTmpItem[] = [];
     if (isReturn || isDetermineLend) {
         const response = useSuspenseQuery({
             queryKey: ["selectableStockTable"],
-            queryFn: () => sleepWithValue(10, responseItem),
+            queryFn: () => fetchDetailIssue(id),
         });
         const rows = response.data.equipments;
 
@@ -88,9 +94,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             const handleOpen = () => {
                 setFieldOpen(true);
             };
+            const [tooltipMsg, setTooltipMsg] = useState("");
+
             items.push({
                 name: rows[i].name,
-                id: rows[i].id,
+                id: rows[i].equipmentId,
                 maxQuantity: rows[i].maxQuantity,
                 currentQuantity: rows[i].currentQuantity,
                 note: rows[i].note,
@@ -102,13 +110,15 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 plannedQuantity: rows[i].plannedQuantity,
                 handleOpen: handleOpen,
                 handleClose: handleClose,
+                tooltipMsg: tooltipMsg,
                 fieldopen: fieldopen,
+                setTooltipMsg: setTooltipMsg,
             });
         }
     } else {
         const response = useSuspenseQuery({
             queryKey: ["selectableStockTable"],
-            queryFn: () => sleepWithValue(10, GETequipmentItem),
+            queryFn: () => fetchEquipments(),
         });
         const rows = response.data.equipments;
 
@@ -127,9 +137,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             const handleOpen = () => {
                 setFieldOpen(true);
             };
+            const [tooltipMsg, setTooltipMsg] = useState("");
+
             items.push({
                 name: rows[i].name,
-                id: rows[i].id,
+                id: rows[i].equipmentId,
                 maxQuantity: rows[i].maxQuantity,
                 currentQuantity: rows[i].currentQuantity,
                 note: rows[i].note,
@@ -141,7 +153,10 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                 plannedQuantity: 0,
                 handleOpen: handleOpen,
                 handleClose: handleClose,
+                tooltipMsg: tooltipMsg,
+
                 fieldopen: fieldopen,
+                setTooltipMsg: setTooltipMsg,
             });
         }
     }
@@ -159,11 +174,11 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
             }
             if (items[i].quantity > 0) {
                 tmp.equipmentsRequired.push({
-                    id: items[i].id,
+                    equipmentId: items[i].id,
                     quantity: items[i].quantity,
                 });
                 tmp.equipmentswithQuantity.push({
-                    id: items[i].id,
+                    equipmentId: items[i].id,
                     name: items[i].name,
                     maxQuantity: items[i].maxQuantity,
                     currentQuantity: items[i].currentQuantity,
@@ -181,8 +196,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
     //それを無視して空のデータを送信してしまう。
     //そこで、初回時は謎のデータに対して0を送信することで、
     //無理やりSetValを実行させる
-    if (isFirst) {
-        isFirst = false;
+    if (val?.equipmentsRequired.length === 0) {
         setItem("fake-Item", 0);
     }
 
@@ -235,7 +249,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                     <TableBody>
                         {items.map((equip: EquipmentTmpItem) => (
                             <TableRow
-                                key={equip.name}
+                                key={equip.id}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -285,7 +299,7 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                     </IconButton>
                                     <Tooltip
                                         open={equip.fieldopen}
-                                        title="半角数字のみ有効です"
+                                        title={equip.tooltipMsg}
                                     >
                                         <TextField
                                             value={equip.quantity}
@@ -295,12 +309,29 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
 
                                                 //valueがNaNになってしまったら0にする
                                                 if (isNaN(Number(value))) {
+                                                    equip.setTooltipMsg(
+                                                        "半角数字のみ有効です",
+                                                    );
                                                     equip.handleOpen();
 
                                                     setItem(equip.id, 0);
                                                     return;
                                                 }
 
+                                                const maxVal = isReturn
+                                                    ? equip.plannedQuantity
+                                                    : equip.currentQuantity;
+                                                if (parseInt(value) > maxVal) {
+                                                    if (maxVal === 0) {
+                                                        return;
+                                                    }
+                                                    equip.setTooltipMsg(
+                                                        `最大値は${maxVal}です`,
+                                                    );
+                                                    equip.handleOpen();
+
+                                                    return;
+                                                }
                                                 if (value === "") {
                                                     equip.setCount(0);
                                                 } else {
@@ -321,6 +352,23 @@ function SelectableStockTable_(props: SelectableStockTableProps) {
                                         tabIndex={-1}
                                         onClick={() => {
                                             const val = equip.quantity + 1;
+
+                                            const maxVal = isReturn
+                                                ? equip.plannedQuantity
+                                                : equip.currentQuantity;
+                                            if (val > maxVal) {
+                                                if (maxVal === 0) {
+                                                    return;
+                                                }
+                                                equip.setTooltipMsg(
+                                                    `最大値は${maxVal}です`,
+                                                );
+                                                equip.handleOpen();
+                                                setTimeout(() => {
+                                                    equip.handleClose();
+                                                }, 4000);
+                                                return;
+                                            }
 
                                             equip.setCount(
                                                 (count) => count + 1,

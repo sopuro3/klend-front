@@ -11,16 +11,9 @@ import { Suspense } from "react";
 import Loader from "../Loader";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { StockTableProps } from "./common";
-import { authAxios } from "@/API/axios";
-import {
-    GETAPI_equipment,
-    getEquipmentItem,
-} from "@/API/API_interface_rewrite";
+import { getEquipmentItem } from "@/API/API_interface_rewrite";
+import { fetchEquipments } from "@/API/fetch";
 
-async function fetchEquipments(): Promise<GETAPI_equipment> {
-    const response = await authAxios.get("/equipment");
-    return response.data;
-}
 export function StockTable(props: StockTableProps) {
     const { displayItems } = props;
 
@@ -70,7 +63,6 @@ function StockTable_(props: StockTableProps) {
                             <TableCell align="left" sx={{ width: "150px" }}>
                                 資機材名
                             </TableCell>
-
                             <TableCell
                                 align="left"
                                 sx={{ width: "120px" }}
@@ -78,6 +70,7 @@ function StockTable_(props: StockTableProps) {
                             >
                                 現在の在庫数
                             </TableCell>
+
                             <TableCell align="left" sx={{ width: "100px" }}>
                                 数量
                             </TableCell>
@@ -88,7 +81,7 @@ function StockTable_(props: StockTableProps) {
                     <TableBody>
                         {rows.map((equip: EquipmentItem_withQuantity) => (
                             <TableRow
-                                key={equip.name}
+                                key={equip.equipmentId}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -100,8 +93,9 @@ function StockTable_(props: StockTableProps) {
                                     align="right"
                                     className="sp_omission"
                                 >
-                                    {equip.currentQuantity}
+                                    {equip.maxQuantity - equip.currentQuantity}
                                 </TableCell>
+
                                 <TableCell align="right">
                                     {equip.plannedQuantity}
                                 </TableCell>
@@ -135,6 +129,13 @@ function StockTable_(props: StockTableProps) {
                             sx={{ width: "120px" }}
                             className="sp_omission"
                         >
+                            現在の貸出数
+                        </TableCell>
+                        <TableCell
+                            align="left"
+                            sx={{ width: "120px" }}
+                            className="sp_omission"
+                        >
                             現在の在庫数
                         </TableCell>
                         <TableCell align="left" sx={{ width: "100px" }}>
@@ -151,7 +152,7 @@ function StockTable_(props: StockTableProps) {
                 <TableBody>
                     {rows.map((equip: getEquipmentItem) => (
                         <TableRow
-                            key={equip.name}
+                            key={equip.equipmentId}
                             sx={{
                                 "&:last-child td, &:last-child th": {
                                     border: 0,
@@ -163,28 +164,30 @@ function StockTable_(props: StockTableProps) {
                                 {equip.maxQuantity}
                             </TableCell>
                             <TableCell align="right" className="sp_omission">
+                                {equip.maxQuantity - equip.currentQuantity}
+                            </TableCell>
+                            <TableCell align="right" className="sp_omission">
                                 {equip.currentQuantity}
                             </TableCell>
                             <TableCell align="left">
-                                {Math.round(
-                                    ((equip.maxQuantity -
-                                        equip.currentQuantity) /
-                                        equip.maxQuantity) *
-                                        10000,
-                                ) / 100}
+                                {(() => {
+                                    const rate =
+                                        Math.round(
+                                            ((equip.maxQuantity -
+                                                equip.currentQuantity) /
+                                                equip.maxQuantity) *
+                                                10000,
+                                        ) / 100;
+
+                                    //rateがNaNやinfinityになったら0にする
+                                    if (isNaN(rate) || !isFinite(rate)) {
+                                        return 0;
+                                    }
+                                    return rate;
+                                })()}
                                 %
                             </TableCell>
                             <TableCell align="left">{equip.note}</TableCell>
-                            {/* <TableCell align="left">
-                        <Link
-                            component={RouterLink}
-                            underline="hover"
-                            to={"/equipment/" + equip.id}
-                            key={"/equipment/" + equip.id}
-                        >
-                            詳細情報
-                        </Link>
-                    </TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>

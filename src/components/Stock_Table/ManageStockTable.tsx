@@ -9,7 +9,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { EquipmentItem } from "@/API/API_interface";
 import {
     Box,
     Button,
@@ -23,144 +22,12 @@ import {
 } from "@mui/material";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../Loader";
-import { sleepWithValue } from "@/dashboard/utils/dev/sleepWithValue";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { responseItem } from "./responseItem";
 
-// const responseItem: Equipment = {
-//     equipments: [
-//         {
-//             name: "スコップ",
-//             id: "a1b2c3d4-1111-2222-3333-123456789abc",
-//             maxQuantity: 10,
-//             currentQuantity: 5,
-//             plannedQuantity: 0,
-//             note: "",
-//         },
-//         {
-//             name: "ハンマー",
-//             id: "b2c3d4e5-2222-3333-4444-23456789abcd",
-//             maxQuantity: 20,
-//             currentQuantity: 15,
-//             plannedQuantity: 5,
-//             note: "長い名前の資機材の概要だよ長い名前の資機材の概要だよ",
-//         },
-//         {
-//             name: "ドライバー",
-//             id: "c3d4e5f6-3333-4444-5555-3456789abcde",
-//             maxQuantity: 8,
-//             plannedQuantity: 10,
-//             currentQuantity: 3,
-//             note: "これは装備アイテム3です。",
-//         },
-//         {
-//             name: "ペンチ",
-//             id: "d4e5f6g7-4444-5555-6666-456789abcdef",
-//             maxQuantity: 25,
-//             plannedQuantity: 3,
-//             currentQuantity: 20,
-//             note: "これは装備アイテム4です。",
-//         },
-//         // Add more dummy equipment items here
-//         {
-//             name: "ドリル",
-//             id: "e5f6g7h8-5555-6666-7777-56789abcdefg",
-//             maxQuantity: 12,
-//             plannedQuantity: 8,
-//             currentQuantity: 10,
-//             note: "これは装備アイテム5です。",
-//         },
-//         {
-//             name: "ノコギリ",
-//             id: "f6g7h8i9-6666-7777-8888-6789abcdefghi",
-//             maxQuantity: 15,
-//             plannedQuantity: 5,
-//             currentQuantity: 12,
-//             note: "これは装備アイテム6です。",
-//         },
-//         // Add 10 more dummy equipment items here
-//         {
-//             name: "Item 7",
-//             id: "g7h8i9j0-7777-8888-9999-7890abcdefghij",
-//             maxQuantity: 5,
-//             plannedQuantity: 2,
-//             currentQuantity: 3,
-//             note: "This is equipment item 7.",
-//         },
-//         {
-//             name: "Item 8",
-//             id: "h8i9j0k1-8888-9999-0000-8901abcdefghijk",
-//             maxQuantity: 18,
-//             plannedQuantity: 12,
-//             currentQuantity: 6,
-//             note: "This is equipment item 8.",
-//         },
-//         {
-//             name: "Item 9",
-//             id: "i9j0k1l2-9999-0000-1111-9012abcdefghijkl",
-//             maxQuantity: 7,
-//             plannedQuantity: 4,
-//             currentQuantity: 3,
-//             note: "This is equipment item 9.",
-//         },
-//         {
-//             name: "Item 10",
-//             id: "j0k1l2m3-0000-1111-2222-0123abcdefghijklm",
-//             maxQuantity: 14,
-//             plannedQuantity: 8,
-//             currentQuantity: 6,
-//             note: "This is equipment item 10.",
-//         },
-//         {
-//             name: "Item 11",
-//             id: "k1l2m3n4-1111-2222-3333-1234abcdefghijklmn",
-//             maxQuantity: 9,
-//             plannedQuantity: 6,
-//             currentQuantity: 3,
-//             note: "This is equipment item 11.",
-//         },
-//         {
-//             name: "Item 12",
-//             id: "l2m3n4o5-2222-3333-4444-2345abcdefghijklmno",
-//             maxQuantity: 20,
-//             plannedQuantity: 15,
-//             currentQuantity: 5,
-//             note: "This is equipment item 12.",
-//         },
-//         {
-//             name: "Item 13",
-//             id: "m3n4o5p6-3333-4444-5555-3456abcdefghijklmnop",
-//             maxQuantity: 11,
-//             plannedQuantity: 7,
-//             currentQuantity: 4,
-//             note: "This is equipment item 13.",
-//         },
-//         {
-//             name: "Item 14",
-//             id: "n4o5p6q7-4444-5555-6666-4567abcdefghijklmnopq",
-//             maxQuantity: 16,
-//             plannedQuantity: 10,
-//             currentQuantity: 6,
-//             note: "This is equipment item 14.",
-//         },
-//         {
-//             name: "Item 15",
-//             id: "o5p6q7r8-5555-6666-7777-5678abcdefghijklmnopqr",
-//             maxQuantity: 13,
-//             plannedQuantity: 9,
-//             currentQuantity: 4,
-//             note: "This is equipment item 15.",
-//         },
-//         {
-//             name: "Item 16",
-//             id: "p6q7r8s9-6666-7777-8888-6789abcdefghijklmnopqrs",
-//             maxQuantity: 6,
-//             plannedQuantity: 3,
-//             currentQuantity: 3,
-//             note: "This is equipment item 16.",
-//         },
-//     ],
-// };
+import { getEquipmentItem } from "@/API/API_interface_rewrite";
+import { ErrorBoundary } from "react-error-boundary";
+import { PUTEquipments, PUTequip, fetchEquipments } from "@/API/fetch";
+
 /**
  * 個数の調整ができるタイプの資機材テーブル
  *
@@ -168,9 +35,11 @@ import { responseItem } from "./responseItem";
  */
 export function StockTable_Manage() {
     return (
-        <Suspense fallback={<Loader />}>
-            <StockTable_Manage_ />
-        </Suspense>
+        <ErrorBoundary fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <StockTable_Manage_ />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 function StockTable_Manage_() {
@@ -187,14 +56,17 @@ function StockTable_Manage_() {
 
     const response = useSuspenseQuery({
         queryKey: ["stockTable"],
-        queryFn: () => sleepWithValue(10, responseItem),
+        // queryFn: () => sleepWithValue(10, responseItem),
+        queryFn: fetchEquipments,
     });
 
     type equipModalType = {
         name: string;
         maxQuantity: number;
-        currentQuantity: number;
+        note: string;
+        id: string;
     };
+    const modal = useRef(null);
 
     const [adjustQuantity, setAdjustQuantity] = useState<number>(0);
     const [afterQuantity, setAfterQuantity] = useState<number>(0);
@@ -202,39 +74,42 @@ function StockTable_Manage_() {
     const [equipModal, setEquipModal] = useState<equipModalType>({
         name: "",
         maxQuantity: 0,
-        currentQuantity: 0,
+        note: "",
+        id: "",
     });
 
-    function applyModal(equip: EquipmentItem) {
+    function applyModal(equip: getEquipmentItem) {
         setEquipModal({
             name: equip.name,
             maxQuantity: equip.maxQuantity,
-            currentQuantity: equip.currentQuantity,
+            note: equip.note,
+            id: equip.equipmentId,
         });
+        console.log(equip);
         //初期化
         setAdjustQuantity(0);
-        setAfterQuantity(equip.currentQuantity);
+        setAfterQuantity(equip.maxQuantity);
         handleOpen();
     }
 
     function refreshbyTotal(number: number) {
         setAfterQuantity(number);
-        if (number - equipModal.currentQuantity >= 0) {
+        if (number - equipModal.maxQuantity >= 0) {
             setIsPlus(true);
-            setAdjustQuantity(number - equipModal.currentQuantity);
+            setAdjustQuantity(number - equipModal.maxQuantity);
         } else {
             setIsPlus(false);
             // number - equipModal.currentQuantityの値がマイナスになるので、絶対値をとる
-            setAdjustQuantity(Math.abs(number - equipModal.currentQuantity));
+            setAdjustQuantity(Math.abs(number - equipModal.maxQuantity));
         }
     }
 
     function refreshbyAdjust(number: number) {
         setAdjustQuantity(number);
         if (isPlus) {
-            setAfterQuantity(equipModal.currentQuantity + number);
+            setAfterQuantity(equipModal.maxQuantity + number);
         } else {
-            setAfterQuantity(equipModal.currentQuantity - number);
+            setAfterQuantity(equipModal.maxQuantity - number);
         }
     }
 
@@ -262,28 +137,57 @@ function StockTable_Manage_() {
         p: 4,
         width: "min(100%,600px)",
     };
-
     function moveConfirm() {
         // console.log(equipModal);
         setIsConfirm(true);
     }
+    function cancelConfirm() {
+        setIsConfirm(false);
+    }
+
+    // ...
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Enter") {
+                console.log("Enter key pressed");
+                console.log(isConfirm);
+                // Handle Enter key press
+                // Call the function you want to execute
+            } else if (event.key === "ArrowLeft") {
+                cancelConfirm();
+            }
+        };
+
+        // Add event listeners when the modal is open
+        if (open) {
+            document.addEventListener("keydown", handleKeyDown);
+        }
+
+        // Remove event listeners when the modal is closed
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [open, isConfirm]);
+
+    // ...
 
     function POST() {
-        type PUTequip = {
-            name: string;
-            maxQuantity: number;
-            currentQuantity: number;
-        };
         const putEquip: PUTequip = {
             name: equipModal.name,
-            maxQuantity: equipModal.maxQuantity,
-            currentQuantity: afterQuantity,
+            maxQuantity: afterQuantity,
+            note: equipModal.note,
         };
 
-        console.log(putEquip);
-        cancelModal();
+        console.log(equipModal.id, putEquip);
+        PUTEquipments(equipModal.id, putEquip);
 
-        // /equipment/:id   にPUTリクエストを送る
+        //テーブルを更新し、再描画する
+        setTimeout(() => {
+            response.refetch();
+        }, 300);
+
+        cancelModal();
     }
 
     return (
@@ -331,7 +235,7 @@ function StockTable_Manage_() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((equip: EquipmentItem) => (
+                        {rows.map((equip: getEquipmentItem) => (
                             <TableRow
                                 key={equip.name}
                                 sx={{
@@ -351,12 +255,21 @@ function StockTable_Manage_() {
                                     {equip.currentQuantity}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {Math.round(
-                                        ((equip.maxQuantity -
-                                            equip.currentQuantity) /
-                                            equip.maxQuantity) *
-                                            10000,
-                                    ) / 100}
+                                    {(() => {
+                                        const rate =
+                                            Math.round(
+                                                ((equip.maxQuantity -
+                                                    equip.currentQuantity) /
+                                                    equip.maxQuantity) *
+                                                    10000,
+                                            ) / 100;
+
+                                        //rateがNaNやinfinityになったら0にする
+                                        if (isNaN(rate) || !isFinite(rate)) {
+                                            return 0;
+                                        }
+                                        return rate;
+                                    })()}
                                     %
                                 </TableCell>
                                 <TableCell align="left">{equip.note}</TableCell>
@@ -377,7 +290,7 @@ function StockTable_Manage_() {
                                     {" "}
                                     <Link
                                         underline="hover"
-                                        key={"/equipment/" + equip.id}
+                                        key={"/equipment/" + equip.equipmentId}
                                         onClick={() => {
                                             applyModal(equip);
                                         }}
@@ -391,6 +304,7 @@ function StockTable_Manage_() {
                 </Table>
             </TableContainer>
             <Modal
+                ref={modal}
                 open={open}
                 onClose={cancelModal}
                 aria-labelledby="modal-modal-title"
@@ -422,13 +336,13 @@ function StockTable_Manage_() {
                             <h4 className="miniDisplay">
                                 現在の資器材個数:{" "}
                                 <span style={{ fontSize: "1.3rem" }}>
-                                    {equipModal.currentQuantity}
+                                    {equipModal.maxQuantity}
                                 </span>
                             </h4>
                             <h4 className="miniDisplay">
                                 変更後の資機材個数:{" "}
                                 <span style={{ fontSize: "1.3rem" }}>
-                                    {equipModal.currentQuantity}
+                                    {equipModal.maxQuantity}
                                     <span
                                         style={{
                                             color:
@@ -473,7 +387,7 @@ function StockTable_Manage_() {
                                                     fontSize: "1.3rem",
                                                 }}
                                             >
-                                                {equipModal.currentQuantity}(
+                                                {equipModal.maxQuantity}(
                                                 <span
                                                     style={{
                                                         color:
@@ -675,7 +589,7 @@ function StockTable_Manage_() {
                                             align="right"
                                             sx={{ fontSize: "1.3rem" }}
                                         >
-                                            {equipModal.currentQuantity}
+                                            {equipModal.maxQuantity}
                                         </TableCell>
                                         <TableCell align="right">
                                             <Typography
@@ -715,7 +629,7 @@ function StockTable_Manage_() {
                                     marginRight: "auto",
                                 }}
                                 onClick={() => {
-                                    setIsConfirm(false);
+                                    cancelConfirm();
                                 }}
                             >
                                 変更
