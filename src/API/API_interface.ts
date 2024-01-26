@@ -1,7 +1,7 @@
 // GET /form
 
 export type Issue = {
-    adress: string; // 被災者宅の住所
+    address: string; // 被災者宅の住所
     name: string; // 被災者宅の代表者名
     issueId: string; //uuid。ユーザーには表示しない
     displayId: string; //受付ナンバー数字４桁

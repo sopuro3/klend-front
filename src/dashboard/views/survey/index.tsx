@@ -58,7 +58,7 @@ function createData(
 }
 
 const rows = [
-    createData("被災宅の名前(仮)", "name", "例: 久留米 太郎"),
+    createData("被災宅の代表者名", "name", "例: 久留米 太郎"),
     createData("住所", "address", "例: 久留米市小森野1丁目1-1"),
     createData("備考", "note", ""),
 ];
@@ -181,7 +181,7 @@ export function InfoInputTable() {
                                 <Divider></Divider>
                                 <br></br>
                             </div>
-                            <div>
+                            <div className="dual-row-table">
                                 <h3>必要な資機材の見積り</h3>
                                 <SelectableStockTable
                                     //カス実装だが、isReturnとisDetermineLendのいずれもfalseならidは使われずEquipmentsをGETするのみなので問題ない

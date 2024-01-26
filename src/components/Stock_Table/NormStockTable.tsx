@@ -130,7 +130,6 @@ function StockTable_(props: StockTableProps) {
                             className="sp_omission"
                         >
                             現在の貸出数
-                            
                         </TableCell>
                         <TableCell
                             align="left"

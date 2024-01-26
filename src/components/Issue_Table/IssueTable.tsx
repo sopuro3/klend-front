@@ -182,7 +182,7 @@ function Table_(props: IssueTableProps) {
         includeScore: true,
         useExtendedSearch: true,
         keys: [
-            searchByAddress ? "adress" : "",
+            searchByAddress ? "address" : "",
             searchByname ? "name" : "",
             searchBynote ? "note" : "",
             searchById ? "displayId" : "",
@@ -313,7 +313,7 @@ function Table_(props: IssueTableProps) {
                                 </TableCell>
                                 <TableCell scope="row">{issue.name}</TableCell>
                                 <TableCell align="left">
-                                    {issue.adress}
+                                    {issue.address}
                                 </TableCell>
                                 <TableCell align="left">
                                     {statusMsg.map((item) => {
