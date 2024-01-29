@@ -62,9 +62,9 @@ const PrintOrganizer: React.FC<PrintOrganizerProps> = (props) => {
     function print() {
         //ここでAPIを叩く
         console.log(issue.issue.issueId);
-        PUTPrint(issue.issue.issueId).then(() => {
-            handlePrint();
-        });
+        PUTPrint(issue.issue.issueId)
+        handlePrint();
+
     }
 
     const [width] = useWindowSize();
