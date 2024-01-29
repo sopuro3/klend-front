@@ -107,7 +107,7 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                         }}
                     >
                         <QRCode
-                            url={`http://${pageURL.host}/reception/return/${issue.issue.issueId}`}
+                            url={`http://${pageURL.host}/reception/return/select/${issue.issue.issueId}`}
                         />
                         <p
                             className="noMargin"
