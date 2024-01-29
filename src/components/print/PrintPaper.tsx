@@ -94,8 +94,10 @@ const PrintExample: React.FC<Props> = (props: Props) => {
                             資機材の返却を行うには、右のQRコードを読み取り、サイト上で返却した個数を入力してください。
                         </p>
                         <p>
-                            QRコードが利用できない場合、https://hogehogefugafuga/reception/return
-                            にアクセスし、上記のIDとパスワードを入力してください。
+                            QRコードが利用できない場合、http://${
+                                import.meta.env.VITE_PAGE_DOMAIN
+                            }/reception/return/${issue.issue.issueId}
+                            にアクセスしてください。
                         </p>
                     </div>
                     <div
